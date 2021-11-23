@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>รายละเอียด</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>ข้อมูลตั้งแต่วันที่</ion-label>
+        <ion-datetime displayFormat="DD MM YY"></ion-datetime>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>จนถึงวันที่</ion-label>
+        <ion-datetime displayFormat="DD MM YY"></ion-datetime>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button expand="full">ยืนยัน</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-text color="danger">
+          <h5 class="title">รายงานความก้าวหน้าการทำแบบสอบถาม</h5>
+          <hr class="hr-border">
+          <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+          <!-- <canvas #doughnutCanvas></canvas> -->
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

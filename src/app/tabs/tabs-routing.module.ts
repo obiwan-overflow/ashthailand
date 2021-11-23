@@ -8,27 +8,87 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'home',
+        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'home/announce-detail',
+        loadChildren: () => import('../announce-detail/announce-detail.module').then(m => m.AnnounceDetailPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'signout',
+        loadChildren: () => import('../signout/signout.module').then(m => m.SignoutPageModule)
+      },
+      {
+        path: 'signin',
+        loadChildren: () => import('../signin/signin.module').then(m => m.SigninPageModule)
+      },
+      {
+        path: 'announce',
+        loadChildren: () => import('../announce/announce.module').then(m => m.AnnouncePageModule)
+      },
+      {
+        path: 'announce/announce-detail',
+        loadChildren: () => import('../announce-detail/announce-detail.module').then(m => m.AnnounceDetailPageModule)
+      },
+      {
+        path: 'report',
+        loadChildren: () => import('../report/report.module').then(m => m.ReportPageModule)
+      },
+      {
+        path: 'report/report-detail',
+        loadChildren: () => import('../report-detail/report-detail.module').then(m => m.ReportDetailPageModule)
+      },
+      {
+        path: 'form',
+        loadChildren: () => import('../form/form.module').then(m => m.FormPageModule)
+      },
+      {
+        path: 'form-lists/form-step1',
+        loadChildren: () => import('../form-step1/form-step1.module').then(m => m.FormStep1PageModule)
+      },
+      {
+        path: 'form-lists/form-step1/form-step2',
+        loadChildren: () => import('../form-step2/form-step2.module').then(m => m.FormStep2PageModule)
+      },
+      {
+        path: 'why',
+        loadChildren: () => import('../why/why.module').then(m => m.WhyPageModule)
+      },
+      {
+        path: 'form-lists',
+        loadChildren: () => import('../form-lists/form-lists.module').then(m => m.FormListsPageModule)
+      },
+      {
+        path: 're-password',
+        loadChildren: () => import('../re-password/re-password.module').then(m => m.RePasswordPageModule)
+      },
+      {
+        path: 'news',
+        loadChildren: () => import('../news/news.module').then(m => m.NewsPageModule)
+      },
+      {
+        path: 'news/news-detail',
+        loadChildren: () => import('../news-detail/news-detail.module').then(m => m.NewsDetailPageModule)
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('../contact/contact.module').then(m => m.ContactPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/announce',
         pathMatch: 'full'
       }
     ]
   },
   {
+    path: 'home-new',
+    loadChildren: () => import('../home-new/home-new.module').then(m => m.HomeNewPageModule)
+  },
+  {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: 'home-new',
     pathMatch: 'full'
   }
 ];

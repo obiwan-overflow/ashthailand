@@ -24,3 +24,30 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {   
+    font-family: 'sarabun';    
+    src: url('assets/fonts/Sarabun/Sarabun-Medium.ttf');
+}
+ion-content,ion-title { 
+    font-family:sarabun !important;
+}
+ion-label {
+    font-family:sarabun !important;
+}
+ion-list {
+    ion-item {
+        font-family: sarabun !important;
+    }
+}
+ion-label {
+    font-family: sarabun !important;
+}
+.ion-color-theme {
+    --ion-color-base: var(--ion-color-theme);
+    --ion-color-base-rgb: var(--ion-color-theme-rgb);
+    --ion-color-contrast: var(--ion-color-theme-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-theme-contrast-rgb);
+    --ion-color-shade: var(--ion-color-theme-shade);
+    --ion-color-tint: var(--ion-color-theme-tint);
+}
