@@ -48,7 +48,15 @@ const routes: Routes = [
         loadChildren: () => import('../form-step1/form-step1.module').then(m => m.FormStep1PageModule)
       },
       {
-        path: 'form-lists/form-step1/form-step2',
+        path: 'form-lists/form-step1/form-step2/:id',
+        loadChildren: () => import('../form-step2/form-step2.module').then(m => m.FormStep2PageModule)
+      },
+      {
+        path: 'form/form-step1/:id',
+        loadChildren: () => import('../form-step1/form-step1.module').then(m => m.FormStep1PageModule)
+      },
+      {
+        path: 'form/form-step1/form-step2/:id',
         loadChildren: () => import('../form-step2/form-step2.module').then(m => m.FormStep2PageModule)
       },
       {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
   selector: 'app-form',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPage implements OnInit {
 
-  constructor() { }
+  constructor(public api:RestApiService) { }
 
   ngOnInit() {
   }

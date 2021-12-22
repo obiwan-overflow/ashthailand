@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>form-step2</ion-title>
+    <ion-title>แบบสอบถาม</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -16,25 +16,22 @@
         <ion-progress-bar value="0.1" buffer="0.2" color="success"></ion-progress-bar>
       </ion-col>
       <ion-col size="12">
-        <ion-list>
+        <ion-list *ngFor="let lists of dataLists">
+          <div>
           <ion-radio-group value="1">
-            <p>ปัจจุบันสูบบุหรี่หรือไม่</p>
+            <p>{{lists.title}}</p>
             
             <ion-item lines="full">
-              <ion-label>ไม่สูบ</ion-label>
+              <ion-label>ใช่</ion-label>
               <ion-radio slot="start" value="1"></ion-radio>
             </ion-item>
         
             <ion-item lines="full">
-              <ion-label>สูบบางวัน</ion-label>
+              <ion-label>ไม่ใช่</ion-label>
               <ion-radio slot="start" value="2"></ion-radio>
             </ion-item>
-
-            <ion-item lines="full">
-              <ion-label>สูบทุกวัน</ion-label>
-              <ion-radio slot="start" value="3"></ion-radio>
-            </ion-item>
           </ion-radio-group>
+          </div>
         </ion-list>
       </ion-col>
       <ion-col size="12">

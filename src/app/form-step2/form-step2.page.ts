@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
   selector: 'app-form-step2',
@@ -9,12 +11,45 @@ import { Injectable } from '@angular/core';
 })
 export class FormStep2Page implements OnInit {
 
-  constructor(public route:Router) { }
+  id:any;
+  dataLists:any;
+  constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
+      console.log(res);
+      this.dataLists = res.rows;
+    });
+  }
 
   ngOnInit() {
   }
   async form(){
-    this.route.navigateByUrl('form-success');
+    this.presentAlertConfirm();
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'ยืนยันการบันทึกข้อมูล',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.router.navigateByUrl('form-success');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
