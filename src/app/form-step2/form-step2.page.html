@@ -16,7 +16,7 @@
         <ion-progress-bar value="0.1" buffer="0.2" color="success"></ion-progress-bar>
       </ion-col>
       <ion-col size="12">
-        <ion-list *ngFor="let lists of dataLists" class="hide">
+        <ion-list *ngFor="let lists of dataLists">
           <div>
           <ion-radio-group value="1">
             <p>{{lists.title}}</p>
@@ -35,7 +35,7 @@
         </ion-list>
       </ion-col>
       <ion-col size="12">
-        <ion-button type="submit" color="theme" expand="block" size="large">บันทึก</ion-button>
+        <ion-button type="submit" color="theme" expand="full" size="large">บันทึก</ion-button>
       </ion-col>
     </ion-row>
     </form>
