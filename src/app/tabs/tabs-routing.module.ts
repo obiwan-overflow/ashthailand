@@ -76,7 +76,7 @@ const routes: Routes = [
         loadChildren: () => import('../news/news.module').then(m => m.NewsPageModule)
       },
       {
-        path: 'news/news-detail',
+        path: 'news/news-detail/:id',
         loadChildren: () => import('../news-detail/news-detail.module').then(m => m.NewsDetailPageModule)
       },
       {

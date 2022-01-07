@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
   selector: 'app-news',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsPage implements OnInit {
 
-  constructor() { }
+  lists:any;
+  constructor(public api:RestApiService) {
+    this.api.getdata('news').subscribe(res=>{
+      console.log(res);
+      this.lists = res;
+    })
+  }
 
   ngOnInit() {
   }
