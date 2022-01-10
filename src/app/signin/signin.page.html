@@ -6,11 +6,11 @@
     <form (ngSubmit)="signin()">
     <ion-item lines="full">
       <ion-label position="floating">ชื่อผู้ใช้</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="text" [(ngModel)]="formlogin.username" name="username"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">รหัสผ่าน</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="formlogin.password" name="password"></ion-input>
     </ion-item>
     <ion-button color="theme" expand="block" type="submit">เข้าสู่ระบบ</ion-button>
     </form>
