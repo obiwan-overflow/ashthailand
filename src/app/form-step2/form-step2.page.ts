@@ -16,7 +16,6 @@ export class FormStep2Page implements OnInit {
   constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
-      console.log(res);
       this.dataLists     = res.rows;
     });
   }
