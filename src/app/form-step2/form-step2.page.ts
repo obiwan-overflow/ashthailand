@@ -13,6 +13,7 @@ export class FormStep2Page implements OnInit {
 
   id:any;
   dataLists:any;
+  form = {}
   constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
@@ -22,7 +23,7 @@ export class FormStep2Page implements OnInit {
 
   ngOnInit() {
   }
-  async form(){
+  async formAnswer(){
     console.log(this.form);
     // this.presentAlertConfirm();
   }

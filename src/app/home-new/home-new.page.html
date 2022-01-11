@@ -33,13 +33,13 @@
         </div>
       </ion-col>
       <ion-col size="6">
-        <div class="menu" routerLink="/tabs/form">
+        <div class="menu" (click)="formanswer()">
           <ion-icon name="document-text-outline"></ion-icon>
           <p>แบบสอบถาม</p>
         </div>
       </ion-col>
       <ion-col size="6">
-        <div class="menu" routerLink="/tabs/report">
+        <div class="menu" (click)="report()">
           <ion-icon name="pie-chart-outline"></ion-icon>
           <p>รายงาน</p>
         </div>
@@ -54,6 +54,12 @@
         <div class="menu" routerLink="/tabs/contact">
           <ion-icon name="mail-outline"></ion-icon>
           <p>ติดต่อเรา</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="menu" routerLink="/signin" *ngIf="fullname == undefined">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <p>เข้าสู่ระบบ</p>
         </div>
       </ion-col>
     </ion-row>

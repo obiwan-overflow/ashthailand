@@ -9,15 +9,15 @@
 
 <ion-content>
   <ion-grid>
-    <form (ngSubmit)="form()">
+    <form (ngSubmit)="formAnswer()">
     <ion-row>
       <ion-col size="12">
         <ion-label>20%</ion-label>
         <ion-progress-bar value="0.1" buffer="0.2" color="success"></ion-progress-bar>
       </ion-col>
       <ion-col size="12">
-        <ion-list *ngFor="let lists of dataLists">
-          <ion-radio-group>
+        <ion-list *ngFor="let lists of dataLists, let key = index">
+          <ion-radio-group [(ngModel)]="form.answer" name="answer">
             <p>{{lists.title}}</p>
             <ion-item lines="full" *ngFor="let answer of lists.answer">
               <ion-label>{{answer.title}}</ion-label>
