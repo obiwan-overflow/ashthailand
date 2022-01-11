@@ -11,6 +11,7 @@ import { AlertController, LoadingController, Platform } from '@ionic/angular';
 })
 export class SigninPage implements OnInit {
   formlogin:Formlogin;
+  loginfail:any;
   constructor(public route: Router,public api:RestApiService,private storage: Storage,public loadingController:LoadingController) { }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class SigninPage implements OnInit {
     await this.api.getdata('member/login&username='+this.formlogin.username+'&password='+this.formlogin.password).subscribe(res=>{
       if(res.result == 'success'){
         this.storage.set('userId',res.detail.id);
+        this.storage.set('fullname',res.detail.name+" "+res.detail.lastname);
         this.route.navigateByUrl('home-new');
         loading.present();
       }else{
@@ -33,12 +35,7 @@ export class SigninPage implements OnInit {
     });
   }
   async loginfailed(){
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Failed !',
-      duration: 2000
-    });
-    loading.present();
+    this.loginfail = "username หรือรหัสผ่านของท่านไม่ถูกต้อง";
   }
 
 }

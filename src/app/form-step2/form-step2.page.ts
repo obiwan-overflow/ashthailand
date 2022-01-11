@@ -16,15 +16,15 @@ export class FormStep2Page implements OnInit {
   constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
-      this.dataLists = res.rows;
-      console.log(res.rows[0]);
+      console.log(res);
+      this.dataLists     = res.rows;
     });
   }
 
   ngOnInit() {
   }
   async form(){
-    this.presentAlertConfirm();
+    // this.presentAlertConfirm();
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

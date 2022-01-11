@@ -12,6 +12,9 @@
       <ion-label position="floating">รหัสผ่าน</ion-label>
       <ion-input type="password" [(ngModel)]="formlogin.password" name="password"></ion-input>
     </ion-item>
+    <ion-text color="danger">
+      {{loginfail}}
+    </ion-text>
     <ion-button color="theme" expand="block" type="submit">เข้าสู่ระบบ</ion-button>
     </form>
     <a href="forgot-password">ลืมรหัสผ่าน ?</a>

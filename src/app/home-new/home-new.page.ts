@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home-new',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeNewPage implements OnInit {
 
-  constructor() { }
+  fullname:any;
+  constructor(private storage: Storage) {
+    this.storage.get('fullname').then((data)=>{
+      this.fullname = data;
+    });
+  }
 
   ngOnInit() {
   }

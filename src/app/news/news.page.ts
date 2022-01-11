@@ -11,9 +11,8 @@ export class NewsPage implements OnInit {
   lists:any;
   constructor(public api:RestApiService) {
     this.api.getdata('news').subscribe(res=>{
-      console.log(res);
       this.lists = res;
-    })
+    });
   }
 
   ngOnInit() {

@@ -16,12 +16,14 @@
         <ion-progress-bar value="0.1" buffer="0.2" color="success"></ion-progress-bar>
       </ion-col>
       <ion-col size="12">
-        <ion-list *ngFor="let lists of dataLists">
-          <div>
-          <ion-radio-group value="1">
+        <ion-list>
+          <ion-radio-group *ngFor="let lists of dataLists" [(ngModel)]="form.answer" name="answer">
             <p>{{lists.title}}</p>
-            
-            <ion-item lines="full">
+            <ion-item lines="full" *ngFor="let answer of lists.answer">
+              <ion-label>{{answer.title}}</ion-label>
+              <ion-radio slot="start" value="{{answer.id}}"></ion-radio>
+            </ion-item>
+            <!-- <ion-item lines="full">
               <ion-label>ใช่</ion-label>
               <ion-radio slot="start" value="1"></ion-radio>
             </ion-item>
@@ -29,9 +31,8 @@
             <ion-item lines="full">
               <ion-label>ไม่ใช่</ion-label>
               <ion-radio slot="start" value="2"></ion-radio>
-            </ion-item>
+            </ion-item> -->
           </ion-radio-group>
-          </div>
         </ion-list>
       </ion-col>
       <ion-col size="12">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
   selector: 'app-why',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./why.page.scss'],
 })
 export class WhyPage implements OnInit {
-
-  constructor() { }
+  detail:any;
+  constructor(public api:RestApiService) {
+    this.api.getdata('article').subscribe((res)=>{
+      this.detail = res.text;
+    });
+  }
 
   ngOnInit() {
   }
