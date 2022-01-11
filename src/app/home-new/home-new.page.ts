@@ -10,12 +10,14 @@ export class HomeNewPage implements OnInit {
 
   fullname:any;
   constructor(private storage: Storage) {
-    this.storage.get('fullname').then((data)=>{
-      this.fullname = data;
-    });
+    
   }
 
   ngOnInit() {
   }
-
+  async ionViewDidEnter(){
+    this.storage.get('fullname').then((data)=>{
+      this.fullname = data;
+    });
+  }
 }

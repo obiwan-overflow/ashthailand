@@ -23,6 +23,7 @@ export class FormStep2Page implements OnInit {
   ngOnInit() {
   }
   async form(){
+    console.log(this.form);
     // this.presentAlertConfirm();
   }
   async presentAlertConfirm() {
