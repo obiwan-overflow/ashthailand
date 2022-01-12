@@ -13,7 +13,11 @@ export class FormStep2Page implements OnInit {
 
   id:any;
   dataLists:any;
-  form = {}
+  form = {
+    answer:{
+      answer:{}
+    }
+  };
   constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
