@@ -43,10 +43,6 @@ export class RestApiService {
 	      map(this.extractData),catchError(this.handleError)
 	    );
 	}
-	putdata(url_string: string,file:File): Observable<any> {
-	    const url = "/testproxy";
-		return this.http.post(url,file,{headers:{'Access-Control-Allow-Origin':"*"}});
-	}
 	postdata(url_string: any,formData: any): Observable<any> { 
 		const url = `${apiUrl}${url_string}`;
 		return this.http.post<string>(url,formData);

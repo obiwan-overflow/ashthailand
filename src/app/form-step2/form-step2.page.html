@@ -17,7 +17,7 @@
       </ion-col>
       <ion-col size="12">
         <ion-list *ngFor="let lists of dataLists, let key = index">
-          <ion-radio-group [(ngModel)]="form.answer.answer[key]" name="answer">
+          <ion-radio-group [(ngModel)]="form.answer[key]" name="answer">
             <p>{{lists.title}}</p>
             <ion-item lines="full" *ngFor="let answer of lists.answer">
               <ion-label>{{answer.title}}</ion-label>

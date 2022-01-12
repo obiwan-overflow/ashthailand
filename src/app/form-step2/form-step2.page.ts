@@ -14,10 +14,9 @@ export class FormStep2Page implements OnInit {
   id:any;
   dataLists:any;
   form = {
-    answer:{
-      answer:{}
-    }
+    answer:{}
   };
+  answer:any;
   constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
@@ -28,10 +27,6 @@ export class FormStep2Page implements OnInit {
   ngOnInit() {
   }
   async formAnswer(){
-    console.log(this.form);
-    // this.presentAlertConfirm();
-  }
-  async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirm!',
@@ -48,13 +43,19 @@ export class FormStep2Page implements OnInit {
           text: 'Okay',
           handler: () => {
             console.log('Confirm Okay');
-            this.router.navigateByUrl('form-success');
+
+            const formData = new FormData();
+            formData.append('answer',JSON.stringify(this.form.answer));
+            
+            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+              if(res.result == 'success'){
+                this.router.navigateByUrl('form-success');
+              }
+            });
           }
         }
       ]
     });
-
     await alert.present();
   }
-
 }
