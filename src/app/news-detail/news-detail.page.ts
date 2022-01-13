@@ -15,7 +15,7 @@ export class NewsDetailPage implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('news/detail&id='+this.id).subscribe((res)=>{
       this.title   = res.title;
-      this.detail  = res.text;
+      this.detail  = res.text.replace(/<\/?[^>]+>/gi, '');
     });
   }
 

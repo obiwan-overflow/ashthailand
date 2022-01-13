@@ -21,7 +21,7 @@
             <p>{{lists.title}}</p>
             <ion-item lines="full" *ngFor="let answer of lists.answer">
               <ion-label>{{answer.title}}</ion-label>
-              <ion-radio slot="start" value="{{answer.id}}"></ion-radio>
+              <ion-radio slot="start" value="{{answer.title}}"></ion-radio>
             </ion-item>
           </ion-radio-group>
         </ion-list>

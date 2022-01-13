@@ -46,6 +46,7 @@ export class FormStep2Page implements OnInit {
 
             const formData = new FormData();
             formData.append('answer',JSON.stringify(this.form.answer));
+            formData.append('cat_id',this.id);
             
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
