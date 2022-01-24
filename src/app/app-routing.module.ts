@@ -80,6 +80,10 @@ const routes: Routes = [
   {
     path: 'form-success',
     loadChildren: () => import('./form-success/form-success.module').then( m => m.FormSuccessPageModule)
+  },
+  {
+    path: 'form-complete',
+    loadChildren: () => import('./form-complete/form-complete.module').then( m => m.FormCompletePageModule)
   }
 
 

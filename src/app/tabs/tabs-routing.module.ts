@@ -64,8 +64,12 @@ const routes: Routes = [
         loadChildren: () => import('../why/why.module').then(m => m.WhyPageModule)
       },
       {
-        path: 'form-lists',
+        path: 'form/form-lists/:id',
         loadChildren: () => import('../form-lists/form-lists.module').then(m => m.FormListsPageModule)
+      },
+      {
+        path: 'form/form-lists/:id/form-complete/:id-detail',
+        loadChildren: () => import('../form-complete/form-complete.module').then(m => m.FormCompletePageModule)
       },
       {
         path: 're-password',

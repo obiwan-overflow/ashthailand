@@ -8,12 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let data of listsData" routerLink="form-complete/{{data.id}}" lines="full">
-      <ion-label>
-        <h3>แบบสอบถาม</h3>
-        <small>{{data.date_add}}</small>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <ion-card-content>
+      <ul class="lists-answer">
+        <li *ngFor="let data of data">
+          <h1>{{data.question}}</h1>
+          <p>{{data.answer}}</p>
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
