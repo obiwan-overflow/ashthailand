@@ -39,27 +39,33 @@
         </div>
       </ion-col>
       <ion-col size="6">
-        <div class="menu" routerLink="/home-new/why">
-          <ion-icon name="volume-high-outline"></ion-icon>
-          <p>บทความ</p>
-        </div>
-      </ion-col>
-      <ion-col size="6">
         <div class="menu" routerLink="/tabs/news">
           <ion-icon name="newspaper-outline"></ion-icon>
           <p>ข่าวสาร</p>
         </div>
       </ion-col>
       <ion-col size="6">
-        <div class="menu" routerLink="/tabs/contact">
-          <ion-icon name="mail-outline"></ion-icon>
-          <p>ติดต่อเรา</p>
+        <div class="menu" routerLink="/home-new/why">
+          <ion-icon name="volume-high-outline"></ion-icon>
+          <p>บทความ</p>
         </div>
       </ion-col>
       <ion-col size="6">
         <div class="menu" routerLink="/signin" *ngIf="fullname == undefined">
           <ion-icon name="person-circle-outline"></ion-icon>
           <p>เข้าสู่ระบบ</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="menu" routerLink="/tabs/register" *ngIf="fullname == undefined">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <p>ลงทะเบียน</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="menu" routerLink="/tabs/contact">
+          <ion-icon name="mail-outline"></ion-icon>
+          <p>ติดต่อเรา</p>
         </div>
       </ion-col>
     </ion-row>

@@ -27,7 +27,8 @@ export class SigninPage implements OnInit {
       if(res.result == 'success'){
         this.storage.set('userId',res.detail.id);
         this.storage.set('fullname',res.detail.name+" "+res.detail.lastname);
-        this.route.navigateByUrl('home-new');
+        // this.route.navigateByUrl('home-new');
+        window.location.assign('home-new');
         loading.present();
       }else{
         this.loginfailed();

@@ -13,9 +13,12 @@
         <ion-item color="theme" lines="full" href="home-new">หน้าหลัก</ion-item>
         <ion-item color="theme" lines="full" href="tabs/news">ข่าวสาร</ion-item>
         <ion-item color="theme" lines="full" href="tabs/contact">ติดต่อเรา</ion-item>
-        <ion-item lines="full"><ion-icon name="person"></ion-icon> ข้อมูลประจำตัว</ion-item>
-        <ion-item color="theme" lines="full" href="tabs/re-password">เปลี่ยนรหัสผ่าน</ion-item>
-        <ion-item color="theme" lines="full" (click)="logout()">ออกจากระบบ</ion-item>
+        <ion-item color="theme" *ngIf="fullname == null" lines="full" href="signin">เข้าสู่ระบบ</ion-item>
+        <ion-item color="theme" *ngIf="fullname == null" lines="full" href="tabs/register">ลงทะเบียน</ion-item>
+
+        <ion-item lines="full"  *ngIf="fullname !== null"><ion-icon name="person"></ion-icon> ข้อมูลประจำตัว</ion-item>
+        <ion-item color="theme" *ngIf="fullname !== null" lines="full" href="tabs/re-password">เปลี่ยนรหัสผ่าน</ion-item>
+        <ion-item color="theme" *ngIf="fullname !== null" lines="full" (click)="logout()">ออกจากระบบ</ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

@@ -8,15 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  fullname:any;
   constructor(private storage: Storage,public route:Router) {}
   async ngOnInit() {
     // If using a custom driver:
     // await this.storage.defineDriver(MyCustomDriver)
     await this.storage.create();
+    this.storage.get('fullname').then((data)=>{
+      this.fullname = data;
+    });
   }
   async logout(){
     await this.storage.remove('id');
     await this.storage.remove('fullname');
-    await this.route.navigate(['signin']);
+    // await this.route.navigate(['home-new']);
+    await window.location.assign('home-new');
   }
 }

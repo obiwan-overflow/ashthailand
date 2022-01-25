@@ -29,18 +29,18 @@ export class FormStep2Page implements OnInit {
   async formAnswer(){
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Confirm!',
+      header: 'บันทึก!',
       message: 'ยืนยันการบันทึกข้อมูล',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'ยกเลิก',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Okay',
+          text: 'บันทึก',
           handler: () => {
             console.log('Confirm Okay');
 

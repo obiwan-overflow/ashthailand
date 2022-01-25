@@ -84,6 +84,14 @@ const routes: Routes = [
   {
     path: 'form-complete',
     loadChildren: () => import('./form-complete/form-complete.module').then( m => m.FormCompletePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'register-success',
+    loadChildren: () => import('./register-success/register-success.module').then( m => m.RegisterSuccessPageModule)
   }
 
 

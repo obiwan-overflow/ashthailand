@@ -11,5 +11,12 @@ export class RePasswordPage implements OnInit {
 
   ngOnInit() {
   }
-
+  todo = {
+    oldpassword: '',
+    password: '',
+    confirmpassword: ''
+  };
+  async formRepassword(form) {
+    console.log(form.value)
+  }
 }
