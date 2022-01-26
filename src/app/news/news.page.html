@@ -21,12 +21,13 @@
     </ion-item> -->
 
     <ion-item *ngFor="let lists of lists" routerLink="/tabs/news/news-detail/{{lists.id}}" lines="full">
-      <ion-avatar slot="start">
-        <img src="assets/shapes.svg">
+      <ion-avatar slot="start" class="icon">
+        <!-- <img src="assets/shapes.svg"> -->
+        <ion-icon name="newspaper-outline" color="warning"></ion-icon>
       </ion-avatar>
       <ion-label>
-        <h3>{{lists.title}}</h3>
-        <small>{{lists.date_add}}</small>
+        <h3><b>{{lists.title}}</b></h3>
+        <small><ion-icon name="time-outline"></ion-icon> {{lists.date_add}}</small>
       </ion-label>
     </ion-item>
 

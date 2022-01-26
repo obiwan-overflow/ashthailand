@@ -92,6 +92,10 @@ const routes: Routes = [
         loadChildren: () => import('../register/register.module').then(m => m.RegisterPageModule)
       },
       {
+        path: 'form/form-general/:id',
+        loadChildren: () => import('../form-general/form-general.module').then(m => m.FormGeneralPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/announce',
         pathMatch: 'full'
