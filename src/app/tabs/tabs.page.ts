@@ -21,9 +21,10 @@ export class TabsPage {
       const loading = await this.loadingController.create({
         cssClass: 'my-custom-class',
         message: 'กรุณาเข้าสู่ระบบ ...',
-        duration: 1000
+        duration: 3000
       });
       loading.present();
+      this.router.navigateByUrl('signin');
     }else{
       this.router.navigateByUrl('tabs/form');
     }
@@ -33,9 +34,10 @@ export class TabsPage {
       const loading = await this.loadingController.create({
         cssClass: 'my-custom-class',
         message: 'กรุณาเข้าสู่ระบบ ...',
-        duration: 1000
+        duration: 3000
       });
       loading.present();
+      this.router.navigateByUrl('signin');
     }else{
       this.router.navigateByUrl('tabs/report');
     }
