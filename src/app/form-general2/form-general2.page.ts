@@ -5,11 +5,11 @@ import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 
 @Component({
-  selector: 'app-form-step2',
-  templateUrl: './form-step2.page.html',
-  styleUrls: ['./form-step2.page.scss'],
+  selector: 'app-form-general2',
+  templateUrl: './form-general2.page.html',
+  styleUrls: ['./form-general2.page.scss'],
 })
-export class FormStep2Page implements OnInit {
+export class FormGeneral2Page implements OnInit {
 
   id:any;
   dataLists:any;
@@ -98,13 +98,6 @@ export class FormStep2Page implements OnInit {
             formData.append('ADDRESS',this.ADDRESS);
             formData.append('LAT',this.LAT);
             formData.append('LONG',this.LONG);
-            formData.append('P1A',this.form.answer[0]);
-            formData.append('P2A',this.form.answer[1]);
-            formData.append('P3A',this.form.answer[2]);
-            formData.append('P4A',this.form.answer[3]);
-            formData.append('P5A',this.form.answer[4]);
-            // formData.append('answer',JSON.stringify(this.form.answer));
-            
             
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){

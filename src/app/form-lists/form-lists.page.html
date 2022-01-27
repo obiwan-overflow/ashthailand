@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>แบบสอบถาม</ion-title>
+    <ion-title>แบบสอบถามที่แล้วเสร็จ</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -10,9 +10,12 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let data of listsData" routerLink="form-complete/{{data.id}}" lines="full">
+      <ion-avatar slot="start" class="icon">
+        <ion-icon name="newspaper-outline" color="success"></ion-icon>
+      </ion-avatar>
       <ion-label>
         <h3>แบบสอบถาม</h3>
-        <small>{{data.date_add}}</small>
+        <small><ion-icon name="time-outline"></ion-icon> {{data.date_add}}</small>
       </ion-label>
     </ion-item>
   </ion-list>

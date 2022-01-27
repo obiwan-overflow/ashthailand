@@ -6,11 +6,11 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 
 @Component({
-  selector: 'app-form-step1',
-  templateUrl: './form-step1.page.html',
-  styleUrls: ['./form-step1.page.scss'],
+  selector: 'app-form-two',
+  templateUrl: './form-two.page.html',
+  styleUrls: ['./form-two.page.scss'],
 })
-export class FormStep1Page implements OnInit {
+export class FormTwoPage implements OnInit {
 
   id:any;
   latitude:any;
@@ -52,6 +52,6 @@ export class FormStep1Page implements OnInit {
     await this.storage.set('ADDRESS',form.value.ADDRESS);
     await this.storage.set('LAT',form.value.LAT);
     await this.storage.set('LONG',form.value.LONG);
-    await this.router.navigateByUrl('/tabs/form/form-step1/form-step2/'+this.id);
+    await this.router.navigateByUrl('/tabs/form/form-two/form-two2/'+this.id);
   }
 }

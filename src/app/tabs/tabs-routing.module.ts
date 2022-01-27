@@ -96,6 +96,18 @@ const routes: Routes = [
         loadChildren: () => import('../form-general/form-general.module').then(m => m.FormGeneralPageModule)
       },
       {
+        path: 'form/form-general/form-general2/:id',
+        loadChildren: () => import('../form-general2/form-general2.module').then(m => m.FormGeneral2PageModule)
+      },
+      {
+        path: 'form/form-two/:id',
+        loadChildren: () => import('../form-two/form-two.module').then(m => m.FormTwoPageModule)
+      },
+      {
+        path: 'form/form-two/form-two2/:id',
+        loadChildren: () => import('../form-two2/form-two2.module').then(m => m.FormTwo2PageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/announce',
         pathMatch: 'full'

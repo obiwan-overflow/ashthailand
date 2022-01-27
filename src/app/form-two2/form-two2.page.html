@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="theme">
+    <ion-title>แบบสอบถาม</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <form (ngSubmit)="formAnswer()">
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>20%</ion-label>
+        <ion-progress-bar value="0.1" buffer="0.2" color="success"></ion-progress-bar>
+      </ion-col>
+      <ion-col size="12">
+        <ion-list *ngFor="let lists of dataLists, let key = index">
+          <ion-radio-group [(ngModel)]="form.answer[key]" name="answer">
+            <p>{{lists.title}}</p>
+            <ion-item lines="full" *ngFor="let answer of lists.answer">
+              <ion-label>{{answer.title}}</ion-label>
+              <ion-radio slot="start" value="{{answer.title}}"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button type="submit" color="dark" expand="full">บันทึกฉบับร่าง</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button type="submit" color="success" expand="full">บันทึก</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

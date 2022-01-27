@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
-import { Storage } from '@ionic/storage-angular';
+import { Storage } from '@ionic/storage-angular'
 
 @Component({
-  selector: 'app-form-step2',
-  templateUrl: './form-step2.page.html',
-  styleUrls: ['./form-step2.page.scss'],
+  selector: 'app-form-two2',
+  templateUrl: './form-two2.page.html',
+  styleUrls: ['./form-two2.page.scss'],
 })
-export class FormStep2Page implements OnInit {
-
+export class FormTwo2Page implements OnInit {
   id:any;
   dataLists:any;
   form = {
@@ -98,14 +97,12 @@ export class FormStep2Page implements OnInit {
             formData.append('ADDRESS',this.ADDRESS);
             formData.append('LAT',this.LAT);
             formData.append('LONG',this.LONG);
-            formData.append('P1A',this.form.answer[0]);
-            formData.append('P2A',this.form.answer[1]);
-            formData.append('P3A',this.form.answer[2]);
-            formData.append('P4A',this.form.answer[3]);
-            formData.append('P5A',this.form.answer[4]);
-            // formData.append('answer',JSON.stringify(this.form.answer));
-            
-            
+            formData.append('S1A',this.form.answer[0]);
+            formData.append('S2A',this.form.answer[1]);
+            formData.append('S3A',this.form.answer[2]);
+            formData.append('S4A',this.form.answer[3]);
+            formData.append('S5A',this.form.answer[4]);
+            formData.append('S6A',this.form.answer[5]);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
                 this.router.navigateByUrl('form-success');

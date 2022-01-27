@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-grid>
-    <form (ngSubmit)="form()">
+    <form #form="ngForm" (ngSubmit)="formData(form)">
     <ion-row>
       <!-- <ion-col size="12">
         <ion-label>10%</ion-label>
@@ -53,35 +53,43 @@
       </ion-col>
       <ion-col size="12">
         <ion-label>จังหวัด</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.CWT" name="CWT"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>ตำบล</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.TMP" name="TMP"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>อำเภอ</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>หมู่บ้าน</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.VIL" name="VIL"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>หมู่</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.MOO" name="MOO"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>บ้านเลขที่</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.A1" name="A1"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>ชื่อคน</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.NAME" name="NAME"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>ที่อยู่</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.ADDRESS" name="ADDRESS"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>latitude</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.LAT" name="LAT" value="{{latitude}}"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>longitude</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.LONG" name="LONG" value="{{longitude}}"></ion-input>
       </ion-col>
       <!-- <ion-col size="12">
         <ion-label>ชื่อร้าน</ion-label>
