@@ -30,6 +30,10 @@ export class FormGeneralPage implements OnInit {
     });
   }
   todo = {
+    MENBER: '',
+    PERSON_NO: '',
+    SEX: '',
+    AGE: '',
     CWT: '',
     TMP: '',
     ID1: '',
@@ -42,6 +46,10 @@ export class FormGeneralPage implements OnInit {
     LONG: ''
   };
   async formData(form){
+    await this.storage.set('MENBER',form.value.MENBER);
+    await this.storage.set('PERSON_NO',form.value.PERSON_NO);
+    await this.storage.set('SEX',form.value.SEX);
+    await this.storage.set('AGE',form.value.AGE);
     await this.storage.set('CWT',form.value.CWT);
     await this.storage.set('TMP',form.value.TMP);
     await this.storage.set('ID1',form.value.ID1);

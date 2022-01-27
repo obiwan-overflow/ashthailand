@@ -27,6 +27,10 @@ export class FormGeneral2Page implements OnInit {
   ADDRESS:any;
   LAT:any;
   LONG:any;
+  MENBER:any;
+  PERSON_NO:any;
+  SEX:any;
+  AGE:any;
   constructor(public router:Router,public alertController:AlertController,public route:ActivatedRoute,public api:RestApiService,public storage:Storage) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('questionnaire&id_category='+this.id).subscribe(res => {
@@ -67,6 +71,18 @@ export class FormGeneral2Page implements OnInit {
     await this.storage.get('LONG').then((data)=>{
       this.LONG = data;
     });
+    await this.storage.get('MENBER').then((data)=>{
+      this.MENBER = data;
+    });
+    await this.storage.get('PERSON_NO').then((data)=>{
+      this.PERSON_NO = data;
+    });
+    await this.storage.get('SEX').then((data)=>{
+      this.SEX = data;
+    });
+    await this.storage.get('AGE').then((data)=>{
+      this.AGE = data;
+    });
   }
   async formAnswer(){
     const alert = await this.alertController.create({
@@ -98,6 +114,10 @@ export class FormGeneral2Page implements OnInit {
             formData.append('ADDRESS',this.ADDRESS);
             formData.append('LAT',this.LAT);
             formData.append('LONG',this.LONG);
+            formData.append('MENBER',this.MENBER);
+            formData.append('PERSON_NO',this.PERSON_NO);
+            formData.append('SEX',this.SEX);
+            formData.append('AGE',this.AGE);
             
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
