@@ -14,7 +14,8 @@ export class FormGeneral2Page implements OnInit {
   id:any;
   dataLists:any;
   form = {
-    answer:{}
+    answer:{},
+    answerInput:{}
   };
   answer:any;
   CWT:any;

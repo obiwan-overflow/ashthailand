@@ -15,8 +15,8 @@
         <ion-label>20%</ion-label>
         <ion-progress-bar value="0.1" buffer="0.2" color="success"></ion-progress-bar>
       </ion-col> -->
-      <ion-col size="12">
-        <ion-list *ngFor="let lists of dataLists, let key = index">
+      <ion-col size="12" *ngFor="let lists of dataLists, let key = index">
+        <ion-list *ngIf="lists.answer.length > 1">
           <ion-radio-group [(ngModel)]="form.answer[key]" name="answer">
             <p>{{lists.title}}</p>
             <ion-item lines="full" *ngFor="let answer of lists.answer">
@@ -24,6 +24,10 @@
               <ion-radio slot="start" value="{{answer.title}}"></ion-radio>
             </ion-item>
           </ion-radio-group>
+        </ion-list>
+        <ion-list *ngIf="lists.answer.length == 1">
+          <p>{{lists.title}}</p>
+          <ion-input placeholder="กรุณากรอกข้อมูล" [(ngModel)]="form.answerInput[key]" name="answerInput"></ion-input>
         </ion-list>
       </ion-col>
       <ion-col size="6">

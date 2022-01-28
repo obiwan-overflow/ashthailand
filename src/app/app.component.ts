@@ -21,7 +21,10 @@ export class AppComponent {
   async logout(){
     await this.storage.remove('id');
     await this.storage.remove('fullname');
-    // await this.route.navigate(['home-new']);
-    await window.location.assign('home-new');
+    this.ionViewWillEnter();
+  }
+  async ionViewWillEnter(){
+    await this.route.navigate(['home-new']);
+    // await window.location.reload();
   }
 }
