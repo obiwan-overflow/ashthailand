@@ -9,8 +9,10 @@ import { AlertController,LoadingController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  status:any;
+  constructor(public router: Router,public api:RestApiService,public loadingController:LoadingController,public alertController:AlertController) {
 
-  constructor(public router: Router,public api:RestApiService,public loadingController:LoadingController,public alertController:AlertController) { }
+  }
 
   ngOnInit() {
   }
@@ -37,20 +39,22 @@ export class RegisterPage implements OnInit {
           text: 'ตกลง',
           handler: () => {
             console.log('Confirm Okay');
-
-            const formData = new FormData();
-            formData.append('name',form.value.name);
-            formData.append('lastname',form.value.lastname);
-            formData.append('username',form.value.username);
-            formData.append('password',form.value.password);
-            
-            this.api.postdata('member/register',formData).subscribe((res)=>{
-              if(res.result == 'success'){
-                this.router.navigateByUrl('register-success');
-              }
-              console.log(res);
-            });
-
+            if(form.value.name == "" || form.value.lastname == "" || form.value.username == "" || form.value.password == ""){
+              this.status = true;
+            }else{
+              const formData = new FormData();
+              formData.append('name',form.value.name);
+              formData.append('lastname',form.value.lastname);
+              formData.append('username',form.value.username);
+              formData.append('password',form.value.password);
+              
+              this.api.postdata('member/register',formData).subscribe((res)=>{
+                if(res.result == 'success'){
+                  this.router.navigateByUrl('register-success');
+                }
+                console.log(res);
+              });
+            }
           }
         }
       ]

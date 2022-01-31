@@ -36,6 +36,11 @@
         </ion-item>
       </ion-col>
       <ion-col size="12">
+        <ion-text color="danger" *ngIf="status == true">
+          <p>* กรุณากรอกข้อมูลให้ครบถ้วน</p>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
         <ion-button type="submit" expand="full" color="theme">บันทึก</ion-button>
       </ion-col>
     </ion-row>
