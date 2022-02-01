@@ -108,6 +108,10 @@ const routes: Routes = [
         loadChildren: () => import('../form-two2/form-two2.module').then(m => m.FormTwo2PageModule)
       },
       {
+        path: 'profile',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/announce',
         pathMatch: 'full'

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="theme">
+    <ion-title>โปรไฟล์</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <form #form="ngForm" (ngSubmit)="formRepassword(form)">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">ชื่อ</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.name" name="name" value="test"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">สกุล</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.lastname" name="lastname" value="test"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button type="submit" expand="full" color="theme">บันทึก</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

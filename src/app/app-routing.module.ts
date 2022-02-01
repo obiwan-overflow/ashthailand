@@ -108,6 +108,10 @@ const routes: Routes = [
   {
     path: 'form-general2',
     loadChildren: () => import('./form-general2/form-general2.module').then( m => m.FormGeneral2PageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
 
 
