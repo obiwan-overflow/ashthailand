@@ -28,7 +28,7 @@ const routes: Routes = [
         loadChildren: () => import('../announce/announce.module').then(m => m.AnnouncePageModule)
       },
       {
-        path: 'announce/announce-detail',
+        path: 'announce-detail',
         loadChildren: () => import('../announce-detail/announce-detail.module').then(m => m.AnnounceDetailPageModule)
       },
       {
@@ -114,6 +114,10 @@ const routes: Routes = [
       {
         path: 'form/form',
         loadChildren: () => import('../formone/form/form.module').then(m => m.FormPageModule)
+      },
+      {
+        path: 'form/form/form-step1',
+        loadChildren: () => import('../formone/form-step1/form-step1.module').then(m => m.FormStep1PageModule)
       },
       {
         path: '',

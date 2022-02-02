@@ -17,7 +17,7 @@
           <ion-item color="theme" *ngIf="!userId" lines="full" routerLink="signin">เข้าสู่ระบบ</ion-item>
           <ion-item color="theme" *ngIf="!userId" lines="full" routerLink="tabs/register">ลงทะเบียน</ion-item>
 
-          <ion-item lines="full"  *ngIf="userId">คุณ : {{fullname}}</ion-item>
+          <ion-item color="light" lines="full"  *ngIf="userId">คุณ : {{fullname}}</ion-item>
           <ion-item color="theme" *ngIf="userId" lines="full" routerLink="tabs/profile">ข้อมูลส่วนตัว</ion-item>
           <ion-item color="theme" *ngIf="userId" lines="full" routerLink="tabs/re-password">เปลี่ยนรหัสผ่าน</ion-item>
           <ion-item color="theme" *ngIf="userId" lines="full" (click)="logout()">ออกจากระบบ</ion-item>

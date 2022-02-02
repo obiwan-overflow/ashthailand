@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
   selector: 'app-home-new',
@@ -11,8 +12,11 @@ import { AlertController, LoadingController, Platform } from '@ionic/angular';
 export class HomeNewPage implements OnInit {
 
   fullname:any;
-  constructor(private storage: Storage,public router:Router,public loadingController:LoadingController) {
-    
+  titleNoti:any;
+  constructor(private storage: Storage,public router:Router,public loadingController:LoadingController,public api:RestApiService) {
+    this.api.getdata('home/noti').subscribe((res)=>{
+      this.titleNoti = res.title;
+    });
   }
 
   ngOnInit() {

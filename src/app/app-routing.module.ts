@@ -73,7 +73,8 @@ const routes: Routes = [
   {
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
-  },  {
+  },
+  {
     path: 'form-step2',
     loadChildren: () => import('./form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
@@ -114,9 +115,67 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'form',
+    path: 'formone',
     loadChildren: () => import('./formone/form/form.module').then( m => m.FormPageModule)
-  }
+  },
+  {
+    path: 'formone/form-step1',
+    loadChildren: () => import('./formone/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
+  },
+  {
+    path: 'formone/form-step1/form-step2',
+    loadChildren: () => import('./formone/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
+  },
+  {
+    path: 'formone/form-step1/form-step3',
+    loadChildren: () => import('./formone/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
+  },
+  {
+    path: 'formone/form-step1/form-step2/form-step4',
+    loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
+  {
+    path: 'formone/form-step1/form-step3/form-step4',
+    loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
+  {
+    path: 'formone/form-step1/form-step2/form-step4/form-step5',
+    loadChildren: () => import('./formone/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
+  },
+  {
+    path: 'formone/form-step1/form-step3/form-step4/form-step5',
+    loadChildren: () => import('./formone/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
+  },
+  {
+    path: 'formtwo',
+    loadChildren: () => import('./formtwo/form/form.module').then( m => m.FormPageModule)
+  },
+  {
+    path: 'formtwo/form-step1',
+    loadChildren: () => import('./formtwo/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
+  },
+  {
+    path: 'formtwo/form-step1/form-step2',
+    loadChildren: () => import('./formtwo/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
+  },
+  {
+    path: 'formtwo/form-step1/form-step2/form-step3',
+    loadChildren: () => import('./formtwo/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
+  },
+  {
+    path: 'formtwo/form-step1/form-step2/form-step3/form-step4',
+    loadChildren: () => import('./formtwo/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
+  {
+    path: 'formtwo/form-step1/form-step2/form-step3/form-step4/form-step5',
+    loadChildren: () => import('./formtwo/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
+  },
+  {
+    path: 'formtwo/form-step1/form-step2/form-step3/form-step4/form-step5/form-step6',
+    loadChildren: () => import('./formtwo/form-step6/form-step6.module').then( m => m.FormStep6PageModule)
+  },
+
+
 
 
 

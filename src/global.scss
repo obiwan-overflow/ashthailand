@@ -51,3 +51,19 @@ ion-label {
     --ion-color-shade: var(--ion-color-theme-shade);
     --ion-color-tint: var(--ion-color-theme-tint);
 }
+
+.btn-answer {
+    display: block;
+    border: 2px solid #209d96;
+    padding: 13px 30px 13px 30px !important;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    color: #209d96;
+    font-size: 1.2rem;
+    font-family: sarabun !important;
+
+    &:hover {
+        background: #209d96;
+        color: #fff;
+    }
+}

@@ -34,7 +34,7 @@
     text-decoration: none;
     // background-color: #fc301a;
     // background: linear-gradient(0deg, rgba(53,4,87,1) 0%, rgba(92,45,144,1) 100%);
-    background: url('/assets/images/background/Background.jpg');
+    background: url('/assets/images/background/Background.jpg') no-repeat 100% 100%;
     background-size: 100% 100%;
     background-position: top;
     border-radius: 15px;
@@ -70,6 +70,7 @@
     background-color: #f4f4f4;
     padding: 8px 10px;
     display: inline-flex;
+    width: 100%;
     ion-icon {
         color: green;
         font-size: 35px;

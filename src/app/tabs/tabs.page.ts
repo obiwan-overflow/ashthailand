@@ -42,5 +42,8 @@ export class TabsPage {
       this.router.navigateByUrl('tabs/report');
     }
   }
+  async home(){
+    this.router.navigateByUrl('home-new');
+  }
 
 }

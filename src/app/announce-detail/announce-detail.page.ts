@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
   selector: 'app-announce-detail',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnnounceDetailPage implements OnInit {
 
-  constructor() { }
+  detail:any;
+  constructor(public api:RestApiService) {
+    this.api.getdata('home/noti').subscribe((res)=>{
+      this.detail = res.text;
+    });
+  }
 
   ngOnInit() {
   }
