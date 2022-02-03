@@ -1,6 +1,6 @@
 <ion-content>
   <div id="header-profile">
-    <ion-row>
+    <ion-row *ngIf="fullname">
       <ion-col size="2">
         <div class="img-profile" routerLink="/tabs/profile">
           <img src="assets/images/user-theme.png">

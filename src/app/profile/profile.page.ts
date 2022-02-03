@@ -14,5 +14,8 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
   }
-
+  todo = {
+    name: '',
+    lastname: ''
+  }
 }

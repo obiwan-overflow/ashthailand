@@ -13,10 +13,8 @@
       <ion-col size="12">
         <div class="card-lists-form">
           <ion-row>
-            <ion-col size="2">
-              <ion-icon name="logo-no-smoking" color="danger"></ion-icon>
-            </ion-col>
-            <ion-col size="10">
+            <ion-col size="12">
+              <img src="assets/images/logo/01.jpeg" alt="" class="logo-form">
               <div class="lists-content">
                 <ion-text color="danger">
                   <h3><b>สังเกตสถานะที่สาธารณะ</b></h3>
@@ -31,7 +29,7 @@
               <ion-button expand="block" shape="round" color="theme" routerLink="/formone">แบบเก็บข้อมูล</ion-button>
             </ion-col>
             <ion-col size="6">
-              <ion-button expand="block" shape="round" fill="outline" color="success" routerLink="form-lists/1">แล้วเสร็จ</ion-button>
+              <ion-button expand="block" shape="round" fill="outline" color="success" routerLink="formone-lists">แล้วเสร็จ</ion-button>
             </ion-col>
             <ion-col size="6">
               <ion-button expand="block" shape="round" fill="outline" color="warning">อยู่ระหว่างดำเนินการ</ion-button>
@@ -42,10 +40,8 @@
       <ion-col size="12">
         <div class="card-lists-form">
           <ion-row>
-            <ion-col size="2">
-              <ion-icon name="logo-no-smoking" color="danger"></ion-icon>
-            </ion-col>
-            <ion-col size="10">
+            <ion-col size="12">
+              <img src="assets/images/logo/02.jpeg" alt="" class="logo-form">
               <div class="lists-content">
                 <ion-text color="danger">
                   <h3><b>สังเกตร้านค้า</b></h3>
@@ -58,7 +54,7 @@
               <ion-button expand="block" shape="round" color="theme" routerLink="/formtwo">แบบเก็บข้อมูล</ion-button>
             </ion-col>
             <ion-col size="6">
-              <ion-button expand="block" shape="round" fill="outline" color="success" routerLink="form-lists/2">แล้วเสร็จ 15/100</ion-button>
+              <ion-button expand="block" shape="round" fill="outline" color="success" routerLink="formtwo-lists">แล้วเสร็จ</ion-button>
             </ion-col>
             <ion-col size="6">
               <ion-button expand="block" shape="round" fill="outline" color="warning">อยู่ระหว่างดำเนินการ</ion-button>
@@ -66,13 +62,11 @@
           </ion-row>
         </div>
       </ion-col>
-      <!-- <ion-col size="12">
+      <ion-col size="12">
         <div class="card-lists-form">
           <ion-row>
-            <ion-col size="2">
-              <ion-icon name="logo-no-smoking" color="danger"></ion-icon>
-            </ion-col>
-            <ion-col size="10">
+            <ion-col size="12">
+              <img src="assets/images/logo/03.png" alt="" class="logo-form">
               <div class="lists-content">
                 <ion-text color="danger">
                   <h3><b>แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</b></h3>
@@ -81,78 +75,18 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="6">
-              <ion-button expand="block" color="success" routerLink="form-lists/3">แล้วเสร็จ 15/100</ion-button>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button expand="block" color="warning">อยู่ระหว่างดำเนินการ</ion-button>
-            </ion-col>
             <ion-col size="12">
-              <ion-button expand="block" color="theme" routerLink="form-general/3">แบบเก็บข้อมูล</ion-button>
+              <ion-button expand="block" shape="round" color="theme" routerLink="/formthree">แบบเก็บข้อมูล</ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button expand="block" shape="round" fill="outline" color="success" routerLink="formthree-lists">แล้วเสร็จ</ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button expand="block" shape="round" fill="outline" color="warning">อยู่ระหว่างดำเนินการ</ion-button>
             </ion-col>
           </ion-row>
         </div>
-      </ion-col> -->
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-<!-- <ion-content>
-  <div class="profile">
-    <ion-row>
-      <ion-col size="3">
-        <div class="profile-img">
-          <ion-avatar>
-            <img src="assets/images/user.png">
-          </ion-avatar>
-        </div>
-      </ion-col>
-      <ion-col size="9">
-        <div class="profile-content">
-          <p>เจ้าหน้าที่ : สมชาย ใจดี</p>
-          <p>หน่วยงาน อบต.</p>
-        </div>
-      </ion-col>
-    </ion-row>
-  </div>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-text color="danger">
-          <h4 class="title">รายการแบบสอบถาม</h4>
-          <hr class="hr-border">
-        </ion-text>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-list>
-    <ion-item lines="none" routerLink="/tabs/form/form-step1">
-      <ion-avatar slot="start">
-        <ion-icon name="document-text-sharp" color="danger"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3>สังเกตุร้านค้า</h3>
-        <p>แล้วเสร็จ 0/10</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item lines="none" routerLink="/tabs/form/form-step1">
-      <ion-avatar slot="start">
-        <ion-icon name="document-text-sharp" color="danger"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3>สังเกตุสถานะที่สาธารณะ</h3>
-        <p>แล้วเสร็จ 0/100</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item lines="none" routerLink="/tabs/form/form-step1">
-      <ion-avatar slot="start">
-        <ion-icon name="document-text-sharp" color="danger"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3>สัมภาษณ์พฤติกรรมการสูบบุหรี่</h3>
-        <p>แล้วเสร็จ 0/100</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content> -->

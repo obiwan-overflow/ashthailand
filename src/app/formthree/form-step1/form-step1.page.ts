@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { attribute } from 'node_modules_bak/postcss-selector-parser/postcss-selector-parser';
 
 @Component({
   selector: 'app-form-step1',
@@ -8,11 +7,9 @@ import { attribute } from 'node_modules_bak/postcss-selector-parser/postcss-sele
 })
 export class FormStep1Page implements OnInit {
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
   }
-  async form(event){
-    console.log(event.srcElement.id);
-  }
+
 }

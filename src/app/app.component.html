@@ -7,20 +7,45 @@
     </ion-header> 
     <ion-content color="theme">
       <ion-list>
-        <!-- <ion-item color="theme" lines="full">แบบบันทึก</ion-item> -->
-        <!-- <ion-item color="theme" lines="full">สรุปผลสำรวจ</ion-item> -->
-        <!-- <ion-item color="theme" lines="full">ทีมงาน</ion-item> -->
         <ion-menu-toggle>
-          <ion-item color="theme" lines="full" routerLink="home-new">หน้าหลัก</ion-item>
-          <ion-item color="theme" lines="full" routerLink="tabs/news">ข่าวสาร</ion-item>
-          <ion-item color="theme" lines="full" routerLink="tabs/contact">ติดต่อเรา</ion-item>
-          <ion-item color="theme" *ngIf="!userId" lines="full" routerLink="signin">เข้าสู่ระบบ</ion-item>
-          <ion-item color="theme" *ngIf="!userId" lines="full" routerLink="tabs/register">ลงทะเบียน</ion-item>
+          <ion-item color="theme" lines="full" routerLink="home-new">
+            <ion-icon name="home-sharp" slot="start"></ion-icon>
+            <ion-label>หน้าหลัก</ion-label>
+          </ion-item>
+          <ion-item color="theme" lines="full" routerLink="tabs/news">
+            <ion-icon name="newspaper-sharp" slot="start"></ion-icon>
+            <ion-label>ข่าวสาร</ion-label>
+          </ion-item>
+          <ion-item color="theme" lines="full" routerLink="tabs/contact">
+            <ion-icon name="paper-plane" slot="start"></ion-icon>
+            <ion-label>ติดต่อเรา</ion-label>
+          </ion-item>
 
-          <ion-item color="light" lines="full"  *ngIf="userId">คุณ : {{fullname}}</ion-item>
-          <ion-item color="theme" *ngIf="userId" lines="full" routerLink="tabs/profile">ข้อมูลส่วนตัว</ion-item>
-          <ion-item color="theme" *ngIf="userId" lines="full" routerLink="tabs/re-password">เปลี่ยนรหัสผ่าน</ion-item>
-          <ion-item color="theme" *ngIf="userId" lines="full" (click)="logout()">ออกจากระบบ</ion-item>
+          <ion-item color="theme" *ngIf="!userId" lines="full" routerLink="signin">
+            <ion-icon name="person-sharp" slot="start"></ion-icon>
+            <ion-label>เข้าสู่ระบบ</ion-label>
+          </ion-item>
+          <ion-item color="theme" *ngIf="!userId" lines="full" routerLink="tabs/register">
+            <ion-icon name="person-sharp" slot="start"></ion-icon>
+            <ion-label>ลงทะเบียน</ion-label>
+          </ion-item>
+
+          <ion-item color="light" lines="full"  *ngIf="userId">
+            <ion-icon name="person-sharp" slot="start"></ion-icon>
+            <ion-label>{{fullname}}</ion-label>
+          </ion-item>
+          <ion-item color="theme" *ngIf="userId" lines="full" routerLink="tabs/profile">
+            <ion-icon name="person-sharp" slot="start"></ion-icon>
+            <ion-label>ข้อมูลส่วนตัว</ion-label>
+          </ion-item>
+          <ion-item color="theme" *ngIf="userId" lines="full" routerLink="tabs/re-password">
+            <ion-icon name="person-sharp" slot="start"></ion-icon>
+            <ion-label>เปลี่ยนรหัสผ่าน</ion-label>
+          </ion-item>
+          <ion-item color="theme" *ngIf="userId" lines="full" (click)="logout()">
+            <ion-icon name="log-out-sharp" slot="start"></ion-icon>
+            <ion-label>ออกจากระบบ</ion-label>
+          </ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

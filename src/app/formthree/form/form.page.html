@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>แบบเก็บข้อมูล</ion-title>
+    <ion-title>แบบสอบถาม</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -13,21 +13,40 @@
     <ion-row>
       <ion-col size="12">
         <ion-text color="danger">
-          <h4 class="title">ข้อมูล</h4>
+          <h4 class="title">ข้อมูลผู้ทำแบบสอบถาม</h4>
           <hr class="hr-border">
         </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>สมาชิกทั้งหมดในครัวเรือน</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.MENBER" name="MENBER"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>เป็นคนที่เท่าไร</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.PERSON_NO" name="PERSON_NO"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>เพศ</ion-label>
+        <ion-select [(ngModel)]="todo.SEX" name="SEX">
+          <ion-select-option value="f">หญิง</ion-select-option>
+          <ion-select-option value="m">ชาย</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>อายุ</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.AGE" name="AGE"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>จังหวัด</ion-label>
         <ion-input type="text" [(ngModel)]="todo.CWT" name="CWT"></ion-input>
       </ion-col>
       <ion-col size="12">
-        <ion-label>อำเภอ</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1"></ion-input>
-      </ion-col>
-      <ion-col size="12">
         <ion-label>ตำบล</ion-label>
         <ion-input type="text" [(ngModel)]="todo.TMP" name="TMP"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>อำเภอ</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>หมู่บ้าน</ion-label>
@@ -53,6 +72,10 @@
         <ion-text>
           <h5>พิกัดพื้นที่ {{latitude}} - {{longitude}}</h5>
         </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>Upload Images</ion-label>
+        <ion-input type="file"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-button expand="block" shape="round" type="submit" color="dark">ต่อไป</ion-button>

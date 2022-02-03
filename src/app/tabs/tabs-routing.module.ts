@@ -120,6 +120,10 @@ const routes: Routes = [
         loadChildren: () => import('../formone/form-step1/form-step1.module').then(m => m.FormStep1PageModule)
       },
       {
+        path: 'form/formone-lists',
+        loadChildren: () => import('../formone/form-lists/form-lists.module').then(m => m.FormListsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/announce',
         pathMatch: 'full'

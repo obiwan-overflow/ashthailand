@@ -174,6 +174,21 @@ const routes: Routes = [
     path: 'formtwo/form-step1/form-step2/form-step3/form-step4/form-step5/form-step6',
     loadChildren: () => import('./formtwo/form-step6/form-step6.module').then( m => m.FormStep6PageModule)
   },
+  {
+    path: 'formthree',
+    loadChildren: () => import('./formthree/form/form.module').then( m => m.FormPageModule)
+  },
+  {
+    path: 'formthree/form-step1',
+    loadChildren: () => import('./formthree/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
+  },
+  {
+    path: 'form-lists',
+    loadChildren: () => import('./formone/form-lists/form-lists.module').then( m => m.FormListsPageModule)
+  },
+
+
+
 
 
 
