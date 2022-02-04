@@ -120,8 +120,12 @@ const routes: Routes = [
         loadChildren: () => import('../formone/form-step1/form-step1.module').then(m => m.FormStep1PageModule)
       },
       {
-        path: 'form/formone-lists',
+        path: 'form/formone-lists/:id',
         loadChildren: () => import('../formone/form-lists/form-lists.module').then(m => m.FormListsPageModule)
+      },
+      {
+        path: 'form/formone-lists/:id/formone-detail/:id',
+        loadChildren: () => import('../formone/formone-detail/formone-detail.module').then(m => m.FormoneDetailPageModule)
       },
       {
         path: '',

@@ -185,7 +185,11 @@ const routes: Routes = [
   {
     path: 'form-lists',
     loadChildren: () => import('./formone/form-lists/form-lists.module').then( m => m.FormListsPageModule)
+  },  {
+    path: 'formone-detail',
+    loadChildren: () => import('./formone/formone-detail/formone-detail.module').then( m => m.FormoneDetailPageModule)
   },
+
 
 
 

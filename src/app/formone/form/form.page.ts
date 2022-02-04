@@ -4,6 +4,7 @@ import { RestApiService } from '../../rest-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +16,7 @@ export class FormPage implements OnInit {
 
   latitude:any;
   longitude:any;
-  constructor(public router:Router,public api:RestApiService,public route:ActivatedRoute,private geolocation: Geolocation,private network: Network,private storage: Storage) {
+  constructor(public router:Router,public api:RestApiService,public route:ActivatedRoute,private geolocation: Geolocation,private network: Network,private storage: Storage,private camera: Camera) {
 
   }
 
@@ -55,20 +56,9 @@ export class FormPage implements OnInit {
       "LONG":this.longitude,
     }
     await this.storage.set('public',dataAnswer);
-    await this.storage.get('public').then((data)=>{
-      console.log(data);
-    });
+    // await this.storage.get('public').then((data)=>{
+    //   console.log(data);
+    // });
     await this.router.navigateByUrl('/formone/form-step1');
-    // await this.storage.set('CWT',form.value.CWT);
-    // await this.storage.set('TMP',form.value.TMP);
-    // await this.storage.set('ID1',form.value.ID1);
-    // await this.storage.set('VIL',form.value.VIL);
-    // await this.storage.set('MOO',form.value.MOO);
-    // await this.storage.set('A1',form.value.A1);
-    // await this.storage.set('NAME',form.value.NAME);
-    // await this.storage.set('ADDRESS',form.value.ADDRESS);
-    // await this.storage.set('LAT',form.value.LAT);
-    // await this.storage.set('LONG',form.value.LONG);
-    // await this.router.navigateByUrl('/formone/form-step1');
   }
 }

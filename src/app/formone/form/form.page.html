@@ -50,6 +50,9 @@
         <ion-input type="text" [(ngModel)]="todo.ADDRESS" name="ADDRESS"></ion-input>
       </ion-col>
       <ion-col size="12">
+        <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size="12">
         <ion-text>
           <h5>พิกัดพื้นที่ {{latitude}} - {{longitude}}</h5>
         </ion-text>
