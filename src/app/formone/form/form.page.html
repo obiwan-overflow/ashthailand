@@ -38,16 +38,22 @@
         <ion-input type="text" [(ngModel)]="todo.MOO" name="MOO"></ion-input>
       </ion-col>
       <ion-col size="12">
-        <ion-label>บ้านเลขที่</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.A1" name="A1"></ion-input>
-      </ion-col>
-      <ion-col size="12">
-        <ion-label>ชื่อคน</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.NAME" name="NAME"></ion-input>
-      </ion-col>
-      <ion-col size="12">
         <ion-label>ที่อยู่</ion-label>
         <ion-input type="text" [(ngModel)]="todo.ADDRESS" name="ADDRESS"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>ประเภทสถานที่</ion-label>
+        <ion-select value="ก1" okText="ตกลง" cancelText="ยกเลิก" [(ngModel)]="todo.A1" name="A1">
+          <ion-select-option value="ก1">สถานบริการสาธารณสุข เช่น รพ.สต. คลินิค ร้านขายยา ร้านนวดแผนไทย เป็นต้น</ion-select-option>
+          <ion-select-option value="ก2">สถานศึกษาต่่ากว่าอุดมศึกษา เช่น โรงเรียน ศูนย์เด็กเล็ก ศูนย์การศึกษานอกโรงเรียน เป็นต้น</ion-select-option>
+          <ion-select-option value="ก3">สถานที่ใช้ประโยชน์ร่วมกัน เช่น อาคารสถานที่ราชการ ศาลาประชาคม/ศาลาอเนกประสงค์ ตลาดสด/ตลาดนัด ร้านอาหาร สถานบันเทิง เป็นต้น</ion-select-option>
+          <ion-select-option value="ก4">ขนส่งสาธารณะ เช่น รถโดยสารสาธารณะ ป้ายรถประจ่าทาง ศาลารอรถ สถานีขนส่งผู้โดยสาร เป็นต้น</ion-select-option>
+          <ion-select-option value="ก5">วัด ศาสนาสถานทุกนิกาย</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>ชื่อสถานที่</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.NAME" name="NAME"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button>

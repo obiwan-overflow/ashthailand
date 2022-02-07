@@ -205,6 +205,18 @@ const routes: Routes = [
     path: 'report-admintwo',
     loadChildren: () => import('./report-admintwo/report-admintwo.module').then( m => m.ReportAdmintwoPageModule)
   },
+  {
+    path: 'form-step2',
+    loadChildren: () => import('./formthree/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
+  },
+  {
+    path: 'form-step3',
+    loadChildren: () => import('./formthree/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
+  },
+  {
+    path: 'form-step4',
+    loadChildren: () => import('./formthree/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
 
 
 
