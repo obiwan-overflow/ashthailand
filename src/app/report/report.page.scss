@@ -3,3 +3,21 @@ ion-avatar {
         font-size: 40px;
     }
 }
+.card-report {
+    display: block;
+    border: 3px solid #209d96;
+    background: #209d96;
+    color: #fff;
+    padding: 20px 15px 20px 15px;
+    border-radius: 100px;
+    text-align: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    p  {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}

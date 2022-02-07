@@ -8,17 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <!-- <ion-item lines="full" routerLink="/tabs/report/report-detail">
-      <ion-avatar slot="start">
-        <ion-icon name="bar-chart-sharp" color="tertiary"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3><b>เป้าหมายของการทำแบบสอบถาม</b></h3>
-        <p><ion-icon name="time-outline"></ion-icon> วันที่ 11 ธค 2564</p>
-      </ion-label>
-    </ion-item>
-
+  <!-- <ion-list>
     <ion-item lines="full" routerLink="/tabs/report/report-detail">
       <ion-avatar slot="start">
         <ion-icon name="bar-chart-sharp" color="tertiary"></ion-icon>
@@ -37,7 +27,35 @@
         <h3><b>เป้าหมายของการทำแบบสอบถาม</b></h3>
         <p><ion-icon name="time-outline"></ion-icon> วันที่ 11 ธค 2564</p>
       </ion-label>
-    </ion-item> -->
+    </ion-item>
 
-  </ion-list>
+    <ion-item lines="full" routerLink="/tabs/report/report-detail">
+      <ion-avatar slot="start">
+        <ion-icon name="bar-chart-sharp" color="tertiary"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3><b>เป้าหมายของการทำแบบสอบถาม</b></h3>
+        <p><ion-icon name="time-outline"></ion-icon> วันที่ 11 ธค 2564</p>
+      </ion-label>
+    </ion-item>
+  </ion-list> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="card-report" routerLink="report-employee">
+          <p>พนักงานสนาม</p>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="card-report" routerLink="report-head">
+          <p>ผู้ควบคม</p>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="card-report" routerLink="report-admin">
+          <p>admin</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

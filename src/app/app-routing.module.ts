@@ -185,10 +185,27 @@ const routes: Routes = [
   {
     path: 'form-lists',
     loadChildren: () => import('./formone/form-lists/form-lists.module').then( m => m.FormListsPageModule)
-  },  {
+  },
+  {
     path: 'formone-detail',
     loadChildren: () => import('./formone/formone-detail/formone-detail.module').then( m => m.FormoneDetailPageModule)
   },
+  {
+    path: 'report-employee',
+    loadChildren: () => import('./report-employee/report-employee.module').then( m => m.ReportEmployeePageModule)
+  },
+  {
+    path: 'report-admin',
+    loadChildren: () => import('./report-admin/report-admin.module').then( m => m.ReportAdminPageModule)
+  },
+  {
+    path: 'report-head',
+    loadChildren: () => import('./report-head/report-head.module').then( m => m.ReportHeadPageModule)
+  },  {
+    path: 'report-admintwo',
+    loadChildren: () => import('./report-admintwo/report-admintwo.module').then( m => m.ReportAdmintwoPageModule)
+  },
+
 
 
 

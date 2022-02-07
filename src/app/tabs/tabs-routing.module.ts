@@ -127,6 +127,23 @@ const routes: Routes = [
         path: 'form/formone-lists/:id/formone-detail/:id',
         loadChildren: () => import('../formone/formone-detail/formone-detail.module').then(m => m.FormoneDetailPageModule)
       },
+
+      {
+        path: 'report/report-employee',
+        loadChildren: () => import('../report-employee/report-employee.module').then(m => m.ReportEmployeePageModule)
+      },
+      {
+        path: 'report/report-head',
+        loadChildren: () => import('../report-head/report-head.module').then(m => m.ReportHeadPageModule)
+      },
+      {
+        path: 'report/report-admin',
+        loadChildren: () => import('../report-admin/report-admin.module').then(m => m.ReportAdminPageModule)
+      },
+      {
+        path: 'report/report-admin/report-admintwo',
+        loadChildren: () => import('../report-admintwo/report-admintwo.module').then(m => m.ReportAdmintwoPageModule)
+      },
       {
         path: '',
         redirectTo: '/tabs/announce',

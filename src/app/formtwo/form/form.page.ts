@@ -39,16 +39,19 @@ export class FormPage implements OnInit {
     LONG: ''
   };
   async formData(form){
-    await this.storage.set('CWT',form.value.CWT);
-    await this.storage.set('TMP',form.value.TMP);
-    await this.storage.set('ID1',form.value.ID1);
-    await this.storage.set('VIL',form.value.VIL);
-    await this.storage.set('MOO',form.value.MOO);
-    await this.storage.set('A1',form.value.A1);
-    await this.storage.set('NAME',form.value.NAME);
-    await this.storage.set('ADDRESS',form.value.ADDRESS);
-    await this.storage.set('LAT',form.value.LAT);
-    await this.storage.set('LONG',form.value.LONG);
+    let dataAnswer = {
+      "CWT":form.value.CWT,
+      "TMP":form.value.TMP,
+      "ID1":form.value.ID1,
+      "VIL":form.value.VIL,
+      "MOO":form.value.MOO,
+      "A1":form.value.A1,
+      "NAME":form.value.NAME,
+      "ADDRESS":form.value.ADDRESS,
+      "LAT":this.latitude,
+      "LONG":this.longitude,
+    }
+    await this.storage.set('shop',dataAnswer);
     await this.router.navigateByUrl('/formtwo/form-step1');
   }
 }

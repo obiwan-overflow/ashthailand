@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="theme">
+    <ion-title>รายงานความก้าวหน้า</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="title">
+    <h1>ชื่อ {{fullname}} (Admin)</h1>
+    <h3>อบต. บางบัวทอง</h3>
+    <ion-item>
+      <ion-label>เดือน</ion-label>
+      <ion-select value="มกราคม">
+        <ion-select-option value="มกราคม">มกราคม</ion-select-option>
+        <ion-select-option value="กุมภาพันธ์">กุมภาพันธ์</ion-select-option>
+        <ion-select-option value="มีนาคม">มีนาคม</ion-select-option>
+        <ion-select-option value="เมษายน">เมษายน</ion-select-option>
+        <ion-select-option value="พฤษภาคม">พฤษภาคม</ion-select-option>
+        <ion-select-option value="มิถุนายน">มิถุนายน</ion-select-option>
+        <ion-select-option value="กรกฎาคม">กรกฎาคม</ion-select-option>
+        <ion-select-option value="สิงหาคม">สิงหาคม</ion-select-option>
+        <ion-select-option value="กันยายน">กันยายน</ion-select-option>
+        <ion-select-option value="ตุลาคม">ตุลาคม</ion-select-option>
+        <ion-select-option value="พฤศจิกายน">พฤศจิกายน</ion-select-option>
+        <ion-select-option value="ธันวาคม">ธันวาคม</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="card-report">
+          <p class="text-name">สังเกตสถานะที่สาธารณะ</p>
+          <hr>
+          <p class="text-title">พื้นที่</p>
+          <p routerLink="report-admintwo">พื้นที่ ก</p>
+          <p routerLink="report-admintwo">พื้นที่ ข</p>
+          <p routerLink="report-admintwo">พื้นที่ ค</p>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="card-report">
+          <p class="text-name">สังเกตร้านค้า</p>
+          <hr>
+          <p class="text-title">พื้นที่</p>
+          <p routerLink="report-admintwo">พื้นที่ ก</p>
+          <p routerLink="report-admintwo">พื้นที่ ข</p>
+          <p routerLink="report-admintwo">พื้นที่ ค</p>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="card-report">
+          <p class="text-name">แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</p>
+          <hr>
+          <p class="text-title">พื้นที่</p>
+          <p routerLink="report-admintwo">พื้นที่ ก</p>
+          <p routerLink="report-admintwo">พื้นที่ ข</p>
+          <p routerLink="report-admintwo">พื้นที่ ค</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
