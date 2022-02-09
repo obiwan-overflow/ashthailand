@@ -58,7 +58,7 @@ export class FormStep1Page implements OnInit {
     if(id == "มี"){
       await this.router.navigate(['formone/form-step1/form-step2']);
     }else if(id == "ไม่มี"){
-      await this.router.navigate(['formone/form-step1/form-step3']);
+      await this.router.navigateByUrl('formone/form-step1/form-step2/form-step3/form-step4');
     }
   }
 }

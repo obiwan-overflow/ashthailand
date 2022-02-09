@@ -139,6 +139,10 @@ const routes: Routes = [
     loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
   },
   {
+    path: 'formone/form-step1/form-step2/form-step3/form-step4',
+    loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
+  {
     path: 'formone/form-step1/form-step2/form-step4/form-step5',
     loadChildren: () => import('./formone/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
   },
@@ -183,6 +187,22 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
   {
+    path: 'formthree/form-step1/form-step2',
+    loadChildren: () => import('./formthree/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step2/form-step3',
+    loadChildren: () => import('./formthree/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step2/form-step3/form-step3b',
+    loadChildren: () => import('./formthree/form-step3b/form-step3b.module').then( m => m.FormStep3bPageModule)
+  },
+  {
+    path: 'form-step4',
+    loadChildren: () => import('./formthree/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
+  {
     path: 'form-lists',
     loadChildren: () => import('./formone/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },
@@ -201,31 +221,11 @@ const routes: Routes = [
   {
     path: 'report-head',
     loadChildren: () => import('./report-head/report-head.module').then( m => m.ReportHeadPageModule)
-  },  {
+  },
+  {
     path: 'report-admintwo',
     loadChildren: () => import('./report-admintwo/report-admintwo.module').then( m => m.ReportAdmintwoPageModule)
   },
-  {
-    path: 'form-step2',
-    loadChildren: () => import('./formthree/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
-  },
-  {
-    path: 'form-step3',
-    loadChildren: () => import('./formthree/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
-  },
-  {
-    path: 'form-step4',
-    loadChildren: () => import('./formthree/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
-  },
-
-
-
-
-
-
-
-
-
 
 
 ];

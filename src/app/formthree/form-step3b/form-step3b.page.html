@@ -12,12 +12,15 @@
     <ion-row>
       <ion-col size="12">
         <ion-text>
-          <h3>3.ป้ายหรือเครื่องหมายห้ามสูบบุหรี่ที่สังเกตพบ อยู่ภายในอาคาร ใช่หรือไม่</h3>
+          <h3>3ข.เลิกสูบมาแล้วกี่เดือน</h3>
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer" (click)="form($event)" id="ใช่">ใช่</div>
-        <div class="btn-answer" (click)="form($event)" id="ไม่ใช่">ไม่ใช่</div>
+        <form (ngSubmit)="Form()">
+        <ion-label>กรอกจำนวนเดือน</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.month" name="month"></ion-input>
+        <ion-button type="submit" expand="block" shape="round" color="dark">ตกลง</ion-button>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

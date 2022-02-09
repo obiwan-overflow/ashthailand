@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   userId:any;
   fullname:any;
-  constructor(private storage: Storage,public route:Router) {
+  constructor(private storage: Storage,public route:Router,public navCtrl: NavController) {
    
   }
   async ngOnInit() {
@@ -27,9 +28,6 @@ export class AppComponent {
   async logout(){
     await this.storage.remove('userId');
     await this.storage.remove('fullname');
-    this.ionViewWillEnter();
-  }
-  async ionViewWillEnter(){
     await this.route.navigate(['home-new']);
     await location.reload();
   }
