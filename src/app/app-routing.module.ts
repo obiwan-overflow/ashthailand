@@ -127,7 +127,7 @@ const routes: Routes = [
     loadChildren: () => import('./formone/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
   {
-    path: 'formone/form-step1/form-step3',
+    path: 'formone/form-step1/form-step2/form-step3',
     loadChildren: () => import('./formone/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
   },
   {
@@ -199,8 +199,40 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-step3b/form-step3b.module').then( m => m.FormStep3bPageModule)
   },
   {
-    path: 'form-step4',
+    path: 'formthree/form-step1/form-step4',
     loadChildren: () => import('./formthree/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step4/form-step4b',
+    loadChildren: () => import('./formthree/form-step4b/form-step4b.module').then( m => m.FormStep4bPageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype',
+    loadChildren: () => import('./formthree/form-smoketype/form-smoketype.module').then( m => m.FormSmoketypePageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype/form-step9',
+    loadChildren: () => import('./formthree/form-step9/form-step9.module').then( m => m.FormStep9PageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype/form-step9/form-response',
+    loadChildren: () => import('./formthree/form-response/form-response.module').then( m => m.FormResponsePageModule)
+  },
+  {
+    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype/form-response',
+    loadChildren: () => import('./formthree/form-response/form-response.module').then( m => m.FormResponsePageModule)
+  },
+  {
+    path: 'formthree/form-response/form-step10',
+    loadChildren: () => import('./formthree/form-step10/form-step10.module').then( m => m.FormStep10PageModule)
+  },
+  {
+    path: 'formthree/form-response/form-step10/form-step11',
+    loadChildren: () => import('./formthree/form-step11/form-step11.module').then( m => m.FormStep11PageModule)
+  },
+  {
+    path: 'formthree/form-response/form-step10/form-step11/form-step12',
+    loadChildren: () => import('./formthree/form-step12/form-step12.module').then( m => m.FormStep12PageModule)
   },
   {
     path: 'form-lists',
@@ -226,7 +258,6 @@ const routes: Routes = [
     path: 'report-admintwo',
     loadChildren: () => import('./report-admintwo/report-admintwo.module').then( m => m.ReportAdmintwoPageModule)
   },
-
 
 ];
 @NgModule({

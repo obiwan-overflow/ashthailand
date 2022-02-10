@@ -67,9 +67,9 @@ export class FormStep1Page implements OnInit {
     await this.storage.set('public',dataAnswer);
     
     if(id == "ไม่สูบ"){
-      await this.router.navigate(['formthree/form-step1/form-step2']);
+      await this.router.navigateByUrl('formthree/form-step1/form-step2');
     }else{
-
+      await this.router.navigateByUrl('formthree/form-step1/form-step4');
     }
   }
 }

@@ -18,25 +18,24 @@ export class SigninPage implements OnInit {
     this.formlogin = new Formlogin();
   }
   async signin(){
+    await this.api.getdata('member/login&username='+this.formlogin.username+'&password='+this.formlogin.password).subscribe(res=>{
+      if(res.result == 'success'){
+        this.setuser(res);
+      }else{
+        this.loginfailed();
+      }
+    });
+  }
+  async setuser(data){
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
       duration: 2000
     });
-    await this.api.getdata('member/login&username='+this.formlogin.username+'&password='+this.formlogin.password).subscribe(res=>{
-      if(res.result == 'success'){
-        this.storage.set('userId',res.detail.id);
-        this.storage.set('fullname',res.detail.name+" "+res.detail.lastname);
-        // this.route.navigateByUrl('home-new');
-        // loading.present();
-        // window.location.assign('home-new');
-
-        location.assign('home-new');
-        loading.present();
-      }else{
-        this.loginfailed();
-      }
-    });
+    await this.storage.set('userId',data.detail.id);
+    await this.storage.set('fullname',data.detail.name+" "+data.detail.lastname);
+    await location.assign('home-new');
+    await loading.present();
   }
   async loginfailed(){
     this.loginfail = "username หรือรหัสผ่านของท่านไม่ถูกต้อง";

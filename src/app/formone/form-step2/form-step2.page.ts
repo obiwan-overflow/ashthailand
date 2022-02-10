@@ -57,6 +57,6 @@ export class FormStep2Page implements OnInit {
       "P3A":"",
     }
     await this.storage.set('public',dataAnswer);
-    await this.router.navigate(['formone/form-step1/form-step2/form-step4']);
+    await this.router.navigate(['formone/form-step1/form-step2/form-step3']);
   }
 }

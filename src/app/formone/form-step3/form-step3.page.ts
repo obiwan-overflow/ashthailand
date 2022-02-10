@@ -20,6 +20,7 @@ export class FormStep3Page implements OnInit {
   LAT:any;
   LONG:any;
   P1A:any;
+  P2A:any;
   constructor(public router:Router,public storage:Storage) { }
 
   ngOnInit() {
@@ -37,6 +38,7 @@ export class FormStep3Page implements OnInit {
       this.LAT      = data.LAT;
       this.LONG     = data.LONG;
       this.P1A      = data.P1A;
+      this.P2A      = data.P2A;
     });
   }
   async form(event){
@@ -53,7 +55,7 @@ export class FormStep3Page implements OnInit {
       "LAT":this.LAT,
       "LONG":this.LONG,
       "P1A":this.P1A,
-      "P2A":"",
+      "P2A":this.P2A,
       "P3A":id,
     }
     await this.storage.set('public',dataAnswer);

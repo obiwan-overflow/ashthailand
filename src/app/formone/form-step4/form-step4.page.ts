@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
+import { RestApiService } from '../../rest-api.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-step4',
@@ -22,7 +24,7 @@ export class FormStep4Page implements OnInit {
   P1A:any;
   P2A:any;
   P3A:any;
-  constructor(public router:Router,public storage:Storage) { }
+  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController) { }
 
   ngOnInit() {
   }
@@ -66,7 +68,53 @@ export class FormStep4Page implements OnInit {
     if(id == "พบภายนอกอาคาร/สิ่งปลูกสร้างใดๆ ที่มิได้จัดไว้ให้เป็นเขตสูบบุหรี่"){
       await this.router.navigate(['formone/form-step1/form-step3/form-step4/form-step5']);
     }else{
-      
+      this.formConfirm(id);
     }
+  }
+  async formConfirm(id){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'บันทึก!',
+      message: 'ยืนยันการบันทึกข้อมูล',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'บันทึก',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            const formData = new FormData();
+            formData.append('cat_id',"1");
+            formData.append('CWT',this.CWT);
+            formData.append('TMP',this.TMP);
+            formData.append('ID1',this.ID1);
+            formData.append('VIL',this.VIL);
+            formData.append('MOO',this.MOO);
+            formData.append('A1',this.A1);
+            formData.append('NAME',this.NAME);
+            formData.append('ADDRESS',this.ADDRESS);
+            formData.append('LAT',this.LAT);
+            formData.append('LONG',this.LONG);
+            formData.append('P1A',this.P1A);
+            formData.append('P2A',this.P2A);
+            formData.append('P3A',this.P3A);
+            formData.append('P4A',id);
+            formData.append('P5A',"");
+            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+              if(res.result == 'success'){
+                this.router.navigateByUrl('tabs/form');
+              }
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }
