@@ -41,8 +41,8 @@ export class FormStep4Page implements OnInit {
       this.LAT      = data.LAT;
       this.LONG     = data.LONG;
       this.P1A      = data.P1A;
-      this.P2A      = data.P2A;
-      this.P3A      = data.P3A;
+      this.P2A      = data.P2A === undefined ? "" : this.P2A;
+      this.P3A      = data.P3A === undefined ? "" : this.P3A;
     });
   }
   async form(event){

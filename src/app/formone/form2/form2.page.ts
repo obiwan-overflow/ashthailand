@@ -1,29 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { attribute } from 'node_modules_bak/postcss-selector-parser/postcss-selector-parser';
 import { ActivatedRoute,Router } from '@angular/router';
+import { RestApiService } from '../../rest-api.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
-import { FormService } from '../../service/form-service';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { FormService } from 'src/app/service/form-service';
 
 @Component({
-  selector: 'app-form-step1',
-  templateUrl: './form-step1.page.html',
-  styleUrls: ['./form-step1.page.scss'],
+  selector: 'app-form2',
+  templateUrl: './form2.page.html',
+  styleUrls: ['./form2.page.scss'],
 })
-export class FormStep1Page implements OnInit {
+export class Form2Page implements OnInit {
 
+  todo:any = {};
   CWT:any;
   TMP:any;
   ID1:any;
   VIL:any;
   MOO:any;
-  A1:any;
-  NAME:any;
   ADDRESS:any;
   LAT:any;
   LONG:any;
-  constructor(public router:Router,public storage:Storage) {
-
-  }
+  constructor(
+    public router:Router,
+    public api:RestApiService,
+    public route:ActivatedRoute,
+    private geolocation: Geolocation,
+    private network: Network,
+    private storage: Storage,
+    private camera: Camera,
+    public FormService:FormService
+  ) { }
 
   ngOnInit() {
   }
@@ -34,34 +43,25 @@ export class FormStep1Page implements OnInit {
       this.ID1      = data.ID1;
       this.VIL      = data.VIL;
       this.MOO      = data.MOO;
-      this.A1       = data.A1;
-      this.NAME     = data.NAME;
       this.ADDRESS  = data.ADDRESS;
       this.LAT      = data.LAT;
       this.LONG     = data.LONG;
     });
   }
-  async form(event){
-    let id = event.srcElement.id;
+  async formData(form){
     let dataAnswer = {
       "CWT":this.CWT,
       "TMP":this.TMP,
       "ID1":this.ID1,
       "VIL":this.VIL,
       "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
       "ADDRESS":this.ADDRESS,
       "LAT":this.LAT,
       "LONG":this.LONG,
-      "P1A":id,
+      "A1":form.value.A1,
+      "NAME":form.value.NAME,
     }
     await this.storage.set('public',dataAnswer);
-    
-    if(id == "มี"){
-      await this.router.navigate(['formone/form-step1/form-step2']);
-    }else if(id == "ไม่มี"){
-      await this.router.navigateByUrl('formone/form-step1/form-step2/form-step3/form-step4');
-    }
+    await this.router.navigateByUrl('/formone/form-step1');
   }
 }

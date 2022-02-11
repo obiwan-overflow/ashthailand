@@ -119,6 +119,10 @@ const routes: Routes = [
     loadChildren: () => import('./formone/form/form.module').then( m => m.FormPageModule)
   },
   {
+    path: 'formone/form2',
+    loadChildren: () => import('./formone/form2/form2.module').then( m => m.Form2PageModule)
+  },
+  {
     path: 'formone/form-step1',
     loadChildren: () => import('./formone/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },

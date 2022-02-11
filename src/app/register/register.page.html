@@ -13,6 +13,18 @@
     <ion-row>
       <ion-col size="12">
         <ion-item lines="full">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.username" name="username"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="todo.password" name="password"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
           <ion-label position="floating">ชื่อ</ion-label>
           <ion-input type="text" [(ngModel)]="todo.name" name="name"></ion-input>
         </ion-item>
@@ -25,14 +37,32 @@
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">Username</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.username" name="username"></ion-input>
+          <ion-label position="floating">เบอร์โทรศัพท์</ion-label>
+          <ion-input type="text"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" [(ngModel)]="todo.password" name="password"></ion-input>
+          <ion-label position="floating">ชื่อหน่วยงาน</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">ตำบล</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">อำเภอ</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">จังหวัด</ion-label>
+          <ion-input type="text"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
