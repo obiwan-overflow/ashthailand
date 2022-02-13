@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController,LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-step5',
@@ -25,7 +25,7 @@ export class FormStep5Page implements OnInit {
   P2A:any;
   P3A:any;
   P4A:any;
-  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController) { }
+  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -46,6 +46,12 @@ export class FormStep5Page implements OnInit {
       this.P3A      = data.P3A;
       this.P4A      = data.P4A;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;

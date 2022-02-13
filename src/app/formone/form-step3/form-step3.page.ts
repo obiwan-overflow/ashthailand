@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-step3',
@@ -21,7 +22,7 @@ export class FormStep3Page implements OnInit {
   LONG:any;
   P1A:any;
   P2A:any;
-  constructor(public router:Router,public storage:Storage) { }
+  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -40,6 +41,12 @@ export class FormStep3Page implements OnInit {
       this.P1A      = data.P1A;
       this.P2A      = data.P2A;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;

@@ -32,8 +32,6 @@ export class FormPage implements OnInit {
     ID1: '',
     VIL: '',
     MOO: '',
-    A1: '',
-    NAME: '',
     ADDRESS: '',
     LAT: '',
     LONG: ''
@@ -45,13 +43,11 @@ export class FormPage implements OnInit {
       "ID1":form.value.ID1,
       "VIL":form.value.VIL,
       "MOO":form.value.MOO,
-      "A1":form.value.A1,
-      "NAME":form.value.NAME,
       "ADDRESS":form.value.ADDRESS,
       "LAT":this.latitude,
       "LONG":this.longitude,
     }
     await this.storage.set('shop',dataAnswer);
-    await this.router.navigateByUrl('/formtwo/form-step1');
+    await this.router.navigateByUrl('/formtwo/form2');
   }
 }

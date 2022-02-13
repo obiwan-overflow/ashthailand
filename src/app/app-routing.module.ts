@@ -159,6 +159,10 @@ const routes: Routes = [
     loadChildren: () => import('./formtwo/form/form.module').then( m => m.FormPageModule)
   },
   {
+    path: 'formtwo/form2',
+    loadChildren: () => import('./formtwo/form2/form2.module').then( m => m.Form2PageModule)
+  },
+  {
     path: 'formtwo/form-step1',
     loadChildren: () => import('./formtwo/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
@@ -261,7 +265,16 @@ const routes: Routes = [
   {
     path: 'report-admintwo',
     loadChildren: () => import('./report-admintwo/report-admintwo.module').then( m => m.ReportAdmintwoPageModule)
+  },  {
+    path: 'form-lists',
+    loadChildren: () => import('./formtwo/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },
+  {
+    path: 'formtwo-detail',
+    loadChildren: () => import('./formtwo/formtwo-detail/formtwo-detail.module').then( m => m.FormtwoDetailPageModule)
+  },
+
+
 
 ];
 @NgModule({

@@ -3,6 +3,7 @@ import { attribute } from 'node_modules_bak/postcss-selector-parser/postcss-sele
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { FormService } from '../../service/form-service';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-step1',
@@ -21,7 +22,7 @@ export class FormStep1Page implements OnInit {
   ADDRESS:any;
   LAT:any;
   LONG:any;
-  constructor(public router:Router,public storage:Storage) {
+  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController) {
 
   }
 
@@ -40,6 +41,12 @@ export class FormStep1Page implements OnInit {
       this.LAT      = data.LAT;
       this.LONG     = data.LONG;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;

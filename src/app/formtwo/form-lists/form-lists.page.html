@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="theme">
+    <ion-title>แบบสำรวจที่แล้วเสร็จ</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let data of listsData" lines="full" routerLink="formtwo-detail/{{data.id}}">
+      <ion-avatar slot="start" class="icon">
+        <ion-icon name="newspaper-outline" color="success"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{data.id}} {{data.NAME1}}</h3>
+        <small><ion-icon name="time-outline"></ion-icon> {{data.date_add}}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

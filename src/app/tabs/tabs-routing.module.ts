@@ -127,7 +127,14 @@ const routes: Routes = [
         path: 'form/formone-lists/:id/formone-detail/:id',
         loadChildren: () => import('../formone/formone-detail/formone-detail.module').then(m => m.FormoneDetailPageModule)
       },
-
+      {
+        path: 'form/formtwo-lists/:id',
+        loadChildren: () => import('../formtwo/form-lists/form-lists.module').then(m => m.FormListsPageModule)
+      },
+      {
+        path: 'form/formtwo-lists/:id/formtwo-detail/:id',
+        loadChildren: () => import('../formtwo/formtwo-detail/formtwo-detail.module').then(m => m.FormtwoDetailPageModule)
+      },
       {
         path: 'report/report-employee',
         loadChildren: () => import('../report-employee/report-employee.module').then(m => m.ReportEmployeePageModule)
