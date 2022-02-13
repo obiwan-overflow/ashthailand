@@ -24,7 +24,31 @@
         </ion-item>
       </ion-col>
       <ion-col size="12">
-        <ion-button type="submit" expand="full" color="theme">บันทึก</ion-button>
+        <ion-item lines="full">
+          <ion-label position="floating">ชื่อหน่วยงาน</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.organization_name" name="organization_name" value="test"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">ตำบล</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict" value="test"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">อำเภอ</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.district" name="district" value="test"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">จังหวัด</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict" value="test"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button type="submit" expand="full" shape="round" color="theme">แก้ไข</ion-button>
       </ion-col>
     </ion-row>
     </form>
