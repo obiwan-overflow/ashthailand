@@ -64,7 +64,7 @@ export class FormStep1Page implements OnInit {
       "LONG":this.LONG,
       "SMOKE":id,
     }
-    await this.storage.set('public',dataAnswer);
+    await this.storage.set('formthree',dataAnswer);
     
     if(id == "ไม่สูบ"){
       await this.router.navigateByUrl('formthree/form-step1/form-step2');

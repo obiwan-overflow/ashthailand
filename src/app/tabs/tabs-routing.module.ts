@@ -136,6 +136,14 @@ const routes: Routes = [
         loadChildren: () => import('../formtwo/formtwo-detail/formtwo-detail.module').then(m => m.FormtwoDetailPageModule)
       },
       {
+        path: 'form/formthree-lists/:id',
+        loadChildren: () => import('../formthree/form-lists/form-lists.module').then(m => m.FormListsPageModule)
+      },
+      {
+        path: 'form/formthree-lists/:id/formthree-detail/:id',
+        loadChildren: () => import('../formthree/formthree-detail/formthree-detail.module').then(m => m.FormthreeDetailPageModule)
+      },
+      {
         path: 'report/report-employee',
         loadChildren: () => import('../report-employee/report-employee.module').then(m => m.ReportEmployeePageModule)
       },

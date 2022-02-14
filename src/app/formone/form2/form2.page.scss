@@ -12,5 +12,7 @@ ion-input {
     margin-top: 10px !important;
 }
 ion-label {
-    overflow: auto !important;
+    overflow: initial !important;
+    white-space: initial !important;
+    font-size: .9rem !important;
 }

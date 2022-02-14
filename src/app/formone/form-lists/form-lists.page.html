@@ -9,12 +9,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let data of listsData" lines="full" routerLink="formone-detail/{{data.id}}">
+    <ion-item *ngFor="let data of listsData, let i = index" lines="full" routerLink="formone-detail/{{data.id}}">
       <ion-avatar slot="start" class="icon">
         <ion-icon name="newspaper-outline" color="success"></ion-icon>
       </ion-avatar>
       <ion-label>
-        <h3>{{data.id}} {{data.NAME1}}</h3>
+        <h3>{{i}} {{data.NAME1}}</h3>
         <small><ion-icon name="time-outline"></ion-icon> {{data.date_add}}</small>
       </ion-label>
     </ion-item>

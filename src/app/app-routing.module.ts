@@ -199,7 +199,7 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
   {
-    path: 'formthree/form-step1/form-step2/form-step3',
+    path: 'formthree/form-step1/form-step3',
     loadChildren: () => import('./formthree/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
   },
   {
@@ -265,14 +265,23 @@ const routes: Routes = [
   {
     path: 'report-admintwo',
     loadChildren: () => import('./report-admintwo/report-admintwo.module').then( m => m.ReportAdmintwoPageModule)
-  },  {
+  },
+  {
     path: 'form-lists',
     loadChildren: () => import('./formtwo/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },
   {
     path: 'formtwo-detail',
     loadChildren: () => import('./formtwo/formtwo-detail/formtwo-detail.module').then( m => m.FormtwoDetailPageModule)
+  },  {
+    path: 'form-lists',
+    loadChildren: () => import('./formthree/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },
+  {
+    path: 'formthree-detail',
+    loadChildren: () => import('./formthree/formthree-detail/formthree-detail.module').then( m => m.FormthreeDetailPageModule)
+  },
+
 
 
 
