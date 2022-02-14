@@ -10,12 +10,34 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(public api:RestApiService) { }
+  name:any;
+  lastname:any;
+  organization_name:any;
+  province:any;
+  district:any;
+  subdistrict:any;
+  constructor(public api:RestApiService,public storage:Storage) {
+    this.init();
+  }
 
   ngOnInit() {
   }
+  async init(){
+    await this.storage.get('userData').then((data)=>{
+      this.name               = data.name;
+      this.lastname           = data.lastname;
+      this.organization_name  = data.organization_name;
+      this.province           = data.province;
+      this.district           = data.district;
+      this.subdistrict        = data.subdistrict;
+    });
+  }
   todo = {
-    name: '',
-    lastname: ''
+    name:'',
+    lastname:'',
+    organization_name:'',
+    province:'',
+    district:'',
+    subdistrict:'',
   }
 }

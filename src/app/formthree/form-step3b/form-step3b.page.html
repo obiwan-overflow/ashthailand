@@ -17,7 +17,7 @@
       </ion-col>
       <ion-col size="12">
         <form (ngSubmit)="Form()">
-        <ion-label>กรอกจำนวนเดือน</ion-label>
+        <ion-label>กรอกจำนวนเดือน <span class="text-danger">ถ้าจำไม่ได้บันทึก 88</span></ion-label>
         <ion-input type="text" [(ngModel)]="todo.month" name="month"></ion-input>
         <ion-button type="submit" expand="block" shape="round" color="dark">ตกลง</ion-button>
         </form>

@@ -67,7 +67,7 @@ export class FormStep2Page implements OnInit {
       "LAT":this.LAT,
       "LONG":this.LONG,
       "SMOKE":this.SMOKE,
-      "EVERSMOKE ":id
+      "EVERSMOKE":id
     }
     await this.storage.set('formthree',dataAnswer);
     if(id == "ไม่สูบ"){

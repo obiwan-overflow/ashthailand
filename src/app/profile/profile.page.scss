@@ -1,0 +1,15 @@
+.upload-profile {
+    border-radius: 50%;
+    border: 2px solid #209d96;
+    display: block;
+    position: relative;
+    ion-icon {
+        position: absolute;
+        bottom: -3px;
+        right: -3px;
+        background: #209d96;
+        color: #fff;
+        border-radius: 50%;
+        padding: 5px;
+    }
+}

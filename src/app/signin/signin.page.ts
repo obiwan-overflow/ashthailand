@@ -34,6 +34,7 @@ export class SigninPage implements OnInit {
     });
     await this.storage.set('userId',data.detail.id);
     await this.storage.set('fullname',data.detail.name+" "+data.detail.lastname);
+    await this.storage.set('userData',data.detail);
     await location.assign('home-new');
     await loading.present();
   }

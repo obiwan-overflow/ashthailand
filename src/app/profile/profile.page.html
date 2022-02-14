@@ -11,40 +11,46 @@
   <ion-grid>
     <form #form="ngForm" (ngSubmit)="formRepassword(form)">
     <ion-row>
+      <ion-col size="3">
+        <div class="upload-profile">
+          <img src="assets/images/user-theme.png">
+          <ion-icon name="camera-sharp"></ion-icon>
+        </div>
+      </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ชื่อ</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.name" name="name" value="test"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.name" name="name" value="{{name}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">สกุล</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.lastname" name="lastname" value="test"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.lastname" name="lastname" value="{{lastname}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ชื่อหน่วยงาน</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.organization_name" name="organization_name" value="test"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.organization_name" name="organization_name" value="{{organization_name}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ตำบล</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict" value="test"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">อำเภอ</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.district" name="district" value="test"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.district" name="district"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">จังหวัด</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict" value="test"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">

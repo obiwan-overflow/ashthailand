@@ -17,7 +17,7 @@
       </ion-col>
       <ion-col size="12">
         <form (ngSubmit)="Form()">
-        <ion-label>กรอกจำนวนปี</ion-label>
+        <ion-label>กรอกจำนวนปี <span class="text-danger">ถ้าเลิกน้อยกว่า 1 ปี บันทึก "0" ถ้าจำไม่ได้บันทึก "88"</span></ion-label>
         <ion-input type="text" [(ngModel)]="todo.YEAR" name="YEAR"></ion-input>
         <ion-button type="submit" expand="block" shape="round" color="dark">ตกลง</ion-button>
         </form>
