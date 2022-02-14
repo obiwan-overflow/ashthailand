@@ -160,6 +160,18 @@ const routes: Routes = [
         loadChildren: () => import('../report-admintwo/report-admintwo.module').then(m => m.ReportAdmintwoPageModule)
       },
       {
+        path: 'form/formone-draft',
+        loadChildren: () => import('../formone/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+      },
+      {
+        path: 'form/formtwo-draft',
+        loadChildren: () => import('../formtwo/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+      },
+      {
+        path: 'form/formthree-draft',
+        loadChildren: () => import('../formthree/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/announce',
         pathMatch: 'full'

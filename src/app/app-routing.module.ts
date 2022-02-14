@@ -281,6 +281,18 @@ const routes: Routes = [
     path: 'formthree-detail',
     loadChildren: () => import('./formthree/formthree-detail/formthree-detail.module').then( m => m.FormthreeDetailPageModule)
   },
+  {
+    path: 'form-draft',
+    loadChildren: () => import('./formone/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+  },
+  {
+    path: 'form-draft',
+    loadChildren: () => import('./formtwo/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+  },
+  {
+    path: 'form-draft',
+    loadChildren: () => import('./formthree/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+  },
 
 
 
