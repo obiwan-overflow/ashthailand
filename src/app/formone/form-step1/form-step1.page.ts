@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { attribute } from 'node_modules_bak/postcss-selector-parser/postcss-selector-parser';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';

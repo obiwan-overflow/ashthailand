@@ -110,10 +110,12 @@ export class Form2Page implements OnInit {
     quality: 100,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
     allowEdit: true
   }
   async openCamera(){
-    await this.camera.getPicture(this.cameraOptions).then((imgData) => {
+    this.camera.getPicture(this.cameraOptions).then((imgData) => {
       console.log('image data =>  ', imgData);
       this.base64Img = 'data:image/jpeg;base64,' + imgData;
       this.userImg = this.base64Img;
@@ -122,7 +124,7 @@ export class Form2Page implements OnInit {
     })
   }
   async openGallery() {
-    await this.camera.getPicture(this.gelleryOptions).then((imgData) => {
+    this.camera.getPicture(this.gelleryOptions).then((imgData) => {
      console.log('image data =>  ', imgData);
      this.base64Img = 'data:image/jpeg;base64,' + imgData;
      this.userImg = this.base64Img;
