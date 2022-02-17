@@ -35,6 +35,7 @@ export class ProfilePage implements OnInit {
   todo = {
     name:'',
     lastname:'',
+    phone:'',
     organization_name:'',
     province:'',
     district:'',

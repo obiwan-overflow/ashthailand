@@ -25,6 +25,11 @@ export class Form2Page implements OnInit {
   LONG:any;
 
   titlePub:any;
+
+  // images
+  userImg: any = '';
+  base64Img = '';
+
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -67,5 +72,21 @@ export class Form2Page implements OnInit {
     }
     await this.storage.set('public',dataAnswer);
     await this.router.navigateByUrl('/formone/form-step1');
+  }
+  cameraOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    allowEdit: true
+   }
+  async btnCamera(){
+    this.camera.getPicture(this.cameraOptions).then((imgData) => {
+      console.log('image data =>  ', imgData);
+      this.base64Img = 'data:image/jpeg;base64,' + imgData;
+      this.userImg = this.base64Img;
+      }, (err) => {
+      console.log(err);
+    })
   }
 }

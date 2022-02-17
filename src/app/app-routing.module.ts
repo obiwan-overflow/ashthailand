@@ -243,6 +243,22 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-step12/form-step12.module').then( m => m.FormStep12PageModule)
   },
   {
+    path: 'formthree/form-step5',
+    loadChildren: () => import('./formthree/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
+  },
+  {
+    path: 'formthree/form-step6',
+    loadChildren: () => import('./formthree/form-step6/form-step6.module').then( m => m.FormStep6PageModule)
+  },
+  {
+    path: 'formthree/form-step7',
+    loadChildren: () => import('./formthree/form-step7/form-step7.module').then( m => m.FormStep7PageModule)
+  },
+  {
+    path: 'formthree/form-step8',
+    loadChildren: () => import('./formthree/form-step8/form-step8.module').then( m => m.FormStep8PageModule)
+  },
+  {
     path: 'form-lists',
     loadChildren: () => import('./formone/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },
@@ -273,7 +289,8 @@ const routes: Routes = [
   {
     path: 'formtwo-detail',
     loadChildren: () => import('./formtwo/formtwo-detail/formtwo-detail.module').then( m => m.FormtwoDetailPageModule)
-  },  {
+  },
+  {
     path: 'form-lists',
     loadChildren: () => import('./formthree/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },

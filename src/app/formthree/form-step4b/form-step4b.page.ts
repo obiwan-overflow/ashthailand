@@ -72,7 +72,8 @@ export class FormStep4bPage implements OnInit {
       "TIME_M":this.todo.month
     }
     await this.storage.set('formthree',dataAnswer);
-    await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype');
+    // await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype');
+    await this.router.navigateByUrl('formthree/form-step5');
   }
   todo = {
     month:""

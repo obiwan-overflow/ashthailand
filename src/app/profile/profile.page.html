@@ -31,6 +31,12 @@
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
+          <ion-label position="floating">เบอร์โทรศัพท์</ion-label>
+          <ion-input type="number" [(ngModel)]="todo.phone" name="phone" value="{{phone}}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
           <ion-label position="floating">ชื่อหน่วยงาน</ion-label>
           <ion-input type="text" [(ngModel)]="todo.organization_name" name="organization_name" value="{{organization_name}}"></ion-input>
         </ion-item>

@@ -15,8 +15,8 @@
         <ion-label>ประเภทสถานที่</ion-label>
         <ion-radio-group [(ngModel)]="todo.A1" name="A1">
           <ion-item lines="full">
-            <ion-label>สถานบริการสาธารณสุข เช่น รพ.สต. คลินิค ร้านขายยา ร้านนวดแผนไทย เป็นต้น</ion-label>
-            <ion-radio slot="start" color="success" value="ก1"></ion-radio>
+            <ion-label for="radio1">สถานบริการสาธารณสุข เช่น รพ.สต. คลินิค ร้านขายยา ร้านนวดแผนไทย เป็นต้น</ion-label>
+            <ion-radio slot="start" id="radio1" color="success" value="ก1"></ion-radio>
           </ion-item>
           <ion-item lines="full">
             <ion-label>สถานศึกษาต่ำกว่าอุดมศึกษา เช่น โรงเรียน ศูนย์เด็กเล็ก ศูนย์การศึกษานอกโรงเรียน เป็นต้น</ion-label>
@@ -35,13 +35,6 @@
             <ion-radio slot="start" color="success" value="ก5"></ion-radio>
           </ion-item>
         </ion-radio-group>
-        <!-- <ion-select [(ngModel)]="todo.A1" name="A1">
-          <ion-select-option value="ก1">สถานบริการสาธารณสุข เช่น รพ.สต. คลินิค ร้านขายยา ร้านนวดแผนไทย เป็นต้น</ion-select-option>
-          <ion-select-option value="ก2">สถานศึกษาต่่ากว่าอุดมศึกษา เช่น โรงเรียน ศูนย์เด็กเล็ก ศูนย์การศึกษานอกโรงเรียน เป็นต้น</ion-select-option>
-          <ion-select-option value="ก3">สถานที่ใช้ประโยชน์ร่วมกัน เช่น อาคารสถานที่ราชการ ศาลาประชาคม/ศาลาอเนกประสงค์ ตลาดสด/ตลาดนัด ร้านอาหาร สถานบันเทิง เป็นต้น</ion-select-option>
-          <ion-select-option value="ก4">ขนส่งสาธารณะ เช่น รถโดยสารสาธารณะ ป้ายรถประจ่าทาง ศาลารอรถ สถานีขนส่งผู้โดยสาร เป็นต้น</ion-select-option>
-          <ion-select-option value="ก5">วัด ศาสนาสถานทุกนิกาย</ion-select-option>
-        </ion-select> -->
       </ion-col>
       <ion-col size="12">
         <ion-label>ชื่อสถานที่</ion-label>
@@ -49,7 +42,7 @@
       </ion-col>
       <ion-col size="12">
         <!-- <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button> -->
-        <div class="upload-images">
+        <div class="upload-images" (click)="btnCamera()">
           <ion-icon name="camera-outline"></ion-icon>
           <p>อัพโหลดรูปภาพ</p>
         </div>
