@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form-step2',
@@ -21,7 +22,11 @@ export class FormStep2Page implements OnInit {
   LAT:any;
   LONG:any;
   P1A:any;
-  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController) { }
+
+  titlePub:any;
+  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController,public auth:AuthService) {
+    this.titlePub = this.auth.titlePublic();
+  }
 
   ngOnInit() {
   }

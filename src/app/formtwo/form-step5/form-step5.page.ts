@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form-step5',
@@ -23,7 +24,11 @@ export class FormStep5Page implements OnInit {
   S2A:any;
   S3A:any;
   S4A:any;
-  constructor(public router:Router,public storage:Storage) { }
+
+  titleShop:any;
+  constructor(public router:Router,public storage:Storage,public auth:AuthService) {
+    this.titleShop = this.auth.titleShop();
+  }
 
   ngOnInit() {
   }

@@ -16,3 +16,20 @@ ion-label {
     white-space: initial !important;
     font-size: .9rem !important;
 }
+
+.upload-images {
+    display: block;
+    background-color: #eee;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    ion-icon {
+        font-size: 30px;
+        color: #333;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: #333;
+    }
+}

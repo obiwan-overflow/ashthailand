@@ -3,6 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form-step6',
@@ -26,7 +27,11 @@ export class FormStep6Page implements OnInit {
   S3A:any;
   S4A:any;
   S5A:any;
-  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController) { }
+
+  titleShop:any;
+  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public auth:AuthService) {
+    this.titleShop = this.auth.titleShop();
+  }
 
   ngOnInit() {
   }

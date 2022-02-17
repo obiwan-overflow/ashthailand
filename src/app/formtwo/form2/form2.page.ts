@@ -5,7 +5,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
-import { FormService } from 'src/app/service/form-service';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form2',
@@ -23,6 +23,8 @@ export class Form2Page implements OnInit {
   ADDRESS:any;
   LAT:any;
   LONG:any;
+
+  titleShop:any;
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -31,8 +33,10 @@ export class Form2Page implements OnInit {
     private network: Network,
     private storage: Storage,
     private camera: Camera,
-    public FormService:FormService
-  ) { }
+    public auth:AuthService
+  ) {
+    this.titleShop = this.auth.titleShop();
+  }
 
   ngOnInit() {
   }

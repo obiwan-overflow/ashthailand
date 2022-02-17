@@ -4,6 +4,7 @@ import { RestApiService } from '../../rest-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +15,18 @@ export class FormPage implements OnInit {
 
   latitude:any;
   longitude:any;
-  constructor(public router:Router,public api:RestApiService,public route:ActivatedRoute,private geolocation: Geolocation,private network: Network,private storage: Storage) { }
+
+  titleShop:any;
+  constructor(
+    public router:Router,
+    public api:RestApiService,
+    public route:ActivatedRoute,
+    private geolocation: Geolocation,
+    private network: Network,
+    private storage: Storage,
+    public auth:AuthService) {
+      this.titleShop = this.auth.titleShop();
+    }
 
   ngOnInit() {
   }

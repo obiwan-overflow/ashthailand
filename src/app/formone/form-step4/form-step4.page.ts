@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { AlertController,LoadingController } from '@ionic/angular';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form-step4',
@@ -24,7 +25,11 @@ export class FormStep4Page implements OnInit {
   P1A:any;
   P2A:any;
   P3A:any;
-  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public loadingController:LoadingController) { }
+
+  titlePub:any;
+  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public loadingController:LoadingController,public auth:AuthService) {
+    this.titlePub = this.auth.titlePublic();
+  }
 
   ngOnInit() {
   }

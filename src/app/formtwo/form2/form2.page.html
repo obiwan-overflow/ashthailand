@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>สังเกตร้านค้า</ion-title>
+    <ion-title>{{titleShop}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -27,11 +27,11 @@
             <ion-radio slot="start" color="success" value="3"></ion-radio>
           </ion-item>
           <ion-item lines="full">
-            <ion-label>ผับบาร์/คาราโอเกะ/สถานบันเทิงรวมลานเบียร</ion-label>
+            <ion-label>ผับบาร์/คาราโอเกะ/สถานบันเทิง รวมลานเบียร</ion-label>
             <ion-radio slot="start" color="success" value="4"></ion-radio>
           </ion-item>
           <ion-item lines="full">
-            <ion-label>ร้านค้าล็อกหรือแผงขายที่อยู่ในตลาดนัด/ตลาดสด</ion-label>
+            <ion-label>ร้านค้า ล็อกหรือแผงขายที่อยู่ในตลาดนัด/ตลาดสด</ion-label>
             <ion-radio slot="start" color="success" value="5"></ion-radio>
           </ion-item>
           <ion-item lines="full">
@@ -39,21 +39,17 @@
             <ion-radio slot="start" color="success" value="6"></ion-radio>
           </ion-item>
         </ion-radio-group>
-        <!-- <ion-select [(ngModel)]="todo.A1" name="A1">
-          <ion-select-option value="1">ร้านสะดวกซื้อ</ion-select-option>
-          <ion-select-option value="2">ร้านขายของชา</ion-select-option>
-          <ion-select-option value="3">ร้านอาหารที่มีบุหรี่หรือยาเส้นจำหน่าย</ion-select-option>
-          <ion-select-option value="4">ผับบาร์/คาราโอเกะ/สถานบันเทิงรวมลานเบียร</ion-select-option>
-          <ion-select-option value="5">ร้านค้าล็อกหรือแผงขายที่อยู่ในตลาดนัด/ตลาดสด</ion-select-option>
-          <ion-select-option value="6">อื่น ๆ</ion-select-option>
-        </ion-select> -->
       </ion-col>
       <ion-col size="12">
         <ion-label>ชื่อสถานที่</ion-label>
         <ion-input type="text" [(ngModel)]="todo.NAME" name="NAME"></ion-input>
       </ion-col>
       <ion-col size="12">
-        <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button>
+        <!-- <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button> -->
+        <div class="upload-images">
+          <ion-icon name="camera-outline"></ion-icon>
+          <p>อัพโหลดรูปภาพ</p>
+        </div>
       </ion-col>
       <ion-col size="12">
         <ion-button expand="block" shape="round" type="submit" color="dark">ต่อไป</ion-button>

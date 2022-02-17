@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</ion-title>
+    <ion-title size="small">แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -17,8 +17,9 @@
       </ion-col>
       <ion-col size="12">
         <form (ngSubmit)="Form()">
-          <ion-label>กรอกจำนวน <span class="text-danger">จำไม่ได้กรอก 88</span></ion-label>
-          <ion-input type="text" [(ngModel)]="todo.NO" name="NO"></ion-input>
+          <p>กรอกจำนวน</p>
+          <p class="text-danger">จำไม่ได้กรอก 88</p>
+          <ion-input type="number" [(ngModel)]="todo.NO" name="NO"></ion-input>
           <ion-button type="submit" expand="block" shape="round" color="dark">ตกลง</ion-button>
         </form>
       </ion-col>

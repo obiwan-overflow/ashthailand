@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form-step3',
@@ -21,7 +22,11 @@ export class FormStep3Page implements OnInit {
   LONG:any;
   S1A:any;
   S2A:any;
-  constructor(public router:Router,public storage:Storage) { }
+
+  titleShop:any;
+  constructor(public router:Router,public storage:Storage,public auth:AuthService) {
+    this.titleShop = this.auth.titleShop();
+  }
 
   ngOnInit() {
   }

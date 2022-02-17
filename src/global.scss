@@ -61,6 +61,7 @@ ion-label {
     color: #209d96;
     font-size: 1.2rem;
     font-family: sarabun !important;
+    line-height: 1.8;
 
     &:hover {
         background: #209d96;
@@ -78,4 +79,7 @@ ion-label {
     background: #209d96;
     color: #fff;
 
+}
+h3 {
+   line-height: 1.5;
 }

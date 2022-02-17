@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>สังเกตสถานะที่สาธารณะ</ion-title>
+    <ion-title>{{titlePub}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -19,7 +19,7 @@
             <ion-radio slot="start" color="success" value="ก1"></ion-radio>
           </ion-item>
           <ion-item lines="full">
-            <ion-label>สถานศึกษาต่่ากว่าอุดมศึกษา เช่น โรงเรียน ศูนย์เด็กเล็ก ศูนย์การศึกษานอกโรงเรียน เป็นต้น</ion-label>
+            <ion-label>สถานศึกษาต่ำกว่าอุดมศึกษา เช่น โรงเรียน ศูนย์เด็กเล็ก ศูนย์การศึกษานอกโรงเรียน เป็นต้น</ion-label>
             <ion-radio slot="start" color="success" value="ก2"></ion-radio>
           </ion-item>
           <ion-item lines="full">
@@ -27,11 +27,11 @@
             <ion-radio slot="start" color="success" value="ก3"></ion-radio>
           </ion-item>
           <ion-item lines="full">
-            <ion-label>ขนส่งสาธารณะ เช่น รถโดยสารสาธารณะ ป้ายรถประจ่าทาง ศาลารอรถ สถานีขนส่งผู้โดยสาร เป็นต้น</ion-label>
+            <ion-label>ขนส่งสาธารณะ เช่น รถโดยสารสาธารณะ ป้ายรถประจำทาง ศาลารอรถ สถานีขนส่งผู้โดยสาร เป็นต้น</ion-label>
             <ion-radio slot="start" color="success" value="ก4"></ion-radio>
           </ion-item>
           <ion-item lines="full">
-            <ion-label>วัด ศาสนาสถานทุกนิกาย</ion-label>
+            <ion-label>วัด ศาสนสถานทุกนิกาย</ion-label>
             <ion-radio slot="start" color="success" value="ก5"></ion-radio>
           </ion-item>
         </ion-radio-group>
@@ -48,7 +48,11 @@
         <ion-input type="text" [(ngModel)]="todo.NAME" name="NAME"></ion-input>
       </ion-col>
       <ion-col size="12">
-        <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button>
+        <!-- <ion-button color="warning" (click)="btnCamera()"><ion-icon name="images-outline"></ion-icon></ion-button> -->
+        <div class="upload-images">
+          <ion-icon name="camera-outline"></ion-icon>
+          <p>อัพโหลดรูปภาพ</p>
+        </div>
       </ion-col>
       <ion-col size="12">
         <ion-button expand="block" shape="round" type="submit" color="dark">ต่อไป</ion-button>

@@ -5,7 +5,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
-import { FormService } from 'src/app/service/form-service';
+import { AuthService } from 'src/app/AuthService';
 
 @Component({
   selector: 'app-form',
@@ -17,6 +17,7 @@ export class FormPage implements OnInit {
 
   latitude:any;
   longitude:any;
+  titlePub:any;
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -25,9 +26,9 @@ export class FormPage implements OnInit {
     private network: Network,
     private storage: Storage,
     private camera: Camera,
-    public FormService:FormService
+    public auth:AuthService
   ) {
-
+    this.titlePub = this.auth.titlePublic();
   }
 
   ngOnInit() {
