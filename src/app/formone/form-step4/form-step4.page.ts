@@ -77,7 +77,7 @@ export class FormStep4Page implements OnInit {
     await this.storage.set('public',dataAnswer);
 
     if(id == "พบภายนอกอาคาร/สิ่งปลูกสร้างใดๆ ที่มิได้จัดไว้ให้เป็นเขตสูบบุหรี่"){
-      await this.router.navigate(['formone/form-step1/form-step3/form-step4/form-step5']);
+      await this.router.navigate(['formone/form-step5']);
     }else{
       this.formConfirm(id);
     }

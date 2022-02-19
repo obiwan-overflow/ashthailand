@@ -33,7 +33,8 @@ export class FormResponsePage implements OnInit {
   E_CIG:any;
   OTHER:any;
   NO1:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController) { }
+  NO2:any;
+  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -57,11 +58,18 @@ export class FormResponsePage implements OnInit {
       this.TIME_Y     = data.TIME_Y;
       this.TIME_M     = data.TIME_M === undefined ? "" : data.TIME_M;
       this.CIG        = data.CIG === undefined ? "" : data.CIG;
+      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
       this.ROLL       = data.ROLL === undefined ? "" : data.ROLL;
+      this.NO2        = data.NO2 === undefined ? "" : data.NO2;
       this.E_CIG      = data.E_CIG === undefined ? "" : data.E_CIG;
       this.OTHER      = data.OTHER === undefined ? "" : data.OTHER;
-      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;
@@ -84,22 +92,23 @@ export class FormResponsePage implements OnInit {
       "TIME_Y":this.TIME_Y,
       "TIME_M":this.TIME_M,
       "CIG":this.CIG,
+      "NO1":this.NO1,
       "ROLL":this.ROLL,
+      "NO2":this.NO2,
       "E_CIG":this.E_CIG,
       "OTHER":this.OTHER,
-      "NO1":this.NO1,
       "RESPONSE":id
     }
     await this.storage.set('formthree',dataAnswer);
     if(id == "ใช่"){
       if(this.CIG !== ""){
-        this.router.navigateByUrl('formthree/form-response/form-step10');
+        this.router.navigateByUrl('formthree/form-step10');
       }else{
-        this.router.navigateByUrl('formthree/form-response/form-step10/form-step11');
+        this.router.navigateByUrl('formthree/form-step11');
       }
     }else{
       if(this.E_CIG !== ""){
-        this.router.navigateByUrl('formthree/form-response/form-step10/form-step11');
+        this.router.navigateByUrl('formthree/form-step11');
       }else{
         this.formConfirm(id);
       }
@@ -146,7 +155,7 @@ export class FormResponsePage implements OnInit {
             formData.append('ROLL',this.ROLL);
             formData.append('E_CIG',this.E_CIG);
             formData.append('OTHER',this.OTHER);
-            formData.append('NO1',this.NO1);
+            formData.append('NO1',(this.NO1+this.NO2));
             formData.append('RESPONSE',id);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){

@@ -29,12 +29,13 @@ export class FormStep10Page implements OnInit {
   TIME_Y:any;
   TIME_M:any;
   CIG:any;
+  NO1:any;
   ROLL:any;
+  NO2:any;
   E_CIG:any;
   OTHER:any;
-  NO1:any;
   RESPONSE:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController) { }
+  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -58,12 +59,19 @@ export class FormStep10Page implements OnInit {
       this.TIME_Y     = data.TIME_Y;
       this.TIME_M     = data.TIME_M === undefined ? "" : data.TIME_M;
       this.CIG        = data.CIG === undefined ? "" : data.CIG;
+      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
       this.ROLL       = data.ROLL === undefined ? "" : data.ROLL;
+      this.NO2        = data.NO2 === undefined ? "" : data.NO2;
       this.E_CIG      = data.E_CIG === undefined ? "" : data.E_CIG;
       this.OTHER      = data.OTHER === undefined ? "" : data.OTHER;
-      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
       this.RESPONSE   = data.RESPONSE === undefined ? "" : data.RESPONSE;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;
@@ -86,14 +94,15 @@ export class FormStep10Page implements OnInit {
       "TIME_Y":this.TIME_Y,
       "TIME_M":this.TIME_M,
       "CIG":this.CIG,
+      "NO1":this.NO1,
       "ROLL":this.ROLL,
+      "NO2":this.NO2,
       "E_CIG":this.E_CIG,
       "OTHER":this.OTHER,
-      "NO1":this.NO1,
       "RESPONSE":this.RESPONSE,
       "TYPE_CIG":id
     }
     await this.storage.set('formthree',dataAnswer);
-    await this.router.navigateByUrl('formthree/form-response/form-step10/form-step11');
+    await this.router.navigateByUrl('formthree/form-step11');
   }
 }

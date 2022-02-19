@@ -29,7 +29,7 @@ export class Form2Page implements OnInit {
   // images
   userImg: any = '';
   base64Img = '';
-
+  imagesarray: any = [];
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -119,6 +119,7 @@ export class Form2Page implements OnInit {
       console.log('image data =>  ', imgData);
       this.base64Img = 'data:image/jpeg;base64,' + imgData;
       this.userImg = this.base64Img;
+      this.updateImages(this.userImg);
     }, (err) => {
       console.log(err);
     })
@@ -128,8 +129,12 @@ export class Form2Page implements OnInit {
      console.log('image data =>  ', imgData);
      this.base64Img = 'data:image/jpeg;base64,' + imgData;
      this.userImg = this.base64Img;
+     this.updateImages(this.userImg);
     }, (err) => {
      console.log(err);
     })
+  }
+  async updateImages(images){
+    this.imagesarray.push(images);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/AuthService';
 
 @Component({
@@ -24,7 +25,7 @@ export class FormStep3Page implements OnInit {
   S2A:any;
 
   titleShop:any;
-  constructor(public router:Router,public storage:Storage,public auth:AuthService) {
+  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController,public auth:AuthService) {
     this.titleShop = this.auth.titleShop();
   }
 
@@ -45,6 +46,12 @@ export class FormStep3Page implements OnInit {
       this.S1A      = data.S1A;
       this.S2A      = data.S2A;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;
@@ -64,6 +71,6 @@ export class FormStep3Page implements OnInit {
       "S3A":id
     }
     await this.storage.set('shop',dataAnswer);
-    await this.router.navigate(['formtwo/form-step1/form-step2/form-step3/form-step4']);
+    await this.router.navigate(['formtwo/form-step4']);
   }
 }

@@ -48,6 +48,12 @@ export class FormStep2Page implements OnInit {
       this.LONG       = data.LONG;
       this.SMOKE      = data.SMOKE;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;
@@ -73,7 +79,7 @@ export class FormStep2Page implements OnInit {
     if(id == "ไม่สูบ"){
       this.formConfirm(id);
     }else{
-      await this.router.navigateByUrl('formthree/form-step1/form-step3');
+      await this.router.navigateByUrl('formthree/form-step3');
     }
   }
   async formConfirm(id){

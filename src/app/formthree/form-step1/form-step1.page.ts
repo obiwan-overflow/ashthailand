@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-step1',
@@ -23,7 +24,7 @@ export class FormStep1Page implements OnInit {
   ADDRESS:any;
   LAT:any;
   LONG:any;
-  constructor(public router:Router,public storage:Storage) { }
+  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -44,6 +45,12 @@ export class FormStep1Page implements OnInit {
       this.LAT        = data.LAT;
       this.LONG       = data.LONG;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;
@@ -67,9 +74,9 @@ export class FormStep1Page implements OnInit {
     await this.storage.set('formthree',dataAnswer);
     
     if(id == "ไม่สูบ"){
-      await this.router.navigateByUrl('formthree/form-step1/form-step2');
+      await this.router.navigateByUrl('formthree/form-step2');
     }else{
-      await this.router.navigateByUrl('formthree/form-step1/form-step4');
+      await this.router.navigateByUrl('formthree/form-step4');
     }
   }
 }

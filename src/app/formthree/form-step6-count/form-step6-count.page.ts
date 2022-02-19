@@ -5,11 +5,11 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController,LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-form-step4',
-  templateUrl: './form-step4.page.html',
-  styleUrls: ['./form-step4.page.scss'],
+  selector: 'app-form-step6-count',
+  templateUrl: './form-step6-count.page.html',
+  styleUrls: ['./form-step6-count.page.scss'],
 })
-export class FormStep4Page implements OnInit {
+export class FormStep6CountPage implements OnInit {
 
   MENBER:any;
   PERSON_NO:any;
@@ -26,6 +26,11 @@ export class FormStep4Page implements OnInit {
   LAT:any;
   LONG:any;
   SMOKE:any;
+  TIME_Y:any;
+  TIME_M:any;
+  CIG:any;
+  NO1:any;
+  ROLL:any;
   constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
@@ -47,6 +52,11 @@ export class FormStep4Page implements OnInit {
       this.LAT        = data.LAT;
       this.LONG       = data.LONG;
       this.SMOKE      = data.SMOKE;
+      this.TIME_Y     = data.TIME_Y;
+      this.TIME_M     = data.TIME_M === undefined ? "" : data.TIME_M;
+      this.CIG        = data.CIG === undefined ? "" : data.CIG;
+      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
+      this.ROLL       = data.ROLL;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -72,16 +82,17 @@ export class FormStep4Page implements OnInit {
       "LAT":this.LAT,
       "LONG":this.LONG,
       "SMOKE":this.SMOKE,
-      "TIME_Y":this.todo.year
+      "TIME_Y":this.TIME_Y,
+      "TIME_M":this.TIME_M,
+      "CIG":this.CIG,
+      "NO1":this.NO1,
+      "ROLL":this.ROLL,
+      "NO2":this.todo.NO
     }
     await this.storage.set('formthree',dataAnswer);
-    if(this.todo.year < '1'){
-      this.router.navigateByUrl('formthree/form-step4b');
-    }else{
-      this.router.navigateByUrl('formthree/form-step5');
-    }
+    await this.router.navigateByUrl('formthree/form-step7');
   }
   todo = {
-    year:""
+    NO:""
   }
 }

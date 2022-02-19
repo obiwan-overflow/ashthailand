@@ -27,7 +27,7 @@ export class FormStep3Page implements OnInit {
   LONG:any;
   SMOKE:any;
   EVERSMOKE:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController) { }
+  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -50,6 +50,12 @@ export class FormStep3Page implements OnInit {
       this.SMOKE      = data.SMOKE;
       this.EVERSMOKE  = data.EVERSMOKE;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async Form(){
     let year = this.todo.YEAR;
@@ -75,7 +81,7 @@ export class FormStep3Page implements OnInit {
     await this.storage.set('formthree',dataAnswer);
 
     if(year < '1'){
-      this.router.navigateByUrl('formthree/form-step1/form-step2/form-step3/form-step3b');
+      this.router.navigateByUrl('formthree/form-step3b');
     }else{
       this.formConfirm(year);
     }

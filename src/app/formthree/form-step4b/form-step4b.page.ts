@@ -27,7 +27,7 @@ export class FormStep4bPage implements OnInit {
   LONG:any;
   SMOKE:any;
   TIME_Y:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController) { }
+  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -50,6 +50,12 @@ export class FormStep4bPage implements OnInit {
       this.SMOKE      = data.SMOKE;
       this.TIME_Y     = data.TIME_Y;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async Form(){
     let dataAnswer = {

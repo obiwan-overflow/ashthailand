@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/AuthService';
 
 @Component({
@@ -29,7 +29,7 @@ export class FormStep6Page implements OnInit {
   S5A:any;
 
   titleShop:any;
-  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public auth:AuthService) {
+  constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public loadingController:LoadingController,public auth:AuthService) {
     this.titleShop = this.auth.titleShop();
   }
 
@@ -53,6 +53,12 @@ export class FormStep6Page implements OnInit {
       this.S4A      = data.S4A;
       this.S5A      = data.S5A;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;

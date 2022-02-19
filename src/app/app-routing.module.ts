@@ -127,31 +127,19 @@ const routes: Routes = [
     loadChildren: () => import('./formone/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
   {
-    path: 'formone/form-step1/form-step2',
+    path: 'formone/form-step2',
     loadChildren: () => import('./formone/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
   {
-    path: 'formone/form-step1/form-step2/form-step3',
+    path: 'formone/form-step3',
     loadChildren: () => import('./formone/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
   },
   {
-    path: 'formone/form-step1/form-step2/form-step4',
+    path: 'formone/form-step4',
     loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
   },
   {
-    path: 'formone/form-step1/form-step3/form-step4',
-    loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
-  },
-  {
-    path: 'formone/form-step1/form-step2/form-step3/form-step4',
-    loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
-  },
-  {
-    path: 'formone/form-step1/form-step2/form-step4/form-step5',
-    loadChildren: () => import('./formone/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
-  },
-  {
-    path: 'formone/form-step1/form-step3/form-step4/form-step5',
+    path: 'formone/form-step5',
     loadChildren: () => import('./formone/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
   },
   {
@@ -167,23 +155,23 @@ const routes: Routes = [
     loadChildren: () => import('./formtwo/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
   {
-    path: 'formtwo/form-step1/form-step2',
+    path: 'formtwo/form-step2',
     loadChildren: () => import('./formtwo/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
   {
-    path: 'formtwo/form-step1/form-step2/form-step3',
+    path: 'formtwo/form-step3',
     loadChildren: () => import('./formtwo/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
   },
   {
-    path: 'formtwo/form-step1/form-step2/form-step3/form-step4',
+    path: 'formtwo/form-step4',
     loadChildren: () => import('./formtwo/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
   },
   {
-    path: 'formtwo/form-step1/form-step2/form-step3/form-step4/form-step5',
+    path: 'formtwo/form-step5',
     loadChildren: () => import('./formtwo/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
   },
   {
-    path: 'formtwo/form-step1/form-step2/form-step3/form-step4/form-step5/form-step6',
+    path: 'formtwo/form-step6',
     loadChildren: () => import('./formtwo/form-step6/form-step6.module').then( m => m.FormStep6PageModule)
   },
   {
@@ -195,60 +183,40 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
   {
-    path: 'formthree/form-step1/form-step2',
+    path: 'formthree/form-step2',
     loadChildren: () => import('./formthree/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
   {
-    path: 'formthree/form-step1/form-step3',
+    path: 'formthree/form-step3',
     loadChildren: () => import('./formthree/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
   },
   {
-    path: 'formthree/form-step1/form-step2/form-step3/form-step3b',
+    path: 'formthree/form-step3b',
     loadChildren: () => import('./formthree/form-step3b/form-step3b.module').then( m => m.FormStep3bPageModule)
   },
   {
-    path: 'formthree/form-step1/form-step4',
+    path: 'formthree/form-step4',
     loadChildren: () => import('./formthree/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
   },
   {
-    path: 'formthree/form-step1/form-step4/form-step4b',
+    path: 'formthree/form-step4b',
     loadChildren: () => import('./formthree/form-step4b/form-step4b.module').then( m => m.FormStep4bPageModule)
-  },
-  {
-    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype',
-    loadChildren: () => import('./formthree/form-smoketype/form-smoketype.module').then( m => m.FormSmoketypePageModule)
-  },
-  {
-    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype/form-step9',
-    loadChildren: () => import('./formthree/form-step9/form-step9.module').then( m => m.FormStep9PageModule)
-  },
-  {
-    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype/form-step9/form-response',
-    loadChildren: () => import('./formthree/form-response/form-response.module').then( m => m.FormResponsePageModule)
-  },
-  {
-    path: 'formthree/form-step1/form-step4/form-step4b/form-smoketype/form-response',
-    loadChildren: () => import('./formthree/form-response/form-response.module').then( m => m.FormResponsePageModule)
-  },
-  {
-    path: 'formthree/form-response/form-step10',
-    loadChildren: () => import('./formthree/form-step10/form-step10.module').then( m => m.FormStep10PageModule)
-  },
-  {
-    path: 'formthree/form-response/form-step10/form-step11',
-    loadChildren: () => import('./formthree/form-step11/form-step11.module').then( m => m.FormStep11PageModule)
-  },
-  {
-    path: 'formthree/form-response/form-step10/form-step11/form-step12',
-    loadChildren: () => import('./formthree/form-step12/form-step12.module').then( m => m.FormStep12PageModule)
   },
   {
     path: 'formthree/form-step5',
     loadChildren: () => import('./formthree/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
   },
   {
+    path: 'formthree/form-step5-count',
+    loadChildren: () => import('./formthree/form-step5-count/form-step5-count.module').then( m => m.FormStep5CountPageModule)
+  },
+  {
     path: 'formthree/form-step6',
     loadChildren: () => import('./formthree/form-step6/form-step6.module').then( m => m.FormStep6PageModule)
+  },
+  {
+    path: 'formthree/form-step6-count',
+    loadChildren: () => import('./formthree/form-step6-count/form-step6-count.module').then( m => m.FormStep6CountPageModule)
   },
   {
     path: 'formthree/form-step7',
@@ -257,6 +225,30 @@ const routes: Routes = [
   {
     path: 'formthree/form-step8',
     loadChildren: () => import('./formthree/form-step8/form-step8.module').then( m => m.FormStep8PageModule)
+  },
+  {
+    path: 'formthree/form-step9',
+    loadChildren: () => import('./formthree/form-step9/form-step9.module').then( m => m.FormStep9PageModule)
+  },
+  {
+    path: 'formthree/form-step10',
+    loadChildren: () => import('./formthree/form-step10/form-step10.module').then( m => m.FormStep10PageModule)
+  },
+  {
+    path: 'formthree/form-step11',
+    loadChildren: () => import('./formthree/form-step11/form-step11.module').then( m => m.FormStep11PageModule)
+  },
+  {
+    path: 'formthree/form-step12',
+    loadChildren: () => import('./formthree/form-step12/form-step12.module').then( m => m.FormStep12PageModule)
+  },
+  {
+    path: 'formthree/form-response',
+    loadChildren: () => import('./formthree/form-response/form-response.module').then( m => m.FormResponsePageModule)
+  },
+  {
+    path: 'formthree/form-smoketype',
+    loadChildren: () => import('./formthree/form-smoketype/form-smoketype.module').then( m => m.FormSmoketypePageModule)
   },
   {
     path: 'form-lists',
@@ -310,6 +302,8 @@ const routes: Routes = [
     path: 'form-draft',
     loadChildren: () => import('./formthree/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
   },
+  
+
 
 
 

@@ -80,7 +80,7 @@ export class FormStep3Page implements OnInit {
           "P3A":id,
         }
         await this.storage.set('public',dataAnswer);
-        await this.router.navigate(['formone/form-step1/form-step3/form-step4']);
+        await this.router.navigate(['formone/form-step4']);
       }
     }
   }

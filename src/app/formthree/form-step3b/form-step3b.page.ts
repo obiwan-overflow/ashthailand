@@ -28,7 +28,7 @@ export class FormStep3bPage implements OnInit {
   SMOKE:any;
   EVERSMOKE:any;
   EXSMOKE_Y:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController) { }
+  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -52,6 +52,12 @@ export class FormStep3bPage implements OnInit {
       this.EVERSMOKE  = data.EVERSMOKE;
       this.EXSMOKE_Y  = data.EXSMOKE_Y;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async Form(){
     let month = this.todo.month;

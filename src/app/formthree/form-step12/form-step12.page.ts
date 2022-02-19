@@ -33,10 +33,11 @@ export class FormStep12Page implements OnInit {
   E_CIG:any;
   OTHER:any;
   NO1:any;
+  NO2:any;
   RESPONSE:any;
   TYPE_CIG:any;
   SECOND:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController) {
+  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) {
 
   }
 
@@ -62,14 +63,21 @@ export class FormStep12Page implements OnInit {
       this.TIME_Y     = data.TIME_Y;
       this.TIME_M     = data.TIME_M === undefined ? "" : data.TIME_M;
       this.CIG        = data.CIG === undefined ? "" : data.CIG;
+      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
       this.ROLL       = data.ROLL === undefined ? "" : data.ROLL;
+      this.NO2        = data.NO2 === undefined ? "" : data.NO2;
       this.E_CIG      = data.E_CIG === undefined ? "" : data.E_CIG;
       this.OTHER      = data.OTHER === undefined ? "" : data.OTHER;
-      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
       this.RESPONSE   = data.RESPONSE === undefined ? "" : data.RESPONSE;
       this.TYPE_CIG   = data.TYPE_CIG === undefined ? "" : data.TYPE_CIG;
       this.SECOND     = data.SECOND === undefined ? "" : data.SECOND;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async form(event){
     let id = event.srcElement.id;
@@ -92,10 +100,11 @@ export class FormStep12Page implements OnInit {
       "TIME_Y":this.TIME_Y,
       "TIME_M":this.TIME_M,
       "CIG":this.CIG,
+      "NO1":this.NO1,
       "ROLL":this.ROLL,
+      "NO2":this.NO2,
       "E_CIG":this.E_CIG,
       "OTHER":this.OTHER,
-      "NO1":this.NO1,
       "RESPONSE":this.RESPONSE,
       "TYPE_CIG":this.TYPE_CIG,
       "SECOND":this.SECOND,
@@ -145,7 +154,7 @@ export class FormStep12Page implements OnInit {
             formData.append('ROLL',this.ROLL);
             formData.append('E_CIG',this.E_CIG);
             formData.append('OTHER',this.OTHER);
-            formData.append('NO1',this.NO1);
+            formData.append('NO1',(this.NO1+this.NO2));
             formData.append('RESPONSE',this.RESPONSE);
             formData.append('TYPE_CIG',this.TYPE_CIG);
             formData.append('SECOND',this.SECOND);
