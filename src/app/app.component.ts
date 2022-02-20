@@ -28,6 +28,7 @@ export class AppComponent {
   async logout(){
     await this.storage.remove('userId');
     await this.storage.remove('fullname');
+    await this.storage.remove('userData');
     await this.route.navigate(['home-new']);
     await location.reload();
   }

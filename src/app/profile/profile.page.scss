@@ -3,6 +3,9 @@
     border: 2px solid #209d96;
     display: block;
     position: relative;
+    img {
+        border-radius: 50%;
+    }
     ion-icon {
         position: absolute;
         bottom: -3px;
