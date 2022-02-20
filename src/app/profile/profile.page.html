@@ -12,8 +12,8 @@
     <form (ngSubmit)="form()">
     <ion-row>
       <ion-col size="3">
-        <div class="upload-profile">
-          <img src="assets/images/user-theme.png">
+        <div class="upload-profile" (click)="openGallery">
+          <img src="{{profileImg}}">
           <ion-icon name="camera-sharp"></ion-icon>
         </div>
       </ion-col>
@@ -44,19 +44,19 @@
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ตำบล</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict" value="{{subdistrict}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">อำเภอ</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.district" name="district"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.district" name="district" value="{{district}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">จังหวัด</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.province" name="province" value="{{province}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">

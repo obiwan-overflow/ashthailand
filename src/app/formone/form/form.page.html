@@ -13,15 +13,15 @@
     <ion-row>
       <ion-col size="12">
         <ion-label>จังหวัด</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.CWT" name="CWT"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.CWT" name="CWT" value="{{province}}" disabled></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>อำเภอ</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1" value="{{district}}" disabled></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>ตำบล</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.TMP" name="TMP"></ion-input>
+        <ion-input type="text" [(ngModel)]="todo.TMP" name="TMP" value="{{subdistrict}}" disabled></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-text>

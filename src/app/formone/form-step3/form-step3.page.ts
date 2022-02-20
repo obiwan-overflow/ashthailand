@@ -69,8 +69,27 @@ export class FormStep3Page implements OnInit {
           "P3A":id,
         }
         await this.storage.set('public',dataAnswer);
-        await this.router.navigate(['formone/form-step4']);
+        await this.router.navigateByUrl('formone/form-step4');
       }
+    }else{
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "VIL":this.dataStorage.VIL,
+        "MOO":this.dataStorage.MOO,
+        "A1":this.dataStorage.A1,
+        "NAME":this.dataStorage.NAME,
+        "ADDRESS":this.dataStorage.ADDRESS,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "images":this.dataStorage.images,
+        "P1A":this.dataStorage.P1A,
+        "P2A":this.dataStorage.P2A,
+        "P3A":id,
+      }
+      await this.storage.set('public',dataAnswer);
+      await this.router.navigateByUrl('formone/form-step4');
     }
   }
   async presentToast() {

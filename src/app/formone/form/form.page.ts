@@ -14,6 +14,9 @@ import { LoadingController } from '@ionic/angular';
 })
 export class FormPage implements OnInit {
 
+  province:any;
+  district:any;
+  subdistrict:any;
 
   latitude:any;
   longitude:any;
@@ -29,6 +32,11 @@ export class FormPage implements OnInit {
     public loadingController:LoadingController
   ) {
     this.titlePub = this.auth.titlePublic();
+    this.storage.get('userData').then((data)=>{
+      this.province     = data.province;
+      this.district     = data.district;
+      this.subdistrict  = data.subdistrict;
+    });
   }
 
   ngOnInit() {
@@ -49,9 +57,9 @@ export class FormPage implements OnInit {
   }
   async formData(form){
     let dataAnswer = {
-      "CWT":form.value.CWT,
-      "TMP":form.value.TMP,
-      "ID1":form.value.ID1,
+      "CWT":this.province,
+      "ID1":this.district,
+      "TMP":this.subdistrict,
       "LAT":this.latitude,
       "LONG":this.longitude,
     }

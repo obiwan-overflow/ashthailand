@@ -14,6 +14,9 @@ import { LoadingController } from '@ionic/angular';
 })
 export class FormPage implements OnInit {
 
+  province:any;
+  district:any;
+  subdistrict:any;
   latitude:any;
   longitude:any;
   
@@ -29,6 +32,11 @@ export class FormPage implements OnInit {
     public loadingController:LoadingController
     ) {
       this.titleShop = this.auth.titleShop();
+      this.storage.get('userData').then((data)=>{
+        this.province     = data.province;
+        this.district     = data.district;
+        this.subdistrict  = data.subdistrict;
+      });
     }
 
   ngOnInit() {
