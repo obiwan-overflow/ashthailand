@@ -4,8 +4,8 @@ import { RestApiService } from '../../rest-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
-import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthService } from 'src/app/AuthService';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form',
@@ -25,8 +25,8 @@ export class FormPage implements OnInit {
     private geolocation: Geolocation,
     private network: Network,
     private storage: Storage,
-    private camera: Camera,
-    public auth:AuthService
+    public auth:AuthService,
+    public loadingController:LoadingController
   ) {
     this.titlePub = this.auth.titlePublic();
   }
@@ -40,29 +40,27 @@ export class FormPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
-  todo = {
-    CWT: '',
-    TMP: '',
-    ID1: '',
-    VIL: '',
-    MOO: '',
-    ADDRESS: '',
-    LAT: '',
-    LONG: ''
-  };
   async formData(form){
     let dataAnswer = {
       "CWT":form.value.CWT,
       "TMP":form.value.TMP,
       "ID1":form.value.ID1,
-      "VIL":form.value.VIL,
-      "MOO":form.value.MOO,
-      "ADDRESS":form.value.ADDRESS,
       "LAT":this.latitude,
       "LONG":this.longitude,
     }
     await this.storage.set('public',dataAnswer);
     await this.router.navigateByUrl('/formone/form2');
   }
+  todo = {
+    CWT: '',
+    TMP: '',
+    ID1: '',
+  };
 }

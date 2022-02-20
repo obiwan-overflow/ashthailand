@@ -6,6 +6,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthService } from 'src/app/AuthService';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form2',
@@ -15,15 +16,7 @@ import { AuthService } from 'src/app/AuthService';
 export class Form2Page implements OnInit {
 
   todo:any = {};
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-
+  dataStorage: any = [];
   titleShop:any;
   constructor(
     public router:Router,
@@ -33,7 +26,8 @@ export class Form2Page implements OnInit {
     private network: Network,
     private storage: Storage,
     private camera: Camera,
-    public auth:AuthService
+    public auth:AuthService,
+    public loadingController:LoadingController
   ) {
     this.titleShop = this.auth.titleShop();
   }
@@ -42,30 +36,30 @@ export class Form2Page implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('shop').then((data)=>{
-      this.CWT      = data.CWT;
-      this.TMP      = data.TMP;
-      this.ID1      = data.ID1;
-      this.VIL      = data.VIL;
-      this.MOO      = data.MOO;
-      this.ADDRESS  = data.ADDRESS;
-      this.LAT      = data.LAT;
-      this.LONG     = data.LONG;
+      this.dataStorage.CWT      = data.CWT;
+      this.dataStorage.ID1      = data.ID1;
+      this.dataStorage.TMP      = data.TMP;
+      this.dataStorage.LAT      = data.LAT;
+      this.dataStorage.LONG     = data.LONG;
     });
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    await loading.present();
   }
   async formData(form){
     let dataAnswer = {
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "A1":form.value.A1,
-      "NAME":form.value.NAME,
+      "CWT":this.dataStorage.CWT,
+      "ID1":this.dataStorage.ID1,
+      "TMP":this.dataStorage.TMP,
+      "LAT":this.dataStorage.LAT,
+      "LONG":this.dataStorage.LONG,
+      "MOO":form.value.MOO,
+      "VIL":form.value.VIL,
     }
     await this.storage.set('shop',dataAnswer);
-    await this.router.navigateByUrl('/formtwo/form-step1');
+    await this.router.navigateByUrl('/formtwo/form3');
   }
 }

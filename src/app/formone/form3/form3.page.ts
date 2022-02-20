@@ -7,11 +7,11 @@ import { AuthService } from 'src/app/AuthService';
 import { ActionSheetController,LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-form2',
-  templateUrl: './form2.page.html',
-  styleUrls: ['./form2.page.scss'],
+  selector: 'app-form3',
+  templateUrl: './form3.page.html',
+  styleUrls: ['./form3.page.scss'],
 })
-export class Form2Page implements OnInit {
+export class Form3Page implements OnInit {
 
   titlePub:any;
   todo : any = [];
@@ -40,6 +40,8 @@ export class Form2Page implements OnInit {
       this.dataStorage.TMP      = data.TMP;
       this.dataStorage.LAT      = data.LAT;
       this.dataStorage.LONG     = data.LONG;
+      this.dataStorage.MOO      = data.MOO;
+      this.dataStorage.VIL      = data.VIL;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -55,10 +57,11 @@ export class Form2Page implements OnInit {
       "TMP":this.dataStorage.TMP,
       "LAT":this.dataStorage.LAT,
       "LONG":this.dataStorage.LONG,
-      "MOO":form.value.MOO,
-      "VIL":form.value.VIL,
+      "MOO":this.dataStorage.MOO,
+      "VIL":this.dataStorage.VIL,
+      "A1":form.value.A1,
     }
     await this.storage.set('public',dataAnswer);
-    await this.router.navigateByUrl('/formone/form3');
+    await this.router.navigateByUrl('/formone/form4');
   }
 }
