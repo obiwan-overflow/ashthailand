@@ -37,7 +37,6 @@ export class ProfilePage implements OnInit {
     private camera: Camera,
   ) {
     this.init();
-    this.profileImg = 'assets/images/user-theme.png';
   }
 
   ngOnInit() {
@@ -52,6 +51,7 @@ export class ProfilePage implements OnInit {
       this.subdistrict        = data.subdistrict;
       this.phone              = data.phone;
       this.id                 = data.id;
+      this.image              = data.image == " " ? data.image : 'assets/images/user-theme.png';
     });
   }
   async form(){
@@ -118,7 +118,6 @@ export class ProfilePage implements OnInit {
     this.camera.getPicture(this.gelleryOptions).then((imgData) => {
      console.log('image data =>  ', imgData);
      this.base64Img = 'data:image/jpeg;base64,' + imgData;
-     this.profileImg = imgData;
      this.userImg = this.base64Img;
      this.updateImages(this.userImg);
     }, (err) => {

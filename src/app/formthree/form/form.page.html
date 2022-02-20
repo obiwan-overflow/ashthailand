@@ -12,6 +12,19 @@
     <form #form="ngForm" (ngSubmit)="formData(form)">
     <ion-row>
       <ion-col size="12">
+        <ion-label>จังหวัด</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.CWT" name="CWT" value="{{province}}" disabled></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>อำเภอ</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1" value="{{district}}" disabled></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>ตำบล</ion-label>
+        <ion-input type="text" [(ngModel)]="todo.TMP" name="TMP" value="{{subdistrict}}" disabled></ion-input>
+      </ion-col>
+
+      <!-- <ion-col size="12">
         <ion-label>บ้านเลขที่</ion-label>
         <ion-input type="text" [(ngModel)]="todo.A1" name="A1"></ion-input>
       </ion-col>
@@ -22,18 +35,6 @@
       <ion-col size="12">
         <ion-label>เป็นคนที่เท่าไร</ion-label>
         <ion-input type="text" [(ngModel)]="todo.PERSON_NO" name="PERSON_NO"></ion-input>
-      </ion-col>
-      <ion-col size="12">
-        <ion-label>จังหวัด</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.CWT" name="CWT"></ion-input>
-      </ion-col>
-      <ion-col size="12">
-        <ion-label>ตำบล</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.TMP" name="TMP"></ion-input>
-      </ion-col>
-      <ion-col size="12">
-        <ion-label>อำเภอ</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.ID1" name="ID1"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>ชุมชน/บ้าน</ion-label>
@@ -57,10 +58,6 @@
       <ion-col size="12">
         <ion-label>อายุ</ion-label>
         <ion-input type="text" [(ngModel)]="todo.AGE" name="AGE"></ion-input>
-      </ion-col>
-      <!-- <ion-col size="12">
-        <ion-label>ที่อยู่</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.ADDRESS" name="ADDRESS"></ion-input>
       </ion-col> -->
       <ion-col size="12">
         <ion-text>

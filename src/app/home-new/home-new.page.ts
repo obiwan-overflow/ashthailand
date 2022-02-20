@@ -13,6 +13,7 @@ export class HomeNewPage implements OnInit {
 
   fullname:any;
   titleNoti:any;
+  image:any;
   constructor(private storage: Storage,public router:Router,public loadingController:LoadingController,public api:RestApiService) {
     this.api.getdata('home/noti').subscribe((res)=>{
       this.titleNoti = res.title;
@@ -22,8 +23,9 @@ export class HomeNewPage implements OnInit {
   ngOnInit() {
   }
   async ionViewDidEnter(){
-    this.storage.get('fullname').then((data)=>{
-      this.fullname = data;
+    await this.storage.get('userData').then((data)=>{
+      this.fullname = data.name+" "+data.lastname;
+      this.image    = data.image;
     });
   }
   async formanswer(){

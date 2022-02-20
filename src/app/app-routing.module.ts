@@ -195,6 +195,10 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form/form.module').then( m => m.FormPageModule)
   },
   {
+    path: 'formthree/form2',
+    loadChildren: () => import('./formthree/form2/form2.module').then( m => m.Form2PageModule)
+  },
+  {
     path: 'formthree/form-step1',
     loadChildren: () => import('./formthree/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
@@ -317,7 +321,12 @@ const routes: Routes = [
   {
     path: 'form-draft',
     loadChildren: () => import('./formthree/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+  },  {
+    path: 'form3',
+    loadChildren: () => import('./formthree/form3/form3.module').then( m => m.Form3PageModule)
   },
+
+
 ];
 @NgModule({
   imports: [
