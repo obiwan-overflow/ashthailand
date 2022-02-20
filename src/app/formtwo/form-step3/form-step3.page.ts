@@ -10,20 +10,7 @@ import { AuthService } from 'src/app/AuthService';
   styleUrls: ['./form-step3.page.scss'],
 })
 export class FormStep3Page implements OnInit {
-
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  A1:any;
-  NAME:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-  S1A:any;
-  S2A:any;
-
+  dataStorage: any = [];
   titleShop:any;
   constructor(public router:Router,public storage:Storage,public loadingController:LoadingController,public auth:AuthService) {
     this.titleShop = this.auth.titleShop();
@@ -33,18 +20,19 @@ export class FormStep3Page implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('shop').then((data)=>{
-      this.CWT      = data.CWT;
-      this.TMP      = data.TMP;
-      this.ID1      = data.ID1;
-      this.VIL      = data.VIL;
-      this.MOO      = data.MOO;
-      this.A1       = data.A1;
-      this.NAME     = data.NAME;
-      this.ADDRESS  = data.ADDRESS;
-      this.LAT      = data.LAT;
-      this.LONG     = data.LONG;
-      this.S1A      = data.S1A;
-      this.S2A      = data.S2A;
+      this.dataStorage.CWT      = data.CWT;
+      this.dataStorage.TMP      = data.TMP;
+      this.dataStorage.ID1      = data.ID1;
+      this.dataStorage.VIL      = data.VIL;
+      this.dataStorage.MOO      = data.MOO;
+      this.dataStorage.A1       = data.A1;
+      this.dataStorage.NAME     = data.NAME;
+      this.dataStorage.ADDRESS  = data.ADDRESS;
+      this.dataStorage.LAT      = data.LAT;
+      this.dataStorage.LONG     = data.LONG;
+      this.dataStorage.images   = data.images;
+      this.dataStorage.S1A      = data.S1A;
+      this.dataStorage.S2A      = data.S2A;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -56,18 +44,19 @@ export class FormStep3Page implements OnInit {
   async form(event){
     let id = event.srcElement.id;
     let dataAnswer = {
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "S1A":this.S1A,
-      "S2A":this.S2A,
+      "CWT":this.dataStorage.CWT,
+      "TMP":this.dataStorage.TMP,
+      "ID1":this.dataStorage.ID1,
+      "VIL":this.dataStorage.VIL,
+      "MOO":this.dataStorage.MOO,
+      "A1":this.dataStorage.A1,
+      "NAME":this.dataStorage.NAME,
+      "ADDRESS":this.dataStorage.ADDRESS,
+      "LAT":this.dataStorage.LAT,
+      "LONG":this.dataStorage.LONG,
+      "images":this.dataStorage.images,
+      "S1A":this.dataStorage.S1A,
+      "S2A":this.dataStorage.S2A,
       "S3A":id
     }
     await this.storage.set('shop',dataAnswer);

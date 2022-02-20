@@ -11,17 +11,7 @@ import { AuthService } from 'src/app/AuthService';
 })
 export class FormStep1Page implements OnInit {
 
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  A1:any;
-  NAME:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-  
+  dataStorage:any = [];
   titlePub:any;
   constructor(public router:Router,public storage:Storage,public loadingController:LoadingController,public auth:AuthService) {
     this.titlePub = this.auth.titlePublic();
@@ -31,16 +21,17 @@ export class FormStep1Page implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('public').then((data)=>{
-      this.CWT      = data.CWT;
-      this.TMP      = data.TMP;
-      this.ID1      = data.ID1;
-      this.VIL      = data.VIL;
-      this.MOO      = data.MOO;
-      this.A1       = data.A1;
-      this.NAME     = data.NAME;
-      this.ADDRESS  = data.ADDRESS;
-      this.LAT      = data.LAT;
-      this.LONG     = data.LONG;
+      this.dataStorage.CWT      = data.CWT;
+      this.dataStorage.TMP      = data.TMP;
+      this.dataStorage.ID1      = data.ID1;
+      this.dataStorage.VIL      = data.VIL;
+      this.dataStorage.MOO      = data.MOO;
+      this.dataStorage.A1       = data.A1;
+      this.dataStorage.NAME     = data.NAME;
+      this.dataStorage.ADDRESS  = data.ADDRESS;
+      this.dataStorage.LAT      = data.LAT;
+      this.dataStorage.LONG     = data.LONG;
+      this.dataStorage.images   = data.images;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -52,16 +43,17 @@ export class FormStep1Page implements OnInit {
   async form(event){
     let id = event.srcElement.id;
     let dataAnswer = {
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
+      "CWT":this.dataStorage.CWT,
+      "TMP":this.dataStorage.TMP,
+      "ID1":this.dataStorage.ID1,
+      "VIL":this.dataStorage.VIL,
+      "MOO":this.dataStorage.MOO,
+      "A1":this.dataStorage.A1,
+      "NAME":this.dataStorage.NAME,
+      "ADDRESS":this.dataStorage.ADDRESS,
+      "LAT":this.dataStorage.LAT,
+      "LONG":this.dataStorage.LONG,
+      "images":this.dataStorage.images,
       "P1A":id,
     }
     await this.storage.set('public',dataAnswer);

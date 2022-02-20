@@ -68,6 +68,7 @@ export class Form4Page implements OnInit {
       "A1":this.dataStorage.A1,
       "NAME":form.value.NAME,
       "ADDRESS":form.value.ADDRESS,
+      "images":this.imagesarray,
     }
     await this.storage.set('shop',dataAnswer);
     await this.router.navigateByUrl('/formtwo/form-step1');
