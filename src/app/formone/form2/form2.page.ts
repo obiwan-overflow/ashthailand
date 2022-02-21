@@ -4,7 +4,7 @@ import { RestApiService } from '../../rest-api.service';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from 'src/app/AuthService';
-import { ActionSheetController,LoadingController } from '@ionic/angular';
+import { ActionSheetController,LoadingController,ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form2',
@@ -14,7 +14,6 @@ import { ActionSheetController,LoadingController } from '@ionic/angular';
 export class Form2Page implements OnInit {
 
   titlePub:any;
-  todo : any = [];
   latitude:any;
   longitude:any;
   dataStorage:any = [];
@@ -26,7 +25,8 @@ export class Form2Page implements OnInit {
     private storage: Storage,
     public auth:AuthService,
     public actionSheetController: ActionSheetController,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public toastController:ToastController
   ) {
     this.titlePub = this.auth.titlePublic();
   }
@@ -49,16 +49,32 @@ export class Form2Page implements OnInit {
     await loading.present();
   }
   async formData(form){
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "ID1":this.dataStorage.ID1,
-      "TMP":this.dataStorage.TMP,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "MOO":form.value.MOO,
-      "VIL":form.value.VIL,
+    if(form.value.MOO == '' || form.value.VIL == ''){
+      this.presentToast();
+    }else{
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "ID1":this.dataStorage.ID1,
+        "TMP":this.dataStorage.TMP,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "MOO":form.value.MOO,
+        "VIL":form.value.VIL,
+      }
+      await this.storage.set('public',dataAnswer);
+      await this.router.navigateByUrl('/formone/form3');
     }
-    await this.storage.set('public',dataAnswer);
-    await this.router.navigateByUrl('/formone/form3');
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'กรุณากรอกข้อมูล',
+      duration: 2000,
+      color:"danger"
+    });
+    toast.present();
+  }
+  todo = {
+    MOO: '',
+    VIL: '',
   }
 }

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-form3',
-  templateUrl: './form3.page.html',
-  styleUrls: ['./form3.page.scss'],
+  selector: 'app-form4',
+  templateUrl: './form4.page.html',
+  styleUrls: ['./form4.page.scss'],
 })
-export class Form3Page implements OnInit {
+export class Form4Page implements OnInit {
 
   province:any;
   district:any;
@@ -22,7 +22,8 @@ export class Form3Page implements OnInit {
     public api:RestApiService,
     public route:ActivatedRoute,
     private storage: Storage,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public toastController:ToastController
   ) {
     this.storage.get('userData').then((data)=>{
       this.province     = data.province;
@@ -43,6 +44,7 @@ export class Form3Page implements OnInit {
       this.dataStorage.MOO      = data.MOO;
       this.dataStorage.VIL      = data.VIL;
       this.dataStorage.A1       = data.A1;
+      this.dataStorage.MEMBER   = data.MEMBER;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -52,6 +54,7 @@ export class Form3Page implements OnInit {
     await loading.present();
   }
   async formData(form){
+    console.log(form.value);
     let dataAnswer = {
       "CWT":this.dataStorage.CWT,
       "TMP":this.dataStorage.TMP,
@@ -61,13 +64,40 @@ export class Form3Page implements OnInit {
       "MOO":this.dataStorage.MOO,
       "VIL":this.dataStorage.VIL,
       "A1":this.dataStorage.A1,
-      "MEMBER":form.value.MEMBER,
+      "MEMBER":this.dataStorage.MEMBER,
+      "NAME":form.value.NAME,
+      "SEX":form.value.SEX,
+      "AGE":form.value.AGE,
     }
     await this.storage.set('formthree',dataAnswer);
-    this.router.navigateByUrl('/formthree/form4');
+    if(form.value.AGE == ''){
+      this.checkAge();
+    }else if (form.value.AGE > '15'){
+      this.router.navigateByUrl('/formthree/form-step1');
+    }else {
+      this.presentToast();
+    }
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'อายุต่ำกว่า 15 บันทึกข้อมูล',
+      duration: 2000,
+      color:"success"
+    });
+    toast.present();
+  }
+  async checkAge(){
+    const toast = await this.toastController.create({
+      message: 'กรุณากรอกอายุ',
+      duration: 2000,
+      color:"danger"
+    });
+    toast.present();
   }
   todo = {
-    MEMBER: '',
+    NAME: '',
+    SEX: '',
+    AGE: '',
   };
 
 }

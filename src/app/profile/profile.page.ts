@@ -51,7 +51,7 @@ export class ProfilePage implements OnInit {
       this.subdistrict        = data.subdistrict;
       this.phone              = data.phone;
       this.id                 = data.id;
-      this.image              = data.image == " " ? data.image : 'assets/images/user-theme.png';
+      this.image              = data.image == " " ? 'assets/images/user-theme.png' : data.image;
     });
   }
   async form(){

@@ -5,7 +5,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthService } from 'src/app/AuthService';
-import { ActionSheetController,LoadingController } from '@ionic/angular';
+import { ActionSheetController,LoadingController,ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form4',
@@ -14,7 +14,6 @@ import { ActionSheetController,LoadingController } from '@ionic/angular';
 })
 export class Form4Page implements OnInit {
 
-  todo:any = {};
   titlePub:any;
   dataStorage:any = [];
 
@@ -31,7 +30,8 @@ export class Form4Page implements OnInit {
     private camera: Camera,
     public auth:AuthService,
     public actionSheetController: ActionSheetController,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public toastController:ToastController
   ) {
     this.titlePub = this.auth.titlePublic();
   }
@@ -57,21 +57,25 @@ export class Form4Page implements OnInit {
     await loading.present();
   }
   async formData(form){
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "ID1":this.dataStorage.ID1,
-      "TMP":this.dataStorage.TMP,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "MOO":this.dataStorage.MOO,
-      "VIL":this.dataStorage.VIL,
-      "A1":this.dataStorage.A1,
-      "NAME":form.value.NAME,
-      "ADDRESS":form.value.ADDRESS,
-      "images":this.imagesarray,
+    if(form.value.ADDRESS == '' || form.value.NAME == ''){
+      this.presentToast();
+    }else{
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "ID1":this.dataStorage.ID1,
+        "TMP":this.dataStorage.TMP,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "MOO":this.dataStorage.MOO,
+        "VIL":this.dataStorage.VIL,
+        "A1":this.dataStorage.A1,
+        "NAME":form.value.NAME,
+        "ADDRESS":form.value.ADDRESS,
+        "images":this.imagesarray,
+      }
+      await this.storage.set('public',dataAnswer);
+      await this.router.navigateByUrl('/formone/form-step1');
     }
-    await this.storage.set('public',dataAnswer);
-    await this.router.navigateByUrl('/formone/form-step1');
   }
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
@@ -136,5 +140,17 @@ export class Form4Page implements OnInit {
   }
   async updateImages(images){
     this.imagesarray.push(images);
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'กรุณากรอกข้อมูล',
+      duration: 2000,
+      color:"danger"
+    });
+    toast.present();
+  }
+  todo = {
+    NAME: '',
+    ADDRESS: ''
   }
 }

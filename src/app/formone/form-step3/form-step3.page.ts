@@ -17,7 +17,8 @@ export class FormStep3Page implements OnInit {
     public storage:Storage,
     public loadingController:LoadingController,
     public auth:AuthService,
-    public toastController:ToastController) {
+    public toastController:ToastController
+  ) {
     this.titlePub = this.auth.titlePublic();
   }
 

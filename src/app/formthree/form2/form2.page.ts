@@ -76,7 +76,7 @@ export class Form2Page implements OnInit {
       "A1":form.value.A1,
     }
     await this.storage.set('formthree',dataAnswer);
-    this.router.navigateByUrl('/formthree/form-step1');
+    this.router.navigateByUrl('/formthree/form3');
   }
   todo = {
     MOO: '',
