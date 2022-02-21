@@ -5,7 +5,10 @@ ion-avatar {
 }
 .card-report {
     display: block;
-    background: orange;
+    // background: orange;
+    background: url('/assets/images/background/Background.jpg') no-repeat 100% 100%;
+    background-size: 100%;
+    background-position: top;
     color: #fff;
     padding: 10px 15px 10px 15px;
     border-radius: 20px;
