@@ -72,7 +72,7 @@ export class Form4Page implements OnInit {
     await this.storage.set('formthree',dataAnswer);
     if(form.value.AGE == ''){
       this.checkAge();
-    }else if (form.value.AGE > '15'){
+    }else if (form.value.AGE >= '15'){
       this.router.navigateByUrl('/formthree/form-step1');
     }else {
       this.presentToast();
