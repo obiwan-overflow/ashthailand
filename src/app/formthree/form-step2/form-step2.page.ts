@@ -31,7 +31,7 @@ export class FormStep2Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.MENBER     = data.MENBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
@@ -75,8 +75,8 @@ export class FormStep2Page implements OnInit {
       "SMOKE":this.SMOKE,
       "EVERSMOKE":id
     }
-    await this.storage.set('formthree',dataAnswer);
-    if(id == "ไม่สูบ"){
+    await this.storage.set('formfamily',dataAnswer);
+    if(id == "1"){
       this.formConfirm(id);
     }else{
       await this.router.navigateByUrl('formthree/form-step3');

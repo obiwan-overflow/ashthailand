@@ -20,7 +20,7 @@ export class FormStep6Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('shop').then((data)=>{
+    await this.storage.get('formshop').then((data)=>{
       this.dataStorage.CWT      = data.CWT;
       this.dataStorage.TMP      = data.TMP;
       this.dataStorage.ID1      = data.ID1;
@@ -66,7 +66,7 @@ export class FormStep6Page implements OnInit {
       "S5A":this.dataStorage.S5A,
       "S6A":id
     }
-    await this.storage.set('shop',dataAnswer);
+    await this.storage.set('formshop',dataAnswer);
     this.formConfirm(id);
   }
   async formConfirm(id){

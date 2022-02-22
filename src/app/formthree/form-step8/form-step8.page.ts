@@ -38,7 +38,7 @@ export class FormStep8Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.MENBER     = data.MENBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
@@ -96,7 +96,29 @@ export class FormStep8Page implements OnInit {
       "E_CIG":this.E_CIG,
       "OTHER":id
     }
-    await this.storage.set('formthree',dataAnswer);
-    await this.router.navigateByUrl('formthree/form-response');
+    await this.storage.set('formfamily',dataAnswer);
+
+    if(id !== '2' || this.CIG !== '2' || this.ROLL !== '2' || this.E_CIG !== '2'){
+      await this.router.navigateByUrl('formthree/form-response');
+    }else{
+      this.presentAlertConfirm();
+    }
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      message: 'ต้องมีการสูบอย่างน้อย 1 ประเภท !!!',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            this.router.navigateByUrl('formthree/form-step5');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

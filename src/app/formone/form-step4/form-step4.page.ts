@@ -20,7 +20,7 @@ export class FormStep4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('public').then((data)=>{
+    await this.storage.get('formpublic').then((data)=>{
       this.dataStorage.CWT      = data.CWT;
       this.dataStorage.TMP      = data.TMP;
       this.dataStorage.ID1      = data.ID1;
@@ -62,7 +62,7 @@ export class FormStep4Page implements OnInit {
       "P3A":this.dataStorage.P3A,
       "P4A":id,
     }
-    await this.storage.set('public',dataAnswer);
+    await this.storage.set('formpublic',dataAnswer);
 
     if(id == "4"){
       await this.router.navigate(['formone/form-step5']);

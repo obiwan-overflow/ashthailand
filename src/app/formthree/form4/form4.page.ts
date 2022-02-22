@@ -35,7 +35,7 @@ export class Form4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.dataStorage.CWT      = data.CWT;
       this.dataStorage.ID1      = data.ID1;
       this.dataStorage.TMP      = data.TMP;
@@ -69,7 +69,7 @@ export class Form4Page implements OnInit {
       "SEX":form.value.SEX,
       "AGE":form.value.AGE,
     }
-    await this.storage.set('formthree',dataAnswer);
+    await this.storage.set('formfamily',dataAnswer);
     if(form.value.AGE == ''){
       this.checkAge();
     }else if (form.value.AGE >= '15'){

@@ -33,7 +33,7 @@ export class FormSmoketypePage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.MENBER     = data.MENBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
@@ -76,7 +76,7 @@ export class FormSmoketypePage implements OnInit {
         "TIME_M":this.TIME_M,
         "CIG":"สูบ"
       }
-      await this.storage.set('formthree',dataAnswer);
+      await this.storage.set('formfamily',dataAnswer);
       await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype/form-step9');
     }else if(id == '6'){
       let dataAnswer = {
@@ -99,7 +99,7 @@ export class FormSmoketypePage implements OnInit {
         "TIME_M":this.TIME_M,
         "ROLL":"สูบ"
       }
-      await this.storage.set('formthree',dataAnswer);
+      await this.storage.set('formfamily',dataAnswer);
       await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype/form-step9');
     }else if(id == '7'){
       let dataAnswer = {
@@ -122,7 +122,7 @@ export class FormSmoketypePage implements OnInit {
         "TIME_M":this.TIME_M,
         "E_CIG":"สูบ"
       }
-      await this.storage.set('formthree',dataAnswer);
+      await this.storage.set('formfamily',dataAnswer);
       await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype/form-response');
     }else if(id == '8'){
       let dataAnswer = {
@@ -145,7 +145,7 @@ export class FormSmoketypePage implements OnInit {
         "TIME_M":this.TIME_M,
         "OTHER":"สูบ"
       }
-      await this.storage.set('formthree',dataAnswer);
+      await this.storage.set('formfamily',dataAnswer);
       await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype/form-response');
     }
   }

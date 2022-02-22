@@ -39,7 +39,7 @@ export class FormResponsePage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.MENBER     = data.MENBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
@@ -99,19 +99,17 @@ export class FormResponsePage implements OnInit {
       "OTHER":this.OTHER,
       "RESPONSE":id
     }
-    await this.storage.set('formthree',dataAnswer);
-    if(id == "ใช่"){
-      if(this.CIG !== ""){
+    await this.storage.set('formfamily',dataAnswer);
+    if(id == "1"){
+      if(this.CIG == '1' || this.ROLL == '1'){
         this.router.navigateByUrl('formthree/form-step10');
-      }else{
-        this.router.navigateByUrl('formthree/form-step11');
-      }
-    }else{
-      if(this.E_CIG !== ""){
+      }else if(this.ROLL == '1' || this.E_CIG == '1' || this.OTHER == '1'){
         this.router.navigateByUrl('formthree/form-step11');
       }else{
         this.formConfirm(id);
       }
+    }else{
+      this.formConfirm(id);
     }
   }
   async formConfirm(id){

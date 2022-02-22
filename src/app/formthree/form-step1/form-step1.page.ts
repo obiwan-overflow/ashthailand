@@ -29,7 +29,7 @@ export class FormStep1Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.MENBER     = data.MENBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
@@ -71,9 +71,9 @@ export class FormStep1Page implements OnInit {
       "LONG":this.LONG,
       "SMOKE":id,
     }
-    await this.storage.set('formthree',dataAnswer);
+    await this.storage.set('formfamily',dataAnswer);
     
-    if(id == "ไม่สูบ"){
+    if(id == "1"){
       await this.router.navigateByUrl('formthree/form-step2');
     }else{
       await this.router.navigateByUrl('formthree/form-step4');

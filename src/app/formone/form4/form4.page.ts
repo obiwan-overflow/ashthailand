@@ -39,7 +39,7 @@ export class Form4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('public').then((data)=>{
+    await this.storage.get('formpublic').then((data)=>{
       this.dataStorage.CWT      = data.CWT;
       this.dataStorage.ID1      = data.ID1;
       this.dataStorage.TMP      = data.TMP;
@@ -73,7 +73,7 @@ export class Form4Page implements OnInit {
         "ADDRESS":form.value.ADDRESS,
         "images":this.imagesarray,
       }
-      await this.storage.set('public',dataAnswer);
+      await this.storage.set('formpublic',dataAnswer);
       await this.router.navigateByUrl('/formone/form-step1');
     }
   }

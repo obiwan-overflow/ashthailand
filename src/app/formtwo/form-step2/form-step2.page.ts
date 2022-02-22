@@ -19,7 +19,7 @@ export class FormStep2Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('shop').then((data)=>{
+    await this.storage.get('formshop').then((data)=>{
       this.dataStorage.CWT      = data.CWT;
       this.dataStorage.TMP      = data.TMP;
       this.dataStorage.ID1      = data.ID1;
@@ -57,7 +57,7 @@ export class FormStep2Page implements OnInit {
       "S1A":this.dataStorage.S1A,
       "S2A":id,
     }
-    await this.storage.set('shop',dataAnswer);
+    await this.storage.set('formshop',dataAnswer);
     await this.router.navigate(['formtwo/form-step3']);
   }
 }

@@ -34,7 +34,7 @@ export class Form3Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.dataStorage.CWT      = data.CWT;
       this.dataStorage.ID1      = data.ID1;
       this.dataStorage.TMP      = data.TMP;
@@ -63,7 +63,7 @@ export class Form3Page implements OnInit {
       "A1":this.dataStorage.A1,
       "MEMBER":form.value.MEMBER,
     }
-    await this.storage.set('formthree',dataAnswer);
+    await this.storage.set('formfamily',dataAnswer);
     this.router.navigateByUrl('/formthree/form4');
   }
   todo = {

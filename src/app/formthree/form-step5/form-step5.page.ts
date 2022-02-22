@@ -33,7 +33,7 @@ export class FormStep5Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formthree').then((data)=>{
+    await this.storage.get('formfamily').then((data)=>{
       this.MENBER     = data.MENBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
@@ -81,8 +81,8 @@ export class FormStep5Page implements OnInit {
       "TIME_M":this.TIME_M,
       "CIG":id
     }
-    await this.storage.set('formthree',dataAnswer);
-    if(id == "สูบ"){
+    await this.storage.set('formfamily',dataAnswer);
+    if(id == "1"){
       await this.router.navigateByUrl('formthree/form-step5-count');
     }else{
       await this.router.navigateByUrl('formthree/form-step6');

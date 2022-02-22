@@ -63,7 +63,7 @@ export class FormPage implements OnInit {
       "LAT":this.latitude,
       "LONG":this.longitude,
     }
-    await this.storage.set('shop',dataAnswer);
+    await this.storage.set('formshop',dataAnswer);
     await this.router.navigateByUrl('/formtwo/form2');
   }
   todo = {
