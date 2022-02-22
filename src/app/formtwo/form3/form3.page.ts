@@ -68,7 +68,8 @@ export class Form3Page implements OnInit {
     const toast = await this.toastController.create({
       message: 'กรุณากรอกข้อมูล',
       duration: 2000,
-      color:"danger"
+      color:"danger",
+      position:"top"
     });
     toast.present();
   }

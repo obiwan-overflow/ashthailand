@@ -102,7 +102,8 @@ export class ProfilePage implements OnInit {
     const toast = await this.toastController.create({
       message: 'แก้ไขข้อมูลเรียบร้อย',
       duration: 5000,
-      color:"success"
+      color:"success",
+      position:"top"
     });
     toast.present();
   }

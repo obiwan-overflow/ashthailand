@@ -17,7 +17,8 @@ export class FormStep3Page implements OnInit {
     public storage:Storage,
     public loadingController:LoadingController,
     public auth:AuthService,
-    public toastController:ToastController
+    public toastController:ToastController,
+    public alertController:AlertController
   ) {
     this.titlePub = this.auth.titlePublic();
   }
@@ -49,9 +50,9 @@ export class FormStep3Page implements OnInit {
   }
   async form(event){
     let id = event.srcElement.id;
-    if(this.dataStorage.P2A == "ไม่ใช่"){
-      if(id == "ไม่ใช่"){
-        this.presentToast();
+    if(this.dataStorage.P2A == "1"){
+      if(id == "2"){
+        this.presentAlertConfirm();
       }else{
         let dataAnswer = {
           "CWT":this.dataStorage.CWT,
@@ -97,8 +98,26 @@ export class FormStep3Page implements OnInit {
     const toast = await this.toastController.create({
       message: 'เพราะไม่พบป้ายห้ามสูบทั้งภายในแหละภายนอกอาคาร',
       duration: 2000,
-      color:"danger"
+      color:"danger",
+      position:"top"
     });
     toast.present();
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      message: 'เพราะไม่พบป้ายห้ามสูบทั้งภายในแหละภายนอกอาคาร !!!',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            this.router.navigateByUrl('formone/form-step1');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

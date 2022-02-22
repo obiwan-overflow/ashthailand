@@ -33,8 +33,8 @@ export class FormStep4Page implements OnInit {
       this.dataStorage.LONG     = data.LONG;
       this.dataStorage.images   = data.images;
       this.dataStorage.P1A      = data.P1A;
-      this.dataStorage.P2A      = data.P2A === undefined ? "" : this.dataStorage.P2A;
-      this.dataStorage.P3A      = data.P3A === undefined ? "" : this.dataStorage.P3A;
+      this.dataStorage.P2A      = data.P2A == '' ? "" : this.dataStorage.P2A;
+      this.dataStorage.P3A      = data.P3A == '' ? "" : this.dataStorage.P3A;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -64,7 +64,7 @@ export class FormStep4Page implements OnInit {
     }
     await this.storage.set('public',dataAnswer);
 
-    if(id == "พบภายนอกอาคาร/สิ่งปลูกสร้างใดๆ ที่มิได้จัดไว้ให้เป็นเขตสูบบุหรี่"){
+    if(id == "4"){
       await this.router.navigate(['formone/form-step5']);
     }else{
       this.formConfirm(id);

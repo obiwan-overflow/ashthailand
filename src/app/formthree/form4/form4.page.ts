@@ -82,7 +82,8 @@ export class Form4Page implements OnInit {
     const toast = await this.toastController.create({
       message: 'อายุต่ำกว่า 15 บันทึกข้อมูล',
       duration: 2000,
-      color:"success"
+      color:"success",
+      position:"top"
     });
     toast.present();
   }

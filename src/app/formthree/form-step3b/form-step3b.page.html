@@ -18,8 +18,22 @@
       <ion-col size="12">
         <form (ngSubmit)="Form()">
         <p>กรอกจำนวนเดือน</p>
-        <p class="text-danger">ถ้าจำไม่ได้บันทึก "88"</p>
-        <ion-input type="number" [(ngModel)]="todo.month" name="month"></ion-input>
+        <!-- <p class="text-danger">ถ้าจำไม่ได้บันทึก "88"</p> -->
+        <!-- <ion-input type="number" [(ngModel)]="todo.month" name="month"></ion-input> -->
+        <ion-select [(ngModel)]="todo.month" name="month">
+          <ion-select-option value="1">1 เดือน</ion-select-option>
+          <ion-select-option value="2">2 เดือน</ion-select-option>
+          <ion-select-option value="3">3 เดือน</ion-select-option>
+          <ion-select-option value="4">4 เดือน</ion-select-option>
+          <ion-select-option value="5">5 เดือน</ion-select-option>
+          <ion-select-option value="6">6 เดือน</ion-select-option>
+          <ion-select-option value="7">7 เดือน</ion-select-option>
+          <ion-select-option value="8">8 เดือน</ion-select-option>
+          <ion-select-option value="9">9 เดือน</ion-select-option>
+          <ion-select-option value="10">10 เดือน</ion-select-option>
+          <ion-select-option value="11">11 เดือน</ion-select-option>
+          <ion-select-option value="88">จำไม่ได้กรอก</ion-select-option>
+        </ion-select>
         <ion-button type="submit" expand="block" shape="round" color="dark">ตกลง</ion-button>
         </form>
       </ion-col>
