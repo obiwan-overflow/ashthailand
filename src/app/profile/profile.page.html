@@ -11,9 +11,9 @@
   <ion-grid>
     <form (ngSubmit)="form()">
     <ion-row>
-      <ion-col size="3">
+      <ion-col size="12">
         <div class="upload-profile" (click)="openGallery()">
-          <img src="{{image}}">
+          <img src="{{image}}" width="100" height="100">
           <ion-icon name="camera-sharp"></ion-icon>
         </div>
       </ion-col>
@@ -32,7 +32,7 @@
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">เบอร์โทรศัพท์</ion-label>
-          <ion-input type="number" [(ngModel)]="todo.phone" name="phone" value="{{phone}}"></ion-input>
+          <ion-input type="phone" [(ngModel)]="todo.phone" name="phone" value="{{phone}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
@@ -43,20 +43,26 @@
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">ตำบล</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.subdistrict" name="subdistrict" value="{{subdistrict}}"></ion-input>
+          <ion-label>จังหวัด</ion-label>
+          <ion-select [(ngModel)]="todo.province" name="province" [compareWith]="compareWith" value="{{province}}">
+            <ion-select-option *ngFor="let dataprovinces of dataProvince" value="{{dataprovinces.id_provinces}}">{{dataprovinces.provinces}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">อำเภอ</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.district" name="district" value="{{district}}"></ion-input>
+          <ion-label>อำเภอ</ion-label>
+          <ion-select [(ngModel)]="todo.district" name="district" [compareWith]="compareWith" value="{{district}}">
+            <ion-select-option *ngFor="let dataamphures of dataAmphures" value="{{dataamphures.id_amphures}}">{{dataamphures.amphures}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">จังหวัด</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.province" name="province" value="{{province}}"></ion-input>
+          <ion-label>ตำบล</ion-label>
+          <ion-select [(ngModel)]="todo.subdistrict" name="subdistrict" [compareWith]="compareWith" value="{{subdistrict}}">
+            <ion-select-option *ngFor="let datatombons of dataTombons" value="{{datatombons.id_tombons}}">{{datatombons.tombons}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
       <ion-col size="12">

@@ -21,12 +21,27 @@ export class ProfilePage implements OnInit {
   phone:any;
   id:any;
   image:any;
+  dataProvince:any = [];
+  dataAmphures:any = [];
+  dataTombons:any = [];
 
   // images
   profileImg:any;
   userImg: any = '';
   base64Img = '';
   imagesarray: any = [];
+
+  compareWithFn(o1, o2) {
+    return o1 === o2;
+  };
+  gelleryOptions: CameraOptions = {
+    quality: 500,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    allowEdit: true
+  }
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -53,6 +68,20 @@ export class ProfilePage implements OnInit {
       this.id                 = data.id;
       this.image              = data.image == " " ? 'assets/images/user-theme.png' : data.image;
     });
+    await this.loadDataselect();
+  }
+  async openGallery() {
+    this.camera.getPicture(this.gelleryOptions).then((imgData) => {
+     console.log('image data =>  ', imgData);
+     this.base64Img = 'data:image/jpeg;base64,' + imgData;
+     this.userImg = this.base64Img;
+     this.updateImages(this.userImg);
+    }, (err) => {
+     console.log(err);
+    })
+  }
+  async updateImages(images){
+    this.image = images;
   }
   async form(){
     const alert = await this.alertController.create({
@@ -81,7 +110,7 @@ export class ProfilePage implements OnInit {
             formData.append('district',this.todo.district !== undefined ? this.todo.district : this.district);
             formData.append('subdistrict',this.todo.subdistrict !== undefined ? this.todo.subdistrict : this.subdistrict);
             formData.append('phone',this.todo.phone !== undefined ? this.todo.phone : this.phone);
-            formData.append('image',this.todo.image !== undefined ? this.todo.image : this.image);
+            formData.append('image',this.todo.image !== undefined ? this.image : this.image);
             this.api.postdata('member/editProfile',formData).subscribe((res)=>{
               if(res.result == 'success'){
                 this.setUserData(res.detail);
@@ -107,25 +136,15 @@ export class ProfilePage implements OnInit {
     });
     toast.present();
   }
-  gelleryOptions: CameraOptions = {
-    quality: 100,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: true
-  }
-  async openGallery() {
-    this.camera.getPicture(this.gelleryOptions).then((imgData) => {
-     console.log('image data =>  ', imgData);
-     this.base64Img = 'data:image/jpeg;base64,' + imgData;
-     this.userImg = this.base64Img;
-     this.updateImages(this.userImg);
-    }, (err) => {
-     console.log(err);
-    })
-  }
-  async updateImages(images){
-    this.image = images;
+  async loadDataselect(){
+    await this.api.getdata('member/getProvinces').subscribe((res)=>{
+      this.dataProvince = res.detail;
+    });
+    await this.api.getdata('member/getAmphures&id_provinces='+this.province).subscribe((res)=>{
+      this.dataAmphures = res.detail;
+    });
+    await this.api.getdata('member/getTombons&id_provinces='+this.province+'&id_amphures='+this.district).subscribe((res)=>{
+      this.dataTombons = res.detail;
+    });
   }
 }

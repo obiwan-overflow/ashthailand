@@ -24,8 +24,10 @@ export class HomeNewPage implements OnInit {
   }
   async ionViewDidEnter(){
     await this.storage.get('userData').then((data)=>{
-      this.fullname = data.name+" "+data.lastname;
-      this.image    = data.image;
+        if(data !== null){
+          this.fullname = data.name+" "+data.lastname;
+          this.image    = data.image == " " ? 'assets/images/user-theme.png' : data.image;
+        }
     });
   }
   async formanswer(){
