@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
-import { AlertController,LoadingController } from '@ionic/angular';
+import { AlertController,LoadingController,ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-step4',
@@ -26,7 +26,14 @@ export class FormStep4Page implements OnInit {
   LAT:any;
   LONG:any;
   SMOKE:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public toastController:ToastController
+  ) { }
 
   ngOnInit() {
   }
@@ -75,11 +82,24 @@ export class FormStep4Page implements OnInit {
       "TIME_Y":this.todo.year
     }
     await this.storage.set('formfamily',dataAnswer);
-    if(this.todo.year < '1'){
-      this.router.navigateByUrl('formthree/form-step4b');
+    if(this.todo.year < this.AGE){
+      if(this.todo.year < '1'){
+        this.router.navigateByUrl('formthree/form-step4b');
+      }else{
+        this.router.navigateByUrl('formthree/form-step5');
+      }
     }else{
-      this.router.navigateByUrl('formthree/form-step5');
+      this.presentToast();
     }
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'จำนวนปีการสูบบุหรี่มากกว่าอายุ',
+      duration: 2000,
+      color:"danger",
+      position:"top"
+    });
+    toast.present();
   }
   todo = {
     year:""

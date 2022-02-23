@@ -50,7 +50,7 @@ export class FormStep3Page implements OnInit {
   }
   async form(event){
     let id = event.srcElement.id;
-    if(this.dataStorage.P2A == "1"){
+    if(this.dataStorage.P2A == "2"){
       if(id == "2"){
         this.presentAlertConfirm();
       }else{
