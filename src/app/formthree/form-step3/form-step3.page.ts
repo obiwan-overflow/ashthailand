@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
-import { AlertController,LoadingController } from '@ionic/angular';
+import { AlertController,LoadingController,ToastController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-form-step3',
@@ -27,7 +28,20 @@ export class FormStep3Page implements OnInit {
   LONG:any;
   SMOKE:any;
   EVERSMOKE:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
+  private ionicForm : FormGroup;
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public toastController:ToastController,
+    public formBuilder: FormBuilder
+  ) {
+    this.ionicForm = this.formBuilder.group({
+      YEAR: ['',[Validators.required,Validators.max(99)]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -58,7 +72,8 @@ export class FormStep3Page implements OnInit {
     await loading.present();
   }
   async Form(){
-    let year = this.todo.YEAR;
+    console.log(this.ionicForm.value);
+    let year = this.ionicForm.value.YEAR;
     let dataAnswer = {
       "MENBER":this.MENBER,
       "PERSON_NO":this.PERSON_NO,
@@ -133,8 +148,5 @@ export class FormStep3Page implements OnInit {
       ]
     });
     await alert.present();
-  }
-  todo = {
-    YEAR:""
   }
 }

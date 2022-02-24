@@ -91,7 +91,8 @@ export class Form4Page implements OnInit {
     const toast = await this.toastController.create({
       message: 'กรุณากรอกอายุ',
       duration: 2000,
-      color:"danger"
+      color:"danger",
+      position:"top"
     });
     toast.present();
   }

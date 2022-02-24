@@ -19,6 +19,7 @@ export class FormPage implements OnInit {
   subdistrict:any;
   latitude:any;
   longitude:any;
+  detailProvince:any = [];
   
   titleShop:any;
   constructor(
@@ -42,11 +43,14 @@ export class FormPage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.geolocation.getCurrentPosition().then((resp) => {
+    await this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude   = resp.coords.latitude;
       this.longitude  = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
+    });
+    await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
+      this.detailProvince = res.detail;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',

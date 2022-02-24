@@ -13,11 +13,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot({name: "mydatabase"}),HttpClientModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    IonicStorageModule.forRoot({name: "mydatabase"}),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera],
   bootstrap: [AppComponent],
 })
