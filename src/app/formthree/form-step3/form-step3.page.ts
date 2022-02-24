@@ -72,7 +72,6 @@ export class FormStep3Page implements OnInit {
     await loading.present();
   }
   async Form(){
-    console.log(this.ionicForm.value);
     let year = this.ionicForm.value.YEAR;
     let dataAnswer = {
       "MENBER":this.MENBER,

@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController,LoadingController,ToastController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-form-step4',
@@ -26,14 +27,20 @@ export class FormStep4Page implements OnInit {
   LAT:any;
   LONG:any;
   SMOKE:any;
+  private ionicForm:FormGroup;
   constructor(
     public storage:Storage,
     public api:RestApiService,
     public router:Router,
     public alertController:AlertController,
     public loadingController:LoadingController,
-    public toastController:ToastController
-  ) { }
+    public toastController:ToastController,
+    public formBuilder:FormBuilder
+  ) {
+    this.ionicForm = this.formBuilder.group({
+      year: ['',[Validators.required,Validators.max(99)]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -79,11 +86,11 @@ export class FormStep4Page implements OnInit {
       "LAT":this.LAT,
       "LONG":this.LONG,
       "SMOKE":this.SMOKE,
-      "TIME_Y":this.todo.year
+      "TIME_Y":this.ionicForm.value.year
     }
     await this.storage.set('formfamily',dataAnswer);
-    if(this.todo.year < this.AGE){
-      if(this.todo.year < '1'){
+    if(this.ionicForm.value.year < this.AGE){
+      if(this.ionicForm.value.year < '1'){
         this.router.navigateByUrl('formthree/form-step4b');
       }else{
         this.router.navigateByUrl('formthree/form-step5');
@@ -100,8 +107,5 @@ export class FormStep4Page implements OnInit {
       position:"top"
     });
     toast.present();
-  }
-  todo = {
-    year:""
   }
 }

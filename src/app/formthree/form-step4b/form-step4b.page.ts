@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController,LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-form-step4b',
@@ -27,7 +28,19 @@ export class FormStep4bPage implements OnInit {
   LONG:any;
   SMOKE:any;
   TIME_Y:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
+  private ionicForm:FormGroup;
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public formBuilder:FormBuilder
+  ) {
+    this.ionicForm = this.formBuilder.group({
+      month: ['',[Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -75,13 +88,9 @@ export class FormStep4bPage implements OnInit {
       "LONG":this.LONG,
       "SMOKE":this.SMOKE,
       "TIME_Y":this.TIME_Y,
-      "TIME_M":this.todo.month
+      "TIME_M":this.ionicForm.value.month
     }
     await this.storage.set('formfamily',dataAnswer);
-    // await this.router.navigateByUrl('formthree/form-step1/form-step4/form-step4b/form-smoketype');
     await this.router.navigateByUrl('formthree/form-step5');
-  }
-  todo = {
-    month:""
   }
 }

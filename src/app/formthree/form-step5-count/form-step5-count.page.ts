@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController,LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-form-step5-count',
@@ -29,7 +30,19 @@ export class FormStep5CountPage implements OnInit {
   TIME_Y:any;
   TIME_M:any;
   CIG:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
+  private ionicForm:FormGroup;
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public formBuilder:FormBuilder
+  ) {
+    this.ionicForm = this.formBuilder.group({
+      NO: ['',[Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -81,12 +94,9 @@ export class FormStep5CountPage implements OnInit {
       "TIME_Y":this.TIME_Y,
       "TIME_M":this.TIME_M,
       "CIG":this.CIG,
-      "NO1":this.todo.NO
+      "NO1":this.ionicForm.value.NO
     }
     await this.storage.set('formfamily',dataAnswer);
     await this.router.navigateByUrl('formthree/form-step6');
-  }
-  todo = {
-    NO:""
   }
 }

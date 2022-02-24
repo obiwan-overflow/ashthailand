@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +13,8 @@ import { FormStep4bPage } from './form-step4b.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FormStep4bPageRoutingModule
+    FormStep4bPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [FormStep4bPage]
 })

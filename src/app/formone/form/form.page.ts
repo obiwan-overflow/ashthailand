@@ -60,13 +60,13 @@ export class FormPage implements OnInit {
     await loading.present();
   }
   async formData(form){
-    let dataAnswer = {
+    let dataAnswer = [{
       "CWT":this.province,
       "ID1":this.district,
       "TMP":this.subdistrict,
       "LAT":this.latitude,
       "LONG":this.longitude,
-    }
+    }];
     await this.storage.set('formpublic',dataAnswer);
     await this.router.navigateByUrl('/formone/form2');
   }

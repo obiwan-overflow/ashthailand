@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController,LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-form-step3b',
@@ -28,7 +29,19 @@ export class FormStep3bPage implements OnInit {
   SMOKE:any;
   EVERSMOKE:any;
   EXSMOKE_Y:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
+  private ionicForm : FormGroup;
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public formBuilder: FormBuilder
+  ) {
+    this.ionicForm = this.formBuilder.group({
+      month: ['',[Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -60,7 +73,7 @@ export class FormStep3bPage implements OnInit {
     await loading.present();
   }
   async Form(){
-    let month = this.todo.month;
+    let month = this.ionicForm.value.month;
     let dataAnswer = {
       "MENBER":this.MENBER,
       "PERSON_NO":this.PERSON_NO,
@@ -132,8 +145,5 @@ export class FormStep3bPage implements OnInit {
       ]
     });
     await alert.present();
-  }
-  todo = {
-    month:""
   }
 }

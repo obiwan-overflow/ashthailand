@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +13,8 @@ import { FormStep6CountPage } from './form-step6-count.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FormStep6CountPageRoutingModule
+    FormStep6CountPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [FormStep6CountPage]
 })

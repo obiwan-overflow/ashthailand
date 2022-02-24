@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title size="small">แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</ion-title>
+    <ion-title class="title-smoke">แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -16,11 +16,11 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <form (ngSubmit)="Form()">
+        <form [formGroup]="ionicForm" (ngSubmit)="Form()">
           <p>บันทึกจำนวน</p>
-          <p class="text-danger">จำไม่ได้กรอก 88</p>
-          <ion-input type="number" [(ngModel)]="todo.NO" name="NO"></ion-input>
-          <ion-button type="submit" expand="block" shape="round" color="dark">ตกลง</ion-button>
+          <p class="text-danger">จำไม่ได้บันทึก 88</p>
+          <ion-input type="number" formControlName="NO"></ion-input>
+          <ion-button type="submit" expand="block" shape="round" color="dark" [disabled]="!ionicForm.valid">ตกลง</ion-button>
         </form>
       </ion-col>
     </ion-row>

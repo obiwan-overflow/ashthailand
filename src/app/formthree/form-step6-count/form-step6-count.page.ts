@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../../rest-api.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController,LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-form-step6-count',
@@ -31,7 +32,19 @@ export class FormStep6CountPage implements OnInit {
   CIG:any;
   NO1:any;
   ROLL:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) { }
+  private ionicForm:FormGroup;
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public formBuilder:FormBuilder
+  ) {
+    this.ionicForm = this.formBuilder.group({
+      NO: ['',[Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -87,12 +100,9 @@ export class FormStep6CountPage implements OnInit {
       "CIG":this.CIG,
       "NO1":this.NO1,
       "ROLL":this.ROLL,
-      "NO2":this.todo.NO
+      "NO2":this.ionicForm.value.NO
     }
     await this.storage.set('formfamily',dataAnswer);
     await this.router.navigateByUrl('formthree/form-step7');
-  }
-  todo = {
-    NO:""
   }
 }

@@ -54,13 +54,12 @@ export class Form4Page implements OnInit {
     await loading.present();
   }
   async formData(form){
-    console.log(form.value);
     let dataAnswer = {
       "CWT":this.dataStorage.CWT,
       "TMP":this.dataStorage.TMP,
       "ID1":this.dataStorage.ID1,
-      "LAT":this.dataStorage.latitude,
-      "LONG":this.dataStorage.longitude,
+      "LAT":this.dataStorage.LAT,
+      "LONG":this.dataStorage.LONG,
       "MOO":this.dataStorage.MOO,
       "VIL":this.dataStorage.VIL,
       "A1":this.dataStorage.A1,

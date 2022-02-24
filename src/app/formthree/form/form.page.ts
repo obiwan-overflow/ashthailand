@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { LoadingController } from '@ionic/angular';
 
@@ -23,7 +22,6 @@ export class FormPage implements OnInit {
     public api:RestApiService,
     public route:ActivatedRoute,
     private geolocation: Geolocation,
-    private network: Network,
     private storage: Storage,
     public loadingController:LoadingController
   ) {
@@ -55,11 +53,14 @@ export class FormPage implements OnInit {
   }
   async formData(form){
     let dataAnswer = {
-      "CWT":form.value.CWT,
-      "TMP":form.value.TMP,
-      "ID1":form.value.ID1,
-      "LAT":this.latitude,
-      "LONG":this.longitude
+      member:'',
+      family: [{
+        "CWT":form.value.CWT,
+        "TMP":form.value.TMP,
+        "ID1":form.value.ID1,
+        "LAT":this.latitude,
+        "LONG":this.longitude,
+      }]
     }
     await this.storage.set('formfamily',dataAnswer);
     this.router.navigateByUrl('/formthree/form2');
