@@ -39,7 +39,7 @@ export class FormStep3Page implements OnInit {
     public formBuilder: FormBuilder
   ) {
     this.ionicForm = this.formBuilder.group({
-      YEAR: ['',[Validators.required,Validators.pattern('^[0-9]+$')]]
+      YEAR: ['',[Validators.required,Validators.max(99)]]
     });
   }
 
@@ -93,11 +93,14 @@ export class FormStep3Page implements OnInit {
       "EXSMOKE_Y":year
     }
     await this.storage.set('formfamily',dataAnswer);
-
-    if(year < '1'){
-      this.router.navigateByUrl('formthree/form-step3b');
+    if(year < this.AGE){
+      if(year < '1'){
+        this.router.navigateByUrl('formthree/form-step3b');
+      }else{
+        this.formConfirm(year);
+      }
     }else{
-      this.formConfirm(year);
+      this.presentToast();
     }
   }
   async formConfirm(year){
@@ -147,5 +150,14 @@ export class FormStep3Page implements OnInit {
       ]
     });
     await alert.present();
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'จำนวนปีการเลิกสูบบุหรี่มากกว่าอายุ',
+      duration: 2000,
+      color:"danger",
+      position:"top"
+    });
+    toast.present();
   }
 }
