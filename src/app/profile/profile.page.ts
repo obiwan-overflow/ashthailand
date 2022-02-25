@@ -28,6 +28,7 @@ export class ProfilePage implements OnInit {
 
   // loading 
   loading:any;
+  loadingImg:any;
 
   // images
   profileImg:any;
@@ -39,12 +40,12 @@ export class ProfilePage implements OnInit {
     return o1 === o2;
   };
   gelleryOptions: CameraOptions = {
-    quality: 500,
+    quality: 50,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: true
+    allowEdit: false
   }
   constructor(
     public api:RestApiService,
@@ -66,17 +67,25 @@ export class ProfilePage implements OnInit {
     // await this.loadDataselect();
   }
   async openGallery() {
+    this.loadingImage();
     this.camera.getPicture(this.gelleryOptions).then((imgData) => {
-     console.log('image data =>  ', imgData);
-     this.base64Img = 'data:image/jpeg;base64,' + imgData;
-     this.userImg = this.base64Img;
-     this.updateImages(this.userImg);
-    }, (err) => {
-     console.log(err);
-    })
+      this.base64Img = 'data:image/jpeg;base64,' + imgData;
+      // this.userImg = this.base64Img;
+      this.updateImages(this.base64Img);
+      }, (err) => {
+      console.log(err);
+      })
+  }
+  async loadingImage() {
+    this.loadingImg = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+    });
+    this.loadingImg.present();
   }
   async updateImages(images){
     this.image = images;
+    this.loadingImg.dismiss();
   }
   async form(){
     const alert = await this.alertController.create({
@@ -105,7 +114,7 @@ export class ProfilePage implements OnInit {
             formData.append('district',this.todo.district !== undefined ? this.todo.district : this.district);
             formData.append('subdistrict',this.todo.subdistrict !== undefined ? this.todo.subdistrict : this.subdistrict);
             formData.append('phone',this.todo.phone !== undefined ? this.todo.phone : this.phone);
-            formData.append('image',this.todo.image !== undefined ? this.image : this.image);
+            formData.append('image',this.image);
             this.api.postdata('member/editProfile',formData).subscribe((res)=>{
               if(res.result == 'success'){
                 this.setUserData(res.detail);
