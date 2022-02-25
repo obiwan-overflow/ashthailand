@@ -39,7 +39,7 @@ export class FormStep3Page implements OnInit {
     public formBuilder: FormBuilder
   ) {
     this.ionicForm = this.formBuilder.group({
-      YEAR: ['',[Validators.required,Validators.max(99)]]
+      YEAR: ['',[Validators.required,Validators.pattern('^[0-9]+$')]]
     });
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form2',
@@ -22,7 +22,8 @@ export class Form2Page implements OnInit {
     public api:RestApiService,
     public route:ActivatedRoute,
     private storage: Storage,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public toastController:ToastController
   ) {
     this.storage.get('userData').then((data)=>{
       this.province     = data.province;
@@ -65,18 +66,31 @@ export class Form2Page implements OnInit {
     //   "LAT":this.latitude,
     //   "LONG":this.longitude
     // }
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "MOO":form.value.MOO,
-      "VIL":form.value.VIL,
-      "A1":form.value.A1,
+    if(form.value.MOO == '' || form.value.VIL == '' || form.value.A1 == ''){
+      this.presentToast();
+    }else{
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "MOO":form.value.MOO,
+        "VIL":form.value.VIL,
+        "A1":form.value.A1,
+      }
+      await this.storage.set('formfamily',dataAnswer);
+      this.router.navigateByUrl('/formthree/form3');
     }
-    await this.storage.set('formfamily',dataAnswer);
-    this.router.navigateByUrl('/formthree/form3');
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'กรุณากรอกข้อมูล',
+      duration: 2000,
+      color:"danger",
+      position:"top"
+    });
+    toast.present();
   }
   todo = {
     MOO: '',

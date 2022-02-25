@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form3',
@@ -22,7 +22,8 @@ export class Form3Page implements OnInit {
     public api:RestApiService,
     public route:ActivatedRoute,
     private storage: Storage,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public toastController:ToastController
   ) {
     this.storage.get('userData').then((data)=>{
       this.province     = data.province;
@@ -52,19 +53,32 @@ export class Form3Page implements OnInit {
     await loading.present();
   }
   async formData(form){
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "MOO":this.dataStorage.MOO,
-      "VIL":this.dataStorage.VIL,
-      "A1":this.dataStorage.A1,
-      "MEMBER":form.value.MEMBER,
+    if(form.value.MEMBER == ''){
+      this.presentToast();
+    }else{
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "MOO":this.dataStorage.MOO,
+        "VIL":this.dataStorage.VIL,
+        "A1":this.dataStorage.A1,
+        "MEMBER":form.value.MEMBER,
+      }
+      await this.storage.set('formfamily',dataAnswer);
+      this.router.navigateByUrl('/formthree/form4');
     }
-    await this.storage.set('formfamily',dataAnswer);
-    this.router.navigateByUrl('/formthree/form4');
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'กรุณากรอกข้อมูล',
+      duration: 2000,
+      color:"danger",
+      position:"top"
+    });
+    toast.present();
   }
   todo = {
     MEMBER: '',

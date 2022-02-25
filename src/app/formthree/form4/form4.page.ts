@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
-import { LoadingController,ToastController } from '@ionic/angular';
+import { LoadingController,ToastController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form4',
@@ -23,7 +23,8 @@ export class Form4Page implements OnInit {
     public route:ActivatedRoute,
     private storage: Storage,
     public loadingController:LoadingController,
-    public toastController:ToastController
+    public toastController:ToastController,
+    public alertController:AlertController
   ) {
     this.storage.get('userData').then((data)=>{
       this.province     = data.province;
@@ -69,26 +70,57 @@ export class Form4Page implements OnInit {
       "AGE":form.value.AGE,
     }
     await this.storage.set('formfamily',dataAnswer);
-    if(form.value.AGE == ''){
-      this.checkAge();
-    }else if (form.value.AGE >= '15'){
-      this.router.navigateByUrl('/formthree/form-step1');
-    }else {
+    if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
       this.presentToast();
+    }else if (form.value.AGE >= 15){
+      this.router.navigateByUrl('/formthree/form-step1');
+    }else if(form.value.AGE <= 14){
+      this.formConfirm();
     }
+  }
+  async formConfirm(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'บันทึก!',
+      message: 'ยืนยันการบันทึกข้อมูล',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'บันทึก',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            // const formData = new FormData();
+            // formData.append('cat_id',"3");
+            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+            //   if(res.result == 'success'){
+            //     this.router.navigateByUrl('tabs/form');
+            //   }
+            // });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async alertAgelimit(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'เงื่อนไข!',
+      message: 'อายุเกินกำหนด',
+      keyboardClose:true
+    });
+    await alert.present();
   }
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'อายุต่ำกว่า 15 บันทึกข้อมูล',
-      duration: 2000,
-      color:"success",
-      position:"top"
-    });
-    toast.present();
-  }
-  async checkAge(){
-    const toast = await this.toastController.create({
-      message: 'กรุณากรอกอายุ',
+      message: 'กรุณากรอกข้อมูล',
       duration: 2000,
       color:"danger",
       position:"top"

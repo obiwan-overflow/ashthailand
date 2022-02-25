@@ -20,13 +20,13 @@
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ชื่อ</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.name" name="name" value="{{name}}"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.name" name="name" value="{{name}}" disabled></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">สกุล</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.lastname" name="lastname" value="{{lastname}}"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.lastname" name="lastname" value="{{lastname}}" disabled></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
@@ -38,31 +38,34 @@
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ชื่อหน่วยงาน</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.organization_name" name="organization_name" value="{{organization_name}}"></ion-input>
+          <ion-input type="text" [(ngModel)]="todo.organization_name" name="organization_name" value="{{organization_name}}" disabled></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label>จังหวัด</ion-label>
-          <ion-select [(ngModel)]="todo.province" name="province" [compareWith]="compareWith" value="{{province}}">
+          <ion-label position="floating">จังหวัด</ion-label>
+          <ion-input type="phone" value="{{detailProvince.provinces}}" disabled></ion-input>
+          <!-- <ion-select [(ngModel)]="todo.province" name="province" [compareWith]="compareWith" value="{{province}}">
             <ion-select-option *ngFor="let dataprovinces of dataProvince" value="{{dataprovinces.id_provinces}}">{{dataprovinces.provinces}}</ion-select-option>
-          </ion-select>
+          </ion-select> -->
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label>อำเภอ</ion-label>
-          <ion-select [(ngModel)]="todo.district" name="district" [compareWith]="compareWith" value="{{district}}">
+          <ion-label position="floating">อำเภอ</ion-label>
+          <ion-input type="phone" value="{{detailProvince.amphures}}" disabled></ion-input>
+          <!-- <ion-select [(ngModel)]="todo.district" name="district" [compareWith]="compareWith" value="{{district}}">
             <ion-select-option *ngFor="let dataamphures of dataAmphures" value="{{dataamphures.id_amphures}}">{{dataamphures.amphures}}</ion-select-option>
-          </ion-select>
+          </ion-select> -->
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label>ตำบล</ion-label>
-          <ion-select [(ngModel)]="todo.subdistrict" name="subdistrict" [compareWith]="compareWith" value="{{subdistrict}}">
+          <ion-label position="floating">ตำบล</ion-label>
+          <ion-input type="phone" value="{{detailProvince.tombons}}" disabled></ion-input>
+          <!-- <ion-select [(ngModel)]="todo.subdistrict" name="subdistrict" [compareWith]="compareWith" value="{{subdistrict}}">
             <ion-select-option *ngFor="let datatombons of dataTombons" value="{{datatombons.id_tombons}}">{{datatombons.tombons}}</ion-select-option>
-          </ion-select>
+          </ion-select> -->
         </ion-item>
       </ion-col>
       <ion-col size="12">

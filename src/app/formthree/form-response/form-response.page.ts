@@ -101,7 +101,7 @@ export class FormResponsePage implements OnInit {
     }
     await this.storage.set('formfamily',dataAnswer);
     if(id == "1"){
-      if(this.CIG == '1' || this.ROLL == '1'){
+      if(this.CIG == '1'){
         this.router.navigateByUrl('formthree/form-step10');
       }else if(this.ROLL == '1' || this.E_CIG == '1' || this.OTHER == '1'){
         this.router.navigateByUrl('formthree/form-step11');

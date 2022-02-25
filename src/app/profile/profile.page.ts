@@ -24,6 +24,10 @@ export class ProfilePage implements OnInit {
   dataProvince:any = [];
   dataAmphures:any = [];
   dataTombons:any = [];
+  detailProvince:any = [];
+
+  // loading 
+  loading:any;
 
   // images
   profileImg:any;
@@ -51,24 +55,15 @@ export class ProfilePage implements OnInit {
     public toastController:ToastController,
     private camera: Camera,
   ) {
-    this.init();
+
   }
 
   ngOnInit() {
   }
-  async init(){
-    await this.storage.get('userData').then((data)=>{
-      this.name               = data.name;
-      this.lastname           = data.lastname;
-      this.organization_name  = data.organization_name;
-      this.province           = data.province;
-      this.district           = data.district;
-      this.subdistrict        = data.subdistrict;
-      this.phone              = data.phone;
-      this.id                 = data.id;
-      this.image              = data.image == " " ? 'assets/images/user-theme.png' : data.image;
-    });
-    await this.loadDataselect();
+
+  async ionViewWillEnter(){
+    await this.presentLoading();
+    // await this.loadDataselect();
   }
   async openGallery() {
     this.camera.getPicture(this.gelleryOptions).then((imgData) => {
@@ -130,11 +125,38 @@ export class ProfilePage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'แก้ไขข้อมูลเรียบร้อย',
-      duration: 5000,
+      duration: 2000,
       color:"success",
       position:"top"
     });
     toast.present();
+  }
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+    });
+    this.loading.present();
+
+    await this.storage.get('userData').then((data)=>{
+      this.name               = data.name;
+      this.lastname           = data.lastname;
+      this.organization_name  = data.organization_name;
+      this.province           = data.province;
+      this.district           = data.district;
+      this.subdistrict        = data.subdistrict;
+      this.phone              = data.phone;
+      this.id                 = data.id;
+      this.image              = data.image == " " ? 'assets/images/user-theme.png' : data.image;
+    });
+    await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
+      this.detailProvince = res.detail;
+      this.stopLoading();
+    });
+  }
+  async stopLoading(){
+    await this.loading.dismiss();
+    console.log('Loading dismissed!');
   }
   async loadDataselect(){
     await this.api.getdata('member/getProvinces').subscribe((res)=>{
