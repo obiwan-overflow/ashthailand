@@ -48,7 +48,6 @@ export class FormPage implements OnInit {
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
-      duration: 200
     });
     this.loading.present();
     this.loadData();
