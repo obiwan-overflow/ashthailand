@@ -95,13 +95,13 @@ export class FormStep4Page implements OnInit {
       }else{
         this.router.navigateByUrl('formthree/form-step5');
       }
-    }else{
+    }else if(this.ionicForm.value.year > this.AGE){
       this.presentToast();
     }
   }
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'จำนวนปีการสูบบุหรี่มากกว่าอายุ',
+      message: 'อายุน้อยกว่าระยะเวลาที่สูบ',
       duration: 2000,
       color:"danger",
       position:"top"

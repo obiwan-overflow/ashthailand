@@ -8,11 +8,13 @@
 
     .img-profile {
         border-radius: 50%;
-        width: 50px;
         height: 50px;
-        border: 2px solid #209d96;
+        width: 50px;
         img {
             border-radius: 50%;
+            height: 100%;
+            width: 100%;
+            border: 2px solid #209d96;
         }
     }
     p {

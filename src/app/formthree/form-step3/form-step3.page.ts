@@ -153,7 +153,7 @@ export class FormStep3Page implements OnInit {
   }
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'จำนวนปีการเลิกสูบบุหรี่มากกว่าอายุ',
+      message: 'อายุน้อยกว่าระยะเวลาที่เลิกสูบ',
       duration: 2000,
       color:"danger",
       position:"top"

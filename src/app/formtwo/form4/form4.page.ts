@@ -15,7 +15,8 @@ import { ActionSheetController,LoadingController,ToastController } from '@ionic/
 export class Form4Page implements OnInit {
   dataStorage: any = [];
   titleShop:any;
-
+  // loadding
+  loadingImg:any;
   // images
   userImg: any = '';
   base64Img = '';
@@ -103,21 +104,22 @@ export class Form4Page implements OnInit {
     await actionSheet.present();
   }
   cameraOptions: CameraOptions = {
-    quality: 100,
+    quality: 30,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: true
+    allowEdit: false
   }
   gelleryOptions: CameraOptions = {
-    quality: 100,
+    quality: 30,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: true
+    allowEdit: false
   }
   async openCamera(){
+    this.loadingImage();
     this.camera.getPicture(this.cameraOptions).then((imgData) => {
       console.log('image data =>  ', imgData);
       this.base64Img = 'data:image/jpeg;base64,' + imgData;
@@ -128,6 +130,7 @@ export class Form4Page implements OnInit {
     })
   }
   async openGallery() {
+    this.loadingImage();
     this.camera.getPicture(this.gelleryOptions).then((imgData) => {
      console.log('image data =>  ', imgData);
      this.base64Img = 'data:image/jpeg;base64,' + imgData;
@@ -138,7 +141,8 @@ export class Form4Page implements OnInit {
     })
   }
   async updateImages(images){
-    this.imagesarray.push(images);
+    await this.imagesarray.push(images);
+    await this.loadingImg.dismiss();
   }
   async presentToast() {
     const toast = await this.toastController.create({
@@ -148,6 +152,13 @@ export class Form4Page implements OnInit {
       position:"top"
     });
     toast.present();
+  }
+  async loadingImage() {
+    this.loadingImg = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+    });
+    this.loadingImg.present();
   }
   todo = {
     NAME: '',
