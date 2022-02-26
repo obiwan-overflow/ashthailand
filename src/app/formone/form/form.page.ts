@@ -19,6 +19,8 @@ export class FormPage implements OnInit {
   subdistrict:any;
   detailProvince:any = [];
 
+  loading:any;
+
   latitude:any;
   longitude:any;
   titlePub:any;
@@ -43,6 +45,15 @@ export class FormPage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 200
+    });
+    this.loading.present();
+    this.loadData();
+  }
+  async loadData(){
     await this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude   = resp.coords.latitude;
       this.longitude  = resp.coords.longitude;
@@ -52,21 +63,16 @@ export class FormPage implements OnInit {
     await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
       this.detailProvince = res.detail;
     });
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'กรุณารอสักครู่...',
-      duration: 200
-    });
-    await loading.present();
+    await this.loading.dismiss();
   }
   async formData(form){
-    let dataAnswer = [{
+    let dataAnswer = {
       "CWT":this.province,
       "ID1":this.district,
       "TMP":this.subdistrict,
       "LAT":this.latitude,
       "LONG":this.longitude,
-    }];
+    };
     await this.storage.set('formpublic',dataAnswer);
     await this.router.navigateByUrl('/formone/form2');
   }

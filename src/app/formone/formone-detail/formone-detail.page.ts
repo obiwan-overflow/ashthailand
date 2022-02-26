@@ -15,6 +15,7 @@ export class FormoneDetailPage implements OnInit {
   P3A:any;
   P4A:any;
   P5A:any;
+  images:any;
   constructor(public api:RestApiService,public route:ActivatedRoute) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('reportQuestion/detail&id='+this.id).subscribe(res => {
@@ -23,6 +24,9 @@ export class FormoneDetailPage implements OnInit {
       this.P3A = res.detail.P3A;
       this.P4A = res.detail.P4A;
       this.P5A = res.detail.P5A;
+    });
+    this.api.getdata('reportQuestion/loadImages&question_id='+this.id).subscribe((res)=>{
+      this.images = res.detail.image;
     });
   }
 

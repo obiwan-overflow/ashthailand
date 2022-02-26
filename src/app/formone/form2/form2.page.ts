@@ -60,7 +60,7 @@ export class Form2Page implements OnInit {
         "LONG":this.dataStorage.LONG,
         "MOO":form.value.MOO,
         "VIL":form.value.VIL,
-      }
+      };
       await this.storage.set('formpublic',dataAnswer);
       await this.router.navigateByUrl('/formone/form3');
     }
