@@ -11,7 +11,7 @@ import { AlertController,LoadingController } from '@ionic/angular';
 })
 export class FormResponsePage implements OnInit {
 
-  MENBER:any;
+  MEMBER:any;
   PERSON_NO:any;
   SEX:any;
   AGE:any;
@@ -40,7 +40,7 @@ export class FormResponsePage implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.MENBER     = data.MENBER;
+      this.MEMBER     = data.MEMBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
       this.AGE        = data.AGE;
@@ -73,43 +73,124 @@ export class FormResponsePage implements OnInit {
   }
   async form(event){
     let id = event.srcElement.id;
-    let dataAnswer = {
-      "MENBER":this.MENBER,
-      "PERSON_NO":this.PERSON_NO,
-      "SEX":this.SEX,
-      "AGE":this.AGE,
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "SMOKE":this.SMOKE,
-      "TIME_Y":this.TIME_Y,
-      "TIME_M":this.TIME_M,
-      "CIG":this.CIG,
-      "NO1":this.NO1,
-      "ROLL":this.ROLL,
-      "NO2":this.NO2,
-      "E_CIG":this.E_CIG,
-      "OTHER":this.OTHER,
-      "RESPONSE":id
-    }
-    await this.storage.set('formfamily',dataAnswer);
     if(id == "1"){
       if(this.CIG == '1'){
-        this.router.navigateByUrl('formthree/form-step10');
+        let dataAnswer = {
+          "MEMBER":this.MEMBER,
+          "PERSON_NO":this.PERSON_NO,
+          "SEX":this.SEX,
+          "AGE":this.AGE,
+          "CWT":this.CWT,
+          "TMP":this.TMP,
+          "ID1":this.ID1,
+          "VIL":this.VIL,
+          "MOO":this.MOO,
+          "A1":this.A1,
+          "NAME":this.NAME,
+          "ADDRESS":this.ADDRESS,
+          "LAT":this.LAT,
+          "LONG":this.LONG,
+          "SMOKE":this.SMOKE,
+          "TIME_Y":this.TIME_Y,
+          "TIME_M":this.TIME_M,
+          "CIG":this.CIG,
+          "NO1":this.NO1,
+          "ROLL":this.ROLL,
+          "NO2":this.NO2,
+          "E_CIG":this.E_CIG,
+          "OTHER":this.OTHER,
+          "RESPONSE":id
+        }
+        await this.storage.set('formfamily',dataAnswer);
+        await this.router.navigateByUrl('formthree/form-step10');
       }else if(this.ROLL == '1' || this.E_CIG == '1' || this.OTHER == '1'){
-        this.router.navigateByUrl('formthree/form-step11');
+        let dataAnswer = {
+          "MEMBER":this.MEMBER,
+          "PERSON_NO":this.PERSON_NO,
+          "SEX":this.SEX,
+          "AGE":this.AGE,
+          "CWT":this.CWT,
+          "TMP":this.TMP,
+          "ID1":this.ID1,
+          "VIL":this.VIL,
+          "MOO":this.MOO,
+          "A1":this.A1,
+          "NAME":this.NAME,
+          "ADDRESS":this.ADDRESS,
+          "LAT":this.LAT,
+          "LONG":this.LONG,
+          "SMOKE":this.SMOKE,
+          "TIME_Y":this.TIME_Y,
+          "TIME_M":this.TIME_M,
+          "CIG":this.CIG,
+          "NO1":this.NO1,
+          "ROLL":this.ROLL,
+          "NO2":this.NO2,
+          "E_CIG":this.E_CIG,
+          "OTHER":this.OTHER,
+          "RESPONSE":id
+        }
+        await this.storage.set('formfamily',dataAnswer);
+        await this.router.navigateByUrl('formthree/form-step11');
       }else{
-        this.formConfirm(id);
+        let dataAnswer = {
+          "MEMBER":this.MEMBER,
+          "PERSON_NO":this.PERSON_NO == undefined ? 1 : (this.PERSON_NO + 1),
+          "SEX":this.SEX,
+          "AGE":this.AGE,
+          "CWT":this.CWT,
+          "TMP":this.TMP,
+          "ID1":this.ID1,
+          "VIL":this.VIL,
+          "MOO":this.MOO,
+          "A1":this.A1,
+          "NAME":this.NAME,
+          "ADDRESS":this.ADDRESS,
+          "LAT":this.LAT,
+          "LONG":this.LONG,
+          "SMOKE":this.SMOKE,
+          "TIME_Y":this.TIME_Y,
+          "TIME_M":this.TIME_M,
+          "CIG":this.CIG,
+          "NO1":this.NO1,
+          "ROLL":this.ROLL,
+          "NO2":this.NO2,
+          "E_CIG":this.E_CIG,
+          "OTHER":this.OTHER,
+          "RESPONSE":id
+        }
+        await this.storage.set('formfamily',dataAnswer);
+        await this.formConfirm(id);
       }
     }else{
-      this.formConfirm(id);
+      let dataAnswer = {
+        "MEMBER":this.MEMBER,
+        "PERSON_NO":this.PERSON_NO == undefined ? 1 : (this.PERSON_NO + 1),
+        "SEX":this.SEX,
+        "AGE":this.AGE,
+        "CWT":this.CWT,
+        "TMP":this.TMP,
+        "ID1":this.ID1,
+        "VIL":this.VIL,
+        "MOO":this.MOO,
+        "A1":this.A1,
+        "NAME":this.NAME,
+        "ADDRESS":this.ADDRESS,
+        "LAT":this.LAT,
+        "LONG":this.LONG,
+        "SMOKE":this.SMOKE,
+        "TIME_Y":this.TIME_Y,
+        "TIME_M":this.TIME_M,
+        "CIG":this.CIG,
+        "NO1":this.NO1,
+        "ROLL":this.ROLL,
+        "NO2":this.NO2,
+        "E_CIG":this.E_CIG,
+        "OTHER":this.OTHER,
+        "RESPONSE":id
+      }
+      await this.storage.set('formfamily',dataAnswer);
+      await this.formConfirm(id);
     }
   }
   async formConfirm(id){
@@ -132,7 +213,7 @@ export class FormResponsePage implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
-            formData.append('MENBER',this.MENBER),
+            formData.append('MEMBER',this.MEMBER),
             formData.append('PERSON_NO',this.PERSON_NO),
             formData.append('SEX',this.SEX),
             formData.append('AGE',this.AGE),
@@ -157,13 +238,35 @@ export class FormResponsePage implements OnInit {
             formData.append('RESPONSE',id);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                if(this.MEMBER - this.PERSON_NO !== 0){
+                  this.router.navigateByUrl('/formthree/form-family-lists');
+                }else{
+                  this.presentAlertConfirm();
+                }
               }
             });
           }
         }
       ]
     });
+    await alert.present();
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'สำเร็จ!',
+      message: 'เก็บข้อมูลในครัวเรือนครบแล้ว',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.router.navigateByUrl('tabs/form');
+          }
+        }
+      ]
+    });
+
     await alert.present();
   }
 }

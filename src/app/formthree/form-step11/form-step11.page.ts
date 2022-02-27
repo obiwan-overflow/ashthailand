@@ -11,7 +11,7 @@ import { AlertController,LoadingController } from '@ionic/angular';
 })
 export class FormStep11Page implements OnInit {
 
-  MENBER:any;
+  MEMBER:any;
   PERSON_NO:any;
   SEX:any;
   AGE:any;
@@ -42,7 +42,7 @@ export class FormStep11Page implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.MENBER     = data.MENBER;
+      this.MEMBER     = data.MEMBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
       this.AGE        = data.AGE;
@@ -78,7 +78,7 @@ export class FormStep11Page implements OnInit {
   async form(event){
     let id = event.srcElement.id;
     let dataAnswer = {
-      "MENBER":this.MENBER,
+      "MEMBER":this.MEMBER,
       "PERSON_NO":this.PERSON_NO,
       "SEX":this.SEX,
       "AGE":this.AGE,

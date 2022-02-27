@@ -12,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class FormStep6CountPage implements OnInit {
 
-  MENBER:any;
+  MEMBER:any;
   PERSON_NO:any;
   SEX:any;
   AGE:any;
@@ -50,7 +50,7 @@ export class FormStep6CountPage implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.MENBER     = data.MENBER;
+      this.MEMBER     = data.MEMBER;
       this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
       this.AGE        = data.AGE;
@@ -80,7 +80,7 @@ export class FormStep6CountPage implements OnInit {
   }
   async Form(){
     let dataAnswer = {
-      "MENBER":this.MENBER,
+      "MEMBER":this.MEMBER,
       "PERSON_NO":this.PERSON_NO,
       "SEX":this.SEX,
       "AGE":this.AGE,

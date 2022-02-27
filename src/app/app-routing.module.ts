@@ -279,6 +279,10 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-smoketype/form-smoketype.module').then( m => m.FormSmoketypePageModule)
   },
   {
+    path: 'formthree/form-family-lists',
+    loadChildren: () => import('./formthree/form-family-lists/form-family-lists.module').then( m => m.FormFamilyListsPageModule)
+  },
+  {
     path: 'form-lists',
     loadChildren: () => import('./formone/form-lists/form-lists.module').then( m => m.FormListsPageModule)
   },

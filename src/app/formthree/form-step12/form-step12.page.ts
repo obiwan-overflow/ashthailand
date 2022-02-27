@@ -11,7 +11,7 @@ import { AlertController,LoadingController } from '@ionic/angular';
 })
 export class FormStep12Page implements OnInit {
 
-  MENBER:any;
+  MEMBER:any;
   PERSON_NO:any;
   SEX:any;
   AGE:any;
@@ -45,8 +45,8 @@ export class FormStep12Page implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.MENBER     = data.MENBER;
-      this.PERSON_NO  = data.PERSON_NO;
+      this.MEMBER     = data.MEMBER;
+      this.PERSON_NO  = data.PERSON_NO == undefined ? 1 : (data.PERSON_NO + 1);
       this.SEX        = data.SEX;
       this.AGE        = data.AGE;
       this.CWT        = data.CWT;
@@ -82,7 +82,7 @@ export class FormStep12Page implements OnInit {
   async form(event){
     let id = event.srcElement.id;
     let dataAnswer = {
-      "MENBER":this.MENBER,
+      "MEMBER":this.MEMBER,
       "PERSON_NO":this.PERSON_NO,
       "SEX":this.SEX,
       "AGE":this.AGE,
@@ -133,7 +133,7 @@ export class FormStep12Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
-            formData.append('MENBER',this.MENBER),
+            formData.append('MEMBER',this.MEMBER),
             formData.append('PERSON_NO',this.PERSON_NO),
             formData.append('SEX',this.SEX),
             formData.append('AGE',this.AGE),
@@ -161,13 +161,35 @@ export class FormStep12Page implements OnInit {
             formData.append('QUITE_CHECK',id);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                if(this.MEMBER - this.PERSON_NO !== 0){
+                  this.router.navigateByUrl('/formthree/form-family-lists');
+                }else{
+                  this.presentAlertConfirm();
+                }
               }
             });
           }
         }
       ]
     });
+    await alert.present();
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'สำเร็จ!',
+      message: 'เก็บข้อมูลในครัวเรือนครบแล้ว',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.router.navigateByUrl('tabs/form');
+          }
+        }
+      ]
+    });
+
     await alert.present();
   }
 }

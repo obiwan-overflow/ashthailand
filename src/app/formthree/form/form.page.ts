@@ -58,13 +58,18 @@ export class FormPage implements OnInit {
   }
   async formData(form){
     let dataAnswer = {
-      family: [{
-        "CWT":this.province,
-        "TMP":this.district,
-        "ID1":this.subdistrict,
-        "LAT":this.latitude,
-        "LONG":this.longitude,
-      }]
+      // family: [{
+      //   "CWT":this.province,
+      //   "TMP":this.district,
+      //   "ID1":this.subdistrict,
+      //   "LAT":this.latitude,
+      //   "LONG":this.longitude,
+      // }]
+      "CWT":this.province,
+      "TMP":this.district,
+      "ID1":this.subdistrict,
+      "LAT":this.latitude,
+      "LONG":this.longitude,
     }
     await this.storage.set('formfamily',dataAnswer);
     this.router.navigateByUrl('/formthree/form2');

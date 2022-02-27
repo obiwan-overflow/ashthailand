@@ -37,15 +37,16 @@ export class Form4Page implements OnInit {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.dataStorage.CWT      = data.CWT;
-      this.dataStorage.ID1      = data.ID1;
-      this.dataStorage.TMP      = data.TMP;
-      this.dataStorage.LAT      = data.LAT;
-      this.dataStorage.LONG     = data.LONG;
-      this.dataStorage.MOO      = data.MOO;
-      this.dataStorage.VIL      = data.VIL;
-      this.dataStorage.A1       = data.A1;
-      this.dataStorage.MEMBER   = data.MEMBER;
+      this.dataStorage.CWT        = data.CWT;
+      this.dataStorage.ID1        = data.ID1;
+      this.dataStorage.TMP        = data.TMP;
+      this.dataStorage.LAT        = data.LAT;
+      this.dataStorage.LONG       = data.LONG;
+      this.dataStorage.MOO        = data.MOO;
+      this.dataStorage.VIL        = data.VIL;
+      this.dataStorage.A1         = data.A1;
+      this.dataStorage.MEMBER     = data.MEMBER;
+      this.dataStorage.PERSON_NO  = data.PERSON_NO == undefined ? 1 : (data.PERSON_NO + 1);
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -68,6 +69,7 @@ export class Form4Page implements OnInit {
       "NAME":form.value.NAME,
       "SEX":form.value.SEX,
       "AGE":form.value.AGE,
+      "PERSON_NO":this.dataStorage.PERSON_NO,
     }
     await this.storage.set('formfamily',dataAnswer);
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
@@ -75,10 +77,10 @@ export class Form4Page implements OnInit {
     }else if (form.value.AGE >= 15){
       this.router.navigateByUrl('/formthree/form-step1');
     }else if(form.value.AGE <= 14){
-      this.formConfirm();
+      this.formConfirm(form.value.NAME,form.value.SEX,form.value.AGE);
     }
   }
-  async formConfirm(){
+  async formConfirm(NAME,SEX,AGE){
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'บันทึก!',
@@ -96,13 +98,31 @@ export class Form4Page implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
 
-            // const formData = new FormData();
-            // formData.append('cat_id',"3");
-            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-            //   if(res.result == 'success'){
-            //     this.router.navigateByUrl('tabs/form');
-            //   }
-            // });
+            const formData = new FormData();
+            formData.append('cat_id',"3");
+            formData.append('MEMBER',this.dataStorage.MEMBER),
+            formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
+            formData.append('CWT',this.dataStorage.CWT);
+            formData.append('TMP',this.dataStorage.TMP);
+            formData.append('ID1',this.dataStorage.ID1);
+            formData.append('VIL',this.dataStorage.VIL);
+            formData.append('MOO',this.dataStorage.MOO);
+            formData.append('A1',this.dataStorage.A1);
+            formData.append('LAT',this.dataStorage.LAT);
+            formData.append('LONG',this.dataStorage.LONG);
+            formData.append('SEX',SEX),
+            formData.append('AGE',AGE),
+            formData.append('NAME',NAME),
+            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+              if(res.result == 'success'){
+                // this.router.navigateByUrl('tabs/form');
+                if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
+                  this.router.navigateByUrl('/formthree/form-family-lists');
+                }else{
+                  this.presentAlertConfirm();
+                }
+              }
+            });
           }
         }
       ]
@@ -127,6 +147,25 @@ export class Form4Page implements OnInit {
     });
     toast.present();
   }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'สำเร็จ!',
+      message: 'เก็บข้อมูลในครัวเรือนครบแล้ว',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.router.navigateByUrl('tabs/form');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   todo = {
     NAME: '',
     SEX: '',
