@@ -20,19 +20,8 @@ export class FormStep1Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formpublic').then((data)=>{
-      this.dataStorage.CWT      = data.CWT;
-      this.dataStorage.TMP      = data.TMP;
-      this.dataStorage.ID1      = data.ID1;
-      this.dataStorage.VIL      = data.VIL;
-      this.dataStorage.MOO      = data.MOO;
-      this.dataStorage.A1       = data.A1;
-      this.dataStorage.NAME     = data.NAME;
-      this.dataStorage.ADDRESS  = data.ADDRESS;
-      this.dataStorage.LAT      = data.LAT;
-      this.dataStorage.LONG     = data.LONG;
-      this.dataStorage.images   = data.images;
-    });
+    this.dataStorage = await this.storage.get('formpublic');
+    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -42,25 +31,41 @@ export class FormStep1Page implements OnInit {
   }
   async form(event){
     let id = event.srcElement.id;
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "VIL":this.dataStorage.VIL,
-      "MOO":this.dataStorage.MOO,
-      "A1":this.dataStorage.A1,
-      "NAME":this.dataStorage.NAME,
-      "ADDRESS":this.dataStorage.ADDRESS,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "images":this.dataStorage.images,
-      "P1A":id,
-    }
-    await this.storage.set('formpublic',dataAnswer);
-    
     if(id == "1"){
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "VIL":this.dataStorage.VIL,
+        "MOO":this.dataStorage.MOO,
+        "A1":this.dataStorage.A1,
+        "NAME":this.dataStorage.NAME,
+        "ADDRESS":this.dataStorage.ADDRESS,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "images":this.dataStorage.images,
+        "P1A":id,
+      }
+      await this.storage.set('formpublic',dataAnswer);
       await this.router.navigate(['formone/form-step2']);
     }else if(id == "2"){
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "VIL":this.dataStorage.VIL,
+        "MOO":this.dataStorage.MOO,
+        "A1":this.dataStorage.A1,
+        "NAME":this.dataStorage.NAME,
+        "ADDRESS":this.dataStorage.ADDRESS,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "images":this.dataStorage.images,
+        "P1A":id,
+        "P2A":'',
+        "P3A":'',
+      }
+      await this.storage.set('formpublic',dataAnswer);
       await this.router.navigateByUrl('formone/form-step4');
     }
   }

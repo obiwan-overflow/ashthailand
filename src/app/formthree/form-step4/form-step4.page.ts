@@ -12,21 +12,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class FormStep4Page implements OnInit {
 
-  MEMBER:any;
-  PERSON_NO:any;
-  SEX:any;
-  AGE:any;
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  A1:any;
-  NAME:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-  SMOKE:any;
+  dataStorage:any = [];
   private ionicForm:FormGroup;
   constructor(
     public storage:Storage,
@@ -38,30 +24,15 @@ export class FormStep4Page implements OnInit {
     public formBuilder:FormBuilder
   ) {
     this.ionicForm = this.formBuilder.group({
-      year: ['',[Validators.required,Validators.max(99)]]
+      YEAR: ['',[Validators.required,Validators.max(99)]]
     });
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formfamily').then((data)=>{
-      this.MEMBER     = data.MEMBER;
-      this.PERSON_NO  = data.PERSON_NO;
-      this.SEX        = data.SEX;
-      this.AGE        = data.AGE;
-      this.CWT        = data.CWT;
-      this.TMP        = data.TMP;
-      this.ID1        = data.ID1;
-      this.VIL        = data.VIL;
-      this.MOO        = data.MOO;
-      this.A1         = data.A1;
-      this.NAME       = data.NAME;
-      this.ADDRESS    = data.ADDRESS;
-      this.LAT        = data.LAT;
-      this.LONG       = data.LONG;
-      this.SMOKE      = data.SMOKE;
-    });
+    this.dataStorage = await this.storage.get('formfamily');
+   
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -70,42 +41,84 @@ export class FormStep4Page implements OnInit {
     await loading.present();
   }
   async Form(){
+    let year = this.ionicForm.value.YEAR;
     let dataAnswer = {
-      "MEMBER":this.MEMBER,
-      "PERSON_NO":this.PERSON_NO,
-      "SEX":this.SEX,
-      "AGE":this.AGE,
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "SMOKE":this.SMOKE,
-      "TIME_Y":this.ionicForm.value.year
+      "MEMBER":this.dataStorage.MEMBER,
+      "PERSON_NO":this.dataStorage.PERSON_NO,
+      "SEX":this.dataStorage.SEX,
+      "AGE":this.dataStorage.AGE,
+      "CWT":this.dataStorage.CWT,
+      "TMP":this.dataStorage.TMP,
+      "ID1":this.dataStorage.ID1,
+      "VIL":this.dataStorage.VIL,
+      "MOO":this.dataStorage.MOO,
+      "A1":this.dataStorage.A1,
+      "NAME":this.dataStorage.NAME,
+      "ADDRESS":this.dataStorage.ADDRESS,
+      "LAT":this.dataStorage.LAT,
+      "LONG":this.dataStorage.LONG,
+      "SMOKE":this.dataStorage.SMOKE,
+      "TIME_Y":year
     }
     await this.storage.set('formfamily',dataAnswer);
-    if(this.ionicForm.value.year < this.AGE){
-      if(this.ionicForm.value.year < '1'){
-        this.router.navigateByUrl('formthree/form-step4b');
+    if(year < this.dataStorage.AGE){
+      if((this.dataStorage.AGE - year) > 6){
+        if(year == 0){
+          this.router.navigateByUrl('formthree/form-step4b');
+        }else{
+          this.router.navigateByUrl('formthree/form-step5');
+        }
       }else{
-        this.router.navigateByUrl('formthree/form-step5');
+        this.ConfirmOrEdit();
       }
-    }else if(this.ionicForm.value.year > this.AGE){
-      this.presentToast();
+    }else if (year == 88){
+      this.router.navigateByUrl('formthree/form-step4b');
+    }else{
+      this.presentAlertConfirm();
     }
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'อายุน้อยกว่าระยะเวลาที่สูบ',
-      duration: 2000,
-      color:"danger",
-      position:"top"
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ!',
+      message: 'เพราะบันทึกจำนวนปีที่สูบไม่สัมพันธ์กับอายุปัจจุบัน',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'แก้ไข',
+          role: 'แก้ไข',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
     });
-    toast.present();
+
+    await alert.present();
+  }
+  async ConfirmOrEdit() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ!',
+      message: 'เพราะบันทึกจำนวนปีที่สูบไม่สัมพันธ์กับอายุปัจจุบัน',
+      buttons: [
+        {
+          text: 'แก้ไข',
+          role: 'แก้ไข',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'ยืนยัน',
+          handler: () => {
+            this.router.navigateByUrl('formthree/form-step5');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

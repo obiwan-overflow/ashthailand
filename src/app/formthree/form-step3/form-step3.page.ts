@@ -12,22 +12,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class FormStep3Page implements OnInit {
 
-  MEMBER:any;
-  PERSON_NO:any;
-  SEX:any;
-  AGE:any;
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  A1:any;
-  NAME:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-  SMOKE:any;
-  EVERSMOKE:any;
+  dataStorage:any = [];
   private ionicForm : FormGroup;
   constructor(
     public storage:Storage,
@@ -39,31 +24,15 @@ export class FormStep3Page implements OnInit {
     public formBuilder: FormBuilder
   ) {
     this.ionicForm = this.formBuilder.group({
-      YEAR: ['',[Validators.required,Validators.max(99)]]
+      YEAR: ['',[Validators.required]]
     });
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formfamily').then((data)=>{
-      this.MEMBER     = data.MEMBER;
-      this.PERSON_NO  = data.PERSON_NO;
-      this.SEX        = data.SEX;
-      this.AGE        = data.AGE;
-      this.CWT        = data.CWT;
-      this.TMP        = data.TMP;
-      this.ID1        = data.ID1;
-      this.VIL        = data.VIL;
-      this.MOO        = data.MOO;
-      this.A1         = data.A1;
-      this.NAME       = data.NAME;
-      this.ADDRESS    = data.ADDRESS;
-      this.LAT        = data.LAT;
-      this.LONG       = data.LONG;
-      this.SMOKE      = data.SMOKE;
-      this.EVERSMOKE  = data.EVERSMOKE;
-    });
+    this.dataStorage = await this.storage.get('formfamily');
+
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -74,33 +43,39 @@ export class FormStep3Page implements OnInit {
   async Form(){
     let year = this.ionicForm.value.YEAR;
     let dataAnswer = {
-      "MEMBER":this.MEMBER,
-      "PERSON_NO":this.PERSON_NO,
-      "SEX":this.SEX,
-      "AGE":this.AGE,
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "SMOKE":this.SMOKE,
-      "EVERSMOKE":this.EVERSMOKE,
+      "MEMBER":this.dataStorage.MEMBER,
+      "PERSON_NO":this.dataStorage.PERSON_NO,
+      "SEX":this.dataStorage.SEX,
+      "AGE":this.dataStorage.AGE,
+      "CWT":this.dataStorage.CWT,
+      "TMP":this.dataStorage.TMP,
+      "ID1":this.dataStorage.ID1,
+      "VIL":this.dataStorage.VIL,
+      "MOO":this.dataStorage.MOO,
+      "A1":this.dataStorage.A1,
+      "NAME":this.dataStorage.NAME,
+      "ADDRESS":this.dataStorage.ADDRESS,
+      "LAT":this.dataStorage.LAT,
+      "LONG":this.dataStorage.LONG,
+      "SMOKE":this.dataStorage.SMOKE,
+      "EVERSMOKE":this.dataStorage.EVERSMOKE,
       "EXSMOKE_Y":year
     }
     await this.storage.set('formfamily',dataAnswer);
-    if(year < this.AGE){
-      if(year < '1'){
-        this.router.navigateByUrl('formthree/form-step3b');
+    if(year < this.dataStorage.AGE){
+      if((this.dataStorage.AGE - year) > 6){
+        if(year == 0){
+          this.router.navigateByUrl('formthree/form-step3b');
+        }else{
+          this.formConfirm(year);
+        }
       }else{
-        this.formConfirm(year);
+        this.ConfirmOrEdit(year);
       }
+    }else if (year == 88){
+      this.router.navigateByUrl('formthree/form-step3b');
     }else{
-      this.presentToast();
+      this.presentAlertConfirm();
     }
   }
   async formConfirm(year){
@@ -123,22 +98,22 @@ export class FormStep3Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
-            formData.append('MEMBER',this.MEMBER),
-            formData.append('PERSON_NO',this.PERSON_NO),
-            formData.append('SEX',this.SEX),
-            formData.append('AGE',this.AGE),
-            formData.append('CWT',this.CWT);
-            formData.append('TMP',this.TMP);
-            formData.append('ID1',this.ID1);
-            formData.append('VIL',this.VIL);
-            formData.append('MOO',this.MOO);
-            formData.append('A1',this.A1);
-            formData.append('NAME',this.NAME);
-            formData.append('ADDRESS',this.ADDRESS);
-            formData.append('LAT',this.LAT);
-            formData.append('LONG',this.LONG);
-            formData.append('SMOKE',this.SMOKE);
-            formData.append('EVERSMOKE',this.EVERSMOKE);
+            formData.append('MEMBER',this.dataStorage.MEMBER),
+            formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
+            formData.append('SEX',this.dataStorage.SEX),
+            formData.append('AGE',this.dataStorage.AGE),
+            formData.append('CWT',this.dataStorage.CWT);
+            formData.append('TMP',this.dataStorage.TMP);
+            formData.append('ID1',this.dataStorage.ID1);
+            formData.append('VIL',this.dataStorage.VIL);
+            formData.append('MOO',this.dataStorage.MOO);
+            formData.append('A1',this.dataStorage.A1);
+            formData.append('NAME',this.dataStorage.NAME);
+            formData.append('ADDRESS',this.dataStorage.ADDRESS);
+            formData.append('LAT',this.dataStorage.LAT);
+            formData.append('LONG',this.dataStorage.LONG);
+            formData.append('SMOKE',this.dataStorage.SMOKE);
+            formData.append('EVERSMOKE',this.dataStorage.EVERSMOKE);
             formData.append('EXSMOKE_Y',year);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
@@ -151,13 +126,71 @@ export class FormStep3Page implements OnInit {
     });
     await alert.present();
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'อายุน้อยกว่าระยะเวลาที่เลิกสูบ',
-      duration: 2000,
-      color:"danger",
-      position:"top"
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ!',
+      message: 'เพราะบันทึกจำนวนปีที่สูบไม่สัมพันธ์กับอายุปัจจุบัน',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'แก้ไข',
+          role: 'แก้ไข',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
     });
-    toast.present();
+
+    await alert.present();
+  }
+  async ConfirmOrEdit(year) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ!',
+      message: 'เพราะบันทึกจำนวนปีที่สูบไม่สัมพันธ์กับอายุปัจจุบัน',
+      buttons: [
+        {
+          text: 'แก้ไข',
+          role: 'แก้ไข',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'ยืนยัน',
+          handler: () => {
+            const formData = new FormData();
+            formData.append('cat_id',"3");
+            formData.append('MEMBER',this.dataStorage.MEMBER),
+            formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
+            formData.append('SEX',this.dataStorage.SEX),
+            formData.append('AGE',this.dataStorage.AGE),
+            formData.append('CWT',this.dataStorage.CWT);
+            formData.append('TMP',this.dataStorage.TMP);
+            formData.append('ID1',this.dataStorage.ID1);
+            formData.append('VIL',this.dataStorage.VIL);
+            formData.append('MOO',this.dataStorage.MOO);
+            formData.append('A1',this.dataStorage.A1);
+            formData.append('NAME',this.dataStorage.NAME);
+            formData.append('ADDRESS',this.dataStorage.ADDRESS);
+            formData.append('LAT',this.dataStorage.LAT);
+            formData.append('LONG',this.dataStorage.LONG);
+            formData.append('SMOKE',this.dataStorage.SMOKE);
+            formData.append('EVERSMOKE',this.dataStorage.EVERSMOKE);
+            formData.append('EXSMOKE_Y',year);
+            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+              if(res.result == 'success'){
+                this.router.navigateByUrl('tabs/form');
+              }
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

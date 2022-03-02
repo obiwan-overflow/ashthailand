@@ -111,7 +111,7 @@ export class FormStep8Page implements OnInit {
       backdropDismiss:false,
       buttons: [
         {
-          text: 'Okay',
+          text: 'ตกลง',
           handler: () => {
             this.router.navigateByUrl('formthree/form-step5');
           }

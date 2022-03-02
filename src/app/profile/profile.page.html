@@ -32,7 +32,7 @@
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">เบอร์โทรศัพท์</ion-label>
-          <ion-input type="phone" [(ngModel)]="todo.phone" name="phone" value="{{phone}}"></ion-input>
+          <ion-input type="text" inputmode="numeric" maxlength="10" [(ngModel)]="todo.phone" name="phone" value="{{phone}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">

@@ -39,16 +39,8 @@ export class Form4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formshop').then((data)=>{
-      this.dataStorage.CWT      = data.CWT;
-      this.dataStorage.ID1      = data.ID1;
-      this.dataStorage.TMP      = data.TMP;
-      this.dataStorage.LAT      = data.LAT;
-      this.dataStorage.LONG     = data.LONG;
-      this.dataStorage.MOO      = data.MOO;
-      this.dataStorage.VIL      = data.VIL;
-      this.dataStorage.A1       = data.A1;
-    });
+    this.dataStorage = await this.storage.get('formshop');
+    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',

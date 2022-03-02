@@ -25,9 +25,9 @@ export class FormoneDetailPage implements OnInit {
       this.P4A = res.detail.P4A;
       this.P5A = res.detail.P5A;
     });
-    this.api.getdata('reportQuestion/loadImages&question_id='+this.id).subscribe((res)=>{
-      this.images = res.detail.image;
-    });
+    // this.api.getdata('reportQuestion/loadImages&question_id='+this.id).subscribe((res)=>{
+    //   this.images = res.detail.image;
+    // });
   }
 
   ngOnInit() {
