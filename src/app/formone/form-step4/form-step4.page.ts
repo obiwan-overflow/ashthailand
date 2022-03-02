@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/AuthService';
 })
 export class FormStep4Page implements OnInit {
   dataStorage:any = [];
+  userId:any;
   titlePub:any;
   constructor(public router:Router,public storage:Storage,public api:RestApiService,public alertController:AlertController,public loadingController:LoadingController,public auth:AuthService) {
     this.titlePub = this.auth.titlePublic();
@@ -20,8 +21,8 @@ export class FormStep4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formpublic');
-    
+    this.dataStorage  = await this.storage.get('formpublic');
+    this.userId       = await this.storage.get('userId');
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -76,6 +77,7 @@ export class FormStep4Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"1");
+            formData.append('user_id',this.userId);
             formData.append('CWT',this.dataStorage.CWT);
             formData.append('TMP',this.dataStorage.TMP);
             formData.append('ID1',this.dataStorage.ID1);

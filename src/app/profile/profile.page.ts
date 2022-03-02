@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { RestApiService } from '../rest-api.service';
 import { Router } from '@angular/router';
-import { AlertController,LoadingController,ToastController } from '@ionic/angular';
+import { AlertController,LoadingController,ToastController,ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
 @Component({
@@ -48,6 +48,7 @@ export class ProfilePage implements OnInit {
     public router:Router,
     public toastController:ToastController,
     private camera: Camera,
+    public actionSheetController: ActionSheetController,
   ) {
 
   }
@@ -88,20 +89,68 @@ export class ProfilePage implements OnInit {
   }
 
   // images
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'อัพโหลดรูปภาพ',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'เปิดกล้อง',
+        icon: 'camera',
+        handler: () => {
+          this.openCamera();
+        }
+      }, {
+        text: 'เปิดอัลบั้มรูป',
+        icon: 'image',
+        handler: () => {
+          this.openGallery();
+        }
+      }, {
+        text: 'ยกเลิก',
+        icon: 'close',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
   gelleryOptions: CameraOptions = {
     quality: 50,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
     allowEdit: false
+  }
+  cameraOptions: CameraOptions = {
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    allowEdit: false
+  }
+  async openCamera(){
+    this.loadingImage();
+    this.camera.getPicture(this.cameraOptions).then((imgData) => {
+      console.log('image data =>  ', imgData);
+      this.base64Img = 'data:image/jpeg;base64,' + imgData;
+      this.updateImages(this.base64Img);
+    }, (err) => {
+      console.log(err);
+      this.loadingImg.dismiss();
+      this.errorImage();
+    })
   }
   async openGallery() {
     this.loadingImage();
     this.camera.getPicture(this.gelleryOptions).then((imgData) => {
       this.base64Img = 'data:image/jpeg;base64,' + imgData;
-      // this.userImg = this.base64Img;
       this.updateImages(this.base64Img);
       }, (err) => {
       console.log(err);
+      this.loadingImg.dismiss();
+      this.errorImage();
       })
   }
   async loadingImage() {
@@ -114,6 +163,15 @@ export class ProfilePage implements OnInit {
   async updateImages(images){
     this.image = images;
     this.loadingImg.dismiss();
+  }
+  async errorImage() {
+    const toast = await this.toastController.create({
+      message: 'การอัพโหลดรูปภาพมีปัญหา',
+      duration: 10000,
+      color:"danger",
+      position:"top"
+    });
+    toast.present();
   }
 
 

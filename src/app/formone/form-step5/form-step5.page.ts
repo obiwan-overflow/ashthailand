@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/AuthService';
 })
 export class FormStep5Page implements OnInit {
   dataStorage:any = [];
+  userId:any;
   titlePub:any;
   constructor(
     public router:Router,
@@ -27,7 +28,7 @@ export class FormStep5Page implements OnInit {
   }
   async ionViewWillEnter(){
     this.dataStorage = await this.storage.get('formpublic');
-    
+    this.userId       = await this.storage.get('userId');
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -78,6 +79,7 @@ export class FormStep5Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"1");
+            formData.append('user_id',this.userId);
             formData.append('CWT',this.dataStorage.CWT);
             formData.append('TMP',this.dataStorage.TMP);
             formData.append('ID1',this.dataStorage.ID1);

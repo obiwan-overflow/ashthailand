@@ -3,7 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Storage } from '@ionic/storage-angular';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form',
@@ -25,7 +25,8 @@ export class FormPage implements OnInit {
     public route:ActivatedRoute,
     private geolocation: Geolocation,
     private storage: Storage,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public alertController:AlertController 
   ) {
     this.storage.get('userData').then((data)=>{
       this.province     = data.province;
@@ -50,6 +51,7 @@ export class FormPage implements OnInit {
       this.longitude  = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
+      this.presentAlertConfirm();
     });
     await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
       this.detailProvince = res.detail;
@@ -73,6 +75,23 @@ export class FormPage implements OnInit {
     }
     await this.storage.set('formfamily',dataAnswer);
     this.router.navigateByUrl('/formthree/form2');
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'แจ้งเตือน!',
+      message: 'ไม่สามารถโหลด location ได้กรุณาเปิด location',
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.loading.dismiss();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   todo = {
     CWT: '',
