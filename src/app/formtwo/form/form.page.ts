@@ -20,7 +20,6 @@ export class FormPage implements OnInit {
   subdistrict:any;
   latitude:any;
   longitude:any;
-  detailProvince:any = [];
 
   loading:any;
   
@@ -39,10 +38,10 @@ export class FormPage implements OnInit {
     
     ) {
       this.titleShop = this.auth.titleShop();
-      this.storage.get('userData').then((data)=>{
-        this.province     = data.province;
-        this.district     = data.district;
-        this.subdistrict  = data.subdistrict;
+      this.storage.get('provincesDetail').then((data)=>{
+        this.province     = data.provinces;
+        this.district     = data.amphures;
+        this.subdistrict  = data.tombons;
       });
     }
 
@@ -63,10 +62,7 @@ export class FormPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
-      this.detailProvince = res.detail;
-    });
-    await this.loading.dismiss();
+    this.loading.dismiss();
   }
   async formData(form){
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
@@ -103,6 +99,7 @@ export class FormPage implements OnInit {
   async openLocation(){
     await this.openNativeSettings.open("location").then((res)=>{
       console.log('opened settings');
+      this.ionViewWillEnter();
     },(err)=>{
       console.log('failed to open settings'+err);
     });
