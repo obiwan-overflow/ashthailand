@@ -51,6 +51,30 @@ ion-label {
     --ion-color-shade: var(--ion-color-theme-shade);
     --ion-color-tint: var(--ion-color-theme-tint);
 }
+.ion-color-public {
+    --ion-color-base: var(--ion-color-public);
+	--ion-color-base-rgb: var(--ion-color-public-rgb);
+	--ion-color-contrast: var(--ion-color-public-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-public-contrast-rgb);
+	--ion-color-shade: var(--ion-color-public-shade);
+	--ion-color-tint: var(--ion-color-public-tint);
+}
+.ion-color-shop {
+    --ion-color-base: var(--ion-color-shop);
+	--ion-color-base-rgb: var(--ion-color-shop-rgb);
+	--ion-color-contrast: var(--ion-color-shop-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-shop-contrast-rgb);
+	--ion-color-shade: var(--ion-color-shop-shade);
+	--ion-color-tint: var(--ion-color-shop-tint);
+}
+.ion-color-family {
+	--ion-color-base: var(--ion-color-family);
+	--ion-color-base-rgb: var(--ion-color-family-rgb);
+	--ion-color-contrast: var(--ion-color-family-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-family-contrast-rgb);
+	--ion-color-shade: var(--ion-color-family-shade);
+	--ion-color-tint: var(--ion-color-family-tint);
+}
 
 .btn-answer {
     display: block;
@@ -95,18 +119,64 @@ ion-input {
     line-height: 2;
 }
 
+// .progress {
+//     position: fixed;
+//     width: 100%;
+//     bottom: 10px;
+//     padding-left: 5%;
+//     padding-right: 5%;
+//     p {
+//         font-size: .9rem;
+//         margin-bottom: 10px;
+//         font-weight: bold;
+//     }
+//     ion-progress-bar {
+//         height: 10px;
+//     }
+// }
 .progress {
     position: fixed;
     width: 100%;
     bottom: 10px;
     padding-left: 5%;
     padding-right: 5%;
-    p {
-        font-size: .9rem;
-        margin-bottom: 10px;
-        font-weight: bold;
-    }
-    ion-progress-bar {
-        height: 10px;
+    ul {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        width: 100% !important;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            height: 4px;
+            width: 90%;
+            background: orange;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        li {
+            width: 10%;
+            float: left;
+            display: block;
+            text-align: center;
+            position: relative;
+            ion-icon {
+                color: #cccccc;
+                font-size: 25px;
+            }
+            &.active {
+                span {
+                    position: absolute;
+                    top: -25px;
+                    left: 4px;
+                }
+                ion-icon {
+                    color: orange !important;
+                }
+            }
+        }
     }
 }

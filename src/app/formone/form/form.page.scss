@@ -11,3 +11,12 @@ ion-input {
     border: 1px solid #eee;
     margin-top: 10px !important;
 }
+
+
+// alert
+.my-custom-class {
+    text-align: center !important;
+    .btn-confirm {
+        border: 2px solid orangered !important;
+    }
+}

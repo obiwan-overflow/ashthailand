@@ -6,6 +6,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from 'src/app/AuthService';
 import { LoadingController,AlertController } from '@ionic/angular';
+import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 
 @Component({
   selector: 'app-form',
@@ -33,7 +34,9 @@ export class FormPage implements OnInit {
     private storage: Storage,
     public auth:AuthService,
     public loadingController:LoadingController,
-    public alertController:AlertController 
+    public alertController:AlertController,
+    private openNativeSettings: OpenNativeSettings
+    
     ) {
       this.titleShop = this.auth.titleShop();
       this.storage.get('userData').then((data)=>{
@@ -59,7 +62,6 @@ export class FormPage implements OnInit {
       this.longitude  = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
-      this.presentAlertConfirm();
     });
     await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
       this.detailProvince = res.detail;
@@ -67,15 +69,19 @@ export class FormPage implements OnInit {
     await this.loading.dismiss();
   }
   async formData(form){
-    let dataAnswer = {
-      "CWT":this.province,
-      "ID1":this.district,
-      "TMP":this.subdistrict,
-      "LAT":this.latitude,
-      "LONG":this.longitude,
+    if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
+      this.presentAlertConfirm();
+    }else{
+      let dataAnswer = {
+        "CWT":this.province,
+        "ID1":this.district,
+        "TMP":this.subdistrict,
+        "LAT":this.latitude,
+        "LONG":this.longitude,
+      }
+      await this.storage.set('formshop',dataAnswer);
+      await this.router.navigateByUrl('/formtwo/form2');
     }
-    await this.storage.set('formshop',dataAnswer);
-    await this.router.navigateByUrl('/formtwo/form2');
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -86,13 +92,20 @@ export class FormPage implements OnInit {
         {
           text: 'ตกลง',
           handler: () => {
-            this.loading.dismiss();
+            this.openLocation();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+  async openLocation(){
+    await this.openNativeSettings.open("location").then((res)=>{
+      console.log('opened settings');
+    },(err)=>{
+      console.log('failed to open settings'+err);
+    });
   }
   todo = {
     CWT: '',

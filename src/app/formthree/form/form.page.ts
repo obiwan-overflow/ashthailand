@@ -4,6 +4,7 @@ import { RestApiService } from '../../rest-api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { LoadingController,AlertController } from '@ionic/angular';
+import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 
 @Component({
   selector: 'app-form',
@@ -26,7 +27,8 @@ export class FormPage implements OnInit {
     private geolocation: Geolocation,
     private storage: Storage,
     public loadingController:LoadingController,
-    public alertController:AlertController 
+    public alertController:AlertController,
+    private openNativeSettings: OpenNativeSettings
   ) {
     this.storage.get('userData').then((data)=>{
       this.province     = data.province;
@@ -51,7 +53,6 @@ export class FormPage implements OnInit {
       this.longitude  = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
-      this.presentAlertConfirm();
     });
     await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
       this.detailProvince = res.detail;
@@ -59,22 +60,26 @@ export class FormPage implements OnInit {
     await this.loading.dismiss();
   }
   async formData(form){
-    let dataAnswer = {
-      // family: [{
-      //   "CWT":this.province,
-      //   "TMP":this.district,
-      //   "ID1":this.subdistrict,
-      //   "LAT":this.latitude,
-      //   "LONG":this.longitude,
-      // }]
-      "CWT":this.province,
-      "TMP":this.district,
-      "ID1":this.subdistrict,
-      "LAT":this.latitude,
-      "LONG":this.longitude,
+    if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
+      this.presentAlertConfirm();
+    }else{
+      let dataAnswer = {
+        // family: [{
+        //   "CWT":this.province,
+        //   "TMP":this.district,
+        //   "ID1":this.subdistrict,
+        //   "LAT":this.latitude,
+        //   "LONG":this.longitude,
+        // }]
+        "CWT":this.province,
+        "TMP":this.district,
+        "ID1":this.subdistrict,
+        "LAT":this.latitude,
+        "LONG":this.longitude,
+      }
+      await this.storage.set('formfamily',dataAnswer);
+      this.router.navigateByUrl('/formthree/form2');
     }
-    await this.storage.set('formfamily',dataAnswer);
-    this.router.navigateByUrl('/formthree/form2');
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -85,13 +90,20 @@ export class FormPage implements OnInit {
         {
           text: 'ตกลง',
           handler: () => {
-            this.loading.dismiss();
+            this.openLocation();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+  async openLocation(){
+    await this.openNativeSettings.open("location").then((res)=>{
+      console.log('opened settings');
+    },(err)=>{
+      console.log('failed to open settings'+err);
+    });
   }
   todo = {
     CWT: '',

@@ -14,6 +14,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,9 +26,9 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     IonicStorageModule.forRoot({name: "mydatabase"}),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera,OpenNativeSettings],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
