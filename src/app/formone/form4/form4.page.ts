@@ -150,7 +150,7 @@ export class Form4Page implements OnInit {
       message: 'กรุณากรอกข้อมูล',
       duration: 2000,
       color:"danger",
-      position:"top"
+      position:"middle"
     });
     toast.present();
   }

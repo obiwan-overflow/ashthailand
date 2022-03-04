@@ -79,7 +79,7 @@ export class FormStep4Page implements OnInit {
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: 'alertConfirm',
       header: 'ตรวจสอบ!',
       message: 'เพราะบันทึกจำนวนปีที่สูบไม่สัมพันธ์กับอายุปัจจุบัน',
       backdropDismiss:false,

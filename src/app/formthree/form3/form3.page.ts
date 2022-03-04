@@ -3,6 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { LoadingController,ToastController } from '@ionic/angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form3',
@@ -17,34 +18,27 @@ export class Form3Page implements OnInit {
   latitude:any;
   longitude:any;
   dataStorage:any = [];
+  memberCount:any;
+  dataAnswer:any = [];
+  private todo : FormGroup;
   constructor(
     public router:Router,
     public api:RestApiService,
     public route:ActivatedRoute,
     private storage: Storage,
     public loadingController:LoadingController,
-    public toastController:ToastController
+    public toastController:ToastController,
+    private formBuilder: FormBuilder
   ) {
-    this.storage.get('userData').then((data)=>{
-      this.province     = data.province;
-      this.district     = data.district;
-      this.subdistrict  = data.subdistrict;
+    this.todo = this.formBuilder.group({
+      MEMBER: ['', Validators.required],
     });
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formfamily').then((data)=>{
-      this.dataStorage.CWT      = data.CWT;
-      this.dataStorage.ID1      = data.ID1;
-      this.dataStorage.TMP      = data.TMP;
-      this.dataStorage.LAT      = data.LAT;
-      this.dataStorage.LONG     = data.LONG;
-      this.dataStorage.MOO      = data.MOO;
-      this.dataStorage.VIL      = data.VIL;
-      this.dataStorage.A1       = data.A1;
-    });
+    this.dataStorage = await this.storage.get('formfamily');
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -52,36 +46,38 @@ export class Form3Page implements OnInit {
     });
     await loading.present();
   }
-  async formData(form){
-    if(form.value.MEMBER == ''){
+  async formData(){
+    console.log(this.todo.value.MEMBER);
+    if(this.todo.value.MEMBER == ''){
       this.presentToast();
     }else{
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "TMP":this.dataStorage.TMP,
-        "ID1":this.dataStorage.ID1,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":this.dataStorage.MOO,
-        "VIL":this.dataStorage.VIL,
-        "A1":this.dataStorage.A1,
-        "MEMBER":form.value.MEMBER,
+      for(let i = 1; i < this.todo.value.MEMBER; i++){
+        this.dataAnswer = [{
+          "CWT":this.dataStorage.CWT,
+          "TMP":this.dataStorage.TMP,
+          "ID1":this.dataStorage.ID1,
+          "LAT":this.dataStorage.LAT,
+          "LONG":this.dataStorage.LONG,
+          "MOO":this.dataStorage.MOO,
+          "VIL":this.dataStorage.VIL,
+          "A1":this.dataStorage.A1,
+          "MEMBER":this.todo.value.MEMBER,
+        }];
+        await this.storage.set('formfamily',this.dataAnswer);
       }
-      await this.storage.set('formfamily',dataAnswer);
-      this.router.navigateByUrl('/formthree/form4');
+      // this.router.navigateByUrl('/formthree/form4');
     }
+  }
+  async btnStartTest(){
+    this.router.navigateByUrl('/formthree/form4');
   }
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'กรุณากรอกข้อมูล',
       duration: 2000,
       color:"danger",
-      position:"top"
+      position:"middle",
     });
     toast.present();
   }
-  todo = {
-    MEMBER: '',
-  };
-
 }

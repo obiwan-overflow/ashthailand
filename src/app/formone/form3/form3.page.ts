@@ -66,7 +66,7 @@ export class Form3Page implements OnInit {
       message: 'กรุณากรอกข้อมูล',
       duration: 2000,
       color:"danger",
-      position:"top"
+      position:"middle"
     });
     toast.present();
   }

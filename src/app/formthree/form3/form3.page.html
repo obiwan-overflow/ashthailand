@@ -9,11 +9,11 @@
 
 <ion-content>
   <ion-grid>
-    <form #form="ngForm" (ngSubmit)="formData(form)">
+    <form [formGroup]="todo" (ngSubmit)="formData()">
     <ion-row>
       <ion-col size="12">
         <ion-label>จำนวนสมาชิก (คน)</ion-label>
-        <ion-select [(ngModel)]="todo.MEMBER" name="MEMBER">
+        <ion-select formControlName="MEMBER" okText="ตกลง" cancelText="ยกเลิก">
           <ion-select-option value="1">1 คน</ion-select-option>
           <ion-select-option value="2">2 คน</ion-select-option>
           <ion-select-option value="3">3 คน</ion-select-option>
@@ -32,9 +32,15 @@
         </ion-select>
       </ion-col>
       <ion-col size="12">
-        <ion-button expand="block" shape="round" type="submit" color="dark">ต่อไป</ion-button>
+        <ion-button expand="block" shape="round" type="submit" color="dark">ยืนยัน</ion-button>
       </ion-col>
     </ion-row>
     </form>
+    <ion-list lines="full">
+      <ion-item color="primary" (click)="btnStartTest()">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label>สมาชิกคนที่ 1</ion-label>
+      </ion-item>
+    </ion-list>
   </ion-grid>
 </ion-content>

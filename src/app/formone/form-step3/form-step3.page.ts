@@ -86,7 +86,7 @@ export class FormStep3Page implements OnInit {
       message: 'เพราะไม่พบป้ายห้ามสูบทั้งภายในแหละภายนอกอาคาร',
       duration: 2000,
       color:"danger",
-      position:"top"
+      position:"middle"
     });
     toast.present();
   }
@@ -97,7 +97,7 @@ export class FormStep3Page implements OnInit {
       backdropDismiss:false,
       buttons: [
         {
-          text: 'Okay',
+          text: 'ตกลง',
           handler: () => {
             this.router.navigateByUrl('formone/form-step1');
           }

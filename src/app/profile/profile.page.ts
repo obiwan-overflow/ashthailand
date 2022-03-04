@@ -169,7 +169,7 @@ export class ProfilePage implements OnInit {
       message: 'การอัพโหลดรูปภาพมีปัญหา',
       duration: 10000,
       color:"danger",
-      position:"top"
+      position:"middle"
     });
     toast.present();
   }
