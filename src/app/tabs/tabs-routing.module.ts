@@ -140,7 +140,11 @@ const routes: Routes = [
         loadChildren: () => import('../formthree/form-lists/form-lists.module').then(m => m.FormListsPageModule)
       },
       {
-        path: 'form/formthree-lists/:id/formthree-detail/:id',
+        path: 'form/formthree-lists/:id/formthree-lists-detail/:id',
+        loadChildren: () => import('../formthree/form-lists-detail/form-lists-detail.module').then(m => m.FormListsDetailPageModule)
+      },
+      {
+        path: 'form/formthree-lists/:id/formthree-lists-detail/:id/formthree-detail/:id',
         loadChildren: () => import('../formthree/formthree-detail/formthree-detail.module').then(m => m.FormthreeDetailPageModule)
       },
       {

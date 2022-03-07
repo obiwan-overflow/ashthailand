@@ -51,21 +51,33 @@ export class Form3Page implements OnInit {
     if(this.todo.value.MEMBER == ''){
       this.presentToast();
     }else{
-      for(let i = 1; i < this.todo.value.MEMBER; i++){
-        this.dataAnswer = [{
-          "CWT":this.dataStorage.CWT,
-          "TMP":this.dataStorage.TMP,
-          "ID1":this.dataStorage.ID1,
-          "LAT":this.dataStorage.LAT,
-          "LONG":this.dataStorage.LONG,
-          "MOO":this.dataStorage.MOO,
-          "VIL":this.dataStorage.VIL,
-          "A1":this.dataStorage.A1,
-          "MEMBER":this.todo.value.MEMBER,
-        }];
-        await this.storage.set('formfamily',this.dataAnswer);
-      }
-      // this.router.navigateByUrl('/formthree/form4');
+      // for(let i = 1; i < this.todo.value.MEMBER; i++){
+      //   let dataAnswer = [{
+      //     "CWT":this.dataStorage.CWT,
+      //     "TMP":this.dataStorage.TMP,
+      //     "ID1":this.dataStorage.ID1,
+      //     "LAT":this.dataStorage.LAT,
+      //     "LONG":this.dataStorage.LONG,
+      //     "MOO":this.dataStorage.MOO,
+      //     "VIL":this.dataStorage.VIL,
+      //     "A1":this.dataStorage.A1,
+      //     "MEMBER":this.todo.value.MEMBER,
+      //   }];
+      //   await this.storage.set('formfamily',dataAnswer);
+      // }
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "MOO":this.dataStorage.MOO,
+        "VIL":this.dataStorage.VIL,
+        "A1":this.dataStorage.A1,
+        "MEMBER":this.todo.value.MEMBER,
+      };
+      await this.storage.set('formfamily',dataAnswer);
+      this.router.navigateByUrl('/formthree/form4');
     }
   }
   async btnStartTest(){

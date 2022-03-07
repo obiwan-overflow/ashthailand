@@ -18,6 +18,7 @@ export class FormthreeDetailPage implements OnInit {
   TIME_M:any;     
   CIG:any;        
   ROLL:any;       
+  E_CIG:any;
   OTHER:any;      
   NO1:any;        
   RESPONSE:any;   
@@ -35,6 +36,7 @@ export class FormthreeDetailPage implements OnInit {
       this.TIME_M       = res.detail.TIME_M;
       this.CIG          = res.detail.CIG;
       this.ROLL         = res.detail.ROLL;
+      this.E_CIG        = res.detail.E_CIG;
       this.OTHER        = res.detail.OTHER;
       this.NO1          = res.detail.NO1;
       this.RESPONSE     = res.detail.RESPONSE;

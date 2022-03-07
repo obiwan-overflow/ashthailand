@@ -81,6 +81,7 @@ export class Form4Page implements OnInit {
     }
   }
   async formConfirm(NAME,SEX,AGE){
+    const userId = await this.storage.get('userId');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'บันทึก!',
@@ -100,6 +101,7 @@ export class Form4Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
+            formData.append('user_id',userId);
             formData.append('MEMBER',this.dataStorage.MEMBER),
             formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
             formData.append('CWT',this.dataStorage.CWT);

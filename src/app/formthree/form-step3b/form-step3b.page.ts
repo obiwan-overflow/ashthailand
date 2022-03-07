@@ -48,7 +48,7 @@ export class FormStep3bPage implements OnInit {
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
       this.MEMBER     = data.MEMBER;
-      this.PERSON_NO  = data.PERSON_NO == undefined ? 1 : (data.PERSON_NO + 1);
+      this.PERSON_NO  = data.PERSON_NO;
       this.SEX        = data.SEX;
       this.AGE        = data.AGE;
       this.CWT        = data.CWT;
@@ -98,6 +98,7 @@ export class FormStep3bPage implements OnInit {
     await this.formConfirm(month);
   }
   async formConfirm(month){
+    const userId = await this.storage.get('userId');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'บันทึก!',
@@ -117,6 +118,7 @@ export class FormStep3bPage implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
+            formData.append('user_id',userId);
             formData.append('MEMBER',this.MEMBER),
             formData.append('PERSON_NO',this.PERSON_NO),
             formData.append('SEX',this.SEX),

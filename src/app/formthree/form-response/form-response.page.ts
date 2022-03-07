@@ -165,7 +165,7 @@ export class FormResponsePage implements OnInit {
     }else{
       let dataAnswer = {
         "MEMBER":this.MEMBER,
-        "PERSON_NO":this.PERSON_NO == undefined ? 1 : (this.PERSON_NO + 1),
+        "PERSON_NO":this.PERSON_NO,
         "SEX":this.SEX,
         "AGE":this.AGE,
         "CWT":this.CWT,
@@ -194,6 +194,7 @@ export class FormResponsePage implements OnInit {
     }
   }
   async formConfirm(id){
+    const userId = await this.storage.get('userId');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'บันทึก!',
@@ -213,6 +214,7 @@ export class FormResponsePage implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
+            formData.append('user_id',userId);
             formData.append('MEMBER',this.MEMBER),
             formData.append('PERSON_NO',this.PERSON_NO),
             formData.append('SEX',this.SEX),

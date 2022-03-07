@@ -79,6 +79,7 @@ export class FormStep3Page implements OnInit {
     }
   }
   async formConfirm(year){
+    const userId = await this.storage.get('userId');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'บันทึก!',
@@ -98,6 +99,7 @@ export class FormStep3Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"3");
+            formData.append('user_id',userId);
             formData.append('MEMBER',this.dataStorage.MEMBER),
             formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
             formData.append('SEX',this.dataStorage.SEX),
@@ -117,7 +119,11 @@ export class FormStep3Page implements OnInit {
             formData.append('EXSMOKE_Y',year);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
+                  this.router.navigateByUrl('/formthree/form-family-lists');
+                }else{
+                  this.memberSuccess();
+                }
               }
             });
           }
@@ -147,6 +153,7 @@ export class FormStep3Page implements OnInit {
     await alert.present();
   }
   async ConfirmOrEdit(year) {
+    const userId = await this.storage.get('userId');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'ตรวจสอบ!',
@@ -164,6 +171,7 @@ export class FormStep3Page implements OnInit {
           handler: () => {
             const formData = new FormData();
             formData.append('cat_id',"3");
+            formData.append('user_id',userId);
             formData.append('MEMBER',this.dataStorage.MEMBER),
             formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
             formData.append('SEX',this.dataStorage.SEX),
@@ -183,9 +191,31 @@ export class FormStep3Page implements OnInit {
             formData.append('EXSMOKE_Y',year);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
+                  this.router.navigateByUrl('/formthree/form-family-lists');
+                }else{
+                  this.memberSuccess();
+                }
               }
             });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async memberSuccess() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'สำเร็จ!',
+      message: 'เก็บข้อมูลในครัวเรือนครบแล้ว',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.router.navigateByUrl('tabs/form');
           }
         }
       ]

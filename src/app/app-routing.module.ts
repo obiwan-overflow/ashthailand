@@ -333,9 +333,14 @@ const routes: Routes = [
   {
     path: 'form-draft',
     loadChildren: () => import('./formthree/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
-  },  {
+  },
+  {
     path: 'family-lists',
     loadChildren: () => import('./formthree/family-lists/family-lists.module').then( m => m.FamilyListsPageModule)
+  },
+  {
+    path: 'form-lists-detail',
+    loadChildren: () => import('./formthree/form-lists-detail/form-lists-detail.module').then( m => m.FormListsDetailPageModule)
   },
 
 ];
