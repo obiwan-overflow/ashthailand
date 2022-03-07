@@ -92,6 +92,66 @@ ion-label {
         color: #fff;
     }
 }
+.btn-answer-public {
+    display: block;
+    border: 2px solid #4097AA;
+    padding: 11px 30px 11px 30px !important;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 1.2rem;
+    font-family: sarabun !important;
+    line-height: 1.8;
+    &.active {
+        border: 2px solid #4097AA !important;
+        background: #4097AA !important;
+        color: #000 !important;
+    }
+    &:hover {
+        background: #4097AA;
+        color: #fff;
+    }
+}
+.btn-answer-shop {
+    display: block;
+    border: 2px solid #83D6E7;
+    padding: 11px 30px 11px 30px !important;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 1.2rem;
+    font-family: sarabun !important;
+    line-height: 1.8;
+    &.active {
+        border: 2px solid #83D6E7 !important;
+        background: #83D6E7 !important;
+        color: #000 !important;
+    }
+    &:hover {
+        background: #83D6E7;
+        color: #fff;
+    }
+}
+.btn-answer-family {
+    display: block;
+    border: 2px solid #A9D18E;
+    padding: 11px 30px 11px 30px !important;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 1.2rem;
+    font-family: sarabun !important;
+    line-height: 1.8;
+    &.active {
+        border: 2px solid #A9D18E !important;
+        background: #A9D18E !important;
+        color: #000 !important;
+    }
+    &:hover {
+        background: #A9D18E;
+        color: #fff;
+    }
+}
 .btn-answer-active {
     display: block;
     border: 2px solid #209d96;
@@ -113,6 +173,11 @@ h3 {
 ion-select,
 ion-input {
     border-color: #cccccc !important;
+}
+
+ion-button {
+    font-family: sarabun !important;
+    --box-shadow: none !important;
 }
 .title-smoke {
     font-size: 15px !important;
@@ -153,7 +218,7 @@ ion-input {
             left: 0;
             height: 4px;
             width: 90%;
-            background: orange;
+            background: #4097AA;
             margin-left: 5%;
             margin-right: 5%;
         }
@@ -174,7 +239,7 @@ ion-input {
                     left: 4px;
                 }
                 ion-icon {
-                    color: orange !important;
+                    color: #4097AA !important;
                 }
             }
         }

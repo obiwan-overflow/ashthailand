@@ -6,11 +6,13 @@ ion-avatar {
 .card-report {
     display: block;
     // background: orange;
-    background: url('/assets/images/background/Background.jpg') no-repeat 100% 100%;
-    background-size: 100%;
-    background-position: top;
-    color: #fff;
-    padding: 10px 15px 10px 15px;
+    // background: url('/assets/images/background/Background.jpg') no-repeat 100% 100%;
+    // background-size: 100%;
+    // background-position: top;
+    background: rgb(64,151,170);
+    background: linear-gradient(180deg, rgba(64,151,170,1) 0%, rgba(169,209,142,1) 64%);
+    color: #333;
+    padding: 30px 15px 30px 15px;
     border-radius: 20px;
     text-align: center;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -19,7 +21,7 @@ ion-avatar {
     p  {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
-        font-size: 20px;
+        font-size: 30px;
         font-weight: bold;
     }
     ion-icon {

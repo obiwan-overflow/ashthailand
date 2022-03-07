@@ -16,9 +16,9 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="SMOKE == 1">ไม่สูบ</div>
-        <div class="btn-answer-active" *ngIf="SMOKE == 2">สูบบางวัน</div>
-        <div class="btn-answer-active" *ngIf="SMOKE == 3">สูบทุกวัน</div>
+        <div class="btn-answer-family active" *ngIf="SMOKE == 1">ไม่สูบ</div>
+        <div class="btn-answer-family active" *ngIf="SMOKE == 2">สูบบางวัน</div>
+        <div class="btn-answer-family active" *ngIf="SMOKE == 3">สูบทุกวัน</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -28,8 +28,8 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="EVERSMOKE == 1">ไม่สูบ</div>
-        <div class="btn-answer-active" *ngIf="EVERSMOKE == 2">เคยสูบ</div>
+        <div class="btn-answer-family active" *ngIf="EVERSMOKE == 1">ไม่สูบ</div>
+        <div class="btn-answer-family active" *ngIf="EVERSMOKE == 2">เคยสูบ</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -39,7 +39,7 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="EXSMOKE_Y">{{EXSMOKE_Y}}</div>
+        <div class="btn-answer-family active" *ngIf="EXSMOKE_Y">{{EXSMOKE_Y}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -49,7 +49,7 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="EXSMOKE_M">{{EXSMOKE_M}}</div>
+        <div class="btn-answer-family active" *ngIf="EXSMOKE_M">{{EXSMOKE_M}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -59,7 +59,7 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="TIME_Y">{{TIME_Y}}</div>
+        <div class="btn-answer-family active" *ngIf="TIME_Y">{{TIME_Y}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -69,7 +69,7 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="TIME_M">{{TIME_M}}</div>
+        <div class="btn-answer-family active" *ngIf="TIME_M">{{TIME_M}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -79,10 +79,10 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="CIG">สูบบุหรี่โรงงาน</div>
-        <div class="btn-answer-active" *ngIf="ROLL">สูบบุหรี่มวนเอง</div>
-        <div class="btn-answer-active" *ngIf="E_CIG">สูบบุหรี่ไฟฟ้า</div>
-        <div class="btn-answer-active" *ngIf="OTHER">สูบบุหรี่อื่นๆ เช่น ไปป์ บารากู่ ซิการ์ </div>
+        <div class="btn-answer-family active" *ngIf="CIG">สูบบุหรี่โรงงาน</div>
+        <div class="btn-answer-family active" *ngIf="ROLL">สูบบุหรี่มวนเอง</div>
+        <div class="btn-answer-family active" *ngIf="E_CIG">สูบบุหรี่ไฟฟ้า</div>
+        <div class="btn-answer-family active" *ngIf="OTHER">สูบบุหรี่อื่นๆ เช่น ไปป์ บารากู่ ซิการ์ </div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -92,7 +92,7 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="NO1">ปริมาณบุหรี่ที่สูบ (มวนต่อวัน) {{NO1}}</div>
+        <div class="btn-answer-family active" *ngIf="NO1">ปริมาณบุหรี่ที่สูบ (มวนต่อวัน) {{NO1}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -102,8 +102,8 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="RESPONSE == 1">ใช่</div>
-        <div class="btn-answer-active" *ngIf="RESPONSE == 2">ไม่ใช่</div>
+        <div class="btn-answer-family active" *ngIf="RESPONSE == 1">ใช่</div>
+        <div class="btn-answer-family active" *ngIf="RESPONSE == 2">ไม่ใช่</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -113,8 +113,8 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="TYPE_CIG == 1">ซื้อเป็นซอง</div>
-        <div class="btn-answer-active" *ngIf="TYPE_CIG == 2">ซื้อเป็นมวน</div>
+        <div class="btn-answer-family active" *ngIf="TYPE_CIG == 1">ซื้อเป็นซอง</div>
+        <div class="btn-answer-family active" *ngIf="TYPE_CIG == 2">ซื้อเป็นมวน</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -124,9 +124,9 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="SECOND == 1">ทุกวัน</div>
-        <div class="btn-answer-active" *ngIf="SECOND == 2">บางวัน</div>
-        <div class="btn-answer-active" *ngIf="SECOND == 3">ไม่เคยสูบบุหรี่ในตัวบ้านเลย</div>
+        <div class="btn-answer-family active" *ngIf="SECOND == 1">ทุกวัน</div>
+        <div class="btn-answer-family active" *ngIf="SECOND == 2">บางวัน</div>
+        <div class="btn-answer-family active" *ngIf="SECOND == 3">ไม่เคยสูบบุหรี่ในตัวบ้านเลย</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -136,11 +136,11 @@
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-active" *ngIf="QUITE_CHECK == 1">ไม่คิดอยากจะเลิก</div>
-        <div class="btn-answer-active" *ngIf="QUITE_CHECK == 2">คิดอยากจะเลิกสูบบุหรี่</div>
-        <div class="btn-answer-active" *ngIf="QUITE_CHECK == 3">คิดจะเลิกสูบภายใน 6 เดือนข้างหน้า</div>
-        <div class="btn-answer-active" *ngIf="QUITE_CHECK == 4">คิดจะเลิกสูบภายใน 30 วันข้างหน้า</div>
-        <div class="btn-answer-active" *ngIf="QUITE_CHECK == 5">คิดจะเลิกสูบภายใน 30 วันข้างหน้าและเคยเลิกสูบได้สำเร็จ <br>อย่างน้อย 1 วัน</div>
+        <div class="btn-answer-family active" *ngIf="QUITE_CHECK == 1">ไม่คิดอยากจะเลิก</div>
+        <div class="btn-answer-family active" *ngIf="QUITE_CHECK == 2">คิดอยากจะเลิกสูบบุหรี่</div>
+        <div class="btn-answer-family active" *ngIf="QUITE_CHECK == 3">คิดจะเลิกสูบภายใน 6 เดือนข้างหน้า</div>
+        <div class="btn-answer-family active" *ngIf="QUITE_CHECK == 4">คิดจะเลิกสูบภายใน 30 วันข้างหน้า</div>
+        <div class="btn-answer-family active" *ngIf="QUITE_CHECK == 5">คิดจะเลิกสูบภายใน 30 วันข้างหน้าและเคยเลิกสูบได้สำเร็จ <br>อย่างน้อย 1 วัน</div>
       </ion-col>
     </ion-row>
   </ion-grid>

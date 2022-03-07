@@ -20,6 +20,7 @@ export class Form3Page implements OnInit {
   dataStorage:any = [];
   memberCount:any;
   dataAnswer:any = [];
+  dataFamily:any = [];
   private todo : FormGroup;
   constructor(
     public router:Router,
@@ -45,45 +46,50 @@ export class Form3Page implements OnInit {
       duration: 200
     });
     await loading.present();
+    this.dataFamily = await this.storage.get('formfamily');
   }
   async formData(){
     if(this.todo.value.MEMBER == ''){
       this.presentToast();
     }else{
-      for(let i = 0; i < this.todo.value.MEMBER; i++){
-        console.log('test');
+      var subArray = [];
+      for(let i = 1; i <= this.todo.value.MEMBER; i++){
+        var dataAnswer = {
+          "CWT":this.dataStorage.CWT,
+          "TMP":this.dataStorage.TMP,
+          "ID1":this.dataStorage.ID1,
+          "LAT":this.dataStorage.LAT,
+          "LONG":this.dataStorage.LONG,
+          "MOO":this.dataStorage.MOO,
+          "VIL":this.dataStorage.VIL,
+          "A1":this.dataStorage.A1,
+          "MEMBER":this.todo.value.MEMBER,
+        };
+        subArray.push(dataAnswer);
       }
-      // for(let i = 1; i < this.todo.value.MEMBER; i++){
-      //   let dataAnswer = [{
-      //     "CWT":this.dataStorage.CWT,
-      //     "TMP":this.dataStorage.TMP,
-      //     "ID1":this.dataStorage.ID1,
-      //     "LAT":this.dataStorage.LAT,
-      //     "LONG":this.dataStorage.LONG,
-      //     "MOO":this.dataStorage.MOO,
-      //     "VIL":this.dataStorage.VIL,
-      //     "A1":this.dataStorage.A1,
-      //     "MEMBER":this.todo.value.MEMBER,
-      //   }];
-      //   await this.storage.set('formfamily',dataAnswer);
-      // }
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "TMP":this.dataStorage.TMP,
-        "ID1":this.dataStorage.ID1,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":this.dataStorage.MOO,
-        "VIL":this.dataStorage.VIL,
-        "A1":this.dataStorage.A1,
-        "MEMBER":this.todo.value.MEMBER,
-      };
-      await this.storage.set('formfamily',dataAnswer);
-      this.router.navigateByUrl('/formthree/form4');
+      await this.storage.set('formfamily',subArray);
+      this.loadDataMember();
+      // let dataAnswer = {
+      //   "CWT":this.dataStorage.CWT,
+      //   "TMP":this.dataStorage.TMP,
+      //   "ID1":this.dataStorage.ID1,
+      //   "LAT":this.dataStorage.LAT,
+      //   "LONG":this.dataStorage.LONG,
+      //   "MOO":this.dataStorage.MOO,
+      //   "VIL":this.dataStorage.VIL,
+      //   "A1":this.dataStorage.A1,
+      //   "MEMBER":this.todo.value.MEMBER,
+      // };
+      // await this.storage.set('formfamily',dataAnswer);
+      // this.router.navigateByUrl('/formthree/form4');
     }
   }
+
+  async loadDataMember(){
+    this.dataFamily = await this.storage.get('formfamily');
+  }
   async btnStartTest(){
-    this.router.navigateByUrl('/formthree/form4');
+    // this.router.navigateByUrl('/formthree/form4');
   }
   async presentToast() {
     const toast = await this.toastController.create({
