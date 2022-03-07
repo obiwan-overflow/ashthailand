@@ -47,10 +47,12 @@ export class Form3Page implements OnInit {
     await loading.present();
   }
   async formData(){
-    console.log(this.todo.value.MEMBER);
     if(this.todo.value.MEMBER == ''){
       this.presentToast();
     }else{
+      for(let i = 0; i < this.todo.value.MEMBER; i++){
+        console.log('test');
+      }
       // for(let i = 1; i < this.todo.value.MEMBER; i++){
       //   let dataAnswer = [{
       //     "CWT":this.dataStorage.CWT,
