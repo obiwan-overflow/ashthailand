@@ -60,13 +60,6 @@ export class FormPage implements OnInit {
       this.presentAlertConfirm();
     }else{
       let dataAnswer = {
-        // family: [{
-        //   "CWT":this.province,
-        //   "TMP":this.district,
-        //   "ID1":this.subdistrict,
-        //   "LAT":this.latitude,
-        //   "LONG":this.longitude,
-        // }]
         "CWT":this.province,
         "TMP":this.district,
         "ID1":this.subdistrict,

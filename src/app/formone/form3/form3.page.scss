@@ -11,10 +11,41 @@ ion-input {
     border: 1px solid #eee;
     margin-top: 10px !important;
 }
+// ion-label {
+//     overflow: initial !important;
+//     white-space: initial !important;
+//     font-size: .9rem !important;
+// }
+
+ion-item {
+    border: 2px solid #4097AA;
+    --background-activated: transparent;
+    --ripple-color: transparent;
+}
 ion-label {
+    color: #4097AA;
     overflow: initial !important;
     white-space: initial !important;
     font-size: .9rem !important;
+}
+.question-a1 {
+    --ion-item-color: #333;
+
+    &:not(:last-child) {
+        margin-bottom: 2.5%;
+    }
+  
+    &.item-radio-checked {
+        --ion-item-background: #4097AA;
+        --ion-item-color: #333;
+    }
+    ion-radio {
+        margin-bottom: 0px;
+        margin-right: 0px;
+        --color:transparent;
+        --color-checked: transparent;
+        width: 0 !important;
+    }
 }
 
 

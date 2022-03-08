@@ -12,7 +12,12 @@ import { AlertController, LoadingController, Platform } from '@ionic/angular';
 export class SigninPage implements OnInit {
   formlogin:Formlogin;
   loginfail:any;
-  constructor(public route: Router,public api:RestApiService,private storage: Storage,public loadingController:LoadingController) { }
+  constructor(
+    public route: Router,
+    public api:RestApiService,
+    private storage: Storage,
+    public loadingController:LoadingController
+  ) { }
 
   ngOnInit() {
     this.formlogin = new Formlogin();

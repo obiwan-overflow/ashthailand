@@ -12,27 +12,27 @@
     <form #form="ngForm" (ngSubmit)="formData(form)">
     <ion-row>
       <ion-col size="12">
-        <ion-label>ประเภทสถานที่</ion-label>
+        <p>ประเภทสถานที่</p>
         <ion-radio-group [(ngModel)]="todo.A1" name="A1">
-          <ion-item lines="full">
-            <ion-label for="radio1">สถานบริการสาธารณสุข เช่น รพ.สต. คลินิค ร้านขายยา ร้านนวดแผนไทย เป็นต้น</ion-label>
-            <ion-radio slot="start" color="success" value="ก1"></ion-radio>
+          <ion-item lines="none" class="question-a1">
+            <ion-label>สถานบริการสาธารณสุข เช่น รพ.สต. คลินิค ร้านขายยา ร้านนวดแผนไทย เป็นต้น</ion-label>
+            <ion-radio slot="start" value="ก1"></ion-radio>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="none" class="question-a1">
             <ion-label>สถานศึกษาต่ำกว่าอุดมศึกษา เช่น โรงเรียน ศูนย์เด็กเล็ก ศูนย์การศึกษานอกโรงเรียน เป็นต้น</ion-label>
-            <ion-radio slot="start" color="success" value="ก2"></ion-radio>
+            <ion-radio slot="start" value="ก2"></ion-radio>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="none" class="question-a1">
             <ion-label>สถานที่ใช้ประโยชน์ร่วมกัน เช่น อาคารสถานที่ราชการ ศาลาประชาคม/ศาลาอเนกประสงค์ ตลาดสด/ตลาดนัด ร้านอาหาร สถานบันเทิง เป็นต้น</ion-label>
-            <ion-radio slot="start" color="success" value="ก3"></ion-radio>
+            <ion-radio slot="start" value="ก3"></ion-radio>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="none" class="question-a1">
             <ion-label>ขนส่งสาธารณะ เช่น รถโดยสารสาธารณะ ป้ายรถประจำทาง ศาลารอรถ สถานีขนส่ง <br> ผู้โดยสาร เป็นต้น</ion-label>
-            <ion-radio slot="start" color="success" value="ก4"></ion-radio>
+            <ion-radio slot="start" value="ก4"></ion-radio>
           </ion-item>
-          <ion-item lines="full">
+          <ion-item lines="none" class="question-a1">
             <ion-label>วัด ศาสนสถานทุกนิกาย</ion-label>
-            <ion-radio slot="start" color="success" value="ก5"></ion-radio>
+            <ion-radio slot="start" value="ก5"></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-col>
