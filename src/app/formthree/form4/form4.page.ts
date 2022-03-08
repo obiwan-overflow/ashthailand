@@ -55,6 +55,9 @@ export class Form4Page implements OnInit {
     });
     await loading.present();
   }
+
+
+  // action
   async formData(form){
     let dataAnswer = {
       "CWT":this.dataStorage.CWT,
@@ -131,6 +134,9 @@ export class Form4Page implements OnInit {
     });
     await alert.present();
   }
+
+
+  // alert
   async alertAgelimit(){
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',

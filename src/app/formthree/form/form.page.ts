@@ -65,7 +65,7 @@ export class FormPage implements OnInit {
         "ID1":this.subdistrict,
         "LAT":this.latitude,
         "LONG":this.longitude,
-      }
+      };
       await this.storage.set('formfamily',dataAnswer);
       this.router.navigateByUrl('/formthree/form2');
     }

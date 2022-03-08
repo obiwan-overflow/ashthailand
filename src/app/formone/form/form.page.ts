@@ -18,7 +18,7 @@ export class FormPage implements OnInit {
   province:any;
   district:any;
   subdistrict:any;
-
+  dataStorage:any;
 
   loading:any;
 
@@ -62,6 +62,7 @@ export class FormPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+    this.dataStorage = await this.storage.get('formpublic');
     this.loading.dismiss();
   }
   async formData(form){
@@ -75,6 +76,7 @@ export class FormPage implements OnInit {
         "LAT":this.latitude,
         "LONG":this.longitude,
       };
+      // await subArray.push(dataAnswer);
       await this.storage.set('formpublic',dataAnswer);
       await this.router.navigateByUrl('/formone/form2');
     }

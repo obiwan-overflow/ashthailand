@@ -46,8 +46,10 @@ export class Form3Page implements OnInit {
       duration: 200
     });
     await loading.present();
-    this.dataFamily = await this.storage.get('formfamily');
   }
+
+
+  // load data
   async formData(){
     if(this.todo.value.MEMBER == ''){
       this.presentToast();
@@ -84,13 +86,20 @@ export class Form3Page implements OnInit {
       // this.router.navigateByUrl('/formthree/form4');
     }
   }
-
   async loadDataMember(){
     this.dataFamily = await this.storage.get('formfamily');
   }
-  async btnStartTest(){
-    // this.router.navigateByUrl('/formthree/form4');
+
+
+  // action
+  async btnStartTest(data){
+    console.log(data);
+    this.router.navigateByUrl('/formthree/form4/'+data);
   }
+
+
+
+  // alert 
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'กรุณากรอกข้อมูล',

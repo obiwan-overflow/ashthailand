@@ -36,10 +36,10 @@
       </ion-col>
     </ion-row>
     </form>
-    <ion-list lines="full">
-      <ion-item color="primary" *ngFor="let data of dataFamily" (click)="btnStartTest()">
+    <ion-list lines="full" *ngIf="dataFamily">
+      <ion-item color="family" class="list-member" *ngFor="let data of dataFamily,let key = index" (click)="btnStartTest(key)">
         <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-        <ion-label>สมาชิกคนที่ 1</ion-label>
+        <ion-label>สมาชิกคนที่ {{key+1}}</ion-label>
       </ion-item>
     </ion-list>
   </ion-grid>
