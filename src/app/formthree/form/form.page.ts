@@ -17,6 +17,7 @@ export class FormPage implements OnInit {
   subdistrict:any;
   latitude:any;
   longitude:any;
+  dataStorage:any = [];
 
   loading:any;
   constructor(
@@ -45,6 +46,7 @@ export class FormPage implements OnInit {
     });
     this.loading.present();
     this.loadData();
+    this.dataStorage = await this.storage.get('formfamily');
   }
   async loadData(){
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -59,15 +61,37 @@ export class FormPage implements OnInit {
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
       this.presentAlertConfirm();
     }else{
-      let dataAnswer = [{
-        "CWT":this.province,
-        "TMP":this.district,
-        "ID1":this.subdistrict,
-        "LAT":this.latitude,
-        "LONG":this.longitude,
-      }];
-      await this.storage.set('formfamily',dataAnswer);
-      this.router.navigateByUrl('/formthree/form2');
+      if(this.dataStorage == null){
+        let dataAnswer = [{
+          "CWT":this.province,
+          "TMP":this.district,
+          "ID1":this.subdistrict,
+          "LAT":this.latitude,
+          "LONG":this.longitude,
+        }];
+        this.storage.set('formfamily',dataAnswer);
+        this.router.navigateByUrl('/formthree/form2');
+      }else{
+        let dataAnswer = {
+          "CWT":this.province,
+          "TMP":this.district,
+          "ID1":this.subdistrict,
+          "LAT":this.latitude,
+          "LONG":this.longitude,
+        };
+        await this.dataStorage.push(dataAnswer);
+        await this.storage.set('formfamily',this.dataStorage);
+        this.router.navigateByUrl('/formthree/form2');
+      }
+      // let dataAnswer = [{
+      //   "CWT":this.province,
+      //   "TMP":this.district,
+      //   "ID1":this.subdistrict,
+      //   "LAT":this.latitude,
+      //   "LONG":this.longitude,
+      // }];
+      // await this.storage.set('formfamily',dataAnswer);
+      // this.router.navigateByUrl('/formthree/form2');
     }
   }
   async presentAlertConfirm() {

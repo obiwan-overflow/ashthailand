@@ -11,6 +11,7 @@ import { LoadingController,ToastController } from '@ionic/angular';
 })
 export class Form2Page implements OnInit {
   dataStorage:any = [];
+  index:any;
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -27,6 +28,7 @@ export class Form2Page implements OnInit {
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
       this.dataStorage = data;
+      this.index = data.length-1;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -65,9 +67,9 @@ export class Form2Page implements OnInit {
       //   "VIL":form.value.VIL,
       //   "A1":form.value.A1,
       // }
-      this.dataStorage[0].MOO = form.value.MOO;
-      this.dataStorage[0].VIL = form.value.VIL;
-      this.dataStorage[0].A1  = form.value.A1;
+      this.dataStorage[this.index].MOO = form.value.MOO;
+      this.dataStorage[this.index].VIL = form.value.VIL;
+      this.dataStorage[this.index].A1  = form.value.A1;
       await this.storage.set('formfamily',this.dataStorage);
       this.router.navigateByUrl('/formthree/form3');
     }
