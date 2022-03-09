@@ -10,12 +10,6 @@ import { LoadingController,ToastController } from '@ionic/angular';
   styleUrls: ['./form2.page.scss'],
 })
 export class Form2Page implements OnInit {
-
-  province:any;
-  district:any;
-  subdistrict:any;
-  latitude:any;
-  longitude:any;
   dataStorage:any = [];
   constructor(
     public router:Router,
@@ -25,22 +19,14 @@ export class Form2Page implements OnInit {
     public loadingController:LoadingController,
     public toastController:ToastController
   ) {
-    this.storage.get('userData').then((data)=>{
-      this.province     = data.province;
-      this.district     = data.district;
-      this.subdistrict  = data.subdistrict;
-    });
+    
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.dataStorage.CWT      = data.CWT;
-      this.dataStorage.ID1      = data.ID1;
-      this.dataStorage.TMP      = data.TMP;
-      this.dataStorage.LAT      = data.LAT;
-      this.dataStorage.LONG     = data.LONG;
+      this.dataStorage = data;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -69,17 +55,20 @@ export class Form2Page implements OnInit {
     if(form.value.MOO == '' || form.value.VIL == '' || form.value.A1 == ''){
       this.presentToast();
     }else{
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "TMP":this.dataStorage.TMP,
-        "ID1":this.dataStorage.ID1,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":form.value.MOO,
-        "VIL":form.value.VIL,
-        "A1":form.value.A1,
-      }
-      await this.storage.set('formfamily',dataAnswer);
+      // let dataAnswer = {
+      //   "CWT":this.dataStorage.CWT,
+      //   "TMP":this.dataStorage.TMP,
+      //   "ID1":this.dataStorage.ID1,
+      //   "LAT":this.dataStorage.LAT,
+      //   "LONG":this.dataStorage.LONG,
+      //   "MOO":form.value.MOO,
+      //   "VIL":form.value.VIL,
+      //   "A1":form.value.A1,
+      // }
+      this.dataStorage[0].MOO = form.value.MOO;
+      this.dataStorage[0].VIL = form.value.VIL;
+      this.dataStorage[0].A1  = form.value.A1;
+      await this.storage.set('formfamily',this.dataStorage);
       this.router.navigateByUrl('/formthree/form3');
     }
   }

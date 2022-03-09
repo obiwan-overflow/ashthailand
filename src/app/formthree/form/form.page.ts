@@ -59,13 +59,13 @@ export class FormPage implements OnInit {
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
       this.presentAlertConfirm();
     }else{
-      let dataAnswer = {
+      let dataAnswer = [{
         "CWT":this.province,
         "TMP":this.district,
         "ID1":this.subdistrict,
         "LAT":this.latitude,
         "LONG":this.longitude,
-      };
+      }];
       await this.storage.set('formfamily',dataAnswer);
       this.router.navigateByUrl('/formthree/form2');
     }

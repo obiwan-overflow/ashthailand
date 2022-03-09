@@ -70,7 +70,10 @@ export class Form3Page implements OnInit {
         subArray.push(dataAnswer);
       }
       await this.storage.set('formfamily',subArray);
-      this.loadDataMember();
+      await this.router.navigateByUrl('/formthree/form-family-lists');
+      // this.loadDataMember();
+
+      
       // let dataAnswer = {
       //   "CWT":this.dataStorage.CWT,
       //   "TMP":this.dataStorage.TMP,
@@ -93,7 +96,6 @@ export class Form3Page implements OnInit {
 
   // action
   async btnStartTest(data){
-    console.log(data);
     this.router.navigateByUrl('/formthree/form4/'+data);
   }
 

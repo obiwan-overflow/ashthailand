@@ -69,10 +69,10 @@ export class Form4Page implements OnInit {
       "VIL":this.dataStorage.VIL,
       "A1":this.dataStorage.A1,
       "MEMBER":this.dataStorage.MEMBER,
+      "PERSON_NO":this.dataStorage.PERSON_NO,
       "NAME":form.value.NAME,
       "SEX":form.value.SEX,
       "AGE":form.value.AGE,
-      "PERSON_NO":this.dataStorage.PERSON_NO,
     }
     await this.storage.set('formfamily',dataAnswer);
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
@@ -82,6 +82,10 @@ export class Form4Page implements OnInit {
     }else if(form.value.AGE <= 14){
       this.formConfirm(form.value.NAME,form.value.SEX,form.value.AGE);
     }
+    // var datafamily = await this.storage.get('formfamily');
+    // var datamember = datafamily[2];
+    // datamember.NAME = form.value.NAME;
+    // console.log(datafamily);
   }
   async formConfirm(NAME,SEX,AGE){
     const userId = await this.storage.get('userId');
