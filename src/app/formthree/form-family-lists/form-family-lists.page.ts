@@ -156,14 +156,26 @@ export class FormFamilyListsPage implements OnInit {
 
     await alert.present();
   }
-  async btnDelete(data){
-    // let newData = [];
-    // this.datafamily.splice(data,1);
-    // newData.push(this.datafamily);
-    // newData.push(this.dataOutfamily);
-    // this.storage.set('formfamily',newData);
-  }
+  async btnDelete(AGE,NAME,A1,MOO,VIL){
+    let subArray = [];
+    let newData  = [];
+    for (let val of this.dataStorageAll){
+      if(AGE == parseInt(val.AGE) && NAME == val.NAME && A1 == val.A1){
 
+      }else{
+        subArray.push(val);
+      }
+    }
+    await this.storage.set('formfamily',subArray);
+    await this.storage.get('formfamily').then((data)=>{
+      for (let val of data){
+        if(MOO == data.MOO && VIL == data.VIL && A1 == data.A1){
+          newData = val;
+        }
+      }
+      this.datafamily = newData;
+    });
+  }
 
   // alert
   async presentAlertConfirm() {
