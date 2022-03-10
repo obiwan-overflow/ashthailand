@@ -10,13 +10,8 @@ import { LoadingController,ToastController,AlertController } from '@ionic/angula
   styleUrls: ['./form4.page.scss'],
 })
 export class Form4Page implements OnInit {
-
-  province:any;
-  district:any;
-  subdistrict:any;
-  latitude:any;
-  longitude:any;
   dataStorage:any = [];
+  id:any;
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -26,27 +21,15 @@ export class Form4Page implements OnInit {
     public toastController:ToastController,
     public alertController:AlertController
   ) {
-    this.storage.get('userData').then((data)=>{
-      this.province     = data.province;
-      this.district     = data.district;
-      this.subdistrict  = data.subdistrict;
-    });
+
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
     await this.storage.get('formfamily').then((data)=>{
-      this.dataStorage.CWT        = data.CWT;
-      this.dataStorage.ID1        = data.ID1;
-      this.dataStorage.TMP        = data.TMP;
-      this.dataStorage.LAT        = data.LAT;
-      this.dataStorage.LONG       = data.LONG;
-      this.dataStorage.MOO        = data.MOO;
-      this.dataStorage.VIL        = data.VIL;
-      this.dataStorage.A1         = data.A1;
-      this.dataStorage.MEMBER     = data.MEMBER;
-      this.dataStorage.PERSON_NO  = data.PERSON_NO == undefined ? 1 : (data.PERSON_NO + 1);
+      this.dataStorage = data;
+      // this.dataStorage[this.id].PERSON_NO  = data[this.id].PERSON_NO == undefined ? 1 : (data[this.id].PERSON_NO + 1);
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -54,31 +37,38 @@ export class Form4Page implements OnInit {
       duration: 200
     });
     await loading.present();
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
 
   // action
   async formData(form){
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "MOO":this.dataStorage.MOO,
-      "VIL":this.dataStorage.VIL,
-      "A1":this.dataStorage.A1,
-      "MEMBER":this.dataStorage.MEMBER,
-      "PERSON_NO":this.dataStorage.PERSON_NO,
-      "NAME":form.value.NAME,
-      "SEX":form.value.SEX,
-      "AGE":form.value.AGE,
-    }
-    await this.storage.set('formfamily',dataAnswer);
+    this.dataStorage[this.id].NAME        = form.value.NAME;
+    this.dataStorage[this.id].SEX         = form.value.SEX;
+    this.dataStorage[this.id].AGE         = form.value.AGE;
+    this.dataStorage[this.id].PERSON_NO   = this.dataStorage[this.id].PERSON_NO == undefined ? 1 : this.dataStorage[this.id].PERSON_NO;
+    await this.storage.set('formfamily',this.dataStorage);
+
+    // let dataAnswer = {
+    //   "CWT":this.dataStorage.CWT,
+    //   "TMP":this.dataStorage.TMP,
+    //   "ID1":this.dataStorage.ID1,
+    //   "LAT":this.dataStorage.LAT,
+    //   "LONG":this.dataStorage.LONG,
+    //   "MOO":this.dataStorage.MOO,
+    //   "VIL":this.dataStorage.VIL,
+    //   "A1":this.dataStorage.A1,
+    //   "MEMBER":this.dataStorage.MEMBER,
+    //   "PERSON_NO":this.dataStorage.PERSON_NO,
+    //   "NAME":form.value.NAME,
+    //   "SEX":form.value.SEX,
+    //   "AGE":form.value.AGE,
+    // }
+    // await this.storage.set('formfamily',dataAnswer);
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
       this.presentToast();
     }else if (form.value.AGE >= 15){
-      this.router.navigateByUrl('/formthree/form-step1');
+      this.router.navigateByUrl('/formthree/form-step1/'+this.id);
     }else if(form.value.AGE <= 14){
       this.formConfirm(form.value.NAME,form.value.SEX,form.value.AGE);
     }
@@ -105,33 +95,34 @@ export class Form4Page implements OnInit {
           text: 'บันทึก',
           handler: () => {
             console.log('Confirm Okay');
-
-            const formData = new FormData();
-            formData.append('cat_id',"3");
-            formData.append('user_id',userId);
-            formData.append('MEMBER',this.dataStorage.MEMBER),
-            formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
-            formData.append('CWT',this.dataStorage.CWT);
-            formData.append('TMP',this.dataStorage.TMP);
-            formData.append('ID1',this.dataStorage.ID1);
-            formData.append('VIL',this.dataStorage.VIL);
-            formData.append('MOO',this.dataStorage.MOO);
-            formData.append('A1',this.dataStorage.A1);
-            formData.append('LAT',this.dataStorage.LAT);
-            formData.append('LONG',this.dataStorage.LONG);
-            formData.append('SEX',SEX),
-            formData.append('AGE',AGE),
-            formData.append('NAME',NAME),
-            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-              if(res.result == 'success'){
-                // this.router.navigateByUrl('tabs/form');
-                if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
-                  this.router.navigateByUrl('/formthree/form-family-lists');
-                }else{
-                  this.presentAlertConfirm();
-                }
-              }
-            });
+            this.dataStorage[this.id].status   = "success";
+            this.storage.set('formfamily',this.dataStorage);
+            this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
+            // const formData = new FormData();
+            // formData.append('cat_id',"3");
+            // formData.append('user_id',userId);
+            // formData.append('MEMBER',this.dataStorage.MEMBER),
+            // formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
+            // formData.append('CWT',this.dataStorage.CWT);
+            // formData.append('TMP',this.dataStorage.TMP);
+            // formData.append('ID1',this.dataStorage.ID1);
+            // formData.append('VIL',this.dataStorage.VIL);
+            // formData.append('MOO',this.dataStorage.MOO);
+            // formData.append('A1',this.dataStorage.A1);
+            // formData.append('LAT',this.dataStorage.LAT);
+            // formData.append('LONG',this.dataStorage.LONG);
+            // formData.append('SEX',SEX),
+            // formData.append('AGE',AGE),
+            // formData.append('NAME',NAME),
+            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+            //   if(res.result == 'success'){
+            //     if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
+            //       this.router.navigateByUrl('/formthree/form-family-lists');
+            //     }else{
+            //       this.presentAlertConfirm();
+            //     }
+            //   }
+            // });
           }
         }
       ]

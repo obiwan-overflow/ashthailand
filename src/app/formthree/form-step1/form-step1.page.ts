@@ -9,41 +9,21 @@ import { AlertController, LoadingController, Platform } from '@ionic/angular';
   styleUrls: ['./form-step1.page.scss'],
 })
 export class FormStep1Page implements OnInit {
-
-  MEMBER:any;
-  PERSON_NO:any;
-  SEX:any;
-  AGE:any;
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  A1:any;
-  NAME:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController) { }
+  dataStorage:any = [];
+  id:any;
+  constructor(
+    public router:Router,
+    public storage:Storage,
+    public loadingController:LoadingController,
+    public route:ActivatedRoute
+  ) { }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
+    this.id = await this.route.snapshot.paramMap.get('id');
     await this.storage.get('formfamily').then((data)=>{
-      this.MEMBER     = data.MEMBER;
-      this.PERSON_NO  = data.PERSON_NO;
-      this.SEX        = data.SEX;
-      this.AGE        = data.AGE;
-      this.CWT        = data.CWT;
-      this.TMP        = data.TMP;
-      this.ID1        = data.ID1;
-      this.VIL        = data.VIL;
-      this.MOO        = data.MOO;
-      this.A1         = data.A1;
-      this.NAME       = data.NAME;
-      this.ADDRESS    = data.ADDRESS;
-      this.LAT        = data.LAT;
-      this.LONG       = data.LONG;
+      this.dataStorage = data;
     });
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -53,30 +33,14 @@ export class FormStep1Page implements OnInit {
     await loading.present();
   }
   async form(event){
-    let id = event.srcElement.id;
-    let dataAnswer = {
-      "MEMBER":this.MEMBER,
-      "PERSON_NO":this.PERSON_NO,
-      "SEX":this.SEX,
-      "AGE":this.AGE,
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "SMOKE":id,
-    }
-    await this.storage.set('formfamily',dataAnswer);
-    
-    if(id == "1"){
-      await this.router.navigateByUrl('formthree/form-step2');
+    let answerVal = event.srcElement.id;
+    this.dataStorage[this.id].SMOKE = answerVal;
+    await this.storage.set('formfamily',this.dataStorage);
+
+    if(answerVal == "1"){
+      await this.router.navigateByUrl('formthree/form-step2/'+this.id);
     }else{
-      await this.router.navigateByUrl('formthree/form-step4');
+      await this.router.navigateByUrl('formthree/form-step4/'+this.id);
     }
   }
 }

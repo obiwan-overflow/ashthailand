@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class FormStep3Page implements OnInit {
 
   dataStorage:any = [];
+  id:any;
   private ionicForm : FormGroup;
   constructor(
     public storage:Storage,
@@ -21,7 +22,8 @@ export class FormStep3Page implements OnInit {
     public alertController:AlertController,
     public loadingController:LoadingController,
     public toastController:ToastController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public route:ActivatedRoute
   ) {
     this.ionicForm = this.formBuilder.group({
       YEAR: ['',[Validators.required]]
@@ -31,6 +33,7 @@ export class FormStep3Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
+    this.id = await this.route.snapshot.paramMap.get('id');
     this.dataStorage = await this.storage.get('formfamily');
 
     const loading = await this.loadingController.create({
@@ -42,30 +45,14 @@ export class FormStep3Page implements OnInit {
   }
   async Form(){
     let year = this.ionicForm.value.YEAR;
-    let dataAnswer = {
-      "MEMBER":this.dataStorage.MEMBER,
-      "PERSON_NO":this.dataStorage.PERSON_NO,
-      "SEX":this.dataStorage.SEX,
-      "AGE":this.dataStorage.AGE,
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "VIL":this.dataStorage.VIL,
-      "MOO":this.dataStorage.MOO,
-      "A1":this.dataStorage.A1,
-      "NAME":this.dataStorage.NAME,
-      "ADDRESS":this.dataStorage.ADDRESS,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "SMOKE":this.dataStorage.SMOKE,
-      "EVERSMOKE":this.dataStorage.EVERSMOKE,
-      "EXSMOKE_Y":year
-    }
-    await this.storage.set('formfamily',dataAnswer);
+
+    this.dataStorage[this.id].EXSMOKE_Y = year;
+    await this.storage.set('formfamily',this.dataStorage);
+
     if(year < this.dataStorage.AGE){
       if((this.dataStorage.AGE - year) > 6){
         if(year == 0){
-          this.router.navigateByUrl('formthree/form-step3b');
+          this.router.navigateByUrl('formthree/form-step3b/'+this.id);
         }else{
           this.formConfirm(year);
         }
@@ -73,7 +60,7 @@ export class FormStep3Page implements OnInit {
         this.ConfirmOrEdit(year);
       }
     }else if (year == 88){
-      this.router.navigateByUrl('formthree/form-step3b');
+      this.router.navigateByUrl('formthree/form-step3b/'+this.id);
     }else{
       this.presentAlertConfirm();
     }
@@ -95,37 +82,38 @@ export class FormStep3Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            console.log('Confirm Okay');
-
-            const formData = new FormData();
-            formData.append('cat_id',"3");
-            formData.append('user_id',userId);
-            formData.append('MEMBER',this.dataStorage.MEMBER),
-            formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
-            formData.append('SEX',this.dataStorage.SEX),
-            formData.append('AGE',this.dataStorage.AGE),
-            formData.append('CWT',this.dataStorage.CWT);
-            formData.append('TMP',this.dataStorage.TMP);
-            formData.append('ID1',this.dataStorage.ID1);
-            formData.append('VIL',this.dataStorage.VIL);
-            formData.append('MOO',this.dataStorage.MOO);
-            formData.append('A1',this.dataStorage.A1);
-            formData.append('NAME',this.dataStorage.NAME);
-            formData.append('ADDRESS',this.dataStorage.ADDRESS);
-            formData.append('LAT',this.dataStorage.LAT);
-            formData.append('LONG',this.dataStorage.LONG);
-            formData.append('SMOKE',this.dataStorage.SMOKE);
-            formData.append('EVERSMOKE',this.dataStorage.EVERSMOKE);
-            formData.append('EXSMOKE_Y',year);
-            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-              if(res.result == 'success'){
-                if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
-                  this.router.navigateByUrl('/formthree/form-family-lists');
-                }else{
-                  this.memberSuccess();
-                }
-              }
-            });
+            this.dataStorage[this.id].status   = "success";
+            this.storage.set('formfamily',this.dataStorage);
+            this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
+            // const formData = new FormData();
+            // formData.append('cat_id',"3");
+            // formData.append('user_id',userId);
+            // formData.append('MEMBER',this.dataStorage.MEMBER),
+            // formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
+            // formData.append('SEX',this.dataStorage.SEX),
+            // formData.append('AGE',this.dataStorage.AGE),
+            // formData.append('CWT',this.dataStorage.CWT);
+            // formData.append('TMP',this.dataStorage.TMP);
+            // formData.append('ID1',this.dataStorage.ID1);
+            // formData.append('VIL',this.dataStorage.VIL);
+            // formData.append('MOO',this.dataStorage.MOO);
+            // formData.append('A1',this.dataStorage.A1);
+            // formData.append('NAME',this.dataStorage.NAME);
+            // formData.append('ADDRESS',this.dataStorage.ADDRESS);
+            // formData.append('LAT',this.dataStorage.LAT);
+            // formData.append('LONG',this.dataStorage.LONG);
+            // formData.append('SMOKE',this.dataStorage.SMOKE);
+            // formData.append('EVERSMOKE',this.dataStorage.EVERSMOKE);
+            // formData.append('EXSMOKE_Y',year);
+            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+            //   if(res.result == 'success'){
+            //     if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
+            //       this.router.navigateByUrl('/formthree/form-family-lists');
+            //     }else{
+            //       this.memberSuccess();
+            //     }
+            //   }
+            // });
           }
         }
       ]
@@ -169,35 +157,38 @@ export class FormStep3Page implements OnInit {
         }, {
           text: 'ยืนยัน',
           handler: () => {
-            const formData = new FormData();
-            formData.append('cat_id',"3");
-            formData.append('user_id',userId);
-            formData.append('MEMBER',this.dataStorage.MEMBER),
-            formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
-            formData.append('SEX',this.dataStorage.SEX),
-            formData.append('AGE',this.dataStorage.AGE),
-            formData.append('CWT',this.dataStorage.CWT);
-            formData.append('TMP',this.dataStorage.TMP);
-            formData.append('ID1',this.dataStorage.ID1);
-            formData.append('VIL',this.dataStorage.VIL);
-            formData.append('MOO',this.dataStorage.MOO);
-            formData.append('A1',this.dataStorage.A1);
-            formData.append('NAME',this.dataStorage.NAME);
-            formData.append('ADDRESS',this.dataStorage.ADDRESS);
-            formData.append('LAT',this.dataStorage.LAT);
-            formData.append('LONG',this.dataStorage.LONG);
-            formData.append('SMOKE',this.dataStorage.SMOKE);
-            formData.append('EVERSMOKE',this.dataStorage.EVERSMOKE);
-            formData.append('EXSMOKE_Y',year);
-            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-              if(res.result == 'success'){
-                if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
-                  this.router.navigateByUrl('/formthree/form-family-lists');
-                }else{
-                  this.memberSuccess();
-                }
-              }
-            });
+            this.dataStorage[this.id].status   = "success";
+            this.storage.set('formfamily',this.dataStorage);
+            this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
+            // const formData = new FormData();
+            // formData.append('cat_id',"3");
+            // formData.append('user_id',userId);
+            // formData.append('MEMBER',this.dataStorage.MEMBER),
+            // formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
+            // formData.append('SEX',this.dataStorage.SEX),
+            // formData.append('AGE',this.dataStorage.AGE),
+            // formData.append('CWT',this.dataStorage.CWT);
+            // formData.append('TMP',this.dataStorage.TMP);
+            // formData.append('ID1',this.dataStorage.ID1);
+            // formData.append('VIL',this.dataStorage.VIL);
+            // formData.append('MOO',this.dataStorage.MOO);
+            // formData.append('A1',this.dataStorage.A1);
+            // formData.append('NAME',this.dataStorage.NAME);
+            // formData.append('ADDRESS',this.dataStorage.ADDRESS);
+            // formData.append('LAT',this.dataStorage.LAT);
+            // formData.append('LONG',this.dataStorage.LONG);
+            // formData.append('SMOKE',this.dataStorage.SMOKE);
+            // formData.append('EVERSMOKE',this.dataStorage.EVERSMOKE);
+            // formData.append('EXSMOKE_Y',year);
+            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+            //   if(res.result == 'success'){
+            //     if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
+            //       this.router.navigateByUrl('/formthree/form-family-lists');
+            //     }else{
+            //       this.memberSuccess();
+            //     }
+            //   }
+            // });
           }
         }
       ]

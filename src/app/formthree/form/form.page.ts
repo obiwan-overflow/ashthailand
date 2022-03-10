@@ -18,6 +18,7 @@ export class FormPage implements OnInit {
   latitude:any;
   longitude:any;
   dataStorage:any = [];
+  dataProvin:any = [];
 
   loading:any;
   constructor(
@@ -46,7 +47,8 @@ export class FormPage implements OnInit {
     });
     this.loading.present();
     this.loadData();
-    this.dataStorage = await this.storage.get('formfamily');
+    this.dataStorage  = await this.storage.get('formfamily');
+    this.dataProvin   = await this.storage.get('userData');
   }
   async loadData(){
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -63,9 +65,9 @@ export class FormPage implements OnInit {
     }else{
       if(this.dataStorage == null){
         let dataAnswer = [{
-          "CWT":this.province,
-          "TMP":this.district,
-          "ID1":this.subdistrict,
+          "CWT":this.dataProvin.province,
+          "TMP":this.dataProvin.district,
+          "ID1":this.dataProvin.subdistrict,
           "LAT":this.latitude,
           "LONG":this.longitude,
         }];
@@ -73,9 +75,9 @@ export class FormPage implements OnInit {
         this.router.navigateByUrl('/formthree/form2');
       }else{
         let dataAnswer = {
-          "CWT":this.province,
-          "TMP":this.district,
-          "ID1":this.subdistrict,
+          "CWT":this.dataProvin.province,
+          "TMP":this.dataProvin.district,
+          "ID1":this.dataProvin.subdistrict,
           "LAT":this.latitude,
           "LONG":this.longitude,
         };

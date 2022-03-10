@@ -275,7 +275,7 @@ const routes: Routes = [
     loadChildren: () => import('./formthree/form-response/form-response.module').then( m => m.FormResponsePageModule)
   },
   {
-    path: 'formthree/form-family-lists',
+    path: 'formthree/form-family-lists/:id/:status',
     loadChildren: () => import('./formthree/form-family-lists/form-family-lists.module').then( m => m.FormFamilyListsPageModule)
   },
   {

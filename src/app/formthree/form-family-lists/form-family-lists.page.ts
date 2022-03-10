@@ -11,12 +11,16 @@ import { LoadingController,ToastController,AlertController } from '@ionic/angula
 export class FormFamilyListsPage implements OnInit {
 
   dataStorage:any = [];
+  dataStorageAll:any = [];
+  id:any;
+  status:any;
   // member:any;
   constructor(
     private storage: Storage,
     public router:Router,
     public loadingController:LoadingController,
-    public alertController:AlertController
+    public alertController:AlertController,
+    public route:ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -31,9 +35,35 @@ export class FormFamilyListsPage implements OnInit {
       duration: 200
     });
     await loading.present();
-    this.dataStorage = await this.storage.get('formfamily');
+    this.id     = this.route.snapshot.paramMap.get('id');
+    this.status = this.route.snapshot.paramMap.get('status');
+    await this.storage.get('formfamily').then((data)=>{
+      this.dataStorage    = data[this.id];
+      this.dataStorageAll = data; 
+    });
   }
   async btnStartTest(data){
     this.router.navigateByUrl('/formthree/form4/'+data);
+  }
+  async btnStart(){
+    if(this.status == "success"){
+      let dataAnswer = {
+        "CWT":this.dataStorage.CWT,
+        "TMP":this.dataStorage.TMP,
+        "ID1":this.dataStorage.ID1,
+        "LAT":this.dataStorage.LAT,
+        "LONG":this.dataStorage.LONG,
+        "MOO":this.dataStorage.MOO,
+        "VIL":this.dataStorage.VIL,
+        "A1":this.dataStorage.A1,
+        "MEMBER":this.dataStorage.MEMBER,
+        "PERSON_NO":this.dataStorage.PERSON_NO + 1,
+      };
+      await this.dataStorageAll.push(dataAnswer);
+      await this.storage.set('formfamily',this.dataStorageAll);
+      this.router.navigateByUrl('/formthree/form4/'+this.id);
+    }else if (this.status == "continue"){
+      this.router.navigateByUrl('/formthree/form4/'+this.id);
+    }
   }
 }
