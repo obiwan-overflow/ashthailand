@@ -14,6 +14,8 @@ export class FormFamilyListsPage implements OnInit {
   dataStorage:any = [];
   dataStorageAll:any = [];
   datafamily:any = [];
+  dataOutfamily:any = [];
+
   id:any;
   status:any;
   // member:any;
@@ -116,27 +118,7 @@ export class FormFamilyListsPage implements OnInit {
     }
     await this.presentAlertConfirm();
   }
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'สำเร็จ!',
-      message: 'เก็บข้อมูลเรียบร้อย',
-      backdropDismiss:false,
-      buttons: [
-        {
-          text: 'ตกลง',
-          handler: () => {
-            this.router.navigateByUrl('tabs/form');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-
-  async presentAlertPrompt() {
+  async updateMember() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'แก้ไขจำนวนสมาชิก!',
@@ -165,6 +147,32 @@ export class FormFamilyListsPage implements OnInit {
               }
             }
             this.storage.set('formfamily',this.dataStorageAll);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async btnDelete(data){
+    this.datafamily.splice(data,1);
+    console.log(this.datafamily);
+    console.log(this.dataOutfamily);
+  }
+
+
+  // alert
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'สำเร็จ!',
+      message: 'เก็บข้อมูลเรียบร้อย',
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.router.navigateByUrl('tabs/form');
           }
         }
       ]
