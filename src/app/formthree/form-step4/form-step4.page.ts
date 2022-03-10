@@ -45,11 +45,12 @@ export class FormStep4Page implements OnInit {
   }
   async Form(){
     let year = this.ionicForm.value.YEAR;
+    let age  = parseInt(this.dataStorage[this.id].AGE);
     this.dataStorage[this.id].TIME_Y = year;
     await this.storage.set('formfamily',this.dataStorage);
 
-    if(year < this.dataStorage[this.id].AGE){
-      if((this.dataStorage[this.id].AGE - year) > 6){
+    if(year < age){
+      if((age - year) > 6){
         if(year == 0){
           this.router.navigateByUrl('formthree/form-step4b/'+this.id);
         }else{
@@ -60,7 +61,7 @@ export class FormStep4Page implements OnInit {
       }
     }else if (year == 88){
       this.router.navigateByUrl('formthree/form-step4b/'+this.id);
-    }else{
+    }else if (year > age){
       this.presentAlertConfirm();
     }
   }

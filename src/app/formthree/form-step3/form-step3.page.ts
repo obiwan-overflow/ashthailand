@@ -45,12 +45,12 @@ export class FormStep3Page implements OnInit {
   }
   async Form(){
     let year = this.ionicForm.value.YEAR;
-
+    let age  = parseInt(this.dataStorage[this.id].AGE);
     this.dataStorage[this.id].EXSMOKE_Y = year;
     await this.storage.set('formfamily',this.dataStorage);
 
-    if(year < this.dataStorage[this.id].AGE){
-      if((this.dataStorage[this.id].AGE - year) > 6){
+    if(year < age){
+      if((age - year) > 6){
         if(year == 0){
           this.router.navigateByUrl('formthree/form-step3b/'+this.id);
         }else{
