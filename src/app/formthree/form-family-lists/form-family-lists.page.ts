@@ -51,6 +51,8 @@ export class FormFamilyListsPage implements OnInit {
         if(val.PERSON_NO !== undefined){
           this.datafamily.push(val);
         }
+      }else{
+        this.dataOutfamily.push(val);
       }
     }
   }
@@ -155,9 +157,11 @@ export class FormFamilyListsPage implements OnInit {
     await alert.present();
   }
   async btnDelete(data){
-    this.datafamily.splice(data,1);
-    console.log(this.datafamily);
-    console.log(this.dataOutfamily);
+    // let newData = [];
+    // this.datafamily.splice(data,1);
+    // newData.push(this.datafamily);
+    // newData.push(this.dataOutfamily);
+    // this.storage.set('formfamily',newData);
   }
 
 
