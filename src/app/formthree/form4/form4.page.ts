@@ -49,22 +49,6 @@ export class Form4Page implements OnInit {
     this.dataStorage[this.id].PERSON_NO   = this.dataStorage[this.id].PERSON_NO == undefined ? 1 : this.dataStorage[this.id].PERSON_NO;
     await this.storage.set('formfamily',this.dataStorage);
 
-    // let dataAnswer = {
-    //   "CWT":this.dataStorage.CWT,
-    //   "TMP":this.dataStorage.TMP,
-    //   "ID1":this.dataStorage.ID1,
-    //   "LAT":this.dataStorage.LAT,
-    //   "LONG":this.dataStorage.LONG,
-    //   "MOO":this.dataStorage.MOO,
-    //   "VIL":this.dataStorage.VIL,
-    //   "A1":this.dataStorage.A1,
-    //   "MEMBER":this.dataStorage.MEMBER,
-    //   "PERSON_NO":this.dataStorage.PERSON_NO,
-    //   "NAME":form.value.NAME,
-    //   "SEX":form.value.SEX,
-    //   "AGE":form.value.AGE,
-    // }
-    // await this.storage.set('formfamily',dataAnswer);
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
       this.presentToast();
     }else if (form.value.AGE >= 15){
@@ -72,10 +56,6 @@ export class Form4Page implements OnInit {
     }else if(form.value.AGE <= 14){
       this.formConfirm(form.value.NAME,form.value.SEX,form.value.AGE);
     }
-    // var datafamily = await this.storage.get('formfamily');
-    // var datamember = datafamily[2];
-    // datamember.NAME = form.value.NAME;
-    // console.log(datafamily);
   }
   async formConfirm(NAME,SEX,AGE){
     const userId = await this.storage.get('userId');

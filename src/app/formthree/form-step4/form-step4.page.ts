@@ -26,7 +26,7 @@ export class FormStep4Page implements OnInit {
     public route:ActivatedRoute
   ) {
     this.ionicForm = this.formBuilder.group({
-      YEAR: ['',[Validators.required,Validators.max(99)]]
+      YEAR: ['',[Validators.required]]
     });
   }
 
@@ -48,8 +48,8 @@ export class FormStep4Page implements OnInit {
     this.dataStorage[this.id].TIME_Y = year;
     await this.storage.set('formfamily',this.dataStorage);
 
-    if(year < this.dataStorage.AGE){
-      if((this.dataStorage.AGE - year) > 6){
+    if(year < this.dataStorage[this.id].AGE){
+      if((this.dataStorage[this.id].AGE - year) > 6){
         if(year == 0){
           this.router.navigateByUrl('formthree/form-step4b/'+this.id);
         }else{

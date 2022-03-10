@@ -38,13 +38,13 @@ export class FormResponsePage implements OnInit {
   async form(event){
     let answerVal = event.srcElement.id;
     if(answerVal == "1"){
-      if(this.dataStorage[this.id].CIG == '1'){
+      if(this.dataStorage[this.id].CIG == "1"){
 
         this.dataStorage[this.id].RESPONSE   = answerVal;
         await this.storage.set('formfamily',this.dataStorage);
         await this.router.navigateByUrl('formthree/form-step10/'+this.id);
 
-      }else if(this.dataStorage[this.id].ROLL == '1' || this.dataStorage[this.id].E_CIG == '1' || this.dataStorage[this.id].OTHER == '1'){
+      }else if(this.dataStorage[this.id].ROLL == "1" || this.dataStorage[this.id].E_CIG == "1" || this.dataStorage[this.id].OTHER == "1"){
         
         this.dataStorage[this.id].RESPONSE   = answerVal;
         await this.storage.set('formfamily',this.dataStorage);

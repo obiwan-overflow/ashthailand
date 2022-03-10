@@ -18,20 +18,26 @@
           <p>บ้านเลขที่ : {{dataStorage.A1}}</p>
         </ion-text>
       </ion-col>
-      <ion-col size="12">
-        <a class="btn-answer-family active" (click)="btnStart()">เริ่มแบบทดสอบ</a>
+      <ion-col size="12" *ngIf="datafamily.length < dataStorage.MEMBER">
+        <a class="btn-answer-family" (click)="btnStart()">เริ่มแบบทดสอบ</a>
       </ion-col>
       <!-- <ion-col size="12">
         <a class="btn-answer-family" href="/formthree/form4">ทำคนถัดไป</a>
       </ion-col> -->
-      <!-- <ion-col size="12">
+      <ion-col size="12">
         <ion-list lines="full" *ngIf="dataStorage">
-          <ion-item color="family" class="list-member" *ngFor="let data of dataStorage,let key = index" (click)="btnStartTest(key)">
+          <ion-item color="family" class="list-member" *ngFor="let data of datafamily">
             <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-            <ion-label>สมาชิกคนที่ {{key+1}}</ion-label>
+            <ion-label>{{data.NAME}}</ion-label>
           </ion-item>
         </ion-list>
-      </ion-col> -->
+      </ion-col>
+      <ion-col size="12" *ngIf="datafamily.length == dataStorage.MEMBER">
+        <a class="btn-answer-family" (click)="presentAlertPrompt()">แก้ไขจำนวนสมาชิก</a>
+      </ion-col>
+      <ion-col size="12" *ngIf="datafamily.length >= dataStorage.MEMBER">
+        <a class="btn-answer-family active" (click)="btnApprove()">บันทึกข้อมูล</a>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

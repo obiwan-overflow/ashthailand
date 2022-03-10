@@ -37,9 +37,9 @@ export class FormStep7Page implements OnInit {
   }
   async form(event){
     let answerVal = event.srcElement.id;
-    this.dataStorage[this.id].TIME_M  = this.dataStorage.TIME_M === undefined ? "" : this.dataStorage.TIME_M;
-    this.dataStorage[this.id].NO1     = this.dataStorage.NO1 === undefined ? "" : this.dataStorage.NO1;
-    this.dataStorage[this.id].NO2     = this.dataStorage.NO2 === undefined ? "" : this.dataStorage.NO2;
+    // this.dataStorage[this.id].TIME_M  = this.dataStorage.TIME_M === undefined ? "" : this.dataStorage.TIME_M;
+    // this.dataStorage[this.id].NO1     = this.dataStorage.NO1 === undefined ? "" : this.dataStorage.NO1;
+    // this.dataStorage[this.id].NO2     = this.dataStorage.NO2 === undefined ? "" : this.dataStorage.NO2;
     this.dataStorage[this.id].E_CIG   = answerVal;
    
     await this.storage.set('formfamily',this.dataStorage);
