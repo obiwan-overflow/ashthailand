@@ -11,67 +11,25 @@ import { AlertController,LoadingController } from '@ionic/angular';
 })
 export class FormStep12Page implements OnInit {
 
-  MEMBER:any;
-  PERSON_NO:any;
-  SEX:any;
-  AGE:any;
-  CWT:any;
-  TMP:any;
-  ID1:any;
-  VIL:any;
-  MOO:any;
-  A1:any;
-  NAME:any;
-  ADDRESS:any;
-  LAT:any;
-  LONG:any;
-  SMOKE:any;
-  TIME_Y:any;
-  TIME_M:any;
-  CIG:any;
-  ROLL:any;
-  E_CIG:any;
-  OTHER:any;
-  NO1:any;
-  NO2:any;
-  RESPONSE:any;
-  TYPE_CIG:any;
-  SECOND:any;
-  constructor(public storage:Storage,public api:RestApiService,public router:Router,public alertController:AlertController,public loadingController:LoadingController) {
+  dataStorage:any = [];
+  id:any;
+  constructor(
+    public storage:Storage,
+    public api:RestApiService,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController,
+    public route:ActivatedRoute
+  ) {
 
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('formfamily').then((data)=>{
-      this.MEMBER     = data.MEMBER;
-      this.PERSON_NO  = data.PERSON_NO;
-      this.SEX        = data.SEX;
-      this.AGE        = data.AGE;
-      this.CWT        = data.CWT;
-      this.TMP        = data.TMP;
-      this.ID1        = data.ID1;
-      this.VIL        = data.VIL;
-      this.MOO        = data.MOO;
-      this.A1         = data.A1;
-      this.NAME       = data.NAME;
-      this.ADDRESS    = data.ADDRESS;
-      this.LAT        = data.LAT;
-      this.LONG       = data.LONG;
-      this.SMOKE      = data.SMOKE;
-      this.TIME_Y     = data.TIME_Y;
-      this.TIME_M     = data.TIME_M === undefined ? "" : data.TIME_M;
-      this.CIG        = data.CIG === undefined ? "" : data.CIG;
-      this.NO1        = data.NO1 === undefined ? "" : data.NO1;
-      this.ROLL       = data.ROLL === undefined ? "" : data.ROLL;
-      this.NO2        = data.NO2 === undefined ? "" : data.NO2;
-      this.E_CIG      = data.E_CIG === undefined ? "" : data.E_CIG;
-      this.OTHER      = data.OTHER === undefined ? "" : data.OTHER;
-      this.RESPONSE   = data.RESPONSE === undefined ? "" : data.RESPONSE;
-      this.TYPE_CIG   = data.TYPE_CIG === undefined ? "" : data.TYPE_CIG;
-      this.SECOND     = data.SECOND === undefined ? "" : data.SECOND;
-    });
+    this.id = await this.route.snapshot.paramMap.get('id');
+    this.dataStorage = await this.storage.get('formfamily');
+
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -80,40 +38,23 @@ export class FormStep12Page implements OnInit {
     await loading.present();
   }
   async form(event){
-    let id = event.srcElement.id;
-    let dataAnswer = {
-      "MEMBER":this.MEMBER,
-      "PERSON_NO":this.PERSON_NO,
-      "SEX":this.SEX,
-      "AGE":this.AGE,
-      "CWT":this.CWT,
-      "TMP":this.TMP,
-      "ID1":this.ID1,
-      "VIL":this.VIL,
-      "MOO":this.MOO,
-      "A1":this.A1,
-      "NAME":this.NAME,
-      "ADDRESS":this.ADDRESS,
-      "LAT":this.LAT,
-      "LONG":this.LONG,
-      "SMOKE":this.SMOKE,
-      "TIME_Y":this.TIME_Y,
-      "TIME_M":this.TIME_M,
-      "CIG":this.CIG,
-      "NO1":this.NO1,
-      "ROLL":this.ROLL,
-      "NO2":this.NO2,
-      "E_CIG":this.E_CIG,
-      "OTHER":this.OTHER,
-      "RESPONSE":this.RESPONSE,
-      "TYPE_CIG":this.TYPE_CIG,
-      "SECOND":this.SECOND,
-      "QUITE_CHECK":id
-    }
-    await this.storage.set('formfamily',dataAnswer);
-    this.formConfirm(id);
+    let answerVal = event.srcElement.id;
+    this.dataStorage[this.id].TIME_M        = this.dataStorage.TIME_M === undefined ? "" : this.dataStorage.TIME_M;
+    this.dataStorage[this.id].CIG           = this.dataStorage.CIG === undefined ? "" : this.dataStorage.CIG;
+    this.dataStorage[this.id].NO1           = this.dataStorage.NO1 === undefined ? "" : this.dataStorage.NO1;
+    this.dataStorage[this.id].ROLL          = this.dataStorage.ROLL === undefined ? "" : this.dataStorage.ROLL;
+    this.dataStorage[this.id].NO2           = this.dataStorage.NO2 === undefined ? "" : this.dataStorage.NO2;
+    this.dataStorage[this.id].E_CIG         = this.dataStorage.E_CIG === undefined ? "" : this.dataStorage.E_CIG;
+    this.dataStorage[this.id].OTHER         = this.dataStorage.OTHER === undefined ? "" : this.dataStorage.OTHER;
+    this.dataStorage[this.id].RESPONSE      = this.dataStorage.RESPONSE === undefined ? "" : this.dataStorage.RESPONSE;
+    this.dataStorage[this.id].TYPE_CIG      = this.dataStorage.TYPE_CIG === undefined ? "" : this.dataStorage.TYPE_CIG;
+    this.dataStorage[this.id].SECOND        = this.dataStorage.SECOND === undefined ? "" : this.dataStorage.SECOND;
+    this.dataStorage[this.id].QUITE_CHECK   = answerVal;
+    
+    await this.storage.set('formfamily',this.dataStorage);
+    this.formConfirm(answerVal);
   }
-  async formConfirm(id){
+  async formConfirm(answerVal){
     const userId = await this.storage.get('userId');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -130,46 +71,47 @@ export class FormStep12Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            console.log('Confirm Okay');
-
-            const formData = new FormData();
-            formData.append('cat_id',"3");
-            formData.append('user_id',userId);
-            formData.append('MEMBER',this.MEMBER),
-            formData.append('PERSON_NO',this.PERSON_NO),
-            formData.append('SEX',this.SEX),
-            formData.append('AGE',this.AGE),
-            formData.append('CWT',this.CWT);
-            formData.append('TMP',this.TMP);
-            formData.append('ID1',this.ID1);
-            formData.append('VIL',this.VIL);
-            formData.append('MOO',this.MOO);
-            formData.append('A1',this.A1);
-            formData.append('NAME',this.NAME);
-            formData.append('ADDRESS',this.ADDRESS);
-            formData.append('LAT',this.LAT);
-            formData.append('LONG',this.LONG);
-            formData.append('SMOKE',this.SMOKE);
-            formData.append('TIME_Y',this.TIME_Y);
-            formData.append('TIME_M',this.TIME_M);
-            formData.append('CIG',this.CIG);
-            formData.append('ROLL',this.ROLL);
-            formData.append('E_CIG',this.E_CIG);
-            formData.append('OTHER',this.OTHER);
-            formData.append('NO1',(this.NO1+this.NO2));
-            formData.append('RESPONSE',this.RESPONSE);
-            formData.append('TYPE_CIG',this.TYPE_CIG);
-            formData.append('SECOND',this.SECOND);
-            formData.append('QUITE_CHECK',id);
-            this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-              if(res.result == 'success'){
-                if(this.MEMBER - this.PERSON_NO !== 0){
-                  this.router.navigateByUrl('/formthree/form-family-lists');
-                }else{
-                  this.presentAlertConfirm();
-                }
-              }
-            });
+            this.dataStorage[this.id].status   = "success";
+            this.storage.set('formfamily',this.dataStorage);
+            this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
+            // const formData = new FormData();
+            // formData.append('cat_id',"3");
+            // formData.append('user_id',userId);
+            // formData.append('MEMBER',this.MEMBER),
+            // formData.append('PERSON_NO',this.PERSON_NO),
+            // formData.append('SEX',this.SEX),
+            // formData.append('AGE',this.AGE),
+            // formData.append('CWT',this.CWT);
+            // formData.append('TMP',this.TMP);
+            // formData.append('ID1',this.ID1);
+            // formData.append('VIL',this.VIL);
+            // formData.append('MOO',this.MOO);
+            // formData.append('A1',this.A1);
+            // formData.append('NAME',this.NAME);
+            // formData.append('ADDRESS',this.ADDRESS);
+            // formData.append('LAT',this.LAT);
+            // formData.append('LONG',this.LONG);
+            // formData.append('SMOKE',this.SMOKE);
+            // formData.append('TIME_Y',this.TIME_Y);
+            // formData.append('TIME_M',this.TIME_M);
+            // formData.append('CIG',this.CIG);
+            // formData.append('ROLL',this.ROLL);
+            // formData.append('E_CIG',this.E_CIG);
+            // formData.append('OTHER',this.OTHER);
+            // formData.append('NO1',(this.NO1+this.NO2));
+            // formData.append('RESPONSE',this.RESPONSE);
+            // formData.append('TYPE_CIG',this.TYPE_CIG);
+            // formData.append('SECOND',this.SECOND);
+            // formData.append('QUITE_CHECK',id);
+            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
+            //   if(res.result == 'success'){
+            //     if(this.MEMBER - this.PERSON_NO !== 0){
+            //       this.router.navigateByUrl('/formthree/form-family-lists');
+            //     }else{
+            //       this.presentAlertConfirm();
+            //     }
+            //   }
+            // });
           }
         }
       ]

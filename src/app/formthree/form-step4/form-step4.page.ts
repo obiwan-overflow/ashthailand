@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class FormStep4Page implements OnInit {
 
   dataStorage:any = [];
+  id:any;
   private ionicForm:FormGroup;
   constructor(
     public storage:Storage,
@@ -21,7 +22,8 @@ export class FormStep4Page implements OnInit {
     public alertController:AlertController,
     public loadingController:LoadingController,
     public toastController:ToastController,
-    public formBuilder:FormBuilder
+    public formBuilder:FormBuilder,
+    public route:ActivatedRoute
   ) {
     this.ionicForm = this.formBuilder.group({
       YEAR: ['',[Validators.required,Validators.max(99)]]
@@ -31,6 +33,7 @@ export class FormStep4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
+    this.id = await this.route.snapshot.paramMap.get('id');
     this.dataStorage = await this.storage.get('formfamily');
    
     const loading = await this.loadingController.create({
@@ -42,37 +45,21 @@ export class FormStep4Page implements OnInit {
   }
   async Form(){
     let year = this.ionicForm.value.YEAR;
-    let dataAnswer = {
-      "MEMBER":this.dataStorage.MEMBER,
-      "PERSON_NO":this.dataStorage.PERSON_NO,
-      "SEX":this.dataStorage.SEX,
-      "AGE":this.dataStorage.AGE,
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "VIL":this.dataStorage.VIL,
-      "MOO":this.dataStorage.MOO,
-      "A1":this.dataStorage.A1,
-      "NAME":this.dataStorage.NAME,
-      "ADDRESS":this.dataStorage.ADDRESS,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "SMOKE":this.dataStorage.SMOKE,
-      "TIME_Y":year
-    }
-    await this.storage.set('formfamily',dataAnswer);
+    this.dataStorage[this.id].TIME_Y = year;
+    await this.storage.set('formfamily',this.dataStorage);
+
     if(year < this.dataStorage.AGE){
       if((this.dataStorage.AGE - year) > 6){
         if(year == 0){
-          this.router.navigateByUrl('formthree/form-step4b');
+          this.router.navigateByUrl('formthree/form-step4b/'+this.id);
         }else{
-          this.router.navigateByUrl('formthree/form-step5');
+          this.router.navigateByUrl('formthree/form-step5/'+this.id);
         }
       }else{
         this.ConfirmOrEdit();
       }
     }else if (year == 88){
-      this.router.navigateByUrl('formthree/form-step4b');
+      this.router.navigateByUrl('formthree/form-step4b/'+this.id);
     }else{
       this.presentAlertConfirm();
     }
@@ -113,7 +100,7 @@ export class FormStep4Page implements OnInit {
         }, {
           text: 'ยืนยัน',
           handler: () => {
-            this.router.navigateByUrl('formthree/form-step5');
+            this.router.navigateByUrl('formthree/form-step5/'+this.id);
           }
         }
       ]
