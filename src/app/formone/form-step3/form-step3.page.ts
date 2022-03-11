@@ -93,6 +93,7 @@ export class FormStep3Page implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ',
       message: 'เพราะไม่พบป้ายห้ามสูบทั้งภายในและภายนอกอาคาร !!!',
       backdropDismiss:false,
       buttons: [

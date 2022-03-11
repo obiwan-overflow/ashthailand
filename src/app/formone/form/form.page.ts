@@ -18,7 +18,7 @@ export class FormPage implements OnInit {
   province:any;
   district:any;
   subdistrict:any;
-  dataStorage:any;
+  dataStorage:any = [];
 
   loading:any;
 
@@ -69,6 +69,25 @@ export class FormPage implements OnInit {
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
       this.presentAlertConfirm();
     }else{
+      // if(this.dataStorage == null){
+      //   let dataAnswer = [{
+      //     "CWT":this.province,
+      //     "ID1":this.district,
+      //     "TMP":this.subdistrict,
+      //     "LAT":this.latitude,
+      //     "LONG":this.longitude,
+      //   }];
+      //   this.dataStorage = dataAnswer;
+      // }else{
+      //   let dataAnswer = {
+      //     "CWT":this.province,
+      //     "ID1":this.district,
+      //     "TMP":this.subdistrict,
+      //     "LAT":this.latitude,
+      //     "LONG":this.longitude,
+      //   };
+      //   this.dataStorage.push(dataAnswer);
+      // }
       let dataAnswer = {
         "CWT":this.province,
         "ID1":this.district,
@@ -76,7 +95,6 @@ export class FormPage implements OnInit {
         "LAT":this.latitude,
         "LONG":this.longitude,
       };
-      // await subArray.push(dataAnswer);
       await this.storage.set('formpublic',dataAnswer);
       await this.router.navigateByUrl('/formone/form2');
     }

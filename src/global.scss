@@ -245,8 +245,98 @@ ion-button {
         }
     }
 }
-
-
+.progress-shop {
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    ul {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        width: 100% !important;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            height: 4px;
+            width: 90%;
+            background: #83D6E7;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        li {
+            width: 10%;
+            float: left;
+            display: block;
+            text-align: center;
+            position: relative;
+            ion-icon {
+                color: #cccccc;
+                font-size: 25px;
+            }
+            &.active {
+                span {
+                    position: absolute;
+                    top: -25px;
+                    left: 4px;
+                }
+                ion-icon {
+                    color: #83D6E7 !important;
+                }
+            }
+        }
+    }
+}
+.progress-family {
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    ul {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        width: 100% !important;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            height: 4px;
+            width: 90%;
+            background: #A9D18E;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        li {
+            width: 10%;
+            float: left;
+            display: block;
+            text-align: center;
+            position: relative;
+            ion-icon {
+                color: #cccccc;
+                font-size: 25px;
+            }
+            &.active {
+                span {
+                    position: absolute;
+                    top: -25px;
+                    left: 4px;
+                }
+                ion-icon {
+                    color: #A9D18E !important;
+                }
+            }
+        }
+    }
+}
 .alertConfirm {
     text-align: center;
 }
