@@ -14,9 +14,9 @@
         <ion-text>
           <h3>สมาชิกในครัวเรือนมี {{dataStorage.MEMBER}} คน</h3>
           <a class="btn-answer-family" (click)="updateMember()">แก้ไขจำนวนสมาชิก</a>
-          <p>หมู่ที่ : {{dataStorage.MOO}}</p>
-          <p>ชื่อชุมชน/บ้าน : {{dataStorage.VIL}}</p>
-          <p>บ้านเลขที่ : {{dataStorage.A1}}</p>
+          <p>หมู่ที่ : {{MOO}}</p>
+          <p>ชื่อชุมชน/บ้าน : {{VIL}}</p>
+          <p>บ้านเลขที่ : {{A1}}</p>
         </ion-text>
       </ion-col>
       <ion-col size="12" *ngIf="datafamily.length < dataStorage.MEMBER">

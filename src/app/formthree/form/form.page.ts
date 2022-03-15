@@ -21,6 +21,7 @@ export class FormPage implements OnInit {
   dataProvin:any = [];
 
   loading:any;
+  fid:any;
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -49,6 +50,7 @@ export class FormPage implements OnInit {
     this.loadData();
     this.dataStorage  = await this.storage.get('formfamily');
     this.dataProvin   = await this.storage.get('userData');
+    this.fid          = this.dataStorage == null ? 1 : this.dataStorage.length+1;
   }
   async loadData(){
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -70,6 +72,7 @@ export class FormPage implements OnInit {
           "ID1":this.dataProvin.subdistrict,
           "LAT":this.latitude,
           "LONG":this.longitude,
+          "fid":this.fid
         }];
         this.storage.set('formfamily',dataAnswer);
         this.router.navigateByUrl('/formthree/form2');
@@ -80,6 +83,7 @@ export class FormPage implements OnInit {
           "ID1":this.dataProvin.subdistrict,
           "LAT":this.latitude,
           "LONG":this.longitude,
+          "fid":this.fid
         };
         await this.dataStorage.push(dataAnswer);
         await this.storage.set('formfamily',this.dataStorage);

@@ -61,7 +61,12 @@ export class Form3Page implements OnInit {
       
       this.dataStorage[this.index].MEMBER = this.todo.value.MEMBER;
       await this.storage.set('formfamily',this.dataStorage);
-      this.router.navigateByUrl('/formthree/form-family-lists/'+this.index+'/continue');
+      let MOO = this.dataStorage[this.index].MOO.replace("/","*kk*");
+      let VIL = this.dataStorage[this.index].VIL.replace("/","*kk*");
+      let A1  = this.dataStorage[this.index].A1.replace("/","*kk*");
+      this.router.navigateByUrl('/formthree/form-family-lists/'+MOO+'/'+VIL+'/'+A1+'/continue');
+      // this.router.navigateByUrl('/formthree/form-family-lists/'+this.index+'/continue');
+
       // var subArray = [];
       // for(let i = 1; i <= this.todo.value.MEMBER; i++){
       //   var dataAnswer = {

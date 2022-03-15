@@ -38,6 +38,9 @@ export class Form2Page implements OnInit {
     await loading.present();
   }
   async formData(form){
+    let MOO = form.value.MOO;
+    let VIL = form.value.VIL;
+    let A1  = form.value.A1;
     // let dataAnswer = {
     //   "MENBER":form.value.MENBER,
     //   "PERSON_NO":form.value.PERSON_NO,
@@ -54,7 +57,7 @@ export class Form2Page implements OnInit {
     //   "LAT":this.latitude,
     //   "LONG":this.longitude
     // }
-    if(form.value.MOO == '' || form.value.VIL == '' || form.value.A1 == ''){
+    if(MOO == '' || VIL == '' || A1 == ''){
       this.presentToast();
     }else{
       // let dataAnswer = {
@@ -67,9 +70,9 @@ export class Form2Page implements OnInit {
       //   "VIL":form.value.VIL,
       //   "A1":form.value.A1,
       // }
-      this.dataStorage[this.index].MOO = form.value.MOO;
-      this.dataStorage[this.index].VIL = form.value.VIL;
-      this.dataStorage[this.index].A1  = form.value.A1;
+      this.dataStorage[this.index].MOO = MOO;
+      this.dataStorage[this.index].VIL = VIL;
+      this.dataStorage[this.index].A1  = A1;
       await this.storage.set('formfamily',this.dataStorage);
       this.router.navigateByUrl('/formthree/form3');
     }
