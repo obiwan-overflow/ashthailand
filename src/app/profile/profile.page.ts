@@ -169,7 +169,8 @@ export class ProfilePage implements OnInit {
       message: 'การอัพโหลดรูปภาพมีปัญหา',
       duration: 10000,
       color:"danger",
-      position:"middle"
+      position:"middle",
+      cssClass: "customToast"
     });
     toast.present();
   }

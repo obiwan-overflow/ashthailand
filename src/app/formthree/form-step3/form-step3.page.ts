@@ -124,7 +124,7 @@ export class FormStep3Page implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'ตรวจสอบ!',
-      message: 'เพราะบันทึกจำนวนปีที่สูบไม่สัมพันธ์กับอายุปัจจุบัน',
+      message: 'เพราะบันทึกจำนวนปีที่เลิกสูบไม่สัมพันธ์กับอายุปัจจุบัน',
       backdropDismiss:false,
       buttons: [
         {

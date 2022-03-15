@@ -86,7 +86,8 @@ export class FormStep3Page implements OnInit {
       message: 'เพราะไม่พบป้ายห้ามสูบทั้งภายในแหละภายนอกอาคาร',
       duration: 2000,
       color:"danger",
-      position:"middle"
+      position:"middle",
+      cssClass: "customToast"
     });
     toast.present();
   }

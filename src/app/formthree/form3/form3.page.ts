@@ -116,6 +116,7 @@ export class Form3Page implements OnInit {
       duration: 2000,
       color:"danger",
       position:"middle",
+      cssClass: "customToast"
     });
     toast.present();
   }

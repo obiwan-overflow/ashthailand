@@ -338,8 +338,16 @@ ion-button {
     }
 }
 .alertConfirm {
-    text-align: center;
+    text-align: center !important;
 }
 .my-custom-class {
-    text-align: center;
+    text-align: center !important;
+}
+.alert-head {
+    text-align: center !important;
+}
+.customToast {
+    .toast-wrapper {
+        top: 70% !important;
+    } 
 }

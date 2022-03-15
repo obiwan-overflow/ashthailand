@@ -79,7 +79,8 @@ export class Form2Page implements OnInit {
       message: 'กรุณากรอกข้อมูล',
       duration: 2000,
       color:"danger",
-      position:"middle"
+      position:"middle",
+      cssClass: "customToast"
     });
     toast.present();
   }
