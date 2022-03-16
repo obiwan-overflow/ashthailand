@@ -42,10 +42,7 @@ export class FormFamilyListsPage implements OnInit {
     await this.storage.get('formfamily').then((data)=>{
       this.dataStorageAll = data;
     });
-    await this.checkPerson(this.dataStorageAll);
-  }
-  async checkPerson(data){
-    for (const val of data) {
+    for (const val of this.dataStorageAll){
       if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
         this.detail = val;
         if(val.PERSON_NO !== undefined){
@@ -53,7 +50,9 @@ export class FormFamilyListsPage implements OnInit {
         }
       }
     }
-    console.log(this.datafamily);
+  }
+  async ionViewWillLeave(){
+    this.datafamily = [];
   }
   async updateMember() {
     const alert = await this.alertController.create({
@@ -115,6 +114,36 @@ export class FormFamilyListsPage implements OnInit {
       let lastId = this.dataStorageAll.length - 1;
       this.router.navigateByUrl('/formthree/form4/'+lastId);
     }
+  }
+  async btnDelete(del){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ยืนยันการลบข้อมูล!',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'ยืนยัน',
+          handler: () => {
+            this.datafamily.splice(del,1);    
+            for (let val of this.dataStorageAll){
+              if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
+                this.dataStorageAll.splice(del,1);
+                break;
+              }
+            }
+            this.storage.set('formfamily',this.dataStorageAll);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   // async ionViewWillEnter(){
   //   const loading = await this.loadingController.create({
