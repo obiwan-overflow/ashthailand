@@ -5,7 +5,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthService } from 'src/app/AuthService';
-import { ActionSheetController,LoadingController,ToastController } from '@ionic/angular';
+import { ActionSheetController,LoadingController,ToastController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form4',
@@ -34,7 +34,8 @@ export class Form4Page implements OnInit {
     public auth:AuthService,
     public actionSheetController: ActionSheetController,
     public loadingController:LoadingController,
-    public toastController:ToastController
+    public toastController:ToastController,
+    public alertController:AlertController
   ) {
     this.titlePub = this.auth.titlePublic();
   }
@@ -53,7 +54,7 @@ export class Form4Page implements OnInit {
   }
   async formData(form){
     if(form.value.ADDRESS == '' || form.value.NAME == ''){
-      this.presentToast();
+      this.alert();
     }else{
       let dataAnswer = {
         "CWT":this.dataStorage.CWT,
@@ -145,15 +146,14 @@ export class Form4Page implements OnInit {
 
 
   // loadding
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'กรุณากรอกข้อมูล',
-      duration: 2000,
-      color:"danger",
-      position:"middle",
-      cssClass: "customToast"
+  async alert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ',
+      message: 'กรุณากรอกข้อมูล !!!',
     });
-    toast.present();
+
+    await alert.present();
   }
   async loadingImage() {
     this.loadingImg = await this.loadingController.create({

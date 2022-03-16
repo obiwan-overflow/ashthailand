@@ -50,7 +50,7 @@ export class Form4Page implements OnInit {
     await this.storage.set('formfamily',this.dataStorage);
 
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
-      this.presentToast();
+      this.alert();
     }else if (form.value.AGE >= 15){
       this.router.navigateByUrl('/formthree/form-step1/'+this.id);
     }else if(form.value.AGE <= 14){
@@ -122,15 +122,14 @@ export class Form4Page implements OnInit {
     });
     await alert.present();
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'กรุณากรอกข้อมูล',
-      duration: 2000,
-      color:"danger",
-      position:"middle",
-      cssClass: "customToast"
+  async alert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ',
+      message: 'กรุณากรอกข้อมูล !!!',
     });
-    toast.present();
+
+    await alert.present();
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

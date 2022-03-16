@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
-import { LoadingController,ToastController } from '@ionic/angular';
+import { LoadingController,ToastController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form2',
@@ -18,7 +18,8 @@ export class Form2Page implements OnInit {
     public route:ActivatedRoute,
     private storage: Storage,
     public loadingController:LoadingController,
-    public toastController:ToastController
+    public toastController:ToastController,
+    public alertController:AlertController
   ) {
     
   }
@@ -58,7 +59,7 @@ export class Form2Page implements OnInit {
     //   "LONG":this.longitude
     // }
     if(MOO == '' || VIL == '' || A1 == ''){
-      this.presentToast();
+      this.alert();
     }else{
       // let dataAnswer = {
       //   "CWT":this.dataStorage.CWT,
@@ -77,15 +78,14 @@ export class Form2Page implements OnInit {
       this.router.navigateByUrl('/formthree/form3');
     }
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'กรุณากรอกข้อมูล',
-      duration: 2000,
-      color:"danger",
-      position:"middle",
-      cssClass: "customToast"
+  async alert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ',
+      message: 'กรุณากรอกข้อมูล !!!',
     });
-    toast.present();
+
+    await alert.present();
   }
   todo = {
     MOO: '',

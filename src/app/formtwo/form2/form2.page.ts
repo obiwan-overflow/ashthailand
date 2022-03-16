@@ -4,7 +4,7 @@ import { RestApiService } from '../../rest-api.service';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from 'src/app/AuthService';
-import { LoadingController,ToastController } from '@ionic/angular';
+import { LoadingController,ToastController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form2',
@@ -22,7 +22,8 @@ export class Form2Page implements OnInit {
     private storage: Storage,
     public auth:AuthService,
     public loadingController:LoadingController,
-    public toastController:ToastController
+    public toastController:ToastController,
+    public alertController:AlertController
   ) {
     this.titleShop = this.auth.titleShop();
   }
@@ -41,7 +42,7 @@ export class Form2Page implements OnInit {
   }
   async formData(form){
     if(form.value.MOO == '' || form.value.VIL == ''){
-      this.presentToast();
+      this.alert();
     }else{
       let dataAnswer = {
         "CWT":this.dataStorage.CWT,
@@ -56,15 +57,14 @@ export class Form2Page implements OnInit {
       await this.router.navigateByUrl('/formtwo/form3');
     }
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'กรุณากรอกข้อมูล',
-      duration: 2000,
-      color:"danger",
-      position:"middle",
-      cssClass: "customToast"
+  async alert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ',
+      message: 'กรุณากรอกข้อมูล !!!',
     });
-    toast.present();
+
+    await alert.present();
   }
   todo = {
     MOO: '',

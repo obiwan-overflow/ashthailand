@@ -81,16 +81,6 @@ export class FormStep3Page implements OnInit {
       await this.router.navigateByUrl('formone/form-step4');
     }
   }
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'เพราะไม่พบป้ายห้ามสูบทั้งภายในแหละภายนอกอาคาร',
-      duration: 2000,
-      color:"danger",
-      position:"middle",
-      cssClass: "customToast"
-    });
-    toast.present();
-  }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
