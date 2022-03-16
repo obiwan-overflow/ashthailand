@@ -19,14 +19,14 @@
           <p>บ้านเลขที่ : {{A1}}</p>
         </ion-text>
       </ion-col>
-      <ion-col size="12" *ngIf="datafamily.length < dataStorage.MEMBER">
+      <ion-col size="12" *ngIf="datafamily.length < detail.MEMBER">
         <a class="btn-answer-family" (click)="btnStart()">เริ่มแบบทดสอบ</a>
       </ion-col>
       <!-- <ion-col size="12">
         <a class="btn-answer-family" href="/formthree/form4">ทำคนถัดไป</a>
       </ion-col> -->
       <ion-col size="12">
-        <ion-list lines="full" *ngIf="dataStorage">
+        <ion-list lines="full">
           <ion-item color="primary" class="list-member" *ngFor="let data of datafamily,let i = index">
             <ion-icon name="person-circle-outline" slot="start"></ion-icon>
             <ion-label>{{data.NAME}}</ion-label>

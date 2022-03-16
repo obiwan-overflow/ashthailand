@@ -15,6 +15,7 @@ export class FormFamilyListsPage implements OnInit {
   dataStorageAll:any = [];
   datafamily:any = [];
   dataOutfamily:any = [];
+  detail:any = [];
 
   id:any;
   status:any;
@@ -38,7 +39,13 @@ export class FormFamilyListsPage implements OnInit {
     this.VIL = await this.route.snapshot.paramMap.get('VIL').replace("*kk*","/");
     this.A1  = await this.route.snapshot.paramMap.get('A1').replace("*kk*","/");
     await this.storage.get('formfamily').then((data)=>{
-      this.dataStorageAll = data; 
+      for (let index = 0; index < data.length; index++) {
+        if(data[index].MOO == this.MOO && data[index].VIL == this.VIL && data[index].A1 == this.A1){
+          if(data[index].PERSON_NO !== undefined){
+            this.datafamily.push(data);
+          }
+        }
+      }
     });
   }
   // async ionViewWillEnter(){
