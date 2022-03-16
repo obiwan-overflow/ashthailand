@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col size="12">
         <ion-text>
-          <h3>สมาชิกในครัวเรือนมี {{dataStorage.MEMBER}} คน</h3>
+          <h3>สมาชิกในครัวเรือนมี {{detail.MEMBER}} คน</h3>
           <a class="btn-answer-family" (click)="updateMember()">แก้ไขจำนวนสมาชิก</a>
           <p>หมู่ที่ : {{MOO}}</p>
           <p>ชื่อชุมชน/บ้าน : {{VIL}}</p>
@@ -30,27 +30,13 @@
           <ion-item color="primary" class="list-member" *ngFor="let data of datafamily,let i = index">
             <ion-icon name="person-circle-outline" slot="start"></ion-icon>
             <ion-label>{{data.NAME}}</ion-label>
-            <!-- <ion-icon name="trash-sharp" slot="end" (click)="btnDelete(data.AGE,data.NAME,data.A1,data.MOO,data.VIL)"></ion-icon> -->
+            <ion-icon name="trash-sharp" slot="end" (click)="btnDelete()"></ion-icon>
           </ion-item>
         </ion-list>
       </ion-col>
-      <ion-col size="12" *ngIf="datafamily.length >= dataStorage.MEMBER">
+      <ion-col size="12" *ngIf="datafamily.length >= detail.MEMBER">
         <a class="btn-answer-family active" (click)="btnApprove()">บันทึกข้อมูล</a>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div class="progress-family">
-    <ul>
-      <li class="active"><span><ion-icon name="location-sharp" color="danger"></ion-icon></span><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
-    </ul>
-  </div>
 </ion-content>

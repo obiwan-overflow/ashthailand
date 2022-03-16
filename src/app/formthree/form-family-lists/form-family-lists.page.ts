@@ -35,18 +35,86 @@ export class FormFamilyListsPage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.MOO = await this.route.snapshot.paramMap.get('MOO').replace("*kk*","/");
-    this.VIL = await this.route.snapshot.paramMap.get('VIL').replace("*kk*","/");
-    this.A1  = await this.route.snapshot.paramMap.get('A1').replace("*kk*","/");
+    this.MOO      = await this.route.snapshot.paramMap.get('MOO').replace("*kk*","/");
+    this.VIL      = await this.route.snapshot.paramMap.get('VIL').replace("*kk*","/");
+    this.A1       = await this.route.snapshot.paramMap.get('A1').replace("*kk*","/");
+    this.status   = await this.route.snapshot.paramMap.get('status');
     await this.storage.get('formfamily').then((data)=>{
-      for (let index = 0; index < data.length; index++) {
-        if(data[index].MOO == this.MOO && data[index].VIL == this.VIL && data[index].A1 == this.A1){
-          if(data[index].PERSON_NO !== undefined){
-            this.datafamily.push(data);
-          }
+      this.dataStorageAll = data;
+    });
+    await this.checkPerson(this.dataStorageAll);
+  }
+  async checkPerson(data){
+    for (const val of data) {
+      if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
+        this.detail = val;
+        if(val.PERSON_NO !== undefined){
+          this.datafamily.push(val);
         }
       }
+    }
+    console.log(this.datafamily);
+  }
+  async updateMember() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'แก้ไขจำนวนสมาชิก!',
+      inputs: [
+        {
+          name: 'update',
+          type: 'number',
+          placeholder: 'กรุณากรอกจำนวน',
+          value: this.dataStorage.MEMBER
+        }
+      ],
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'บันทึก',
+          handler: (data) => {
+            for (const val of this.dataStorageAll){
+              if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
+                val.MEMBER = data.update;
+              }
+            }
+            this.storage.set('formfamily',this.dataStorageAll);
+          }
+        }
+      ]
     });
+
+    await alert.present();
+  }
+  async btnStart(){
+    if(this.status == "success"){
+      let dataAnswer = {
+        "CWT":this.detail.CWT,
+        "TMP":this.detail.TMP,
+        "ID1":this.detail.ID1,
+        "LAT":this.detail.LAT,
+        "LONG":this.detail.LONG,
+        "MOO":this.detail.MOO,
+        "VIL":this.detail.VIL,
+        "A1":this.detail.A1,
+        "MEMBER":this.detail.MEMBER,
+        "PERSON_NO":this.detail.PERSON_NO + 1,
+        "fid":this.detail.fid + 1,
+      };
+      await this.dataStorageAll.push(dataAnswer);
+      await this.storage.set('formfamily',this.dataStorageAll);
+      this.dataStorageAll = await this.storage.get('formfamily');
+      let lastId = this.dataStorageAll.length - 1;
+      this.router.navigateByUrl('/formthree/form4/'+lastId);
+    }else if (this.status == "continue"){
+      let lastId = this.dataStorageAll.length - 1;
+      this.router.navigateByUrl('/formthree/form4/'+lastId);
+    }
   }
   // async ionViewWillEnter(){
   //   const loading = await this.loadingController.create({

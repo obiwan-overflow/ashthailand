@@ -53,6 +53,7 @@ export class FormStep8Page implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
+      header: 'ตรวจสอบ',
       message: 'ต้องมีการสูบอย่างน้อย 1 ประเภท !!!',
       backdropDismiss:false,
       buttons: [

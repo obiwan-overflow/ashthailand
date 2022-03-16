@@ -18,25 +18,25 @@ ion-input {
 // }
 
 ion-item {
-    border: 2px solid #4097AA;
+    border: 2px solid #71BBEE;
     --background-activated: transparent;
     --ripple-color: transparent;
 }
 ion-label {
-    color: #4097AA;
+    color: #71BBEE;
     overflow: initial !important;
     white-space: initial !important;
     font-size: .9rem !important;
 }
 .question-a1 {
     --ion-item-color: #333;
-
+    border-radius: 100px;
     &:not(:last-child) {
         margin-bottom: 2.5%;
     }
   
     &.item-radio-checked {
-        --ion-item-background: #4097AA;
+        --ion-item-background: #71BBEE;
         --ion-item-color: #333;
     }
     ion-radio {

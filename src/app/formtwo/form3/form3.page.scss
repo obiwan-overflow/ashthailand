@@ -25,7 +25,7 @@ ion-label {
 }
 .question-a1 {
     --ion-item-color: #333;
-
+    border-radius: 100px;
     &:not(:last-child) {
         margin-bottom: 2.5%;
     }
