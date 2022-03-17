@@ -94,7 +94,7 @@ ion-label {
 }
 .btn-answer-public {
     display: block;
-    border: 2px solid #4097AA;
+    border: 2px solid #71BBEE;
     padding: 11px 30px 11px 30px !important;
     border-radius: 100px;
     margin-bottom: 20px;
@@ -103,12 +103,12 @@ ion-label {
     font-family: sarabun !important;
     line-height: 1.8;
     &.active {
-        border: 2px solid #4097AA !important;
-        background: #4097AA !important;
+        border: 2px solid #71BBEE !important;
+        background: #71BBEE !important;
         color: #000 !important;
     }
     &:hover {
-        background: #4097AA;
+        background: #71BBEE;
         color: #fff;
     }
 }

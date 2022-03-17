@@ -61,7 +61,7 @@ export class FormStep4Page implements OnInit {
       }
     }else if (year == 88){
       this.router.navigateByUrl('formthree/form-step4b/'+this.id);
-    }else if (year > age){
+    }else{
       this.presentAlertConfirm();
     }
   }

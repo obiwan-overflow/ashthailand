@@ -81,6 +81,8 @@ export class ProfilePage implements OnInit {
     await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
       this.detailProvince = res.detail;
       this.stopLoading();
+    },(err)=>{
+      this.stopLoading();
     });
   }
   async stopLoading(){

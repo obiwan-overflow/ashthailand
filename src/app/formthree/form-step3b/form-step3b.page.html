@@ -17,7 +17,7 @@
       </ion-col>
       <ion-col size="12">
         <form [formGroup]="ionicForm" (ngSubmit)="Form()">
-        <ion-select formControlName="month">
+        <ion-select formControlName="month" cancelText="ยกเลิก" okText="ตกลง">
           <ion-select-option value="1">1 เดือน</ion-select-option>
           <ion-select-option value="2">2 เดือน</ion-select-option>
           <ion-select-option value="3">3 เดือน</ion-select-option>

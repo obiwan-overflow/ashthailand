@@ -10,7 +10,7 @@
 <ion-content>
   <ion-list>
     <div *ngFor="let data of data,let i = index">
-      <ion-item *ngIf="data.NAME" lines="full" routerLink="/formthree/form-family-lists/{{data.MOO}}/{{data.VIL}}/{{data.A1}}/success">
+      <ion-item *ngIf="data.MOO" lines="full" routerLink="/formthree/form-family-lists/{{data.MOO}}/{{data.VIL}}/{{data.A1}}/success">
         <ion-avatar slot="start" class="icon">
           <ion-icon name="people" color="family"></ion-icon>
         </ion-avatar>
