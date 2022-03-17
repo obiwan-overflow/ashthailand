@@ -19,7 +19,7 @@
         <form [formGroup]="ionicForm" (ngSubmit)="Form()">
           <p>บันทึกช่วยจำ</p>
           <p class="text-danger">ถ้าบอกปริมาณสูบที่ชัดเจนไม่ได้ บันทึก "88"</p>
-          <ion-input type="text" inputmode="numeric" maxlength="2" formControlName="NO"></ion-input>
+          <ion-input type="text" inputmode="numeric" maxlength="2" min="1" max="88" formControlName="NO"></ion-input>
           <ion-button type="submit" expand="block" shape="round" color="family" [disabled]="!ionicForm.valid">ตกลง</ion-button>
         </form>
       </ion-col>

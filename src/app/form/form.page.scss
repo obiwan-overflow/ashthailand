@@ -66,3 +66,16 @@ ion-label {
 ion-button {
     font-weight: bold;
 }
+
+.btn-public {
+    --color: #333 !important;
+    --border-color: #71BBEE !important;
+}
+.btn-shop {
+    --color: #333 !important;
+    --border-color: #83D6E7 !important;
+}
+.btn-family {
+    --color: #333 !important;
+    --border-color: #A9D18E !important;
+}

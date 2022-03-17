@@ -84,7 +84,8 @@ export class FormResponsePage implements OnInit {
           handler: () => {
             this.dataStorage[this.id].status   = "success";
             this.storage.set('formfamily',this.dataStorage);
-            this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
+            // this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
+            this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
             // const formData = new FormData();
             // formData.append('cat_id',"3");
             // formData.append('user_id',userId);

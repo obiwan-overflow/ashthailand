@@ -19,8 +19,11 @@
           <a class="btn-answer-family" (click)="updateMember()">แก้ไขจำนวนสมาชิก</a>
         </ion-text>
       </ion-col>
+      <ion-col size="12">
+        <a class="btn-answer-family" routerLink="/tabs/form">หยุดชั่วคราว</a>
+      </ion-col>
       <ion-col size="12" *ngIf="datafamily.length < detail.MEMBER">
-        <a class="btn-answer-family" (click)="btnStart()">เริ่มสัมภาษณ์</a>
+        <a class="btn-answer-family active" (click)="btnStart()">เริ่มสัมภาษณ์</a>
       </ion-col>
       <!-- <ion-col size="12">
         <a class="btn-answer-family" href="/formthree/form4">ทำคนถัดไป</a>
