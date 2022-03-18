@@ -131,23 +131,23 @@ const routes: Routes = [
     loadChildren: () => import('./formone/form4/form4.module').then( m => m.Form4PageModule)
   },
   {
-    path: 'formone/form-step1',
+    path: 'formone/form-step1/:id',
     loadChildren: () => import('./formone/form-step1/form-step1.module').then( m => m.FormStep1PageModule)
   },
   {
-    path: 'formone/form-step2',
+    path: 'formone/form-step2/:id',
     loadChildren: () => import('./formone/form-step2/form-step2.module').then( m => m.FormStep2PageModule)
   },
   {
-    path: 'formone/form-step3',
+    path: 'formone/form-step3/:id',
     loadChildren: () => import('./formone/form-step3/form-step3.module').then( m => m.FormStep3PageModule)
   },
   {
-    path: 'formone/form-step4',
+    path: 'formone/form-step4/:id',
     loadChildren: () => import('./formone/form-step4/form-step4.module').then( m => m.FormStep4PageModule)
   },
   {
-    path: 'formone/form-step5',
+    path: 'formone/form-step5/:id',
     loadChildren: () => import('./formone/form-step5/form-step5.module').then( m => m.FormStep5PageModule)
   },
   {

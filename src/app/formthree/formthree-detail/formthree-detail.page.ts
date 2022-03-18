@@ -25,24 +25,30 @@ export class FormthreeDetailPage implements OnInit {
   TYPE_CIG:any;   
   SECOND:any;     
   QUITE_CHECK:any;
+  showAge:any;
   constructor(public api:RestApiService,public route:ActivatedRoute) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getdata('reportQuestion/detail&id='+this.id).subscribe(res => {
-      this.SMOKE        = res.detail.SMOKE;
-      this.EVERSMOKE    = res.detail.EVERSMOKE;
-      this.EXSMOKE_Y    = res.detail.EXSMOKE_Y;
-      this.EXSMOKE_M    = res.detail.EXSMOKE_M;
-      this.TIME_Y       = res.detail.TIME_Y;
-      this.TIME_M       = res.detail.TIME_M;
-      this.CIG          = res.detail.CIG;
-      this.ROLL         = res.detail.ROLL;
-      this.E_CIG        = res.detail.E_CIG;
-      this.OTHER        = res.detail.OTHER;
-      this.NO1          = res.detail.NO1;
-      this.RESPONSE     = res.detail.RESPONSE;
-      this.TYPE_CIG     = res.detail.TYPE_CIG;
-      this.SECOND       = res.detail.SECOND;
-      this.QUITE_CHECK  = res.detail.QUITE_CHECK;
+      if(parseInt(res.detail.AGE) <= 14){
+        this.showAge = "show";
+      }else{
+        this.showAge = "hide";
+        this.SMOKE        = res.detail.SMOKE;
+        this.EVERSMOKE    = res.detail.EVERSMOKE;
+        this.EXSMOKE_Y    = res.detail.EXSMOKE_Y;
+        this.EXSMOKE_M    = res.detail.EXSMOKE_M;
+        this.TIME_Y       = res.detail.TIME_Y;
+        this.TIME_M       = res.detail.TIME_M;
+        this.CIG          = res.detail.CIG;
+        this.ROLL         = res.detail.ROLL;
+        this.E_CIG        = res.detail.E_CIG;
+        this.OTHER        = res.detail.OTHER;
+        this.NO1          = res.detail.NO1;
+        this.RESPONSE     = res.detail.RESPONSE;
+        this.TYPE_CIG     = res.detail.TYPE_CIG;
+        this.SECOND       = res.detail.SECOND;
+        this.QUITE_CHECK  = res.detail.QUITE_CHECK;
+      }
     });
   }
 

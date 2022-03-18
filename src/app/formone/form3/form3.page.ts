@@ -35,7 +35,7 @@ export class Form3Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formpublic');
+    this.dataStorage = await this.storage.get('formpublic_step1');
     
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -58,7 +58,7 @@ export class Form3Page implements OnInit {
         "VIL":this.dataStorage.VIL,
         "A1":form.value.A1,
       }
-      await this.storage.set('formpublic',dataAnswer);
+      await this.storage.set('formpublic_step1',dataAnswer);
       await this.router.navigateByUrl('/formone/form4');
     }
   }

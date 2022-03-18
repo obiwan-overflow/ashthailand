@@ -38,11 +38,6 @@ export class FormPage implements OnInit {
     private openNativeSettings: OpenNativeSettings
   ) {
     this.titlePub = this.auth.titlePublic();
-    this.storage.get('provincesDetail').then((data)=>{
-      this.province     = data.provinces;
-      this.district     = data.amphures;
-      this.subdistrict  = data.tombons;
-    });
   }
 
   ngOnInit() {
@@ -53,6 +48,11 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
+    await this.storage.get('provincesDetail').then((data)=>{
+      this.province     = data.provinces;
+      this.district     = data.amphures;
+      this.subdistrict  = data.tombons;
+    });
     this.loadData();
   }
   async loadData(){
@@ -62,32 +62,13 @@ export class FormPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    this.dataStorage = await this.storage.get('formpublic');
+    this.dataStorage = await this.storage.get('formpublic_step1');
     this.loading.dismiss();
   }
   async formData(form){
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
       this.presentAlertConfirm();
     }else{
-      // if(this.dataStorage == null){
-      //   let dataAnswer = [{
-      //     "CWT":this.province,
-      //     "ID1":this.district,
-      //     "TMP":this.subdistrict,
-      //     "LAT":this.latitude,
-      //     "LONG":this.longitude,
-      //   }];
-      //   this.dataStorage = dataAnswer;
-      // }else{
-      //   let dataAnswer = {
-      //     "CWT":this.province,
-      //     "ID1":this.district,
-      //     "TMP":this.subdistrict,
-      //     "LAT":this.latitude,
-      //     "LONG":this.longitude,
-      //   };
-      //   this.dataStorage.push(dataAnswer);
-      // }
       let dataAnswer = {
         "CWT":this.province,
         "ID1":this.district,
@@ -95,7 +76,7 @@ export class FormPage implements OnInit {
         "LAT":this.latitude,
         "LONG":this.longitude,
       };
-      await this.storage.set('formpublic',dataAnswer);
+      await this.storage.set('formpublic_step1',dataAnswer);
       await this.router.navigateByUrl('/formone/form2');
     }
   }

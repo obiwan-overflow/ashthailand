@@ -16,6 +16,7 @@ export class Form4Page implements OnInit {
 
   titlePub:any;
   dataStorage:any = [];
+  dataStorage_step1:any = [];
 
   // loadding
   loadingImg:any;
@@ -43,8 +44,8 @@ export class Form4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
+    this.dataStorage_step1 = await this.storage.get('formpublic_step1');
     this.dataStorage = await this.storage.get('formpublic');
-    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -56,95 +57,30 @@ export class Form4Page implements OnInit {
     if(form.value.ADDRESS == '' || form.value.NAME == ''){
       this.alert();
     }else{
+      if(this.dataStorage == null){
+        this.dataStorage = [];
+      }
       let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "ID1":this.dataStorage.ID1,
-        "TMP":this.dataStorage.TMP,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":this.dataStorage.MOO,
-        "VIL":this.dataStorage.VIL,
-        "A1":this.dataStorage.A1,
+        "CWT":this.dataStorage_step1.CWT,
+        "ID1":this.dataStorage_step1.ID1,
+        "TMP":this.dataStorage_step1.TMP,
+        "LAT":this.dataStorage_step1.LAT,
+        "LONG":this.dataStorage_step1.LONG,
+        "MOO":this.dataStorage_step1.MOO,
+        "VIL":this.dataStorage_step1.VIL,
+        "A1":this.dataStorage_step1.A1,
         "NAME":form.value.NAME,
         "ADDRESS":form.value.ADDRESS,
-        "images":this.imagesarray,
       }
-      await this.storage.set('formpublic',dataAnswer);
-      await this.router.navigateByUrl('/formone/form-step1');
+      await this.storage.set('formpublic_step1',dataAnswer);
+      await this.dataStorage.push(dataAnswer);
+      await this.storage.set('formpublic',this.dataStorage);
+      let lengthArray = await this.storage.get('formpublic');
+      let numberId    = lengthArray.length - 1;
+      await this.router.navigateByUrl('/formone/form-step1/'+numberId);
     }
   }
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'อัพโหลดรูปภาพ',
-      cssClass: 'my-custom-class',
-      buttons: [{
-        text: 'เปิดกล้อง',
-        icon: 'camera',
-        handler: () => {
-          this.openCamera();
-        }
-      }, {
-        text: 'เปิดอัลบั้มรูป',
-        icon: 'image',
-        handler: () => {
-          this.openGallery();
-        }
-      }, {
-        text: 'ยกเลิก',
-        icon: 'close',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
-
-
-  // images
-  cameraOptions: CameraOptions = {
-    quality: 30,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: false
-  }
-  gelleryOptions: CameraOptions = {
-    quality: 30,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: false
-  }
-  async openCamera(){
-    this.loadingImage();
-    this.camera.getPicture(this.cameraOptions).then((imgData) => {
-      console.log('image data =>  ', imgData);
-      this.base64Img = 'data:image/jpeg;base64,' + imgData;
-      this.userImg = this.base64Img;
-      this.updateImages(this.userImg);
-    }, (err) => {
-      console.log(err);
-    })
-  }
-  async openGallery() {
-    this.loadingImage();
-    this.camera.getPicture(this.gelleryOptions).then((imgData) => {
-     console.log('image data =>  ', imgData);
-     this.base64Img = 'data:image/jpeg;base64,' + imgData;
-     this.userImg = this.base64Img;
-     this.updateImages(this.userImg);
-    }, (err) => {
-     console.log(err);
-    })
-  }
-  async updateImages(images){
-    await this.imagesarray.push(images);
-    await this.loadingImg.dismiss();
-  }
-
-
+  
   // loadding
   async alert() {
     const alert = await this.alertController.create({
@@ -152,7 +88,7 @@ export class Form4Page implements OnInit {
       header: 'ตรวจสอบ',
       message: 'กรุณากรอกข้อมูล !!!',
     });
-
+    
     await alert.present();
   }
   async loadingImage() {
@@ -166,4 +102,77 @@ export class Form4Page implements OnInit {
     NAME: '',
     ADDRESS: ''
   }
+
+
+
+
+
+  // async presentActionSheet() {
+  //   const actionSheet = await this.actionSheetController.create({
+  //     header: 'อัพโหลดรูปภาพ',
+  //     cssClass: 'my-custom-class',
+  //     buttons: [{
+  //       text: 'เปิดกล้อง',
+  //       icon: 'camera',
+  //       handler: () => {
+  //         this.openCamera();
+  //       }
+  //     }, {
+  //       text: 'เปิดอัลบั้มรูป',
+  //       icon: 'image',
+  //       handler: () => {
+  //         this.openGallery();
+  //       }
+  //     }, {
+  //       text: 'ยกเลิก',
+  //       icon: 'close',
+  //       handler: () => {
+  //         console.log('Cancel clicked');
+  //       }
+  //     }]
+  //   });
+  //   await actionSheet.present();
+  // }
+  // images
+  // cameraOptions: CameraOptions = {
+  //   quality: 30,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   allowEdit: false
+  // }
+  // gelleryOptions: CameraOptions = {
+  //   quality: 30,
+  //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   allowEdit: false
+  // }
+  // async openCamera(){
+  //   this.loadingImage();
+  //   this.camera.getPicture(this.cameraOptions).then((imgData) => {
+  //     console.log('image data =>  ', imgData);
+  //     this.base64Img = 'data:image/jpeg;base64,' + imgData;
+  //     this.userImg = this.base64Img;
+  //     this.updateImages(this.userImg);
+  //   }, (err) => {
+  //     console.log(err);
+  //   })
+  // }
+  // async openGallery() {
+  //   this.loadingImage();
+  //   this.camera.getPicture(this.gelleryOptions).then((imgData) => {
+  //    console.log('image data =>  ', imgData);
+  //    this.base64Img = 'data:image/jpeg;base64,' + imgData;
+  //    this.userImg = this.base64Img;
+  //    this.updateImages(this.userImg);
+  //   }, (err) => {
+  //    console.log(err);
+  //   })
+  // }
+  // async updateImages(images){
+  //   await this.imagesarray.push(images);
+  //   await this.loadingImg.dismiss();
+  // }
 }

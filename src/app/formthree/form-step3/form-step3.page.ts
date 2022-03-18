@@ -60,7 +60,7 @@ export class FormStep3Page implements OnInit {
         this.ConfirmOrEdit(year);
       }
     }else if (year == 88){
-      this.router.navigateByUrl('formthree/form-step3b/'+this.id);
+      this.formConfirm(year);
     }else{
       this.presentAlertConfirm();
     }

@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="P1A">
       <ion-col size="12">
         <ion-text>
           <h3>1. มีป้ายหรือเครื่องหมายห้ามสูบบุหรี่</h3>
@@ -20,7 +20,7 @@
         <div class="btn-answer-public active" *ngIf="P1A == 2">ไม่มี</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="P2A">
       <ion-col size="12">
         <ion-text>
           <h3>2. ป้ายหรือเครื่องหมายห้ามสูบบุหรี่ที่สังเกตพบ อยู่ภายนอกอาคาร/สิ่งปลูกสร้าง ใช่หรือไม่</h3>
@@ -31,7 +31,7 @@
         <div class="btn-answer-public active" *ngIf="P2A == 2">ไม่ใช่</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="P3A">
       <ion-col size="12">
         <ion-text>
           <h3>3. ป้ายหรือเครื่องหมายห้ามสูบบุหรี่ที่สังเกตพบ อยู่ภายในอาคาร ใช่หรือไม่</h3>
@@ -42,7 +42,7 @@
         <div class="btn-answer-public active" *ngIf="P3A == 2">ไม่ใช่</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="P4A">
       <ion-col size="12">
         <ion-text>
           <h3>4. ช่วงเวลาที่ลงสำรวจพบเห็นการสูบบุหรี่หรือไม่</h3>
@@ -55,7 +55,7 @@
         <div class="btn-answer-public active" *ngIf="P4A == 4">พบภายนอกอาคาร/สิ่งปลูกสร้างใดๆ ที่มิได้จัดไว้ให้เป็นเขตสูบบุหรี่</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="P5A">
       <ion-col size="12">
         <ion-text>
           <h3>5. พบการสูบบุหรี่ในรัศมี โดยประมาณ 5 เมตรจากบรเิวณทางเข้า-ออกหลักของสถานที่สาธารณะนั้นๆ ใช่หรือไม่</h3>
@@ -66,11 +66,5 @@
         <div class="btn-answer-public active" *ngIf="P5A == 2">ไม่ใช่</div>
       </ion-col>
     </ion-row>
-    <!-- <ion-row>
-      <ion-col size="6">
-        <p>รูปภาพ</p>
-        <img src="{{images}}" alt="">
-      </ion-col>
-    </ion-row> -->
   </ion-grid>
 </ion-content>

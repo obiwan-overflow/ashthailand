@@ -32,11 +32,7 @@ export class FormPage implements OnInit {
     public alertController:AlertController,
     private openNativeSettings: OpenNativeSettings
   ) {
-    this.storage.get('provincesDetail').then((data)=>{
-      this.province     = data.provinces;
-      this.district     = data.amphures;
-      this.subdistrict  = data.tombons;
-    });
+   
   }
 
   ngOnInit() {
@@ -47,10 +43,15 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
-    this.loadData();
+    this.storage.get('provincesDetail').then((data)=>{
+      this.province     = data.provinces;
+      this.district     = data.amphures;
+      this.subdistrict  = data.tombons;
+    });
     this.dataStorage  = await this.storage.get('formfamily');
     this.dataProvin   = await this.storage.get('userData');
     this.fid          = this.dataStorage == null ? 1 : this.dataStorage.length+1;
+    this.loadData();
   }
   async loadData(){
     this.geolocation.getCurrentPosition().then((resp) => {

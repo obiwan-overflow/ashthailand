@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { LoadingController,AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-form-lists',
@@ -17,6 +18,7 @@ export class FormListsPage implements OnInit {
     public api:RestApiService,
     public route:ActivatedRoute,
     public loadingController:LoadingController,
+    public storage:Storage
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -29,7 +31,8 @@ export class FormListsPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
-    await this.api.getdata('reportQuestion/lists&id='+this.id).subscribe(res => {
+    let userID = await this.storage.get('userData');
+    await this.api.getdata('reportQuestion/lists&id='+this.id+'&user_id='+userID.id).subscribe(res => {
       if(res.result == "success"){
         for (let index = 0; index < res.lists.length; index++) {
           this.listsData              = res.lists;

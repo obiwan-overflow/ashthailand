@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="S1A">
       <ion-col size="12">
         <ion-text>
           <h3>1. การแสดงยี่ห้อบุหรี่หรือราคาบุหรี่ขนาดใหญ่ ณ จุดขาย</h3>
@@ -20,7 +20,7 @@
         <div class="btn-answer-shop active" *ngIf="S1A == 2">ไม่พบ</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="S2A">
       <ion-col size="12">
         <ion-text>
           <h3>2. การเปิดตู้หรือวางโชว์ซองบุหรี่ที่ขายให้เห็นชัดเจน</h3>
@@ -31,7 +31,7 @@
         <div class="btn-answer-shop active" *ngIf="S2A == 2">ไม่พบ</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="S3A">
       <ion-col size="12">
         <ion-text>
           <h3>3. การขายบุหรี่ให้ผู้ที่สงสัยว่ามีอายุต่ำกว่า 20 ปี</h3>
@@ -43,7 +43,7 @@
         <div class="btn-answer-shop active"  *ngIf="S3A == 3">ช่วงที่สังเกต มีผู้มาซื้อบุหรี่ <br>และ<u>น่าสงสัย</u>ว่ามีอายุต่ำกว่า 20 ปี</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="S4A">
       <ion-col size="12">
         <ion-text>
           <h3>4. การแบ่งขายบุหรี่</h3>
@@ -55,7 +55,7 @@
         <div class="btn-answer-shop active" *ngIf="S4A == 3">ไม่สามารถสังเกตได้</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="S5A">
       <ion-col size="12">
         <ion-text>
           <h3>5. วาง/แขวนซองยาเส้นที่ขายให้เห็นชัดเจน</h3>
@@ -66,7 +66,7 @@
         <div class="btn-answer-shop active" *ngIf="S5A == 2">ไม่พบ</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="S6A">
       <ion-col size="12">
         <ion-text>
           <h3>6. การให้บริการไฟแช็ค ไม้ขีดไฟหรือสิ่งอำนวยความสะดวกอื่นๆ ในการสูบบุหรี่ฟรี</h3>

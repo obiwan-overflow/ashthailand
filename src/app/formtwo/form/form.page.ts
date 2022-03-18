@@ -38,11 +38,6 @@ export class FormPage implements OnInit {
     
     ) {
       this.titleShop = this.auth.titleShop();
-      this.storage.get('provincesDetail').then((data)=>{
-        this.province     = data.provinces;
-        this.district     = data.amphures;
-        this.subdistrict  = data.tombons;
-      });
     }
 
   ngOnInit() {
@@ -53,6 +48,11 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
+    this.storage.get('provincesDetail').then((data)=>{
+      this.province     = data.provinces;
+      this.district     = data.amphures;
+      this.subdistrict  = data.tombons;
+    });
     this.loadData();
   }
   async loadData(){

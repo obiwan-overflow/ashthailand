@@ -9,7 +9,14 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="showAge == 'show'">
+      <ion-col size="12">
+        <ion-text>
+          <h3>อายุต่ำกว่า 14</h3>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="SMOKE">
       <ion-col size="12">
         <ion-text>
           <h3>1. ปัจจุบันสูบบุหรี่หรือไม่</h3>
@@ -21,7 +28,7 @@
         <div class="btn-answer-family active" *ngIf="SMOKE == 3">สูบทุกวัน</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="EVERSMOKE">
       <ion-col size="12">
         <ion-text>
           <h3>2. ในอดีตเคยสูบบุหรีหรือไม่</h3>
@@ -32,7 +39,7 @@
         <div class="btn-answer-family active" *ngIf="EVERSMOKE == 2">เคยสูบ</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="EXSMOKE_Y">
       <ion-col size="12">
         <ion-text>
           <h3>3ก. เลิกสูบมาแล้วกี่ปี</h3>
@@ -42,7 +49,7 @@
         <div class="btn-answer-family active" *ngIf="EXSMOKE_Y">{{EXSMOKE_Y}}</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="EXSMOKE_M">
       <ion-col size="12">
         <ion-text>
           <h3>3ข. เลิกสูบมาแล้วกี่เดือน</h3>
@@ -52,7 +59,7 @@
         <div class="btn-answer-family active" *ngIf="EXSMOKE_M">{{EXSMOKE_M}}</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="TIME_Y">
       <ion-col size="12">
         <ion-text>
           <h3>4ก. สูบมาแล้วกี่ปี</h3>
@@ -62,7 +69,7 @@
         <div class="btn-answer-family active" *ngIf="TIME_Y">{{TIME_Y}}</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="TIME_M">
       <ion-col size="12">
         <ion-text>
           <h3>4ข. สูบมาแล้วกี่เดือน</h3>
@@ -72,20 +79,27 @@
         <div class="btn-answer-family active" *ngIf="TIME_M">{{TIME_M}}</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="CIG">
       <ion-col size="12">
         <ion-text>
           <h3>สูบบุหรี่ประเภทใด</h3>
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <div class="btn-answer-family active" *ngIf="CIG">สูบบุหรี่โรงงาน</div>
-        <div class="btn-answer-family active" *ngIf="ROLL">สูบบุหรี่มวนเอง</div>
-        <div class="btn-answer-family active" *ngIf="E_CIG">สูบบุหรี่ไฟฟ้า</div>
-        <div class="btn-answer-family active" *ngIf="OTHER">สูบบุหรี่อื่นๆ เช่น ไปป์ บารากู่ ซิการ์ </div>
+        <div class="btn-answer-family active">สูบบุหรี่โรงงาน</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="ROLL">
+      <ion-col size="12">
+        <ion-text>
+          <h3>สูบบุหรี่ประเภทใด</h3>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <div class="btn-answer-family active">สูบบุหรี่มวนเอง</div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="NO1">
       <ion-col size="12">
         <ion-text>
           <h3>ปริมาณบุหรี่ที่สูบ (มวนต่อวัน)</h3>
@@ -95,7 +109,27 @@
         <div class="btn-answer-family active" *ngIf="NO1">ปริมาณบุหรี่ที่สูบ (มวนต่อวัน) {{NO1}}</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="E_CIG">
+      <ion-col size="12">
+        <ion-text>
+          <h3>สูบบุหรี่ประเภทใด</h3>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <div class="btn-answer-family active">สูบบุหรี่ไฟฟ้า</div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="OTHER">
+      <ion-col size="12">
+        <ion-text>
+          <h3>สูบบุหรี่ประเภทใด</h3>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <div class="btn-answer-family active">สูบบุหรี่อื่นๆ เช่น ไปป์ บารากู่ ซิการ์ </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="RESPONSE">
       <ion-col size="12">
         <ion-text>
           <h3>ผู้ตอบสัมภาษณ์ให้ข้อมูลด้วยตนเองใช่หรือไม่</h3>
@@ -106,7 +140,7 @@
         <div class="btn-answer-family active" *ngIf="RESPONSE == 2">ไม่ใช่</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="TYPE_CIG">
       <ion-col size="12">
         <ion-text>
           <h3>10. ครั้งสุดท้ายที่ซื้อบุหรี่โรงงานมาสูบท่านซื้อมาในรูปแบบใด</h3>
@@ -117,7 +151,7 @@
         <div class="btn-answer-family active" *ngIf="TYPE_CIG == 2">ซื้อเป็นมวน</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="SECOND">
       <ion-col size="12">
         <ion-text>
           <h3>11. ในรอบ 30 วันที่ผ่านมาเคยสูบบุหรี่ภายในตัวบ้านหรือไม่</h3>
@@ -129,7 +163,7 @@
         <div class="btn-answer-family active" *ngIf="SECOND == 3">ไม่เคยสูบบุหรี่ในตัวบ้านเลย</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="QUITE_CHECK">
       <ion-col size="12">
         <ion-text>
           <h3>12. คิดอยากจะเลิกสูบบุหรี่หรือไม่</h3>

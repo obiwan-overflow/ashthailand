@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController, LoadingController, Platform, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/AuthService';
 
@@ -12,13 +12,15 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep3Page implements OnInit {
   dataStorage:any = [];
   titlePub:any;
+  numberId:any;
   constructor(
     public router:Router,
     public storage:Storage,
     public loadingController:LoadingController,
     public auth:AuthService,
     public toastController:ToastController,
-    public alertController:AlertController
+    public alertController:AlertController,
+    public route:ActivatedRoute
   ) {
     this.titlePub = this.auth.titlePublic();
   }
@@ -26,61 +28,35 @@ export class FormStep3Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formpublic');
-    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
       duration: 200
     });
     await loading.present();
+
+    this.dataStorage = await this.storage.get('formpublic');
+    this.numberId    = await this.route.snapshot.paramMap.get('id');
   }
   async form(event){
-    let id = event.srcElement.id;
-    if(this.dataStorage.P2A == "2"){
-      if(id == "2"){
+    let value = event.srcElement.id;
+
+    this.dataStorage[this.numberId].P3A = value;
+
+    await this.storage.set('formpublic',this.dataStorage);
+
+    if(this.dataStorage[this.numberId].P2A == "2"){
+      if(value == "2"){
         this.presentAlertConfirm();
       }else{
-        let dataAnswer = {
-          "CWT":this.dataStorage.CWT,
-          "TMP":this.dataStorage.TMP,
-          "ID1":this.dataStorage.ID1,
-          "VIL":this.dataStorage.VIL,
-          "MOO":this.dataStorage.MOO,
-          "A1":this.dataStorage.A1,
-          "NAME":this.dataStorage.NAME,
-          "ADDRESS":this.dataStorage.ADDRESS,
-          "LAT":this.dataStorage.LAT,
-          "LONG":this.dataStorage.LONG,
-          "images":this.dataStorage.images,
-          "P1A":this.dataStorage.P1A,
-          "P2A":this.dataStorage.P2A,
-          "P3A":id,
-        }
-        await this.storage.set('formpublic',dataAnswer);
-        await this.router.navigateByUrl('formone/form-step4');
+        await this.router.navigateByUrl('formone/form-step4/'+this.numberId);
       }
-    }else{
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "TMP":this.dataStorage.TMP,
-        "ID1":this.dataStorage.ID1,
-        "VIL":this.dataStorage.VIL,
-        "MOO":this.dataStorage.MOO,
-        "A1":this.dataStorage.A1,
-        "NAME":this.dataStorage.NAME,
-        "ADDRESS":this.dataStorage.ADDRESS,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "images":this.dataStorage.images,
-        "P1A":this.dataStorage.P1A,
-        "P2A":this.dataStorage.P2A,
-        "P3A":id,
-      }
-      await this.storage.set('formpublic',dataAnswer);
-      await this.router.navigateByUrl('formone/form-step4');
+    }else{      
+      await this.router.navigateByUrl('formone/form-step4/'+this.numberId);
     }
   }
+
+
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -91,7 +67,7 @@ export class FormStep3Page implements OnInit {
         {
           text: 'ตกลง',
           handler: () => {
-            this.router.navigateByUrl('formone/form-step1');
+            this.router.navigateByUrl('formone/form-step1/'+this.numberId);
           }
         }
       ]

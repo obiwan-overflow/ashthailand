@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-form-lists-detail',
@@ -9,11 +10,18 @@ import { RestApiService } from '../../rest-api.service';
 })
 export class FormListsDetailPage implements OnInit {
   listsData:any;
-  constructor(public api:RestApiService,public route:ActivatedRoute) {
-    let VIL = this.route.snapshot.paramMap.get('VIL');
-    let MOO = this.route.snapshot.paramMap.get('MOO');
-    let A1  = this.route.snapshot.paramMap.get('A1');
-    this.api.getdata('reportQuestion/familyLists&vil='+VIL+'&moo='+MOO+'&a1='+A1).subscribe(res => {
+  constructor(public api:RestApiService,public route:ActivatedRoute,public storage:Storage) {
+    
+  }
+
+  ngOnInit() {
+  }
+  async ionViewWillEnter(){
+    let VIL     = await this.route.snapshot.paramMap.get('VIL');
+    let MOO     = await this.route.snapshot.paramMap.get('MOO');
+    let A1      = await this.route.snapshot.paramMap.get('A1');
+    let userID  = await this.storage.get('userData');
+    this.api.getdata('reportQuestion/familyLists&vil='+VIL+'&moo='+MOO+'&a1='+A1+'&user_id='+userID.id).subscribe(res => {
       for (let index = 0; index < res.lists.length; index++) {
         this.listsData              = res.lists;
         this.listsData[index].YEAR  = parseInt(res.lists[index].YEAR)+parseInt('543'); 
@@ -45,8 +53,4 @@ export class FormListsDetailPage implements OnInit {
       }
     });
   }
-
-  ngOnInit() {
-  }
-
 }
