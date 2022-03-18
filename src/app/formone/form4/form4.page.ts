@@ -17,7 +17,8 @@ export class Form4Page implements OnInit {
   titlePub:any;
   dataStorage:any = [];
   dataStorage_step1:any = [];
-
+  numberId:any;
+  todo:any = [];
   // loadding
   loadingImg:any;
 
@@ -44,40 +45,61 @@ export class Form4Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage_step1 = await this.storage.get('formpublic_step1');
-    this.dataStorage = await this.storage.get('formpublic');
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
       duration: 200
     });
     await loading.present();
+
+    this.dataStorage_step1  = await this.storage.get('formpublic_step1');
+    this.dataStorage        = await this.storage.get('formpublic');
+    this.numberId           = await this.route.snapshot.paramMap.get('id');
+
+    if(this.numberId == 'continue'){
+      this.todo = {
+        NAME: '',
+        ADDRESS: ''
+      }
+    }else{
+      this.todo = {
+        NAME: this.dataStorage[this.numberId].NAME,
+        ADDRESS: this.dataStorage[this.numberId].ADDRESS
+      }
+    }
   }
   async formData(form){
     if(form.value.ADDRESS == '' || form.value.NAME == ''){
       this.alert();
     }else{
-      if(this.dataStorage == null){
-        this.dataStorage = [];
+      if(this.numberId == 'continue'){
+        if(this.dataStorage == null){
+          this.dataStorage = [];
+        }
+        let dataAnswer = {
+          "CWT":this.dataStorage_step1.CWT,
+          "ID1":this.dataStorage_step1.ID1,
+          "TMP":this.dataStorage_step1.TMP,
+          "LAT":this.dataStorage_step1.LAT,
+          "LONG":this.dataStorage_step1.LONG,
+          "MOO":this.dataStorage_step1.MOO,
+          "VIL":this.dataStorage_step1.VIL,
+          "A1":this.dataStorage_step1.A1,
+          "NAME":form.value.NAME,
+          "ADDRESS":form.value.ADDRESS,
+        }
+        await this.storage.set('formpublic_step1',dataAnswer);
+        await this.dataStorage.push(dataAnswer);
+        await this.storage.set('formpublic',this.dataStorage);
+        let lengthArray = await this.storage.get('formpublic');
+        let numberIdNext    = lengthArray.length - 1;
+        await this.router.navigateByUrl('/formone/form-step1/'+numberIdNext);
+      }else{
+        this.dataStorage[this.numberId].NAME    = form.value.NAME;
+        this.dataStorage[this.numberId].ADDRESS = form.value.ADDRESS;
+        await this.storage.set('formpublic',this.dataStorage);
+        await this.router.navigateByUrl('/formone/form-step1/'+this.numberId);
       }
-      let dataAnswer = {
-        "CWT":this.dataStorage_step1.CWT,
-        "ID1":this.dataStorage_step1.ID1,
-        "TMP":this.dataStorage_step1.TMP,
-        "LAT":this.dataStorage_step1.LAT,
-        "LONG":this.dataStorage_step1.LONG,
-        "MOO":this.dataStorage_step1.MOO,
-        "VIL":this.dataStorage_step1.VIL,
-        "A1":this.dataStorage_step1.A1,
-        "NAME":form.value.NAME,
-        "ADDRESS":form.value.ADDRESS,
-      }
-      await this.storage.set('formpublic_step1',dataAnswer);
-      await this.dataStorage.push(dataAnswer);
-      await this.storage.set('formpublic',this.dataStorage);
-      let lengthArray = await this.storage.get('formpublic');
-      let numberId    = lengthArray.length - 1;
-      await this.router.navigateByUrl('/formone/form-step1/'+numberId);
     }
   }
   
@@ -98,13 +120,6 @@ export class Form4Page implements OnInit {
     });
     this.loadingImg.present();
   }
-  todo = {
-    NAME: '',
-    ADDRESS: ''
-  }
-
-
-
 
 
   // async presentActionSheet() {

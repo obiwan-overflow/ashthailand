@@ -137,7 +137,6 @@ export class FormFamilyListsPage implements OnInit {
             for (let val of this.datafamily){
               this.dataOutfamily.push(val);
             }
-            console.log(this.dataOutfamily);
             this.storage.set('formfamily',this.dataOutfamily);
           }
         }
@@ -188,7 +187,12 @@ export class FormFamilyListsPage implements OnInit {
     await this.presentAlertConfirm();
   }
   async updateDatafamily(){
-   
+    for (const val of this.dataStorageAll){
+      if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
+        
+      }
+    }
+    // this.storage.set('formfamily',this.dataStorageAll);
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

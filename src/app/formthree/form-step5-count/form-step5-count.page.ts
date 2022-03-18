@@ -25,7 +25,7 @@ export class FormStep5CountPage implements OnInit {
     public route:ActivatedRoute
   ) {
     this.ionicForm = this.formBuilder.group({
-      NO: ['',[Validators.required]]
+      NO: ['',[Validators.required,Validators.min(1),Validators.max(88)]]
     });
   }
 
@@ -44,8 +44,7 @@ export class FormStep5CountPage implements OnInit {
   }
   async Form(){
     let answerVal = this.ionicForm.value.NO;
-    // this.dataStorage[this.id].TIME_M = this.dataStorage.TIME_M === undefined ? "" : this.dataStorage.TIME_M;
-    // this.dataStorage[this.id].CIG = this.dataStorage.CIG === undefined ? "" : this.dataStorage.CIG;
+
     this.dataStorage[this.id].NO1 = answerVal;
     
     await this.storage.set('formfamily',this.dataStorage);

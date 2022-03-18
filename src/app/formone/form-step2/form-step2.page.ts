@@ -38,10 +38,13 @@ export class FormStep2Page implements OnInit {
   }
   async form(event){
     let value = event.srcElement.id;
-    
     this.dataStorage[this.numberId].P2A = value;
    
     await this.storage.set('formpublic',this.dataStorage);
     await this.router.navigateByUrl('formone/form-step3/'+this.numberId);
+  }
+
+  async backPage(){
+    this.router.navigateByUrl('formone/form-step1/'+this.numberId);
   }
 }

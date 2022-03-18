@@ -127,7 +127,7 @@ const routes: Routes = [
     loadChildren: () => import('./formone/form3/form3.module').then( m => m.Form3PageModule)
   },
   {
-    path: 'formone/form4',
+    path: 'formone/form4/:id',
     loadChildren: () => import('./formone/form4/form4.module').then( m => m.Form4PageModule)
   },
   {

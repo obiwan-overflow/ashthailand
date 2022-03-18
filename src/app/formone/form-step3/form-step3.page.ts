@@ -55,8 +55,6 @@ export class FormStep3Page implements OnInit {
       await this.router.navigateByUrl('formone/form-step4/'+this.numberId);
     }
   }
-
-
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -74,5 +72,9 @@ export class FormStep3Page implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async backPage(){
+    this.router.navigateByUrl('formone/form-step2/'+this.numberId);
   }
 }

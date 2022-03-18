@@ -39,8 +39,6 @@ export class FormStep1Page implements OnInit {
   }
   async form(event){
     let value = event.srcElement.id;
-    
-    // value
     this.dataStorage[this.numberId].P1A = value;
 
     await this.storage.set('formpublic',this.dataStorage);
@@ -49,5 +47,9 @@ export class FormStep1Page implements OnInit {
     }else if(value == "2"){     
       await this.router.navigateByUrl('formone/form-step4/'+this.numberId);
     }
+  }
+
+  async backPage(){
+    this.router.navigateByUrl('formone/form4/'+this.numberId);
   }
 }

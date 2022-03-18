@@ -59,7 +59,7 @@ export class Form3Page implements OnInit {
         "A1":form.value.A1,
       }
       await this.storage.set('formpublic_step1',dataAnswer);
-      await this.router.navigateByUrl('/formone/form4');
+      await this.router.navigateByUrl('/formone/form4/continue');
     }
   }
   async alert() {
