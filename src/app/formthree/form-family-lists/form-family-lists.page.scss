@@ -6,4 +6,8 @@ a {
 }
 .btn-answer-family {
     margin-bottom: 0px !important;
+    &.fonts-small {
+        padding: 10px !important;
+        font-size: 14px !important;
+    }
 }

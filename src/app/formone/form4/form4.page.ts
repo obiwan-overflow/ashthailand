@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthService } from 'src/app/AuthService';
 import { ActionSheetController,LoadingController,ToastController,AlertController } from '@ionic/angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form4',
@@ -18,7 +19,7 @@ export class Form4Page implements OnInit {
   dataStorage:any = [];
   dataStorage_step1:any = [];
   numberId:any;
-  todo:any = [];
+  private todo : FormGroup;
   // loadding
   loadingImg:any;
 
@@ -37,9 +38,14 @@ export class Form4Page implements OnInit {
     public actionSheetController: ActionSheetController,
     public loadingController:LoadingController,
     public toastController:ToastController,
-    public alertController:AlertController
+    public alertController:AlertController,
+    private formBuilder: FormBuilder
   ) {
     this.titlePub = this.auth.titlePublic();
+    this.todo = this.formBuilder.group({
+      NAME: ['', Validators.required],
+      ADDRESS: ['', Validators.required],
+    });
   }
 
   ngOnInit() {
@@ -55,21 +61,23 @@ export class Form4Page implements OnInit {
     this.dataStorage_step1  = await this.storage.get('formpublic_step1');
     this.dataStorage        = await this.storage.get('formpublic');
     this.numberId           = await this.route.snapshot.paramMap.get('id');
-
     if(this.numberId == 'continue'){
-      this.todo = {
-        NAME: '',
-        ADDRESS: ''
-      }
+      this.todo = this.formBuilder.group({
+        NAME: ['', Validators.required],
+        ADDRESS: ['', Validators.required],
+      });
     }else{
-      this.todo = {
-        NAME: this.dataStorage[this.numberId].NAME,
-        ADDRESS: this.dataStorage[this.numberId].ADDRESS
-      }
+      this.todo = this.formBuilder.group({
+        NAME: [this.dataStorage[this.numberId].NAME, Validators.required],
+        ADDRESS: [this.dataStorage[this.numberId].ADDRESS, Validators.required],
+      });
     }
   }
-  async formData(form){
-    if(form.value.ADDRESS == '' || form.value.NAME == ''){
+  async formData(){    
+    let ADDRESS = await this.todo.value.ADDRESS;
+    let NAME    = await this.todo.value.NAME;
+
+    if(ADDRESS == '' || NAME == ''){
       this.alert();
     }else{
       if(this.numberId == 'continue'){
@@ -85,8 +93,8 @@ export class Form4Page implements OnInit {
           "MOO":this.dataStorage_step1.MOO,
           "VIL":this.dataStorage_step1.VIL,
           "A1":this.dataStorage_step1.A1,
-          "NAME":form.value.NAME,
-          "ADDRESS":form.value.ADDRESS,
+          "NAME":NAME,
+          "ADDRESS":ADDRESS,
         }
         await this.storage.set('formpublic_step1',dataAnswer);
         await this.dataStorage.push(dataAnswer);
@@ -95,8 +103,8 @@ export class Form4Page implements OnInit {
         let numberIdNext    = lengthArray.length - 1;
         await this.router.navigateByUrl('/formone/form-step1/'+numberIdNext);
       }else{
-        this.dataStorage[this.numberId].NAME    = form.value.NAME;
-        this.dataStorage[this.numberId].ADDRESS = form.value.ADDRESS;
+        this.dataStorage[this.numberId].NAME    = NAME;
+        this.dataStorage[this.numberId].ADDRESS = ADDRESS;
         await this.storage.set('formpublic',this.dataStorage);
         await this.router.navigateByUrl('/formone/form-step1/'+this.numberId);
       }
@@ -120,7 +128,9 @@ export class Form4Page implements OnInit {
     });
     this.loadingImg.present();
   }
-
+  async backPage(){
+    this.router.navigateByUrl('formone/form3/'+this.numberId);
+  }
 
   // async presentActionSheet() {
   //   const actionSheet = await this.actionSheetController.create({

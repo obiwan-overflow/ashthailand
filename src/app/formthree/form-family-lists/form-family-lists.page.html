@@ -9,15 +9,18 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row class="ion-text-center">
       <ion-col size="12">
         <ion-text>
           <p>หมู่ที่ : {{MOO}}</p>
           <p>ชื่อชุมชน/บ้าน : {{VIL}}</p>
           <p>บ้านเลขที่ : {{A1}}</p>
           <h3>สมาชิกในครัวเรือนมี {{detail.MEMBER}} คน</h3>
-          <a class="btn-answer-family" (click)="updateMember()">แก้ไขจำนวนสมาชิก</a>
         </ion-text>
+      </ion-col>
+      <ion-col size="6"></ion-col>
+      <ion-col size="6">
+        <a class="btn-answer-family fonts-small" (click)="updateMember()">แก้ไขจำนวนสมาชิก</a>
       </ion-col>
       <ion-col size="12">
         <a class="btn-answer-family" routerLink="/tabs/form">หยุดชั่วคราว</a>

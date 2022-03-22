@@ -148,6 +148,8 @@ export class FormFamilyListsPage implements OnInit {
   async btnApprove(){
     const userId = await this.storage.get('userId');
     for (const val of this.datafamily){
+      let NO1 = val.NO1 == undefined ? 0 : val.NO1;
+      let NO2 = val.NO2 == undefined ? 0 : val.NO2;
       const formData = new FormData();
       formData.append('cat_id',"3");
       formData.append('user_id',userId);
@@ -175,7 +177,7 @@ export class FormFamilyListsPage implements OnInit {
       formData.append('ROLL',val.ROLL == undefined ? "" : val.ROLL);
       formData.append('E_CIG',val.E_CIG == undefined ? "" : val.E_CIG);
       formData.append('OTHER',val.OTHER == undefined ? "" : val.OTHER);
-      formData.append('NO1',(val.NO1 == undefined ? "" : val.NO1) + (val.NO2 == undefined ? "" : val.NO2));
+      formData.append('NO1',NO1+NO2);
       formData.append('RESPONSE',val.RESPONSE == undefined ? "" : val.RESPONSE);
       formData.append('TYPE_CIG',val.TYPE_CIG == undefined ? "" : val.TYPE_CIG);
       formData.append('SECOND',val.SECOND == undefined ? "" : val.SECOND);

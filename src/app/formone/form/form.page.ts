@@ -14,10 +14,7 @@ import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-setting
   styleUrls: ['./form.page.scss'],
 })
 export class FormPage implements OnInit {
-
-  province:any;
-  district:any;
-  subdistrict:any;
+  dataProvince:any = [];
   dataStorage:any = [];
 
   loading:any;
@@ -25,6 +22,11 @@ export class FormPage implements OnInit {
   latitude:any;
   longitude:any;
   titlePub:any;
+  todo = {
+    CWT: '',
+    TMP: '',
+    ID1: '',
+  };
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -48,31 +50,27 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
-    await this.storage.get('provincesDetail').then((data)=>{
-      this.province     = data.provinces;
-      this.district     = data.amphures;
-      this.subdistrict  = data.tombons;
-    });
-    this.loadData();
+    this.dataProvince = await this.storage.get('provincesDetail');
+    await this.loadData();
   }
   async loadData(){
-    this.geolocation.getCurrentPosition().then((resp) => {
+    await this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude   = resp.coords.latitude;
       this.longitude  = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
     });
     this.dataStorage = await this.storage.get('formpublic_step1');
-    this.loading.dismiss();
+    await this.loading.dismiss();
   }
   async formData(form){
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
       this.presentAlertConfirm();
     }else{
       let dataAnswer = {
-        "CWT":this.province,
-        "ID1":this.district,
-        "TMP":this.subdistrict,
+        "CWT":this.dataProvince.provinces,
+        "ID1":this.dataProvince.amphures,
+        "TMP":this.dataProvince.tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
       };
@@ -107,9 +105,7 @@ export class FormPage implements OnInit {
       console.log('failed to open settings'+err);
     });
   }
-  todo = {
-    CWT: '',
-    TMP: '',
-    ID1: '',
-  };
+  async backPage(){
+    this.router.navigateByUrl('tabs/form');
+  }
 }

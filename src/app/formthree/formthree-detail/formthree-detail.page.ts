@@ -43,7 +43,7 @@ export class FormthreeDetailPage implements OnInit {
         this.ROLL         = res.detail.ROLL;
         this.E_CIG        = res.detail.E_CIG;
         this.OTHER        = res.detail.OTHER;
-        this.NO1          = res.detail.NO1;
+        this.NO1          = (res.detail.NO1 == 0 ? "" : res.detail.NO1);
         this.RESPONSE     = res.detail.RESPONSE;
         this.TYPE_CIG     = res.detail.TYPE_CIG;
         this.SECOND       = res.detail.SECOND;

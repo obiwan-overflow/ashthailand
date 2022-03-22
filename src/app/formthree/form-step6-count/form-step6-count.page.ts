@@ -43,7 +43,7 @@ export class FormStep6CountPage implements OnInit {
     await loading.present();
   }
   async Form(){
-    let answerVal = this.ionicForm.value.NO;
+    let answerVal = parseInt(this.ionicForm.value.NO);
 
     this.dataStorage[this.id].NO2     = answerVal;
    

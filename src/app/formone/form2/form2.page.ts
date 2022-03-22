@@ -17,6 +17,10 @@ export class Form2Page implements OnInit {
   latitude:any;
   longitude:any;
   dataStorage:any = [];
+  todo = {
+    MOO: '',
+    VIL: '',
+  }
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -70,8 +74,7 @@ export class Form2Page implements OnInit {
 
     await alert.present();
   }
-  todo = {
-    MOO: '',
-    VIL: '',
+  async backPage(){
+    this.router.navigateByUrl('formone');
   }
 }

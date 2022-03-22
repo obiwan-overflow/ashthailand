@@ -17,6 +17,9 @@ export class Form3Page implements OnInit {
   latitude:any;
   longitude:any;
   dataStorage:any = [];
+  todo = {
+    A1: '',
+  }
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -71,7 +74,7 @@ export class Form3Page implements OnInit {
 
     await alert.present();
   }
-  todo = {
-    A1: '',
+  async backPage(){
+    this.router.navigateByUrl('formone/form2');
   }
 }
