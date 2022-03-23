@@ -17,6 +17,8 @@ export class Form2Page implements OnInit {
   latitude:any;
   longitude:any;
   dataStorage:any = [];
+  dataStorage_step1:any = [];
+  numberId:any;
   todo = {
     MOO: '',
     VIL: '',
@@ -39,8 +41,9 @@ export class Form2Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formpublic_step1');
-    
+    this.dataStorage_step1  = await this.storage.get('formpublic_step1');
+    this.dataStorage        = await this.storage.get('formpublic_step1');
+    this.numberId           = await this.route.snapshot.paramMap.get('id');
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -52,17 +55,24 @@ export class Form2Page implements OnInit {
     if(form.value.MOO == '' || form.value.VIL == ''){
       this.alert();
     }else{
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "ID1":this.dataStorage.ID1,
-        "TMP":this.dataStorage.TMP,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":form.value.MOO,
-        "VIL":form.value.VIL,
-      };
-      await this.storage.set('formpublic_step1',dataAnswer);
-      await this.router.navigateByUrl('/formone/form3');
+      if(this.numberId == 'continue'){
+        let dataAnswer = {
+          "CWT":this.dataStorage_step1.CWT,
+          "ID1":this.dataStorage_step1.ID1,
+          "TMP":this.dataStorage_step1.TMP,
+          "LAT":this.dataStorage_step1.LAT,
+          "LONG":this.dataStorage_step1.LONG,
+          "MOO":form.value.MOO,
+          "VIL":form.value.VIL,
+        };
+        await this.storage.set('formpublic_step1',dataAnswer);
+        await this.router.navigateByUrl('/formone/form3/continue');
+      }else{
+        this.dataStorage[this.numberId].MOO = form.value.MOO;
+        this.dataStorage[this.numberId].VIL = form.value.VIL;
+        await this.storage.set('formpublic',this.dataStorage);
+        await this.router.navigateByUrl('/formone/form3/'+this.numberId);
+      }
     }
   }
   async alert() {
@@ -75,6 +85,6 @@ export class Form2Page implements OnInit {
     await alert.present();
   }
   async backPage(){
-    this.router.navigateByUrl('formone');
+    this.router.navigateByUrl('formone/'+this.numberId);
   }
 }

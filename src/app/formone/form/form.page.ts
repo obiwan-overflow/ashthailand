@@ -22,6 +22,7 @@ export class FormPage implements OnInit {
   latitude:any;
   longitude:any;
   titlePub:any;
+  numberId:any;
   todo = {
     CWT: '',
     TMP: '',
@@ -50,7 +51,8 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
-    this.dataProvince = await this.storage.get('provincesDetail');
+    this.dataProvince   = await this.storage.get('provincesDetail');
+    this.numberId       = await this.route.snapshot.paramMap.get('id');
     await this.loadData();
   }
   async loadData(){
@@ -75,7 +77,7 @@ export class FormPage implements OnInit {
         "LONG":this.longitude,
       };
       await this.storage.set('formpublic_step1',dataAnswer);
-      await this.router.navigateByUrl('/formone/form2');
+      await this.router.navigateByUrl('/formone/form2/'+this.numberId);
     }
   }
   async presentAlertConfirm() {

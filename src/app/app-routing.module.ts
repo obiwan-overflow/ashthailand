@@ -115,15 +115,15 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'formone',
+    path: 'formone/:id',
     loadChildren: () => import('./formone/form/form.module').then( m => m.FormPageModule)
   },
   {
-    path: 'formone/form2',
+    path: 'formone/form2/:id',
     loadChildren: () => import('./formone/form2/form2.module').then( m => m.Form2PageModule)
   },
   {
-    path: 'formone/form3',
+    path: 'formone/form3/:id',
     loadChildren: () => import('./formone/form3/form3.module').then( m => m.Form3PageModule)
   },
   {
