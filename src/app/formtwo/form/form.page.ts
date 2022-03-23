@@ -14,16 +14,19 @@ import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-setting
   styleUrls: ['./form.page.scss'],
 })
 export class FormPage implements OnInit {
-
-  province:any;
-  district:any;
-  subdistrict:any;
+  dataProvince:any = [];
   latitude:any;
   longitude:any;
 
   loading:any;
   
   titleShop:any;
+  numberId:any;
+  todo = {
+    CWT: '',
+    TMP: '',
+    ID1: '',
+  };
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -47,13 +50,10 @@ export class FormPage implements OnInit {
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
     });
-    this.loading.present();
-    this.storage.get('provincesDetail').then((data)=>{
-      this.province     = data.provinces;
-      this.district     = data.amphures;
-      this.subdistrict  = data.tombons;
-    });
-    this.loadData();
+    await this.loading.present();
+    this.dataProvince   = await this.storage.get('provincesDetail');
+    this.numberId       = await this.route.snapshot.paramMap.get('id');
+    await this.loadData();
   }
   async loadData(){
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -64,21 +64,26 @@ export class FormPage implements OnInit {
     });
     this.loading.dismiss();
   }
+
+
   async formData(form){
     if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
       this.presentAlertConfirm();
     }else{
       let dataAnswer = {
-        "CWT":this.province,
-        "ID1":this.district,
-        "TMP":this.subdistrict,
+        "CWT":this.dataProvince.provinces,
+        "ID1":this.dataProvince.amphures,
+        "TMP":this.dataProvince.tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
       }
-      await this.storage.set('formshop',dataAnswer);
-      await this.router.navigateByUrl('/formtwo/form2');
+      await this.storage.set('formshop_step1',dataAnswer);
+      await this.router.navigateByUrl('/formtwo/form2/'+this.numberId);
     }
   }
+
+
+  
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -104,9 +109,7 @@ export class FormPage implements OnInit {
       console.log('failed to open settings'+err);
     });
   }
-  todo = {
-    CWT: '',
-    TMP: '',
-    ID1: '',
-  };
+  async backPage(){
+    this.router.navigateByUrl('tabs/form');
+  }
 }

@@ -12,41 +12,37 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep3Page implements OnInit {
   dataStorage: any = [];
   titleShop:any;
-  constructor(public router:Router,public storage:Storage,public loadingController:LoadingController,public auth:AuthService) {
+  numberId:any;
+  constructor(
+    public router:Router,
+    public storage:Storage,
+    public loadingController:LoadingController,
+    public auth:AuthService,
+    public route:ActivatedRoute
+  ) {
     this.titleShop = this.auth.titleShop();
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formshop');
-    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
       duration: 200
     });
     await loading.present();
+    this.numberId    = await this.route.snapshot.paramMap.get('id');
+    this.dataStorage = await this.storage.get('formshop');
   }
   async form(event){
-    let id = event.srcElement.id;
-    let dataAnswer = {
-      "CWT":this.dataStorage.CWT,
-      "TMP":this.dataStorage.TMP,
-      "ID1":this.dataStorage.ID1,
-      "VIL":this.dataStorage.VIL,
-      "MOO":this.dataStorage.MOO,
-      "A1":this.dataStorage.A1,
-      "NAME":this.dataStorage.NAME,
-      "ADDRESS":this.dataStorage.ADDRESS,
-      "LAT":this.dataStorage.LAT,
-      "LONG":this.dataStorage.LONG,
-      "images":this.dataStorage.images,
-      "S1A":this.dataStorage.S1A,
-      "S2A":this.dataStorage.S2A,
-      "S3A":id
-    }
-    await this.storage.set('formshop',dataAnswer);
-    await this.router.navigate(['formtwo/form-step4']);
+    let value = event.srcElement.id;
+    this.dataStorage[this.numberId].S3A = value;
+    
+    await this.storage.set('formshop',this.dataStorage);
+    await this.router.navigateByUrl('formtwo/form-step4/'+this.numberId);
+  }
+  async backPage(){
+    this.router.navigateByUrl('formtwo/form-step2/'+this.numberId);
   }
 }

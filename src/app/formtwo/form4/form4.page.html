@@ -2,22 +2,22 @@
   <ion-toolbar color="shop">
     <ion-title>{{titleShop}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="" (click)="backPage()"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <form #form="ngForm" (ngSubmit)="formData(form)">
+    <form [formGroup]="todo" (ngSubmit)="formData()">
     <ion-row>
       <ion-col size="12">
         <ion-label>ชื่อสถานที่</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.NAME" name="NAME"></ion-input>
+        <ion-input type="text" formControlName="NAME"></ion-input>
       </ion-col>
       <ion-col size="12">
         <ion-label>ที่ตั้ง</ion-label>
-        <ion-input type="text" [(ngModel)]="todo.ADDRESS" name="ADDRESS"></ion-input>
+        <ion-input type="text" formControlName="ADDRESS"></ion-input>
       </ion-col>
       <!-- <ion-col size="12">
         <div class="upload-images" (click)="presentActionSheet()">

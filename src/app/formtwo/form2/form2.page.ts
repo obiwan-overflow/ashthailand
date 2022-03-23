@@ -13,7 +13,13 @@ import { LoadingController,ToastController,AlertController } from '@ionic/angula
 })
 export class Form2Page implements OnInit {
   dataStorage: any = [];
+  dataStorage_step1:any = [];
+  numberId:any;
   titleShop:any;
+  todo = {
+    MOO: '',
+    VIL: '',
+  }
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -31,30 +37,38 @@ export class Form2Page implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formshop');
-    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
       duration: 200
     });
     await loading.present();
+    this.dataStorage_step1  = await this.storage.get('formshop_step1');
+    this.dataStorage        = await this.storage.get('formshop');
+    this.numberId           = await this.route.snapshot.paramMap.get('id');
   }
   async formData(form){
     if(form.value.MOO == '' || form.value.VIL == ''){
       this.alert();
     }else{
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "ID1":this.dataStorage.ID1,
-        "TMP":this.dataStorage.TMP,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":form.value.MOO,
-        "VIL":form.value.VIL,
+      if(this.numberId == 'continue'){
+        let dataAnswer = {
+          "CWT":this.dataStorage_step1.CWT,
+          "ID1":this.dataStorage_step1.ID1,
+          "TMP":this.dataStorage_step1.TMP,
+          "LAT":this.dataStorage_step1.LAT,
+          "LONG":this.dataStorage_step1.LONG,
+          "MOO":form.value.MOO,
+          "VIL":form.value.VIL,
+        }
+        await this.storage.set('formshop_step1',dataAnswer);
+        await this.router.navigateByUrl('/formtwo/form3/continue');
+      }else{
+        this.dataStorage[this.numberId].MOO = form.value.MOO;
+        this.dataStorage[this.numberId].VIL = form.value.VIL;
+        await this.storage.set('formshop',this.dataStorage);
+        await this.router.navigateByUrl('/formtwo/form3/'+this.numberId);
       }
-      await this.storage.set('formshop',dataAnswer);
-      await this.router.navigateByUrl('/formtwo/form3');
     }
   }
   async alert() {
@@ -66,8 +80,7 @@ export class Form2Page implements OnInit {
 
     await alert.present();
   }
-  todo = {
-    MOO: '',
-    VIL: '',
+  async backPage(){
+    this.router.navigateByUrl('formtwo/'+this.numberId);
   }
 }

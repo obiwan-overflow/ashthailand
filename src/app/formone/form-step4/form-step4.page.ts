@@ -108,6 +108,7 @@ export class FormStep4Page implements OnInit {
       this.dataPublicSuccess = [];
     }
     let data = {
+      "userId":this.userId,
       "CWT":this.dataStorage[this.numberId].CWT,
       "TMP":this.dataStorage[this.numberId].TMP,
       "ID1":this.dataStorage[this.numberId].ID1,

@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { AuthService } from 'src/app/AuthService';
 import { ActionSheetController,LoadingController,ToastController,AlertController } from '@ionic/angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form4',
@@ -14,7 +15,10 @@ import { ActionSheetController,LoadingController,ToastController,AlertController
 })
 export class Form4Page implements OnInit {
   dataStorage: any = [];
+  dataStorage_step1:any = [];
   titleShop:any;
+  numberId:any;
+  private todo : FormGroup;
   // loadding
   loadingImg:any;
   // images
@@ -32,110 +36,75 @@ export class Form4Page implements OnInit {
     public actionSheetController: ActionSheetController,
     public loadingController:LoadingController,
     public toastController:ToastController,
-    public alertController:AlertController
+    public alertController:AlertController,
+    private formBuilder: FormBuilder
   ) {
     this.titleShop = this.auth.titleShop();
+    this.todo = this.formBuilder.group({
+      NAME: ['', Validators.required],
+      ADDRESS: ['', Validators.required],
+    });
   }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.dataStorage = await this.storage.get('formshop');
-    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
       duration: 200
     });
     await loading.present();
-  }
-  async formData(form){
-    if(form.value.NAME == '' || form.value.ADDRESS == ''){
-      this.alert();
+    this.dataStorage_step1  = await this.storage.get('formshop_step1');
+    this.dataStorage        = await this.storage.get('formshop');
+    this.numberId           = await this.route.snapshot.paramMap.get('id');
+    if(this.numberId == 'continue'){
+      this.todo = this.formBuilder.group({
+        NAME: ['', Validators.required],
+        ADDRESS: ['', Validators.required],
+      });
     }else{
-      let dataAnswer = {
-        "CWT":this.dataStorage.CWT,
-        "ID1":this.dataStorage.ID1,
-        "TMP":this.dataStorage.TMP,
-        "LAT":this.dataStorage.LAT,
-        "LONG":this.dataStorage.LONG,
-        "MOO":this.dataStorage.MOO,
-        "VIL":this.dataStorage.VIL,
-        "A1":this.dataStorage.A1,
-        "NAME":form.value.NAME,
-        "ADDRESS":form.value.ADDRESS,
-        "images":this.imagesarray,
-      }
-      await this.storage.set('formshop',dataAnswer);
-      await this.router.navigateByUrl('/formtwo/form-step1');
+      this.todo = this.formBuilder.group({
+        NAME: [this.dataStorage[this.numberId].NAME, Validators.required],
+        ADDRESS: [this.dataStorage[this.numberId].ADDRESS, Validators.required],
+      });
     }
   }
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'อัพโหลดรูปภาพ',
-      cssClass: 'my-custom-class',
-      buttons: [{
-        text: 'เปิดกล้อง',
-        icon: 'camera',
-        handler: () => {
-          this.openCamera();
+  async formData(){
+    let ADDRESS = await this.todo.value.ADDRESS;
+    let NAME    = await this.todo.value.NAME;
+    if(NAME == '' || ADDRESS == ''){
+      this.alert();
+    }else{
+      if(this.numberId == 'continue'){
+        if(this.dataStorage == null){
+          this.dataStorage = [];
         }
-      }, {
-        text: 'เปิดอัลบั้มรูป',
-        icon: 'image',
-        handler: () => {
-          this.openGallery();
+        let dataAnswer = {
+          "CWT":this.dataStorage_step1.CWT,
+          "ID1":this.dataStorage_step1.ID1,
+          "TMP":this.dataStorage_step1.TMP,
+          "LAT":this.dataStorage_step1.LAT,
+          "LONG":this.dataStorage_step1.LONG,
+          "MOO":this.dataStorage_step1.MOO,
+          "VIL":this.dataStorage_step1.VIL,
+          "A1":this.dataStorage_step1.A1,
+          "NAME":NAME,
+          "ADDRESS":ADDRESS,
         }
-      }, {
-        text: 'ยกเลิก',
-        icon: 'close',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
-  cameraOptions: CameraOptions = {
-    quality: 30,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: false
-  }
-  gelleryOptions: CameraOptions = {
-    quality: 30,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    allowEdit: false
-  }
-  async openCamera(){
-    this.loadingImage();
-    this.camera.getPicture(this.cameraOptions).then((imgData) => {
-      console.log('image data =>  ', imgData);
-      this.base64Img = 'data:image/jpeg;base64,' + imgData;
-      this.userImg = this.base64Img;
-      this.updateImages(this.userImg);
-    }, (err) => {
-      console.log(err);
-    })
-  }
-  async openGallery() {
-    this.loadingImage();
-    this.camera.getPicture(this.gelleryOptions).then((imgData) => {
-     console.log('image data =>  ', imgData);
-     this.base64Img = 'data:image/jpeg;base64,' + imgData;
-     this.userImg = this.base64Img;
-     this.updateImages(this.userImg);
-    }, (err) => {
-     console.log(err);
-    })
-  }
-  async updateImages(images){
-    await this.imagesarray.push(images);
-    await this.loadingImg.dismiss();
+        await this.storage.set('formshop_step1',dataAnswer);
+        await this.dataStorage.push(dataAnswer);
+        await this.storage.set('formshop',this.dataStorage);
+        let lengthArray     = await this.storage.get('formshop');
+        let numberIdNext    = lengthArray.length - 1;
+        await this.router.navigateByUrl('/formtwo/form-step1/'+numberIdNext);
+      }else{
+        this.dataStorage[this.numberId].NAME    = NAME;
+        this.dataStorage[this.numberId].ADDRESS = ADDRESS;
+        await this.storage.set('formshop',this.dataStorage);
+        await this.router.navigateByUrl('/formtwo/form-step1/'+this.numberId);
+      }
+    }
   }
   async alert() {
     const alert = await this.alertController.create({
@@ -146,15 +115,81 @@ export class Form4Page implements OnInit {
 
     await alert.present();
   }
-  async loadingImage() {
-    this.loadingImg = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'กรุณารอสักครู่...',
-    });
-    this.loadingImg.present();
+  async backPage(){
+    this.router.navigateByUrl('formtwo/form3/'+this.numberId);
   }
-  todo = {
-    NAME: '',
-    ADDRESS: '',
-  }
+  // async presentActionSheet() {
+  //   const actionSheet = await this.actionSheetController.create({
+  //     header: 'อัพโหลดรูปภาพ',
+  //     cssClass: 'my-custom-class',
+  //     buttons: [{
+  //       text: 'เปิดกล้อง',
+  //       icon: 'camera',
+  //       handler: () => {
+  //         this.openCamera();
+  //       }
+  //     }, {
+  //       text: 'เปิดอัลบั้มรูป',
+  //       icon: 'image',
+  //       handler: () => {
+  //         this.openGallery();
+  //       }
+  //     }, {
+  //       text: 'ยกเลิก',
+  //       icon: 'close',
+  //       handler: () => {
+  //         console.log('Cancel clicked');
+  //       }
+  //     }]
+  //   });
+  //   await actionSheet.present();
+  // }
+  // cameraOptions: CameraOptions = {
+  //   quality: 30,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   allowEdit: false
+  // }
+  // gelleryOptions: CameraOptions = {
+  //   quality: 30,
+  //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   allowEdit: false
+  // }
+  // async openCamera(){
+  //   this.loadingImage();
+  //   this.camera.getPicture(this.cameraOptions).then((imgData) => {
+  //     console.log('image data =>  ', imgData);
+  //     this.base64Img = 'data:image/jpeg;base64,' + imgData;
+  //     this.userImg = this.base64Img;
+  //     this.updateImages(this.userImg);
+  //   }, (err) => {
+  //     console.log(err);
+  //   })
+  // }
+  // async openGallery() {
+  //   this.loadingImage();
+  //   this.camera.getPicture(this.gelleryOptions).then((imgData) => {
+  //    console.log('image data =>  ', imgData);
+  //    this.base64Img = 'data:image/jpeg;base64,' + imgData;
+  //    this.userImg = this.base64Img;
+  //    this.updateImages(this.userImg);
+  //   }, (err) => {
+  //    console.log(err);
+  //   })
+  // }
+  // async updateImages(images){
+  //   await this.imagesarray.push(images);
+  //   await this.loadingImg.dismiss();
+  // }
+  // async loadingImage() {
+  //   this.loadingImg = await this.loadingController.create({
+  //     cssClass: 'my-custom-class',
+  //     message: 'กรุณารอสักครู่...',
+  //   });
+  //   this.loadingImg.present();
+  // }
 }
