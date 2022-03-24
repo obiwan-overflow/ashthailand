@@ -9,69 +9,76 @@
 
 <ion-content>
   <ion-grid>
-    <form #form="ngForm" (ngSubmit)="formRegsiter(form)">
+    <form [formGroup]="todo" (ngSubmit)="formRegsiter()">
     <ion-row>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">Username</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.username" name="username"></ion-input>
+          <ion-label position="floating">ชื่อผู้ใช้งาน</ion-label>
+          <ion-input type="text" formControlName="username"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" [(ngModel)]="todo.password" name="password"></ion-input>
+          <ion-label position="floating">รหัสผ่าน <ion-text color="danger"><span>(เฉพาะตัวเลขและภาษาอังกฤษ)</span></ion-text></ion-label>
+          <ion-input type="password" formControlName="password" pattern="^[a-zA-Z0-9_.+-]*"></ion-input>
         </ion-item>
+        <ion-text color="danger" *ngIf="passwordNotmatch">
+          <small>* รหัสผ่านไม่ตรงกันกรุณากรอกข้อมูลใหม่</small>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="full">
+          <ion-label position="floating">ยืนยันรหัสผ่าน <ion-text color="danger"><span>(เฉพาะตัวเลขและภาษาอังกฤษ)</span></ion-text></ion-label>
+          <ion-input type="password" formControlName="confirmpassword" pattern="^[a-zA-Z0-9_.+-]*"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="passwordNotmatch">
+          <small>* รหัสผ่านไม่ตรงกันกรุณากรอกข้อมูลใหม่</small>
+        </ion-text>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">ชื่อ</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.name" name="name"></ion-input>
+          <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">นามสกุล</ion-label>
-          <ion-input type="text" [(ngModel)]="todo.lastname" name="lastname"></ion-input>
+          <ion-input type="text" formControlName="lastname"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">เบอร์โทรศัพท์</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="full">
-          <ion-label position="floating">ชื่อหน่วยงาน</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="full">
-          <ion-label position="floating">ตำบล</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="full">
-          <ion-label position="floating">อำเภอ</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input type="text" inputmode="numeric" maxlength="10" formControlName="phone"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item lines="full">
           <ion-label position="floating">จังหวัด</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-select formControlName="province" okText="ตกลง" cancelText="ยกเลิก" (ionChange)="getAmphures($event)">
+            <ion-select-option *ngFor="let data of dataProvince" value="{{data.id_provinces}}">{{data.provinces}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
       <ion-col size="12">
-        <ion-text color="danger" *ngIf="status == true">
-          <p>* กรุณากรอกข้อมูลให้ครบถ้วน</p>
-        </ion-text>
+        <ion-item lines="full">
+          <ion-label position="floating">อำเภอ</ion-label>
+          <ion-select formControlName="district" okText="ตกลง" cancelText="ยกเลิก" (ionChange)="getTombons($event)">
+            <ion-select-option *ngFor="let data of dataAmphures" value="{{data.id_provinces}}-{{data.id_amphures}}">{{data.amphures}}</ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-col>
       <ion-col size="12">
-        <ion-button type="submit" expand="full" color="theme">บันทึก</ion-button>
+        <ion-item lines="full">
+          <ion-label position="floating">ตำบล</ion-label>
+          <ion-select formControlName="subdistrict" okText="ตกลง" cancelText="ยกเลิก">
+            <ion-select-option *ngFor="let data of dataTombons" value="{{data.id_tombons}}">{{data.tombons}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button type="submit" expand="full" shape="round" color="theme" [disabled]="!todo.valid">บันทึก</ion-button>
       </ion-col>
     </ion-row>
     </form>
