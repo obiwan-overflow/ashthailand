@@ -3,7 +3,12 @@
     <ion-row *ngIf="fullname">
       <ion-col size="2">
         <div class="img-profile" routerLink="/tabs/profile">
-          <img src="assets/images/profile/m1.png">
+          <div *ngIf="profile">
+            <img src="assets/images/profile/{{profile}}.png">
+          </div>
+          <div *ngIf="!profile">
+            <img src="assets/images/user-theme.png">
+          </div>
         </div>
       </ion-col>
       <ion-col size="10">

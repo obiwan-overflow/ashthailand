@@ -35,13 +35,12 @@ export class FormFamilyListsPage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    this.MOO      = await this.route.snapshot.paramMap.get('MOO').replace("*kk*","/");
-    this.VIL      = await this.route.snapshot.paramMap.get('VIL').replace("*kk*","/");
-    this.A1       = await this.route.snapshot.paramMap.get('A1').replace("*kk*","/");
-    this.status   = await this.route.snapshot.paramMap.get('status');
-    await this.storage.get('formfamily').then((data)=>{
-      this.dataStorageAll = data;
-    });
+    this.MOO            = await this.route.snapshot.paramMap.get('MOO').replace("*kk*","/");
+    this.VIL            = await this.route.snapshot.paramMap.get('VIL').replace("*kk*","/");
+    this.A1             = await this.route.snapshot.paramMap.get('A1').replace("*kk*","/");
+    this.status         = await this.route.snapshot.paramMap.get('status');
+    this.dataStorageAll = await this.storage.get('formfamily');
+
     for (const val of this.dataStorageAll){
       if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
         this.detail = val;
@@ -55,6 +54,7 @@ export class FormFamilyListsPage implements OnInit {
   }
   async ionViewWillLeave(){
     this.datafamily = [];
+    this.dataOutfamily = [];
   }
   async updateMember() {
     const alert = await this.alertController.create({
@@ -186,15 +186,11 @@ export class FormFamilyListsPage implements OnInit {
         this.updateDatafamily();
       });
     }
-    await this.presentAlertConfirm();
   }
   async updateDatafamily(){
-    for (const val of this.dataStorageAll){
-      if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
-        
-      }
-    }
-    // this.storage.set('formfamily',this.dataStorageAll);
+    await this.storage.set('formFamilySuccess',this.datafamily);
+    await this.storage.set('formfamily',this.dataOutfamily);
+    await this.presentAlertConfirm();
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

@@ -21,6 +21,7 @@ export class ProfilePage implements OnInit {
   phone:any;
   id:any;
   image:any;
+  profile:any;
   dataProvince:any = [];
   dataAmphures:any = [];
   dataTombons:any = [];
@@ -77,6 +78,7 @@ export class ProfilePage implements OnInit {
       this.phone              = data.phone;
       this.id                 = data.id;
       this.image              = data.image == " " ? 'assets/images/user-theme.png' : data.image;
+      this.profile            = data.imgProfile;
     });
     await this.api.getdata('member/getProvincesList&id_province='+this.province+'&id_amphures='+this.district+'&id_tombons='+this.subdistrict).subscribe((res)=>{
       this.detailProvince = res.detail;

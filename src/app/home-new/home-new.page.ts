@@ -14,6 +14,7 @@ export class HomeNewPage implements OnInit {
   fullname:any;
   titleNoti:any;
   image:any;
+  profile:any;
   constructor(private storage: Storage,public router:Router,public loadingController:LoadingController,public api:RestApiService) {
     this.api.getdata('home/noti').subscribe((res)=>{
       this.titleNoti = res.title;
@@ -27,6 +28,7 @@ export class HomeNewPage implements OnInit {
         if(data !== null){
           this.fullname = data.name+" "+data.lastname;
           this.image    = data.image == " " ? 'assets/images/user-theme.png' : data.image;
+          this.profile  = data.imgProfile;
         }
     });
   }
