@@ -12,6 +12,11 @@ import { LoadingController,ToastController,AlertController } from '@ionic/angula
 export class Form4Page implements OnInit {
   dataStorage:any = [];
   id:any;
+  todo = {
+    NAME: '',
+    SEX: '',
+    AGE: '',
+  };
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -78,32 +83,6 @@ export class Form4Page implements OnInit {
             this.dataStorage[this.id].status   = "success";
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
-            // this.router.navigateByUrl('/formthree/form-family-lists/'+this.id+'/success');
-            // const formData = new FormData();
-            // formData.append('cat_id',"3");
-            // formData.append('user_id',userId);
-            // formData.append('MEMBER',this.dataStorage.MEMBER),
-            // formData.append('PERSON_NO',this.dataStorage.PERSON_NO),
-            // formData.append('CWT',this.dataStorage.CWT);
-            // formData.append('TMP',this.dataStorage.TMP);
-            // formData.append('ID1',this.dataStorage.ID1);
-            // formData.append('VIL',this.dataStorage.VIL);
-            // formData.append('MOO',this.dataStorage.MOO);
-            // formData.append('A1',this.dataStorage.A1);
-            // formData.append('LAT',this.dataStorage.LAT);
-            // formData.append('LONG',this.dataStorage.LONG);
-            // formData.append('SEX',SEX),
-            // formData.append('AGE',AGE),
-            // formData.append('NAME',NAME),
-            // this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-            //   if(res.result == 'success'){
-            //     if(this.dataStorage.MEMBER - this.dataStorage.PERSON_NO !== 0){
-            //       this.router.navigateByUrl('/formthree/form-family-lists');
-            //     }else{
-            //       this.presentAlertConfirm();
-            //     }
-            //   }
-            // });
           }
         }
       ]
@@ -150,10 +129,7 @@ export class Form4Page implements OnInit {
     await alert.present();
   }
 
-  todo = {
-    NAME: '',
-    SEX: '',
-    AGE: '',
-  };
-
+  async backPage(){
+    this.router.navigateByUrl('formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+  }
 }

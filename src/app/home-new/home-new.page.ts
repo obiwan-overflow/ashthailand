@@ -15,6 +15,7 @@ export class HomeNewPage implements OnInit {
   titleNoti:any;
   image:any;
   profile:any;
+  permission:any;
   constructor(private storage: Storage,public router:Router,public loadingController:LoadingController,public api:RestApiService) {
     this.api.getdata('home/noti').subscribe((res)=>{
       this.titleNoti = res.title;
@@ -26,9 +27,10 @@ export class HomeNewPage implements OnInit {
   async ionViewDidEnter(){
     await this.storage.get('userData').then((data)=>{
         if(data !== null){
-          this.fullname = data.name+" "+data.lastname;
-          this.image    = data.image == " " ? 'assets/images/user-theme.png' : data.image;
-          this.profile  = data.imgProfile;
+          this.fullname   = data.name+" "+data.lastname;
+          this.image      = data.image == " " ? 'assets/images/user-theme.png' : data.image;
+          this.profile    = data.imgProfile;
+          this.permission = data.permission;
         }
     });
   }

@@ -133,16 +133,26 @@ export class FormFamilyListsPage implements OnInit {
         }, {
           text: 'ยืนยัน',
           handler: () => {
-            this.datafamily.splice(del,1);                
-            for (let val of this.datafamily){
-              this.dataOutfamily.push(val);
-            }
-            this.storage.set('formfamily',this.dataOutfamily);
+            this.deleteMemberFamily(del);
           }
         }
       ]
     });
     await alert.present();
+  }
+  async deleteMemberFamily(del){  
+    let loadingDelete = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+    });
+    await loadingDelete.present();
+    await this.datafamily.splice(del,1);
+    for (let val of this.datafamily){
+      this.dataOutfamily.push(val);
+    }
+    await this.storage.set('formfamily',this.dataOutfamily);
+    await location.assign('formthree/form-family-lists/'+this.MOO+'/'+this.VIL+'/'+this.A1+'/success')
+    await loadingDelete.dismiss();
   }
 
   async btnApprove(){

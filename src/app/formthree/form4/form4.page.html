@@ -2,7 +2,7 @@
   <ion-toolbar color="family">
     <ion-title class="title-smoke">แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="" (click)="backPage()"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -37,8 +37,8 @@
   </ion-grid>
   <div class="progress-family">
     <ul>
+      <li class="active"><ion-icon name="ellipse"></ion-icon></li>
       <li class="active"><span><ion-icon name="location-sharp" color="danger"></ion-icon></span><ion-icon name="ellipse"></ion-icon></li>
-      <li><ion-icon name="ellipse"></ion-icon></li>
       <li><ion-icon name="ellipse"></ion-icon></li>
       <li><ion-icon name="ellipse"></ion-icon></li>
       <li><ion-icon name="ellipse"></ion-icon></li>

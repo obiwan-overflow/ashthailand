@@ -10,12 +10,24 @@ import { AlertController, LoadingController, Platform } from '@ionic/angular';
 })
 export class TabsPage {
   fullname:any;
-  constructor(private storage: Storage,public router:Router,public loadingController:LoadingController) {
-    this.storage.get('fullname').then((data)=>{
-      this.fullname = data;
+  permission:boolean;
+  constructor(
+    private storage: Storage,
+    public router:Router,
+    public loadingController:LoadingController
+  ) {
+   
+  }
+  async ionViewWillEnter(){
+    this.fullname   = await this.storage.get('fullname');
+    await this.storage.get('userData').then((res)=>{
+      if(res.permission == '1'){
+        this.permission = false;
+      }else if(res.permission == '2'){
+        this.permission = true;
+      }
     });
   }
-
   async tabForm(){
     if(this.fullname == undefined){
       const loading = await this.loadingController.create({

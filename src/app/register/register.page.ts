@@ -60,6 +60,7 @@ export class RegisterPage implements OnInit {
             if(this.todo.value.password !== this.todo.value.confirmpassword){
               this.passwordNotmatch = true;
             }else{
+              formData.append('permission','2');
               formData.append('username',this.todo.value.username);
               formData.append('password',this.todo.value.password);
               formData.append('name',this.todo.value.name);

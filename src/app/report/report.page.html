@@ -40,9 +40,15 @@
     </ion-item>
   </ion-list> -->
   <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <img src="{{userData.image}}" alt="" class="profile-img">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="7" class="ion-text-center">
+        <div *ngIf="userData.imgProfile">
+          <img src="assets/images/profile/{{userData.imgProfile}}.png" class="w-100">
+        </div>
+        <div *ngIf="!userData.imgProfile">
+          <img src="assets/images/user-theme.png" class="w-100">
+        </div>
+        <!-- <img src="{{userData.image}}" alt="" class="profile-img"> -->
       </ion-col>
     </ion-row>
     <ion-row>

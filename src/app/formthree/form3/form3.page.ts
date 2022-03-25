@@ -66,53 +66,11 @@ export class Form3Page implements OnInit {
       let VIL = this.dataStorage[this.index].VIL.replace("/","*kk*");
       let A1  = this.dataStorage[this.index].A1.replace("/","*kk*");
       this.router.navigateByUrl('/formthree/form-family-lists/'+MOO+'/'+VIL+'/'+A1+'/continue');
-      // this.router.navigateByUrl('/formthree/form-family-lists/'+this.index+'/continue');
-
-      // var subArray = [];
-      // for(let i = 1; i <= this.todo.value.MEMBER; i++){
-      //   var dataAnswer = {
-      //     "CWT":this.dataStorage.CWT,
-      //     "TMP":this.dataStorage.TMP,
-      //     "ID1":this.dataStorage.ID1,
-      //     "LAT":this.dataStorage.LAT,
-      //     "LONG":this.dataStorage.LONG,
-      //     "MOO":this.dataStorage.MOO,
-      //     "VIL":this.dataStorage.VIL,
-      //     "A1":this.dataStorage.A1,
-      //     "MEMBER":this.todo.value.MEMBER,
-      //   };
-      //   subArray.push(dataAnswer);
-      // }
-      // await this.storage.set('formfamily',subArray);
-      // await this.router.navigateByUrl('/formthree/form-family-lists');
-      // this.loadDataMember();
-
-      
-      // let dataAnswer = {
-      //   "CWT":this.dataStorage.CWT,
-      //   "TMP":this.dataStorage.TMP,
-      //   "ID1":this.dataStorage.ID1,
-      //   "LAT":this.dataStorage.LAT,
-      //   "LONG":this.dataStorage.LONG,
-      //   "MOO":this.dataStorage.MOO,
-      //   "VIL":this.dataStorage.VIL,
-      //   "A1":this.dataStorage.A1,
-      //   "MEMBER":this.todo.value.MEMBER,
-      // };
-      // await this.storage.set('formfamily',dataAnswer);
-      // this.router.navigateByUrl('/formthree/form4');
     }
   }
   async loadDataMember(){
     this.dataFamily = await this.storage.get('formfamily');
   }
-
-
-  // action
-  async btnStartTest(data){
-    this.router.navigateByUrl('/formthree/form4/'+data);
-  }
-
 
 
   // alert 
@@ -122,7 +80,11 @@ export class Form3Page implements OnInit {
       header: 'ตรวจสอบ',
       message: 'กรุณากรอกข้อมูล !!!',
     });
-
+    
     await alert.present();
+  }
+
+  async btnStartTest(data){
+    this.router.navigateByUrl('/formthree/form4/'+data);
   }
 }

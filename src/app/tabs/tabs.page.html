@@ -10,7 +10,7 @@
       <ion-label>หน้าหลัก</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="form" (click)="tabForm()">
+    <ion-tab-button tab="form" (click)="tabForm()" [disabled]="permission">
       <ion-icon name="document-text-sharp"></ion-icon>
       <ion-label>แบบเก็บข้อมูล</ion-label>
     </ion-tab-button>
@@ -20,7 +20,7 @@
       <ion-label>ข่าวสาร</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="report" (click)="tabReport()">
+    <ion-tab-button tab="report" (click)="tabReport()" [disabled]="permission">
       <ion-icon name="pie-chart-sharp"></ion-icon>
       <ion-label>รายงานความก้าวหน้า</ion-label>
     </ion-tab-button>

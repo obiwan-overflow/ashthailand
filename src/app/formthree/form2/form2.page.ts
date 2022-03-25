@@ -12,6 +12,11 @@ import { LoadingController,ToastController,AlertController } from '@ionic/angula
 export class Form2Page implements OnInit {
   dataStorage:any = [];
   index:any;
+  todo = {
+    MOO: '',
+    VIL: '',
+    A1: '',
+  };
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -42,35 +47,10 @@ export class Form2Page implements OnInit {
     let MOO = form.value.MOO;
     let VIL = form.value.VIL;
     let A1  = form.value.A1;
-    // let dataAnswer = {
-    //   "MENBER":form.value.MENBER,
-    //   "PERSON_NO":form.value.PERSON_NO,
-    //   "SEX":form.value.SEX,
-    //   "AGE":form.value.AGE,
-    //   "CWT":form.value.CWT,
-    //   "TMP":form.value.TMP,
-    //   "ID1":form.value.ID1,
-    //   "VIL":form.value.VIL,
-    //   "MOO":form.value.MOO,
-    //   "A1":form.value.A1,
-    //   "NAME":form.value.NAME,
-    //   "ADDRESS":form.value.ADDRESS,
-    //   "LAT":this.latitude,
-    //   "LONG":this.longitude
-    // }
+   
     if(MOO == '' || VIL == '' || A1 == ''){
       this.alert();
     }else{
-      // let dataAnswer = {
-      //   "CWT":this.dataStorage.CWT,
-      //   "TMP":this.dataStorage.TMP,
-      //   "ID1":this.dataStorage.ID1,
-      //   "LAT":this.dataStorage.LAT,
-      //   "LONG":this.dataStorage.LONG,
-      //   "MOO":form.value.MOO,
-      //   "VIL":form.value.VIL,
-      //   "A1":form.value.A1,
-      // }
       this.dataStorage[this.index].MOO = MOO;
       this.dataStorage[this.index].VIL = VIL;
       this.dataStorage[this.index].A1  = A1;
@@ -87,10 +67,4 @@ export class Form2Page implements OnInit {
 
     await alert.present();
   }
-  todo = {
-    MOO: '',
-    VIL: '',
-    A1: '',
-  };
-
 }

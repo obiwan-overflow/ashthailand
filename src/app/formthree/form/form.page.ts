@@ -22,6 +22,11 @@ export class FormPage implements OnInit {
 
   loading:any;
   fid:any;
+  todo = {
+    CWT: '',
+    TMP: '',
+    ID1: '',
+  };
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -43,13 +48,8 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     this.loading.present();
-    this.storage.get('provincesDetail').then((data)=>{
-      this.province     = data.provinces;
-      this.district     = data.amphures;
-      this.subdistrict  = data.tombons;
-    });
     this.dataStorage  = await this.storage.get('formfamily');
-    this.dataProvin   = await this.storage.get('userData');
+    this.dataProvin   = await this.storage.get('provincesDetail');
     this.fid          = this.dataStorage == null ? 1 : this.dataStorage.length+1;
     this.loadData();
   }
@@ -68,9 +68,9 @@ export class FormPage implements OnInit {
     }else{
       if(this.dataStorage == null){
         let dataAnswer = [{
-          "CWT":this.dataProvin.province,
-          "TMP":this.dataProvin.district,
-          "ID1":this.dataProvin.subdistrict,
+          "CWT":this.dataProvin.id_provinces,
+          "TMP":this.dataProvin.id_amphures,
+          "ID1":this.dataProvin.id_tombons,
           "LAT":this.latitude,
           "LONG":this.longitude,
           "fid":this.fid
@@ -79,9 +79,9 @@ export class FormPage implements OnInit {
         this.router.navigateByUrl('/formthree/form2');
       }else{
         let dataAnswer = {
-          "CWT":this.dataProvin.province,
-          "TMP":this.dataProvin.district,
-          "ID1":this.dataProvin.subdistrict,
+          "CWT":this.dataProvin.id_provinces,
+          "TMP":this.dataProvin.id_amphures,
+          "ID1":this.dataProvin.id_tombons,
           "LAT":this.latitude,
           "LONG":this.longitude,
           "fid":this.fid
@@ -90,15 +90,6 @@ export class FormPage implements OnInit {
         await this.storage.set('formfamily',this.dataStorage);
         this.router.navigateByUrl('/formthree/form2');
       }
-      // let dataAnswer = [{
-      //   "CWT":this.province,
-      //   "TMP":this.district,
-      //   "ID1":this.subdistrict,
-      //   "LAT":this.latitude,
-      //   "LONG":this.longitude,
-      // }];
-      // await this.storage.set('formfamily',dataAnswer);
-      // this.router.navigateByUrl('/formthree/form2');
     }
   }
   async presentAlertConfirm() {
@@ -126,9 +117,4 @@ export class FormPage implements OnInit {
       console.log('failed to open settings'+err);
     });
   }
-  todo = {
-    CWT: '',
-    TMP: '',
-    ID1: '',
-  };
 }

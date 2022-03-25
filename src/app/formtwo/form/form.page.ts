@@ -71,9 +71,9 @@ export class FormPage implements OnInit {
       this.presentAlertConfirm();
     }else{
       let dataAnswer = {
-        "CWT":this.dataProvince.provinces,
-        "ID1":this.dataProvince.amphures,
-        "TMP":this.dataProvince.tombons,
+        "CWT":this.dataProvince.id_provinces,
+        "ID1":this.dataProvince.id_amphures,
+        "TMP":this.dataProvince.id_tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
       }

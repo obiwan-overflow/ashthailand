@@ -9,12 +9,12 @@ import { Storage } from '@ionic/storage-angular';
 export class ReportPage implements OnInit {
   userData:any = [];
   constructor(public storage:Storage) {
-    this.storage.get('userData').then((data)=>{
-      this.userData = data;
-    });
+
   }
 
   ngOnInit() {
   }
-
+  async ionViewWillEnter(){
+    this.userData = await this.storage.get('userData');
+  }
 }
