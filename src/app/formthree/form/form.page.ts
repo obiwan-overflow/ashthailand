@@ -5,6 +5,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { LoadingController,AlertController } from '@ionic/angular';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-form',
@@ -35,7 +36,8 @@ export class FormPage implements OnInit {
     private storage: Storage,
     public loadingController:LoadingController,
     public alertController:AlertController,
-    private openNativeSettings: OpenNativeSettings
+    private openNativeSettings: OpenNativeSettings,
+    private platform:Platform
   ) {
    
   }
@@ -47,23 +49,26 @@ export class FormPage implements OnInit {
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
     });
-    this.loading.present();
+    await this.loading.present();
     this.dataStorage  = await this.storage.get('formfamily');
     this.dataProvin   = await this.storage.get('provincesDetail');
-    this.fid          = this.dataStorage == null ? 1 : this.dataStorage.length+1;
-    this.loadData();
-  }
-  async loadData(){
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.latitude   = resp.coords.latitude;
-      this.longitude  = resp.coords.longitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
+    this.fid          = await this.dataStorage == null ? 1 : this.dataStorage.length+1;
+    
+    await this.platform.ready().then(()=>{
+      var option = {
+        timeout: 20000
+      }
+      this.geolocation.getCurrentPosition().then((resp) => {
+        this.latitude   = resp.coords.latitude;
+        this.longitude  = resp.coords.longitude;
+      }).catch((error) => {
+      });
     });
-    this.loading.dismiss();
+    await this.loading.dismiss();
   }
   async formData(form){
-    if(this.latitude == undefined || this.latitude == null || this.latitude == ""){
+    console.log(this.latitude);
+    if(this.latitude == undefined || this.longitude == undefined){
       this.presentAlertConfirm();
     }else{
       if(this.dataStorage == null){
@@ -112,9 +117,14 @@ export class FormPage implements OnInit {
   async openLocation(){
     await this.openNativeSettings.open("location").then((res)=>{
       console.log('opened settings');
-      this.ionViewWillEnter();
     },(err)=>{
       console.log('failed to open settings'+err);
     });
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่...',
+      duration: 10000
+    });
+    await this.loading.present();
   }
 }
