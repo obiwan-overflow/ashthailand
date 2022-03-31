@@ -38,7 +38,9 @@ export class SigninPage implements OnInit {
       duration: 2000
     });
     await this.api.getdata('member/getProvincesList&id_province='+data.detail.province+'&id_amphures='+data.detail.district+'&id_tombons='+data.detail.subdistrict).subscribe((res)=>{
-      this.storage.set('provincesDetail',res.detail);
+      if(res.result == "success"){
+        this.storage.set('provincesDetail',res.detail);
+      }
     });
     await this.storage.set('userId',data.detail.id);
     await this.storage.set('fullname',data.detail.name+" "+data.detail.lastname);

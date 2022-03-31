@@ -216,4 +216,7 @@ export class FormStep3Page implements OnInit {
 
     await alert.present();
   }
+  async stop(){
+    this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+  }
 }

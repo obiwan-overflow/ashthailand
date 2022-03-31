@@ -45,4 +45,7 @@ export class FormStep7Page implements OnInit {
     await this.storage.set('formfamily',this.dataStorage);
     await this.router.navigateByUrl('formthree/form-step8/'+this.id);
   }
+  async stop(){
+    this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+  }
 }
