@@ -57,7 +57,8 @@ export class FormPage implements OnInit {
     
     await this.platform.ready().then(()=>{
       var option = {
-        timeout: 20000
+        timeout: 3000,
+        enableHighAccuracy: true
       }
       this.geolocation.getCurrentPosition(option).then((resp) => {
         this.latitude   = resp.coords.latitude;
