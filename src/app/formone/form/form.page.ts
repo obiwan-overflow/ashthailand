@@ -16,8 +16,6 @@ import { Platform } from '@ionic/angular';
 })
 export class FormPage implements OnInit {
   dataProvince:any = [];
-  dataStorage:any = [];
-
   loading:any;
 
   latitude:any;
@@ -56,20 +54,18 @@ export class FormPage implements OnInit {
     this.dataProvince   = await this.storage.get('provincesDetail');
     this.numberId       = await this.route.snapshot.paramMap.get('id');
 
-    await this.platform.ready().then(()=>{
-      var option = {
-        timeout: 3000,
-        enableHighAccuracy: true
-      }
-      this.geolocation.getCurrentPosition(option).then((resp) => {
-        this.latitude   = resp.coords.latitude;
-        this.longitude  = resp.coords.longitude;
-      }).catch((error) => {
-      });
+    var option = {
+      enableHighAccuracy: true
+    }
+    await this.geolocation.getCurrentPosition(option).then((resp) => {
+      this.latitude   = resp.coords.latitude;
+      this.longitude  = resp.coords.longitude;
+      this.loading.dismiss();
+    }).catch((error) => {
+      this.loading.dismiss();
+      alert(error);
     });
     await this.loading.dismiss();
-
-    this.dataStorage = await this.storage.get('formpublic_step1');
   }
 
   async formData(form){

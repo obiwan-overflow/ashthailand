@@ -11,7 +11,7 @@
   <div class="title">
     <!-- <h1>ชื่อ {{fullname}} (Admin)</h1>
     <h3>อบต. บางบัวทอง</h3> -->
-    <ion-item>
+    <!-- <ion-item>
       <ion-label>เดือน</ion-label>
       <ion-select value="มกราคม">
         <ion-select-option value="มกราคม">มกราคม</ion-select-option>
@@ -27,9 +27,18 @@
         <ion-select-option value="พฤศจิกายน">พฤศจิกายน</ion-select-option>
         <ion-select-option value="ธันวาคม">ธันวาคม</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
+    <ion-button id="open-modal">วันที่</ion-button>
+    <ion-button id="open-modal">ถึงวันที่</ion-button>
+    <ion-modal trigger="open-modal">
+      <ng-template>
+        <ion-content>
+          <ion-datetime></ion-datetime>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
   </div>
-  <!-- <ion-grid>
+  <ion-grid>
     <ion-row>
       <ion-col size="12">
         <div class="card-report">
@@ -62,5 +71,5 @@
         </div>
       </ion-col>
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
 </ion-content>

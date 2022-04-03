@@ -11,7 +11,7 @@
   <div class="title">
     <!-- <h1>ชื่อ {{fullname}}</h1>
     <h3>อบต. บางบัวทอง</h3> -->
-    <ion-item>
+    <!-- <ion-item>
       <ion-label>เดือน</ion-label>
       <ion-select value="มกราคม">
         <ion-select-option value="มกราคม">มกราคม</ion-select-option>
@@ -27,11 +27,125 @@
         <ion-select-option value="พฤศจิกายน">พฤศจิกายน</ion-select-option>
         <ion-select-option value="ธันวาคม">ธันวาคม</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
+    <ion-button color="dark" id="open-modal">วันที่</ion-button>
+    <ion-button color="dark" id="open-modal">ถึงวันที่</ion-button>
+    <ion-modal trigger="open-modal">
+      <ng-template>
+        <ion-content>
+          <ion-datetime></ion-datetime>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
   </div>
-  <!-- <ion-grid>
+  <ion-grid>
     <ion-row>
       <ion-col size="12">
+        <div class="card-report">
+          <ion-row>
+            <ion-col size="12">
+              <ion-text class="ion-text-center">
+                <h5><b>สังเกตสถานะที่สาธารณะ</b></h5>
+              </ion-text>
+            </ion-col>  
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>จำนวนทั้งหมด</b></p>
+                <p><b>100</b> แห่ง</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>วันนี้</b></p>
+                <p><b>8</b> แห่ง</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>สะสม</b></p>
+                <p><b>100</b> แห่ง</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>ร้อยละความสำเร็จ</b></p>
+                <p><b>1.00</b> %</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="card-report">
+          <ion-row>
+            <ion-col size="12">
+              <ion-text class="ion-text-center">
+                <h5><b>สังเกตร้านค้า</b></h5>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>จำนวนทั้งหมด</b></p>
+                <p><b>100</b> ร้าน</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>วันนี้</b></p>
+                <p><b>8</b> ร้าน</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>สะสม</b></p>
+                <p><b>100</b> ร้าน</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>ร้อยละความสำเร็จ</b></p>
+                <p><b>1.00</b> %</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="card-report">
+          <ion-row>
+            <ion-col size="12">
+              <ion-text class="ion-text-center">
+                <h5><b>แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่</b></h5>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>จำนวนทั้งหมด</b></p>
+                <p><b>100</b> ครัวเรือน</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>วันนี้</b></p>
+                <p><b>8</b> ครัวเรือน</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>สะสม</b></p>
+                <p><b>100</b> ครัวเรือน</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text class="ion-text-center">
+                <p><b>ร้อยละความสำเร็จ</b></p>
+                <p><b>1.00</b> %</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <!-- <ion-col size="12">
         <div class="card-report">
           <span class="persent">10%</span>
           <p class="text-title">สังเกตสถานะที่สาธารณะ</p>
@@ -57,7 +171,7 @@
           <p>จำนวนที่แล้วเสร็จ <span class="text-count">10</span></p>
           <p>จำนวนที่เหลือ <span class="text-count">90</span></p>
         </div>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
 </ion-content>

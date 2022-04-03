@@ -37,15 +37,7 @@ export class FormStep11Page implements OnInit {
   }
   async form(event){
     let answerVal = event.srcElement.id;
-    // this.dataStorage[this.id].TIME_M        = this.dataStorage.TIME_M === undefined ? "" : this.dataStorage.TIME_M;
-    // this.dataStorage[this.id].CIG           = this.dataStorage.CIG === undefined ? "" : this.dataStorage.CIG;
-    // this.dataStorage[this.id].NO1           = this.dataStorage.NO1 === undefined ? "" : this.dataStorage.NO1;
-    // this.dataStorage[this.id].ROLL          = this.dataStorage.ROLL === undefined ? "" : this.dataStorage.ROLL;
-    // this.dataStorage[this.id].NO2           = this.dataStorage.NO2 === undefined ? "" : this.dataStorage.NO2;
-    // this.dataStorage[this.id].E_CIG         = this.dataStorage.E_CIG === undefined ? "" : this.dataStorage.E_CIG;
-    // this.dataStorage[this.id].OTHER         = this.dataStorage.OTHER === undefined ? "" : this.dataStorage.OTHER;
-    // this.dataStorage[this.id].RESPONSE      = this.dataStorage.RESPONSE === undefined ? "" : this.dataStorage.RESPONSE;
-    // this.dataStorage[this.id].TYPE_CIG      = this.dataStorage.TYPE_CIG === undefined ? "" : this.dataStorage.TYPE_CIG;
+
     this.dataStorage[this.id].SECOND        = answerVal;
    
     await this.storage.set('formfamily',this.dataStorage);
@@ -53,5 +45,12 @@ export class FormStep11Page implements OnInit {
   }
   async stop(){
     this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+  }
+  async backPage(){
+    if(this.dataStorage[this.id].TYPE_CIG == null || this.dataStorage[this.id].TYPE_CIG == undefined){
+      this.router.navigateByUrl('/formthree/form-response/'+this.id);
+    }else{
+      this.router.navigateByUrl('/formthree/form-step10/'+this.id);
+    }
   }
 }

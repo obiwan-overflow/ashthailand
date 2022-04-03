@@ -34,7 +34,7 @@
       <ion-col size="12">
         <ion-list lines="full">
           <ion-item color="primary" class="list-member" *ngFor="let data of datafamily,let i = index">
-            <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+            <ion-icon name="person-circle-outline" slot="start" (click)="continue(i,data.NAME)"></ion-icon>
             <ion-label>{{data.NAME}} <span *ngIf="data.status == 'success'">สำเร็จ</span></ion-label>
             <ion-icon name="trash-sharp" slot="end" (click)="btnDelete(i,data.NAME)"></ion-icon>
           </ion-item>

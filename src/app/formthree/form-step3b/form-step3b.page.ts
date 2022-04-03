@@ -126,4 +126,7 @@ export class FormStep3bPage implements OnInit {
   async stop(){
     this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
   }
+  async backPage(){
+    this.router.navigateByUrl('/formthree/form-step3/'+this.id);
+  }
 }

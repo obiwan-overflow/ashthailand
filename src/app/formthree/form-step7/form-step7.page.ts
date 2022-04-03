@@ -37,9 +37,7 @@ export class FormStep7Page implements OnInit {
   }
   async form(event){
     let answerVal = event.srcElement.id;
-    // this.dataStorage[this.id].TIME_M  = this.dataStorage.TIME_M === undefined ? "" : this.dataStorage.TIME_M;
-    // this.dataStorage[this.id].NO1     = this.dataStorage.NO1 === undefined ? "" : this.dataStorage.NO1;
-    // this.dataStorage[this.id].NO2     = this.dataStorage.NO2 === undefined ? "" : this.dataStorage.NO2;
+
     this.dataStorage[this.id].E_CIG   = answerVal;
    
     await this.storage.set('formfamily',this.dataStorage);
@@ -47,5 +45,12 @@ export class FormStep7Page implements OnInit {
   }
   async stop(){
     this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+  }
+  async backPage(){
+    if(this.dataStorage[this.id].NO2 == null || this.dataStorage[this.id].NO2 == undefined){
+      this.router.navigateByUrl('/formthree/form-step6/'+this.id);
+    }else{
+      this.router.navigateByUrl('/formthree/form-step6-count/'+this.id);
+    }
   }
 }

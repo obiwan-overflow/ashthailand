@@ -51,4 +51,11 @@ export class FormStep6Page implements OnInit {
   async stop(){
     this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
   }
+  async backPage(){
+    if(this.dataStorage[this.id].NO1 == null || this.dataStorage[this.id].NO1 == undefined){
+      this.router.navigateByUrl('/formthree/form-step5/'+this.id);
+    }else{
+      this.router.navigateByUrl('/formthree/form-step5-count/'+this.id);
+    }
+  }
 }

@@ -154,7 +154,103 @@ export class FormFamilyListsPage implements OnInit {
     await location.assign('formthree/form-family-lists/'+this.MOO+'/'+this.VIL+'/'+this.A1+'/success')
     await loadingDelete.dismiss();
   }
-
+  async continue(index,name){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ทำแบบสัมภาษณ์ต่อ!',
+      message: name,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'ยืนยัน',
+          handler: () => {
+            this.continueApprove(index,name);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async continueApprove(index,name){
+    let count = await this.dataOutfamily.length;
+    let sum   = await count + index;
+    for (let val of this.datafamily){
+      this.dataOutfamily.push(val);
+    }
+    await this.storage.set('formfamily',this.dataOutfamily);
+    let data = await this.storage.get('formfamily');
+    if(data[sum].QUITE_CHECK == undefined){
+      if(data[sum].SECOND == undefined){
+        if(data[sum].TYPE_CIG == undefined){
+          if(data[sum].RESPONSE == undefined){
+            if(data[sum].OTHER == undefined){
+              if(data[sum].E_CIG == undefined){
+                if(data[sum].NO2 == undefined){
+                  if(data[sum].ROLL == undefined){
+                    if(data[sum].NO1 == undefined){
+                      if(data[sum].CIG == undefined){
+                        if(data[sum].TIME_M == undefined){
+                          if(data[sum].TIME_Y == undefined){
+                            if(data[sum].EXSMOKE_M == undefined){
+                              if(data[sum].EXSMOKE_Y == undefined){
+                                if(data[sum].EVERSMOKE == undefined){
+                                  if(data[sum].SMOKE == undefined){
+                                    this.router.navigateByUrl('/formthree/form4/'+sum);
+                                  }else{
+                                    this.router.navigateByUrl('/formthree/form-step1/'+sum);
+                                  }
+                                }else{
+                                  this.router.navigateByUrl('/formthree/form-step2/'+sum);
+                                }
+                              }else{
+                                this.router.navigateByUrl('/formthree/form-step3/'+sum);
+                              }
+                            }else{
+                              this.router.navigateByUrl('/formthree/form-step3b/'+sum);
+                            }
+                          }else{
+                            this.router.navigateByUrl('/formthree/form-step4/'+sum);
+                          }
+                        }else{
+                          this.router.navigateByUrl('/formthree/form-step4b/'+sum);
+                        }
+                      }else{
+                        this.router.navigateByUrl('/formthree/form-step5/'+sum);
+                      }
+                    }else{
+                      this.router.navigateByUrl('/formthree/form-step5-count/'+sum);
+                    }
+                  }else{
+                    this.router.navigateByUrl('/formthree/form-step6/'+sum);
+                  }
+                }else{
+                  this.router.navigateByUrl('/formthree/form-step6-count/'+sum);
+                }
+              }else{
+                this.router.navigateByUrl('/formthree/form-step7/'+sum);
+              }
+            }else{
+              this.router.navigateByUrl('/formthree/form-step8/'+sum);
+            }
+          }else{
+            this.router.navigateByUrl('/formthree/form-response/'+sum);
+          }
+        }else{
+          this.router.navigateByUrl('/formthree/form-step10/'+sum);
+        }
+      }else{
+        this.router.navigateByUrl('/formthree/form-step11/'+sum);
+      }
+    }else{
+      this.router.navigateByUrl('/formthree/form-step12/'+sum);
+    }
+  }
   async btnApprove(){
     const userId = await this.storage.get('userId');
     for (const val of this.datafamily){
