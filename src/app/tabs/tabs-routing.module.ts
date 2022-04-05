@@ -92,6 +92,10 @@ const routes: Routes = [
         loadChildren: () => import('../register/register.module').then(m => m.RegisterPageModule)
       },
       {
+        path: 'register/registertwo',
+        loadChildren: () => import('../registertwo/registertwo.module').then(m => m.RegistertwoPageModule)
+      },
+      {
         path: 'form/form-general/:id',
         loadChildren: () => import('../form-general/form-general.module').then(m => m.FormGeneralPageModule)
       },

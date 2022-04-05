@@ -13,7 +13,8 @@ export class FormDraftPage implements OnInit {
   constructor(
     public storage:Storage,
     public loadingController:LoadingController,
-    public router:Router
+    public router:Router,
+    public alertController:AlertController
   ) { }
 
   ngOnInit() {
@@ -53,5 +54,33 @@ export class FormDraftPage implements OnInit {
     }else{
       this.router.navigateByUrl('/formtwo/form-step6/'+key);
     }
+  }
+  async delete(index,name){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ยืนยันการลบข้อมูล!',
+      message: name,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'บืนยัน',
+          handler: () => {
+            this.confirmDelete(index);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async confirmDelete(index){
+    await this.dataStorage.splice(index,1);
+    await this.storage.set('formshop',this.dataStorage);
   }
 }

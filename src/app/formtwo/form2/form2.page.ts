@@ -74,8 +74,8 @@ export class Form2Page implements OnInit {
   async alert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'ตรวจสอบ',
-      message: 'กรุณากรอกข้อมูล !!!',
+      header: 'ตรวจสอบ!!!',
+      message: 'กรุณากรอกข้อมูลให้ครบ ถ้าไม่มีข้อมูลหมู่ที่ หรือชื่อชุมชน/บ้าน ให้บันทึก "ไม่มี"',
     });
 
     await alert.present();

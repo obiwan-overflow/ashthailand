@@ -337,7 +337,11 @@ const routes: Routes = [
   {
     path: 'form-lists-detail',
     loadChildren: () => import('./formthree/form-lists-detail/form-lists-detail.module').then( m => m.FormListsDetailPageModule)
+  },  {
+    path: 'registertwo',
+    loadChildren: () => import('./registertwo/registertwo.module').then( m => m.RegistertwoPageModule)
   },
+
 
 ];
 @NgModule({

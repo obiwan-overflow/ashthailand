@@ -63,27 +63,36 @@ export class FormPage implements OnInit {
       this.loading.dismiss();
     }).catch((error) => {
       this.loading.dismiss();
-      alert(error);
+      this.waitLocation();
     });
     await this.loading.dismiss();
   }
 
   async formData(form){
-    if(this.latitude == undefined || this.longitude == undefined){
-      this.presentAlertConfirm();
-    }else{
-      let dataAnswer = {
-        "CWT":this.dataProvince.id_provinces,
-        "ID1":this.dataProvince.id_amphures,
-        "TMP":this.dataProvince.id_tombons,
-        "LAT":this.latitude,
-        "LONG":this.longitude,
-      };
-      await this.storage.set('formpublic_step1',dataAnswer);
-      await this.router.navigateByUrl('/formone/form2/'+this.numberId);
-    }
+    let dataAnswer = {
+      "CWT":this.dataProvince.id_provinces,
+      "ID1":this.dataProvince.id_amphures,
+      "TMP":this.dataProvince.id_tombons,
+      "LAT":this.latitude,
+      "LONG":this.longitude,
+    };
+    await this.storage.set('formpublic_step1',dataAnswer);
+    await this.router.navigateByUrl('/formone/form2/'+this.numberId);
+    // if(this.latitude == undefined || this.longitude == undefined){
+    //   this.waitLocation();
+    // }else{
+    //   let dataAnswer = {
+    //     "CWT":this.dataProvince.id_provinces,
+    //     "ID1":this.dataProvince.id_amphures,
+    //     "TMP":this.dataProvince.id_tombons,
+    //     "LAT":this.latitude,
+    //     "LONG":this.longitude,
+    //   };
+    //   await this.storage.set('formpublic_step1',dataAnswer);
+    //   await this.router.navigateByUrl('/formone/form2/'+this.numberId);
+    // }
   }
-  async presentAlertConfirm() {
+  async waitLocation() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'แจ้งเตือน!',
@@ -110,7 +119,7 @@ export class FormPage implements OnInit {
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
-      duration: 10000
+      duration: 5000
     });
     await this.loading.present();
   }
