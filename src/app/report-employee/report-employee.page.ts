@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-report-employee',
@@ -9,14 +10,18 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class ReportEmployeePage implements OnInit {
 
-  fullname:any;
-  constructor(public api:RestApiService,public storage:Storage) { }
+  user:any = {};
+  constructor(
+    public api:RestApiService,
+    public storage:Storage,
+  ) { }
 
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    await this.storage.get('fullname').then((data)=>{
-      this.fullname = data;
+    await this.storage.get('userData').then((data)=>{
+      this.user = data;
     });
   }
+
 }

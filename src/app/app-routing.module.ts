@@ -341,6 +341,14 @@ const routes: Routes = [
     path: 'registertwo',
     loadChildren: () => import('./registertwo/registertwo.module').then( m => m.RegistertwoPageModule)
   },
+  {
+    path: 'report-head-people',
+    loadChildren: () => import('./report-head-people/report-head-people.module').then( m => m.ReportHeadPeoplePageModule)
+  },
+  {
+    path: 'report-head-lists',
+    loadChildren: () => import('./report-head-lists/report-head-lists.module').then( m => m.ReportHeadListsPageModule)
+  },
 
 
 ];

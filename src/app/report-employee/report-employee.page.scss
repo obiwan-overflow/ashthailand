@@ -21,6 +21,15 @@
     border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-bottom: 10px;
+    &.public {
+        background: #71BBEE;
+    }
+    &.shop {
+        background: #83D6E7;
+    }
+    &.family {
+        background: #A9D18E;
+    }
     .text-title {
         margin-top: 0;
         margin-bottom: 0;
@@ -44,4 +53,8 @@
         border-radius: 50%;
         border: 5px solid #064635;
     }
+}
+.input-date {
+    border: 2px solid #fff !important;
+    margin-bottom: 10px;
 }

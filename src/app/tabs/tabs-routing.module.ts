@@ -160,6 +160,14 @@ const routes: Routes = [
         loadChildren: () => import('../report-head/report-head.module').then(m => m.ReportHeadPageModule)
       },
       {
+        path: 'report/report-head/report-head-people',
+        loadChildren: () => import('../report-head-people/report-head-people.module').then(m => m.ReportHeadPeoplePageModule)
+      },
+      {
+        path: 'report/report-head/report-head-lists',
+        loadChildren: () => import('../report-head-lists/report-head-lists.module').then(m => m.ReportHeadListsPageModule)
+      },
+      {
         path: 'report/report-admin',
         loadChildren: () => import('../report-admin/report-admin.module').then(m => m.ReportAdminPageModule)
       },

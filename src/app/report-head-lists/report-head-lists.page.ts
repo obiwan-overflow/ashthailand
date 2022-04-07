@@ -3,14 +3,16 @@ import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 
 @Component({
-  selector: 'app-report-admin',
-  templateUrl: './report-admin.page.html',
-  styleUrls: ['./report-admin.page.scss'],
+  selector: 'app-report-head-lists',
+  templateUrl: './report-head-lists.page.html',
+  styleUrls: ['./report-head-lists.page.scss'],
 })
-export class ReportAdminPage implements OnInit {
-
+export class ReportHeadListsPage implements OnInit {
   user:any = {};
-  constructor(public api:RestApiService,public storage:Storage) { }
+  constructor(
+    public api:RestApiService,
+    public storage:Storage
+  ) { }
 
   ngOnInit() {
   }
@@ -19,5 +21,4 @@ export class ReportAdminPage implements OnInit {
       this.user = data;
     });
   }
-  
 }
