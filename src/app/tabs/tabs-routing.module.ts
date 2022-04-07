@@ -160,7 +160,11 @@ const routes: Routes = [
         loadChildren: () => import('../report-head/report-head.module').then(m => m.ReportHeadPageModule)
       },
       {
-        path: 'report/report-head/report-head-people',
+        path: 'report/report-head/report-head-people-type',
+        loadChildren: () => import('../report-head-people-type/report-head-people-type.module').then(m => m.ReportHeadPeopleTypePageModule)
+      },
+      {
+        path: 'report/report-head/report-head-people-type/report-head-people/:id',
         loadChildren: () => import('../report-head-people/report-head-people.module').then(m => m.ReportHeadPeoplePageModule)
       },
       {
@@ -186,6 +190,10 @@ const routes: Routes = [
       {
         path: 'form/formthree-draft',
         loadChildren: () => import('../formthree/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
+      },
+      {
+        path: 'explore',
+        loadChildren: () => import('../explore/explore.module').then( m => m.ExplorePageModule)
       },
       {
         path: '',

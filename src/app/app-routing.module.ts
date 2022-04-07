@@ -349,6 +349,14 @@ const routes: Routes = [
     path: 'report-head-lists',
     loadChildren: () => import('./report-head-lists/report-head-lists.module').then( m => m.ReportHeadListsPageModule)
   },
+  {
+    path: 'explore',
+    loadChildren: () => import('./explore/explore.module').then( m => m.ExplorePageModule)
+  },
+  {
+    path: 'report-head-people-type',
+    loadChildren: () => import('./report-head-people-type/report-head-people-type.module').then( m => m.ReportHeadPeopleTypePageModule)
+  },
 
 
 ];
