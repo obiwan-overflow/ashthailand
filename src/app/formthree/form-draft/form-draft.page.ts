@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-draft',
@@ -8,7 +10,13 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class FormDraftPage implements OnInit {
   data:any = [];
-  constructor(public storage:Storage) { }
+  dataOut:any = [];
+  constructor(
+    public storage:Storage,
+    public router:Router,
+    public alertController:AlertController,
+    public loadingController:LoadingController
+  ) { }
 
   ngOnInit() {
   }
@@ -29,5 +37,50 @@ export class FormDraftPage implements OnInit {
       }, []);
       this.data = result;
     }
+  }
+  async continue(MOO,VIL,A1){
+    this.router.navigateByUrl('/formthree/form-family-lists/'+MOO+'/'+VIL+'/'+A1+'/success');
+  }
+  async delete(MOO,VIL,A1){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ยืนยันการลบข้อมูล!',
+      message: 'หมู่ที่ '+MOO+'ชื่อชุมชน/บ้าน '+VIL+'บ้านเลขที่ '+A1,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'บืนยัน',
+          handler: () => {
+            this.confirmDelete(MOO,VIL,A1);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async confirmDelete(MOO,VIL,A1){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+    await loading.present();
+    let dataFamily = [];
+    dataFamily = await this.storage.get('formfamily');
+    for (let i = 0; i < dataFamily.length; i++) {
+      const element = dataFamily[i];
+      if(element.MOO !== MOO && element.VIL !== VIL && element.A1 !== A1){
+        this.dataOut.push(element);
+      }
+    }
+    await this.storage.set('formfamily',this.dataOut);
+    await this.ionViewWillEnter();
+    await loading.dismiss();
   }
 }
