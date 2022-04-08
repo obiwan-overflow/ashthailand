@@ -64,29 +64,25 @@ export class FormPage implements OnInit {
       this.loading.dismiss();
     }).catch((error) => {
       this.loading.dismiss();
-      alert(error);
+      this.waitLocation();
     });
     await this.loading.dismiss();
   }
   async formData(form){
-    if(this.latitude == undefined || this.longitude == undefined){
-      this.presentAlertConfirm();
-    }else{
-      let dataAnswer = {
-        "CWT":this.dataProvince.id_provinces,
-        "ID1":this.dataProvince.id_amphures,
-        "TMP":this.dataProvince.id_tombons,
-        "LAT":this.latitude,
-        "LONG":this.longitude,
-      }
-      await this.storage.set('formshop_step1',dataAnswer);
-      await this.router.navigateByUrl('/formtwo/form2/'+this.numberId);
+    let dataAnswer = {
+      "CWT":this.dataProvince.id_provinces,
+      "ID1":this.dataProvince.id_amphures,
+      "TMP":this.dataProvince.id_tombons,
+      "LAT":this.latitude,
+      "LONG":this.longitude,
     }
+    await this.storage.set('formshop_step1',dataAnswer);
+    await this.router.navigateByUrl('/formtwo/form2/'+this.numberId);
   }
 
 
   
-  async presentAlertConfirm() {
+  async waitLocation() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'แจ้งเตือน!',

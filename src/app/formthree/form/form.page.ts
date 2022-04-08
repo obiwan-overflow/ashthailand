@@ -63,42 +63,37 @@ export class FormPage implements OnInit {
       this.loading.dismiss();
     }).catch((error) => {
       this.loading.dismiss();
-      alert(error)
+      this.waitLocation();
     });
     await this.loading.dismiss();
   }
   async formData(form){
-    console.log(this.latitude);
-    if(this.latitude == undefined || this.longitude == undefined){
-      this.presentAlertConfirm();
+    if(this.dataStorage == null){
+      let dataAnswer = [{
+        "CWT":this.dataProvin.id_provinces,
+        "TMP":this.dataProvin.id_amphures,
+        "ID1":this.dataProvin.id_tombons,
+        "LAT":this.latitude,
+        "LONG":this.longitude,
+        "fid":this.fid
+      }];
+      this.storage.set('formfamily',dataAnswer);
+      this.router.navigateByUrl('/formthree/form2');
     }else{
-      if(this.dataStorage == null){
-        let dataAnswer = [{
-          "CWT":this.dataProvin.id_provinces,
-          "TMP":this.dataProvin.id_amphures,
-          "ID1":this.dataProvin.id_tombons,
-          "LAT":this.latitude,
-          "LONG":this.longitude,
-          "fid":this.fid
-        }];
-        this.storage.set('formfamily',dataAnswer);
-        this.router.navigateByUrl('/formthree/form2');
-      }else{
-        let dataAnswer = {
-          "CWT":this.dataProvin.id_provinces,
-          "TMP":this.dataProvin.id_amphures,
-          "ID1":this.dataProvin.id_tombons,
-          "LAT":this.latitude,
-          "LONG":this.longitude,
-          "fid":this.fid
-        };
-        await this.dataStorage.push(dataAnswer);
-        await this.storage.set('formfamily',this.dataStorage);
-        this.router.navigateByUrl('/formthree/form2');
-      }
+      let dataAnswer = {
+        "CWT":this.dataProvin.id_provinces,
+        "TMP":this.dataProvin.id_amphures,
+        "ID1":this.dataProvin.id_tombons,
+        "LAT":this.latitude,
+        "LONG":this.longitude,
+        "fid":this.fid
+      };
+      await this.dataStorage.push(dataAnswer);
+      await this.storage.set('formfamily',this.dataStorage);
+      this.router.navigateByUrl('/formthree/form2');
     }
   }
-  async presentAlertConfirm() {
+  async waitLocation() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'แจ้งเตือน!',
