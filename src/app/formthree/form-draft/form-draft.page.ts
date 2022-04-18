@@ -39,7 +39,10 @@ export class FormDraftPage implements OnInit {
     }
   }
   async continue(MOO,VIL,A1){
-    this.router.navigateByUrl('/formthree/form-family-lists/'+MOO+'/'+VIL+'/'+A1+'/success');
+    let IdMOO  = await MOO.replace("/","*kk*");
+    let IdVIL  = await VIL.replace("/","*kk*");
+    let IdA1   = await A1.replace("/","*kk*");
+    this.router.navigateByUrl('/formthree/form-family-lists/'+IdMOO+'/'+IdVIL+'/'+IdA1+'/success');
   }
   async delete(MOO,VIL,A1){
     const alert = await this.alertController.create({
@@ -55,7 +58,7 @@ export class FormDraftPage implements OnInit {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'บืนยัน',
+          text: 'ยืนยัน',
           handler: () => {
             this.confirmDelete(MOO,VIL,A1);
           }
@@ -75,12 +78,14 @@ export class FormDraftPage implements OnInit {
     dataFamily = await this.storage.get('formfamily');
     for (let i = 0; i < dataFamily.length; i++) {
       const element = dataFamily[i];
-      if(element.MOO !== MOO && element.VIL !== VIL && element.A1 !== A1){
+      if(element.MOO == MOO && element.VIL == VIL && element.A1 == A1){
+
+      }else{
         this.dataOut.push(element);
       }
     }
     await this.storage.set('formfamily',this.dataOut);
-    await this.ionViewWillEnter();
+    await location.assign('/tabs/form/formthree-draft');
     await loading.dismiss();
   }
 }

@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep5Page implements OnInit {
   dataStorage:any = [];
   dataPublicSuccess:any = [];
-  userId:any;
+  userData:any = [];
   titlePub:any;
   numberId:any;
   constructor(
@@ -39,7 +39,7 @@ export class FormStep5Page implements OnInit {
     await loading.present();
 
     this.dataStorage  = await this.storage.get('formpublic');
-    this.userId       = await this.storage.get('userId');
+    this.userData     = await this.storage.get('userData');
     this.numberId     = await this.route.snapshot.paramMap.get('id');
   }
   async form(event){
@@ -68,10 +68,11 @@ export class FormStep5Page implements OnInit {
             this.setDataSuccess(value);
             // this.dataStorage[this.numberId].status = "success";
             // this.storage.set('formpublic',this.dataStorage);
-
+            
             const formData = new FormData();
             formData.append('cat_id',"1");
-            formData.append('user_id',this.userId);
+            formData.append('user_id',this.userData.id);
+            formData.append('organization_name',this.userData.organization_name);
             formData.append('CWT',this.dataStorage[this.numberId].CWT);
             formData.append('TMP',this.dataStorage[this.numberId].TMP);
             formData.append('ID1',this.dataStorage[this.numberId].ID1);
@@ -105,7 +106,8 @@ export class FormStep5Page implements OnInit {
       this.dataPublicSuccess = [];
     }
     let data = {
-      "userId":this.userId,
+      "userId":this.userData.id,
+      "organization_name":this.userData.organization_name,
       "CWT":this.dataStorage[this.numberId].CWT,
       "TMP":this.dataStorage[this.numberId].TMP,
       "ID1":this.dataStorage[this.numberId].ID1,

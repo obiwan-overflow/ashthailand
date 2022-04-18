@@ -252,13 +252,14 @@ export class FormFamilyListsPage implements OnInit {
     }
   }
   async btnApprove(){
-    const userId = await this.storage.get('userId');
+    const userData = await this.storage.get('userData');
     for (const val of this.datafamily){
       let NO1 = val.NO1 == undefined ? 0 : val.NO1;
       let NO2 = val.NO2 == undefined ? 0 : val.NO2;
       const formData = new FormData();
       formData.append('cat_id',"3");
-      formData.append('user_id',userId);
+      formData.append('user_id',userData.id);
+      formData.append('organization_name',val.organization_name == undefined ? "" : val.organization_name);
       formData.append('MEMBER',val.MEMBER == undefined ? "" : val.MEMBER);
       formData.append('PERSON_NO',val.PERSON_NO == undefined ? "" : val.PERSON_NO);
       formData.append('SEX',val.SEX == undefined ? "" : val.SEX);

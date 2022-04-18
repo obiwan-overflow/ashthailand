@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./registertwo.page.scss'],
 })
 export class RegistertwoPage implements OnInit {
-  private dataProvince:any;
-  private dataAmphures:any;
-  private dataTombons:any;
+  dataProvince:any;
+  dataAmphures:any = [];
+  dataTombons:any = [];
   private todo : FormGroup;
   private dataRegister:any;
   constructor(
@@ -24,6 +24,8 @@ export class RegistertwoPage implements OnInit {
     public router:Router
   ) {
     this.todo = this.formBuilder.group({
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
       phone: ['', Validators.required],
       province: ['', Validators.required],
       district: ['', Validators.required],
@@ -44,7 +46,12 @@ export class RegistertwoPage implements OnInit {
   }
   async getAmphures(event){
     await this.api.getdata('member/getAmphures&id_provinces='+event.detail.value).subscribe((res)=>{
-      this.dataAmphures = res.detail;
+      for (let index = 0; index < res.detail.length; index++) {
+        const element = res.detail[index];
+        if(element.amphures !== ''){
+          this.dataAmphures.push(element);
+        }
+      }
     });
   }
   async getTombons(event){
@@ -53,7 +60,12 @@ export class RegistertwoPage implements OnInit {
     let idAmphures = event.detail.value.substring(event.detail.value.indexOf("-") + 1);
 
     await this.api.getdata('member/getTombons&id_provinces='+idProvinces+'&id_amphures='+idAmphures).subscribe((res)=>{
-      this.dataTombons = res.detail;
+      for (let index = 0; index < res.detail.length; index++) {
+        const element = res.detail[index];
+        if(element.tombons !== ''){
+          this.dataTombons.push(element);
+        }
+      }
     });
   }
 

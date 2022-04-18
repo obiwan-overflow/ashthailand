@@ -17,6 +17,9 @@ export class Form4Page implements OnInit {
     SEX: '',
     AGE: '',
   };
+  IdMOO:any;
+  IdVIL:any;
+  IdA1:any;
   constructor(
     public router:Router,
     public api:RestApiService,
@@ -36,6 +39,7 @@ export class Form4Page implements OnInit {
       this.dataStorage = data;
       // this.dataStorage[this.id].PERSON_NO  = data[this.id].PERSON_NO == undefined ? 1 : (data[this.id].PERSON_NO + 1);
     });
+    
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'กรุณารอสักครู่...',
@@ -43,15 +47,21 @@ export class Form4Page implements OnInit {
     });
     await loading.present();
     this.id = this.route.snapshot.paramMap.get('id');
+    this.IdMOO = this.dataStorage[this.id].MOO.replace("/","*kk*");
+    this.IdVIL = this.dataStorage[this.id].VIL.replace("/","*kk*");
+    this.IdA1  = this.dataStorage[this.id].A1.replace("/","*kk*");
   }
 
 
   // action
   async formData(form){
-    this.dataStorage[this.id].NAME        = form.value.NAME;
-    this.dataStorage[this.id].SEX         = form.value.SEX;
-    this.dataStorage[this.id].AGE         = form.value.AGE;
-    this.dataStorage[this.id].PERSON_NO   = this.dataStorage[this.id].PERSON_NO == undefined ? 1 : this.dataStorage[this.id].PERSON_NO;
+    let userData = await this.storage.get('userData');
+
+    this.dataStorage[this.id].NAME                = form.value.NAME;
+    this.dataStorage[this.id].SEX                 = form.value.SEX;
+    this.dataStorage[this.id].AGE                 = form.value.AGE;
+    this.dataStorage[this.id].organization_name   = userData.organization_name;
+    this.dataStorage[this.id].PERSON_NO           = this.dataStorage[this.id].PERSON_NO == undefined ? 1 : this.dataStorage[this.id].PERSON_NO;
     await this.storage.set('formfamily',this.dataStorage);
 
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
@@ -82,7 +92,7 @@ export class Form4Page implements OnInit {
             console.log('Confirm Okay');
             this.dataStorage[this.id].status   = "success";
             this.storage.set('formfamily',this.dataStorage);
-            this.router.navigateByUrl('/formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+            this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }
         }
       ]
@@ -130,6 +140,6 @@ export class Form4Page implements OnInit {
   }
 
   async backPage(){
-    this.router.navigateByUrl('formthree/form-family-lists/'+this.dataStorage[this.id].MOO+'/'+this.dataStorage[this.id].VIL+'/'+this.dataStorage[this.id].A1+'/success');
+    this.router.navigateByUrl('formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
   }
 }

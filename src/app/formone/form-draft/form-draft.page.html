@@ -14,7 +14,7 @@
       <ion-label>
         <h3>{{i+1}} ชื่อสถานที่ {{data.NAME}} ที่ตั้ง {{data.ADDRESS}}</h3>
       </ion-label>
-      <ion-icon name="document-attach-sharp" color="public" slot="end" (click)="formContinue(i)"></ion-icon>
+      <ion-icon name="pencil-outline" color="public" slot="end" (click)="formContinue(i)"></ion-icon>
       <ion-icon name="trash-outline" color="danger" slot="end" (click)="delete(i,data.NAME)"></ion-icon>
     </ion-item>
   </ion-list>

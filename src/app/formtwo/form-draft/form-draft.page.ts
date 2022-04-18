@@ -69,7 +69,7 @@ export class FormDraftPage implements OnInit {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'บืนยัน',
+          text: 'ยืนยัน',
           handler: () => {
             this.confirmDelete(index);
           }

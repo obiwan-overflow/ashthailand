@@ -33,10 +33,12 @@
       </ion-col> -->
       <ion-col size="12">
         <ion-list lines="full">
-          <ion-item color="primary" class="list-member" *ngFor="let data of datafamily,let i = index">
-            <ion-icon name="person-circle-outline" slot="start" (click)="continue(i,data.NAME)"></ion-icon>
-            <ion-label>{{data.NAME}} <span *ngIf="data.status == 'success'">เรียบร้อย</span></ion-label>
-            <ion-icon name="trash-sharp" slot="end" (click)="btnDelete(i,data.NAME)"></ion-icon>
+          <ion-item color="secondary" class="list-member" *ngFor="let data of datafamily,let i = index">
+            <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+            <ion-label>{{data.NAME}}</ion-label>
+            <ion-icon *ngIf="data.status == 'success'" name="bag-check" color="dark" slot="end"></ion-icon>
+            <ion-icon *ngIf="data.status !== 'success'" name="pencil-outline" color="dark" slot="end" (click)="continue(i,data.NAME)"></ion-icon>
+            <ion-icon name="trash-sharp" color="dark" slot="end" (click)="btnDelete(i,data.NAME)"></ion-icon>
           </ion-item>
         </ion-list>
       </ion-col>

@@ -97,14 +97,41 @@ export class Form4Page implements OnInit {
         await this.storage.set('formshop',this.dataStorage);
         let lengthArray     = await this.storage.get('formshop');
         let numberIdNext    = lengthArray.length - 1;
-        await this.router.navigateByUrl('/formtwo/form-step1/'+numberIdNext);
+        // await this.router.navigateByUrl('/formtwo/form-step1/'+numberIdNext);
+        this.confirmStop(numberIdNext);
       }else{
         this.dataStorage[this.numberId].NAME    = NAME;
         this.dataStorage[this.numberId].ADDRESS = ADDRESS;
         await this.storage.set('formshop',this.dataStorage);
-        await this.router.navigateByUrl('/formtwo/form-step1/'+this.numberId);
+        // await this.router.navigateByUrl('/formtwo/form-step1/'+this.numberId);
+        this.confirmStop(this.numberId);
       }
     }
+  }
+
+  // loading
+  async confirmStop(id){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'บันทึก!',
+      message: 'ยืนยันการบันทึกข้อมูล',
+      buttons: [
+        {
+          text: 'หยุดชั่วคราว',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.router.navigateByUrl('/tabs/form');
+          }
+        }, {
+          text: 'สังเกตต่อ',
+          handler: () => {
+            this.router.navigateByUrl('/formtwo/form-step1/'+id);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
   async alert() {
     const alert = await this.alertController.create({

@@ -27,13 +27,6 @@ export class FormDraftPage implements OnInit {
     await loading.present();
     this.dataStorage = await this.storage.get('formpublic');
     await loading.dismiss();
-    // let data = await this.storage.get('formpublic');
-    // for (let val of data){
-    //   if(val.status !== 'success'){
-    //     this.dataStorage.push(val);
-    //   }
-    // }
-    // await loading.dismiss();
   }
 
   async formContinue(key){
@@ -71,7 +64,7 @@ export class FormDraftPage implements OnInit {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'บืนยัน',
+          text: 'ยืนยัน',
           handler: () => {
             this.confirmDelete(index);
           }

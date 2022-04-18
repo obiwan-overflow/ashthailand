@@ -30,8 +30,6 @@ export class RegisterPage implements OnInit {
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]*')]],
       confirmpassword: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]*')]],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
     });
   }
   ngOnInit() {
@@ -42,8 +40,6 @@ export class RegisterPage implements OnInit {
     }else{
       this.dataRegister.username  = await this.todo.value.username;
       this.dataRegister.password  = await this.todo.value.password;
-      this.dataRegister.name      = await this.todo.value.name;
-      this.dataRegister.lastname  = await this.todo.value.lastname;
       await this.storage.set('dataRegister',this.dataRegister);
       await this.router.navigateByUrl('tabs/register/registertwo');
     }

@@ -7,13 +7,15 @@
     background-position: center;
 
     .img-profile {
-        border-radius: 50%;
-        height: 50px;
-        width: 50px;
+        // border-radius: 50%;
+        // height: 50px;
+        // width: 50px;
+        // background-color: #fff;
         img {
             border-radius: 50%;
-            height: 100%;
-            width: 100%;
+            background-color: #fff;
+            // height: 100%;
+            // width: 100%;
             // border: 2px solid #209d96;
         }
     }

@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep6Page implements OnInit {
   dataStorage: any = [];
   dataShopSuccess:any = [];
-  userId:any;
+  userData:any = [];
   titleShop:any;
   numberId:any;
   constructor(
@@ -39,7 +39,7 @@ export class FormStep6Page implements OnInit {
     await loading.present();
     this.numberId     = await this.route.snapshot.paramMap.get('id');
     this.dataStorage  = await this.storage.get('formshop');
-    this.userId       = await this.storage.get('userId');
+    this.userData     = await this.storage.get('userData');
   }
   async form(event){
     let value = event.srcElement.id;
@@ -68,7 +68,8 @@ export class FormStep6Page implements OnInit {
 
             const formData = new FormData();
             formData.append('cat_id',"2");
-            formData.append('user_id',this.userId);
+            formData.append('user_id',this.userData.id);
+            formData.append('organization_name',this.userData.organization_name);
             formData.append('CWT',this.dataStorage[this.numberId].CWT);
             formData.append('TMP',this.dataStorage[this.numberId].TMP);
             formData.append('ID1',this.dataStorage[this.numberId].ID1);
@@ -102,7 +103,8 @@ export class FormStep6Page implements OnInit {
       this.dataShopSuccess = [];
     }
     let data = {
-      "userId":this.userId,
+      "userId":this.userData.id,
+      "organization_name":this.userData.organization_name,
       "CWT":this.dataStorage[this.numberId].CWT,
       "TMP":this.dataStorage[this.numberId].TMP,
       "ID1":this.dataStorage[this.numberId].ID1,
