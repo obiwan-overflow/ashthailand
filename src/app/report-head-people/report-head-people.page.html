@@ -13,21 +13,31 @@
       <p>ชื่อ {{user.name}}</p>
       <p>ชื่อหน่วยงาน {{user.organization_name}}</p>
     </ion-text>
+    <form [formGroup]="todo" (ngSubmit)="logForm()">
     <ion-row>
       <ion-col size="6">
         <ion-item>
-          <ion-input type="date"></ion-input>
+          <ion-input type="date" formControlName="dateStart"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="6">
         <ion-item>
-          <ion-input type="date"></ion-input>
+          <ion-input type="date" formControlName="dateEnd"></ion-input>
         </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button color="primary" expand="block" type="submit" [disabled]="!todo.valid">ค้นหา</ion-button>
       </ion-col>
     </ion-row>
+    </form>
   </div>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="formData == true">
+      <ion-col size="12">
+        <ion-text>
+          <p>ผลการสังเกตสถานที่สาธารณะ (แห่ง)</p>
+        </ion-text>
+      </ion-col>
       <ion-col size="12">
         <div class="card-report">
           <ion-row class="ion-align-items-center">
@@ -96,6 +106,11 @@
             </ion-col>
           </ion-row>
         </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-text>
+          <p>สรุป จำนวนทั้งหมด 240/250 แห่ง</p>
+        </ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>

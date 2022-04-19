@@ -53,6 +53,12 @@
         border-radius: 50%;
         border: 5px solid #064635;
     }
+    .box {
+        text-align: center !important;
+        padding: 10px 5px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 20px;
+    }
 }
 .input-date {
     border: 2px solid #fff !important;

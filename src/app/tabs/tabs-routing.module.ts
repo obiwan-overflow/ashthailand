@@ -176,7 +176,7 @@ const routes: Routes = [
         loadChildren: () => import('../report-admin/report-admin.module').then(m => m.ReportAdminPageModule)
       },
       {
-        path: 'report/report-admin/report-admintwo',
+        path: 'report/report-admin/report-admintwo/:id',
         loadChildren: () => import('../report-admintwo/report-admintwo.module').then(m => m.ReportAdmintwoPageModule)
       },
       {

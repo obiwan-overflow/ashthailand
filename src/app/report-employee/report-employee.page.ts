@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { format, parseISO } from 'date-fns';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-report-employee',
@@ -9,12 +10,19 @@ import { format, parseISO } from 'date-fns';
   styleUrls: ['./report-employee.page.scss'],
 })
 export class ReportEmployeePage implements OnInit {
-
+  private todo : FormGroup;
   user:any = {};
+  formData:boolean;
   constructor(
     public api:RestApiService,
     public storage:Storage,
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.todo = this.formBuilder.group({
+      dateStart: ['', Validators.required],
+      dateEnd: ['', Validators.required],
+    });
+  }
 
   ngOnInit() {
   }
@@ -23,5 +31,7 @@ export class ReportEmployeePage implements OnInit {
       this.user = data;
     });
   }
-
+  async logForm(){
+    this.formData = true;
+  }
 }
