@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-text-center">
+    <ion-row class="ion-text-center" *ngIf="detail.MEMBER">
       <ion-col size="12">
         <ion-text>
           <p>หมู่ที่ : {{MOO}}</p>
@@ -19,7 +19,7 @@
       <ion-col size="6">
         <a class="btn-answer-family fonts-small" (click)="updateMember()">แก้ไขจำนวนสมาชิก</a>
       </ion-col>
-      <ion-col size="12">
+      <ion-col size="12" *ngIf="status == 'success'">
         <a class="btn-answer-family" routerLink="/tabs/form">หยุดชั่วคราว</a>
       </ion-col>
       <ion-col size="12" *ngIf="datafamily.length < detail.MEMBER">
@@ -41,6 +41,14 @@
             <ion-icon name="trash-sharp" color="dark" slot="end" (click)="btnDelete(i,data.NAME)"></ion-icon>
           </ion-item>
         </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!detail.MEMBER">
+      <ion-col size="12" class="ion-text-center">
+        <ion-text color="danger">
+          <h3>ไม่มีข้อมูล</h3>
+          <ion-button shape="round" expand="block" color="dark" routerLink="/tabs/form">กลับไปแบบสอบถาม</ion-button>
+        </ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>

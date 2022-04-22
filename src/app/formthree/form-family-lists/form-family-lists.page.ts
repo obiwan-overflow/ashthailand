@@ -284,14 +284,16 @@ export class FormFamilyListsPage implements OnInit {
       formData.append('ROLL',val.ROLL == undefined ? "" : val.ROLL);
       formData.append('E_CIG',val.E_CIG == undefined ? "" : val.E_CIG);
       formData.append('OTHER',val.OTHER == undefined ? "" : val.OTHER);
-      formData.append('NO1',NO1+NO2);
+      formData.append('NO1',NO1);
+      formData.append('NO2',NO2);
       formData.append('RESPONSE',val.RESPONSE == undefined ? "" : val.RESPONSE);
       formData.append('TYPE_CIG',val.TYPE_CIG == undefined ? "" : val.TYPE_CIG);
       formData.append('SECOND',val.SECOND == undefined ? "" : val.SECOND);
       formData.append('QUITE_CHECK',val.QUITE_CHECK == undefined ? "" : val.QUITE_CHECK);
       this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-        this.updateDatafamily();
+        // this.updateDatafamily();
       });
+      this.updateDatafamily();
     }
   }
   async updateDatafamily(){

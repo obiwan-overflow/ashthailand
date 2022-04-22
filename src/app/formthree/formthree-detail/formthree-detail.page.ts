@@ -20,7 +20,8 @@ export class FormthreeDetailPage implements OnInit {
   ROLL:any;       
   E_CIG:any;
   OTHER:any;      
-  NO1:any;        
+  NO1:any;   
+  NO_SUM:any;     
   RESPONSE:any;   
   TYPE_CIG:any;   
   SECOND:any;     
@@ -43,7 +44,8 @@ export class FormthreeDetailPage implements OnInit {
         this.ROLL         = res.detail.ROLL;
         this.E_CIG        = res.detail.E_CIG;
         this.OTHER        = res.detail.OTHER;
-        this.NO1          = (res.detail.NO1 == 0 ? "" : res.detail.NO1);
+        // this.NO1          = (res.detail.NO1 == 0 ? "" : res.detail.NO1);
+        this.NO_SUM       = (res.detail.NO_SUM == 0 ? "" : res.detail.NO_SUM);
         this.RESPONSE     = res.detail.RESPONSE;
         this.TYPE_CIG     = res.detail.TYPE_CIG;
         this.SECOND       = res.detail.SECOND;
