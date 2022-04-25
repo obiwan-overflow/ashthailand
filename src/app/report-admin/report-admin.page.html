@@ -9,26 +9,30 @@
 
 <ion-content>
   <div class="title">
-    <ion-text color="light">
-      <p>ชื่อ {{user.name}}</p>
-      <p>ชื่อหน่วยงาน {{user.organization_name}}</p>
-    </ion-text>
+    <ion-row>
+      <ion-col size="12">
+        <ion-text color="light">
+          <p>ชื่อ {{user.name}}</p>
+          <p>ชื่อหน่วยงาน {{user.organization_name}}</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
   </div>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <div class="card-report" routerLink="report-admintwo/1">
-          <h5>ผลการสังเกตสถานที่สาธารณะ</h5>
+        <div class="card-report bg-public" routerLink="report-admintwo/1">
+          <h5><img src="assets/images/logo/03.png" alt="" class="icon"> ผลการสังเกตสถานที่สาธารณะ</h5>
         </div>
       </ion-col>
       <ion-col size="12">
-        <div class="card-report" routerLink="report-admintwo/2">
-          <h5>ผลการสังเกตุร้านค้า</h5>
+        <div class="card-report bg-shop" routerLink="report-admintwo/2">
+          <h5><img src="assets/images/logo/02.jpeg" alt="" class="icon"> ผลการสังเกตุร้านค้า</h5>
         </div>
       </ion-col>
       <ion-col size="12">
-        <div class="card-report" routerLink="report-admintwo/3">
-          <h5>แบบสัมภาษณ์พฤติกรรมการสูบุหรี่</h5>
+        <div class="card-report bg-family" routerLink="report-admintwo/3">
+          <h5><img src="assets/images/logo/01.jpeg" alt="" class="icon"> แบบสัมภาษณ์พฤติกรรมการสูบุหรี่</h5>
         </div>
       </ion-col>
     </ion-row>

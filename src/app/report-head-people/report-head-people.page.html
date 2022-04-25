@@ -17,13 +17,19 @@
     <ion-row>
       <ion-col size="6">
         <ion-item>
+          <ion-label position="floating">วันที่เริ่มงาน</ion-label>
           <ion-input type="date" formControlName="dateStart"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">วันที่สิ้นสุดงาน</ion-label>
+          <ion-input type="date" formControlName="dateEnd"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="6">
-        <ion-item>
-          <ion-input type="date" formControlName="dateEnd"></ion-input>
-        </ion-item>
+        <div class="box-numdate">
+          <p>รวมวันเก็บข้อมูล</p>
+          <p>10 วัน</p>
+        </div>
       </ion-col>
       <ion-col size="12">
         <ion-button color="primary" expand="block" type="submit" [disabled]="!todo.valid">ค้นหา</ion-button>
@@ -34,11 +40,107 @@
   <ion-grid>
     <ion-row *ngIf="formData == true">
       <ion-col size="12">
-        <ion-text>
+        <ion-text class="ion-text-center">
           <p>ผลการสังเกตสถานที่สาธารณะ (แห่ง)</p>
         </ion-text>
       </ion-col>
       <ion-col size="12">
+        <ion-row>
+          <ion-col size="4">
+          </ion-col>
+          <ion-col size="8">
+            <ion-text class="ion-text-center">
+              <p>จำนวน (แห่ง)</p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+          </ion-col>
+          <ion-col>
+            <ion-text class="ion-text-center">
+              <p>ทั้งหมด</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-text class="ion-text-center">
+              <p>เก็บวันนี้</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-text class="ion-text-center">
+              <p>สะสม</p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <ion-text>
+              <p>นาย ก</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>100</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>8</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>90</p>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <ion-text>
+              <p>นาย ข</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>100</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>8</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>90</p>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <ion-text>
+              <p>นาย ค</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>100</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>8</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="card-num">
+              <p>90</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <!-- <ion-col size="12">
         <div class="card-report">
           <ion-row class="ion-align-items-center">
             <ion-col size="4">
@@ -106,7 +208,7 @@
             </ion-col>
           </ion-row>
         </div>
-      </ion-col>
+      </ion-col> -->
       <ion-col size="12">
         <ion-text>
           <p>สรุป จำนวนทั้งหมด 240/250 แห่ง</p>

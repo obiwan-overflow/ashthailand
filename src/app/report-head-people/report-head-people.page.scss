@@ -45,3 +45,25 @@
         margin-bottom: 5px;
     }
 }
+.box-numdate {
+    text-align: center;
+    background-color: #fff;
+    padding: 15px 0;
+}
+
+.card-num {
+    text-align: center;
+    background-color: #209d96;
+    width: 45px;
+    height: 45px;
+    border-radius: 50% !important;
+    position: relative;
+    line-height: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    p {
+        color: #fff !important;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+}

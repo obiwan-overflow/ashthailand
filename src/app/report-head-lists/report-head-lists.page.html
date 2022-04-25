@@ -17,13 +17,19 @@
     <ion-row>
       <ion-col size="6">
         <ion-item>
+          <ion-label position="floating">วันที่เริ่มงาน</ion-label>
           <ion-input type="date" formControlName="dateStart"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">วันที่สิ้นสุดงาน</ion-label>
+          <ion-input type="date" formControlName="dateEnd"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="6">
-        <ion-item>
-          <ion-input type="date" formControlName="dateEnd"></ion-input>
-        </ion-item>
+        <div class="box-numdate">
+          <p>รวมวันเก็บข้อมูล</p>
+          <p>10 วัน</p>
+        </div>
       </ion-col>
       <ion-col size="12">
         <ion-button color="primary" expand="block" type="submit" [disabled]="!todo.valid">ค้นหา</ion-button>
@@ -35,6 +41,113 @@
     <ion-row>
       <div *ngIf="formData == true">
         <ion-col size="12">
+          <div class="card-report public">
+            <ion-row>
+              <ion-col size="12">
+                <ion-text class="ion-text-center">
+                  <h5><b>สังเกตสถานที่สาธารณะ 10 วัน</b></h5>
+                </ion-text>
+              </ion-col>  
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>จำนวนทั้งหมด</b></p>
+                  <p><b>100</b> แห่ง</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>วันนี้</b></p>
+                  <p><b>8</b> แห่ง</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>สะสม</b></p>
+                  <p><b>100</b> แห่ง</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>ร้อยละความสำเร็จ</b></p>
+                  <p><b>1.00</b> %</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="card-report shop">
+            <ion-row>
+              <ion-col size="12">
+                <ion-text class="ion-text-center">
+                  <h5><b>สังเกตร้านค้า 10 วัน</b></h5>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>จำนวนทั้งหมด</b></p>
+                  <p><b>100</b> ร้าน</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>วันนี้</b></p>
+                  <p><b>8</b> ร้าน</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>สะสม</b></p>
+                  <p><b>100</b> ร้าน</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>ร้อยละความสำเร็จ</b></p>
+                  <p><b>1.00</b> %</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="card-report family">
+            <ion-row>
+              <ion-col size="12">
+                <ion-text class="ion-text-center">
+                  <h5><b>แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่ 10 วัน</b></h5>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>จำนวนทั้งหมด</b></p>
+                  <p><b>100</b> ครัวเรือน</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>วันนี้</b></p>
+                  <p><b>8</b> ครัวเรือน</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>สะสม</b></p>
+                  <p><b>100</b> ครัวเรือน</p>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="box">
+                  <p><b>ร้อยละความสำเร็จ</b></p>
+                  <p><b>1.00</b> %</p>
+                </div>
+              </ion-col>
+              <ion-col size="12">
+                <div class="box">
+                  <p><b>ผู้ได้รับการสัมภาษณ์ทั้งหมด</b></p>
+                  <p><b>100</b> คน</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+        <!-- <ion-col size="12">
           <div class="card-report">
             <ion-row>
               <ion-col size="12">
@@ -143,7 +256,7 @@
               </ion-col>
             </ion-row>
           </div>
-        </ion-col>
+        </ion-col> -->
       </div>
     </ion-row>
   </ion-grid>

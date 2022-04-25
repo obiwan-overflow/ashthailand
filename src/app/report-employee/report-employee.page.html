@@ -9,21 +9,31 @@
 
 <ion-content>
   <div class="title">
-    <ion-text color="light">
-      <p>ชื่อ {{user.name}}</p>
-      <p>ชื่อหน่วยงาน {{user.organization_name}}</p>
-    </ion-text>
+    <ion-row>
+      <ion-col size="12">
+        <ion-text color="light">
+          <p class="ion-no-margin">ชื่อ {{user.name}}</p>
+          <p class="ion-no-margin">ชื่อหน่วยงาน {{user.organization_name}}</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
     <form [formGroup]="todo" (ngSubmit)="logForm()">
     <ion-row>
       <ion-col size="6">
         <ion-item>
+          <ion-label position="floating">วันที่เริ่มงาน</ion-label>
           <ion-input type="date" formControlName="dateStart"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">วันที่สิ้นสุดงาน</ion-label>
+          <ion-input type="date" formControlName="dateEnd"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="6">
-        <ion-item>
-          <ion-input type="date" formControlName="dateEnd"></ion-input>
-        </ion-item>
+        <div class="box-numdate">
+          <p>รวมวันเก็บข้อมูล</p>
+          <p>10 วัน</p>
+        </div>
       </ion-col>
       <ion-col size="12">
         <ion-button color="primary" expand="block" type="submit" [disabled]="!todo.valid">ค้นหา</ion-button>

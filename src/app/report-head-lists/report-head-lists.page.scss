@@ -14,27 +14,58 @@
         color: #fff;
     }
 }
+// .card-report {
+//     display: block;
+//     background-color: #fff;
+//     padding: 20px 15px 20px 15px;
+//     border-radius: 20px;
+//     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+//     margin-bottom: 10px;
+//     text-align: center !important;
+//     hr {
+//         border-bottom: 1px solid #eee;
+//     }
+//     .text-name {
+//         margin-top: 0;
+//         margin-bottom: 10px;
+//         font-weight: bold;
+//         font-size: 1.3rem;
+//         color: #209d96;
+//     }
+//     .text-title {
+//         margin-top: 0;
+//         margin-bottom: 10px;
+//         font-weight: bold;
+//         font-size: 1.1rem;
+//     }
+//     .text-count {
+//         color: red;
+//         font-weight: bold;
+//     }
+//     p {
+//         margin-top: 0;
+//         margin-bottom: 5px;
+//     }
+// }
 .card-report {
     display: block;
     background-color: #fff;
-    padding: 20px 15px 20px 15px;
+    padding: 10px 10px 10px 10px;
     border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-bottom: 10px;
-    text-align: center !important;
-    hr {
-        border-bottom: 1px solid #eee;
+    &.public {
+        background: #71BBEE;
     }
-    .text-name {
-        margin-top: 0;
-        margin-bottom: 10px;
-        font-weight: bold;
-        font-size: 1.3rem;
-        color: #209d96;
+    &.shop {
+        background: #83D6E7;
+    }
+    &.family {
+        background: #A9D18E;
     }
     .text-title {
         margin-top: 0;
-        margin-bottom: 10px;
+        margin-bottom: 0;
         font-weight: bold;
         font-size: 1.1rem;
     }
@@ -42,8 +73,29 @@
         color: red;
         font-weight: bold;
     }
-    p {
-        margin-top: 0;
-        margin-bottom: 5px;
+    .persent {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translate(0,-50%);
+        font-size: 30px;
+        font-weight: bold;
+        color: #064635;
+        background-color: #fff;
+        padding: 25px 15px;
+        border-radius: 50%;
+        border: 5px solid #064635;
     }
+    .box {
+        text-align: center !important;
+        padding: 10px 5px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 20px;
+        background-color: #fff;
+    }
+}
+.box-numdate {
+    text-align: center;
+    background-color: #fff;
+    padding: 15px 0;
 }
