@@ -55,7 +55,7 @@ export class FormPage implements OnInit {
     this.fid          = await this.dataStorage == null ? 1 : this.dataStorage.length+1;
 
     var option = {
-      enableHighAccuracy: true
+      // enableHighAccuracy: true
     }
     await this.geolocation.getCurrentPosition(option).then((resp) => {
       this.latitude   = resp.coords.latitude;

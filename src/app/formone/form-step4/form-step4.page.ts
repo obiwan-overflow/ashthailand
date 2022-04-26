@@ -96,6 +96,8 @@ export class FormStep4Page implements OnInit {
               if(res.result == 'success'){
                 this.router.navigateByUrl('tabs/form');
               }
+            },(err)=>{
+              this.errorServer(err);
             });
           }
         }
@@ -130,6 +132,9 @@ export class FormStep4Page implements OnInit {
     await this.storage.set('formPublicSuccess',this.dataPublicSuccess);
     await this.dataStorage.splice(this.numberId,1);   
     await this.storage.set('formpublic',this.dataStorage);
+  }
+  async errorServer(err){
+    alert("NO INTERNET"+err);
   }
   async backPage(){
     if(this.dataStorage[this.numberId].P3A){
