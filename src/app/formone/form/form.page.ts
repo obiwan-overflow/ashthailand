@@ -55,7 +55,7 @@ export class FormPage implements OnInit {
     this.numberId       = await this.route.snapshot.paramMap.get('id');
 
     var option = {
-      // enableHighAccuracy: true
+      enableHighAccuracy: true
     }
     await this.geolocation.getCurrentPosition(option).then((resp) => {
       this.latitude   = resp.coords.latitude;

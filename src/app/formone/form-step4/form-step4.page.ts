@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep4Page implements OnInit {
   dataStorage:any = [];
   dataPublicSuccess:any = [];
+  dataPublicNoInternet:any = [];
   userData:any = [];
   titlePub:any;
   numberId:any;
@@ -97,8 +98,9 @@ export class FormStep4Page implements OnInit {
                 this.router.navigateByUrl('tabs/form');
               }
             },(err)=>{
-              this.errorServer(err);
+              this.errorServer(value);
             });
+            this.deleteDataOld();
           }
         }
       ]
@@ -130,11 +132,37 @@ export class FormStep4Page implements OnInit {
     };
     await this.dataPublicSuccess.push(data);
     await this.storage.set('formPublicSuccess',this.dataPublicSuccess);
+  }
+  async errorServer(value){
+    this.dataPublicNoInternet = await this.storage.get('formPublicFailed');
+    if(this.dataPublicNoInternet == null){
+      this.dataPublicNoInternet = [];
+    }
+    let data = {
+      "userId":this.userData.id,
+      "organization_name":this.userData.organization_name,
+      "CWT":this.dataStorage[this.numberId].CWT,
+      "TMP":this.dataStorage[this.numberId].TMP,
+      "ID1":this.dataStorage[this.numberId].ID1,
+      "VIL":this.dataStorage[this.numberId].VIL,
+      "MOO":this.dataStorage[this.numberId].MOO,
+      "A1":this.dataStorage[this.numberId].A1,
+      "NAME":this.dataStorage[this.numberId].NAME,
+      "ADDRESS":this.dataStorage[this.numberId].ADDRESS,
+      "LAT":this.dataStorage[this.numberId].LAT,
+      "LONG":this.dataStorage[this.numberId].LONG,
+      "P1A":this.dataStorage[this.numberId].P1A,
+      "P2A":this.dataStorage[this.numberId].P2A,
+      "P3A":this.dataStorage[this.numberId].P3A,
+      "P4A":value,
+    };
+    await this.dataPublicNoInternet.push(data);
+    await this.storage.set('formPublicFailed',this.dataPublicNoInternet);
+  }
+  async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   
     await this.storage.set('formpublic',this.dataStorage);
-  }
-  async errorServer(err){
-    alert("NO INTERNET"+err);
+    this.router.navigateByUrl('tabs/form');
   }
   async backPage(){
     if(this.dataStorage[this.numberId].P3A){

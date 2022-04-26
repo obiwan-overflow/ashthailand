@@ -45,6 +45,9 @@ export class RestApiService {
 	}
 	postdata(url_string: any,formData: any): Observable<any> { 
 		const url = `${apiUrl}${url_string}`;
-		return this.http.post<string>(url,formData);
+		// return this.http.post<string>(url,formData);
+		return this.http.post(url,formData).pipe(
+			map(this.extractData),catchError(this.handleError)
+		);
 	}
 }
