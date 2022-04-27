@@ -15,6 +15,7 @@ export class ReportAdmintwoPage implements OnInit {
   formData:boolean;
   id:any;
   numDay:any;
+  display:any;
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -24,7 +25,8 @@ export class ReportAdmintwoPage implements OnInit {
     this.todo = this.formBuilder.group({
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
-      location: ['', Validators.required]
+      location: ['', Validators.required],
+      locationSub: ['', Validators.required]
     });
   }
 
@@ -35,7 +37,7 @@ export class ReportAdmintwoPage implements OnInit {
       this.user = data;
     });
     this.id = this.route.snapshot.paramMap.get('id');
-    
+    this.display = "hide";
   }
   async logForm(){
     var dateStart           = new Date(this.todo.value.dateStart);
@@ -44,5 +46,8 @@ export class ReportAdmintwoPage implements OnInit {
     var Difference_In_Days  = Difference_In_Time / (1000*3600*24);
     this.numDay = Difference_In_Days;
     this.formData = true;
+  }
+  async selectlocation(){
+    this.display = "show";
   }
 }

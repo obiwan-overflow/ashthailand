@@ -17,7 +17,7 @@
 .card-report {
     display: block;
     background-color: #fff;
-    padding: 20px 15px 20px 15px;
+    padding: 10px;
     border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-bottom: 10px;
@@ -53,5 +53,14 @@
     }
     h5 {
         font-size: 16px;
+    }
+    &.bg-public {
+        background: #71BBEE;
+    }
+    &.bg-shop {
+        background: #83D6E7;
+    }
+    &.bg-family {
+        background: #A9D18E;
     }
 }

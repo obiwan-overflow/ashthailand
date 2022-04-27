@@ -38,11 +38,18 @@
       <ion-col size="12">
         <ion-item>
           <ion-label>เลือกพื้นที่</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="location">
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="location" (ionChange)="selectlocation()">
             <ion-select-option value="1">รวมทุกพื้นที่</ion-select-option>
             <ion-select-option value="2">เทศบาลนคร/เมือง</ion-select-option>
             <ion-select-option value="3">เทศบาลตำบล</ion-select-option>
             <ion-select-option value="4">องค์การบริหารส่วนตำบล</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="{{display}}">
+          <ion-label>เทศบาลนคร/เมือง</ion-label>
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationSub">
+            <ion-select-option value="1">เทศบาลนคร 1</ion-select-option>
+            <ion-select-option value="2">เทศบาลนคร 2</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
