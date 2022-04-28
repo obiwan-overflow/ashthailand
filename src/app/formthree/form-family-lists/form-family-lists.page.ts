@@ -291,15 +291,23 @@ export class FormFamilyListsPage implements OnInit {
       formData.append('SECOND',val.SECOND == undefined ? "" : val.SECOND);
       formData.append('QUITE_CHECK',val.QUITE_CHECK == undefined ? "" : val.QUITE_CHECK);
       this.api.postdata('reportQuestion',formData).subscribe((res)=>{
-        // this.updateDatafamily();
+        if(res.result == "success"){
+          
+        }
+      },(err)=>{
+        this.errorServer();
       });
       this.updateDatafamily();
     }
+    await this.presentAlertConfirm();
   }
   async updateDatafamily(){
     await this.storage.set('formFamilySuccess',this.datafamily);
     await this.storage.set('formfamily',this.dataOutfamily);
-    await this.presentAlertConfirm();
+  }
+  async errorServer(){
+    await this.storage.set('formFamilyFailed',this.datafamily);
+    await this.storage.set('formfamily',this.dataOutfamily);
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

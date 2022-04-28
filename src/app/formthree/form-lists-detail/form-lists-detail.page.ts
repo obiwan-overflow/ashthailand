@@ -17,9 +17,9 @@ export class FormListsDetailPage implements OnInit {
   ngOnInit() {
   }
   async ionViewWillEnter(){
-    let VIL     = await this.route.snapshot.paramMap.get('VIL');
-    let MOO     = await this.route.snapshot.paramMap.get('MOO');
-    let A1      = await this.route.snapshot.paramMap.get('A1');
+    let VIL     = await this.route.snapshot.paramMap.get('VIL').replace("*kk*","/");;
+    let MOO     = await this.route.snapshot.paramMap.get('MOO').replace("*kk*","/");;
+    let A1      = await this.route.snapshot.paramMap.get('A1').replace("*kk*","/");;
     let userID  = await this.storage.get('userData');
     this.api.getdata('reportQuestion/familyLists&vil='+VIL+'&moo='+MOO+'&a1='+A1+'&user_id='+userID.id).subscribe(res => {
       for (let index = 0; index < res.lists.length; index++) {

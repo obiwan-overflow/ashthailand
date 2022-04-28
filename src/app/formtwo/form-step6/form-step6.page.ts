@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep6Page implements OnInit {
   dataStorage: any = [];
   dataShopSuccess:any = [];
+  dataShop:any = [];
   userData:any = [];
   titleShop:any;
   numberId:any;
@@ -90,7 +91,10 @@ export class FormStep6Page implements OnInit {
               if(res.result == 'success'){
                 this.router.navigateByUrl('tabs/form');
               }
+            },(err)=>{
+              this.errorServer(value);
             });
+            this.deleteDataOld();
           }
         }
       ]
@@ -124,8 +128,41 @@ export class FormStep6Page implements OnInit {
     };
     await this.dataShopSuccess.push(data);
     await this.storage.set('formShopSuccess',this.dataShopSuccess);
+    // await this.dataStorage.splice(this.numberId,1);   
+    // await this.storage.set('formshop',this.dataStorage);
+  }
+  async errorServer(value){
+    this.dataShop = await this.storage.get('formShopFailed');
+    if(this.dataShop == null){
+      this.dataShop = [];
+    }
+    let data = {
+      "userId":this.userData.id,
+      "organization_name":this.userData.organization_name,
+      "CWT":this.dataStorage[this.numberId].CWT,
+      "TMP":this.dataStorage[this.numberId].TMP,
+      "ID1":this.dataStorage[this.numberId].ID1,
+      "VIL":this.dataStorage[this.numberId].VIL,
+      "MOO":this.dataStorage[this.numberId].MOO,
+      "A1":this.dataStorage[this.numberId].A1,
+      "NAME":this.dataStorage[this.numberId].NAME,
+      "ADDRESS":this.dataStorage[this.numberId].ADDRESS,
+      "LAT":this.dataStorage[this.numberId].LAT,
+      "LONG":this.dataStorage[this.numberId].LONG,
+      "S1A":this.dataStorage[this.numberId].S1A,
+      "S2A":this.dataStorage[this.numberId].S2A,
+      "S3A":this.dataStorage[this.numberId].S3A,
+      "S4A":this.dataStorage[this.numberId].S4A,
+      "S5A":this.dataStorage[this.numberId].S5A,
+      "S6A":value,
+    };
+    await this.dataShop.push(data);
+    await this.storage.set('formShopFailed',this.dataShop);
+  }
+  async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   
     await this.storage.set('formshop',this.dataStorage);
+    await this.router.navigateByUrl('tabs/form');
   }
   async backPage(){
     this.router.navigateByUrl('formtwo/form-step5/'+this.numberId);

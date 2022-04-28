@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute,Route,Router } from '@angular/router';
 import { RestApiService } from '../../rest-api.service';
 import { LoadingController,AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
@@ -19,7 +19,8 @@ export class FormListsPage implements OnInit {
     public api:RestApiService,
     public route:ActivatedRoute,
     public loadingController:LoadingController,
-    public storage:Storage
+    public storage:Storage,
+    public router:Router
   ) {
     
   }
@@ -86,5 +87,12 @@ export class FormListsPage implements OnInit {
     },err=>{
       this.loading.dismiss();
     });
+  }
+
+  async linkDetail(VIL,MOO,A1){
+    const IdMOO = MOO.replace("/","*kk*");
+    const IdVIL = VIL.replace("/","*kk*");
+    const IdA1  = A1.replace("/","*kk*");
+    this.router.navigateByUrl('tabs/form/formthree-lists/'+this.id+'/formthree-lists-detail/'+IdVIL+'/'+IdMOO+'/'+IdA1); 
   }
 }

@@ -163,7 +163,7 @@ export class FormStep5Page implements OnInit {
   async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   
     await this.storage.set('formpublic',this.dataStorage);
-    this.router.navigateByUrl('tabs/form');
+    await this.router.navigateByUrl('tabs/form');
   }
   async backPage(){
     this.router.navigateByUrl('formone/form-step4/'+this.numberId);

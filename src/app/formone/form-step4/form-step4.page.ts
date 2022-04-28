@@ -162,7 +162,7 @@ export class FormStep4Page implements OnInit {
   async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   
     await this.storage.set('formpublic',this.dataStorage);
-    this.router.navigateByUrl('tabs/form');
+    await this.router.navigateByUrl('tabs/form');
   }
   async backPage(){
     if(this.dataStorage[this.numberId].P3A){
