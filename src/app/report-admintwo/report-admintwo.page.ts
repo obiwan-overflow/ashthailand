@@ -16,6 +16,8 @@ export class ReportAdmintwoPage implements OnInit {
   id:any;
   numDay:any;
   display:any;
+  dataDetail:any = [];
+
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -40,12 +42,16 @@ export class ReportAdmintwoPage implements OnInit {
     this.display = "hide";
   }
   async logForm(){
-    var dateStart           = new Date(this.todo.value.dateStart);
-    var dateEnd             = new Date(this.todo.value.dateEnd);
-    var Difference_In_Time  = dateEnd.getTime() - dateStart.getTime();
-    var Difference_In_Days  = Difference_In_Time / (1000*3600*24);
-    this.numDay = Difference_In_Days;
+    var dateStart           = await new Date(this.todo.value.dateStart);
+    var dateEnd             = await new Date(this.todo.value.dateEnd);
+    var Difference_In_Time  = await dateEnd.getTime() - dateStart.getTime();
+    var Difference_In_Days  = await Difference_In_Time / (1000*3600*24);
+    this.numDay   = await Difference_In_Days;
     this.formData = true;
+
+    await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      this.dataDetail = res;
+    });
   }
   async selectlocation(){
     this.display = "show";

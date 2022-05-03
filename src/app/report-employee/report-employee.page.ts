@@ -14,7 +14,9 @@ export class ReportEmployeePage implements OnInit {
   user:any = {};
   formData:boolean;
   numDay:any;
-  dataPublic:any;
+  dataPublic:any = [];
+  dataShop:any = [];
+  dataFamily:any = [];
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -34,16 +36,21 @@ export class ReportEmployeePage implements OnInit {
     });
   }
   async logForm(){
-    var dateStart           = new Date(this.todo.value.dateStart);
-    var dateEnd             = new Date(this.todo.value.dateEnd);
-    var Difference_In_Time  = dateEnd.getTime() - dateStart.getTime();
-    var Difference_In_Days  = Difference_In_Time / (1000*3600*24);
-    this.numDay = Difference_In_Days;
+    var dateStart           = await new Date(this.todo.value.dateStart);
+    var dateEnd             = await new Date(this.todo.value.dateEnd);
+    var Difference_In_Time  = await dateEnd.getTime() - dateStart.getTime();
+    var Difference_In_Days  = await Difference_In_Time / (1000*3600*24);
+    this.numDay   = await Difference_In_Days;
     this.formData = true;
-
     let userId = await this.storage.get('userId');
-    this.api.getdata('report/reportMember&user_id='+userId+'&cat_id=1').subscribe((res)=>{
-      console.log(res);
+    await this.api.getdata('report/reportMember&user_id='+userId+'&cat_id=1'+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      this.dataPublic = res;
+    });
+    await this.api.getdata('report/reportMember&user_id='+userId+'&cat_id=2'+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      this.dataShop = res;
+    });
+    await this.api.getdata('report/reportMember&user_id='+userId+'&cat_id=3'+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      this.dataFamily = res;
     });
   }
 }
