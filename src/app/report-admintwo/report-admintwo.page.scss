@@ -64,7 +64,12 @@
 .box-numdate {
     text-align: center;
     background-color: #fff;
-    padding: 15px 0;
+    padding: 25px 0;
+    p {
+        font-size: 22px;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
 }
 
 .hide {
@@ -72,4 +77,22 @@
 }
 .show {
     display: block;
+}
+
+.chart {
+    &.public {
+        background-color: #71BBEE;
+    }
+    &.shop {
+        background-color: #83D6E7;
+    }
+    &.family {
+        background-color: #A9D18E;
+    }
+    text-align: center;
+
+    ion-icon {
+        font-size: 60px;
+        color: #fff;
+    }
 }

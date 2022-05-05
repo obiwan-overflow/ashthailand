@@ -16,6 +16,7 @@ export class ReportHeadPeoplePage implements OnInit {
   numDay:any;
   id:any;
   dataDetail:any = [];
+  titleHead:any;
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -34,7 +35,14 @@ export class ReportHeadPeoplePage implements OnInit {
     await this.storage.get('userData').then((data)=>{
       this.user = data;
     });
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = await this.route.snapshot.paramMap.get('id');
+    if(this.id == '1'){
+      this.titleHead = "สังเกตสถานที่สาธารณะ";
+    }else if(this.id == '2'){
+      this.titleHead = "สังเกตร้านค้า";
+    }else if(this.id == '3'){
+      this.titleHead = "แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่";
+    }
   }
   async logForm(){
     var dateStart           = await new Date(this.todo.value.dateStart);
