@@ -25,7 +25,10 @@ export class SigninPage implements OnInit {
   async signin(){
     await this.api.getdata('member/login&username='+this.formlogin.username+'&password='+this.formlogin.password).subscribe(res=>{
       if(res.result == 'success'){
-        this.setuser(res);
+        this.api.getdata('member/getProvincesList&id_province='+res.detail.province+'&id_amphures='+res.detail.district+'&id_tombons='+res.detail.subdistrict).subscribe((data)=>{
+          this.storage.set('provincesDetail',data.detail);
+          this.setuser(res);
+        });
       }else{
         this.loginfailed();
       }
@@ -37,11 +40,7 @@ export class SigninPage implements OnInit {
       message: 'Please wait...',
       duration: 2000
     });
-    await this.api.getdata('member/getProvincesList&id_province='+data.detail.province+'&id_amphures='+data.detail.district+'&id_tombons='+data.detail.subdistrict).subscribe((res)=>{
-      if(res.result == "success"){
-        this.storage.set('provincesDetail',res.detail);
-      }
-    });
+   
     await this.storage.set('userId',data.detail.id);
     await this.storage.set('fullname',data.detail.name+" "+data.detail.lastname);
     await this.storage.set('userData',data.detail);
