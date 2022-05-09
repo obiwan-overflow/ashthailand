@@ -22,7 +22,7 @@
     "@awesome-cordova-plugins/camera": "^5.39.0",
     "@awesome-cordova-plugins/core": "^5.37.3",
     "@awesome-cordova-plugins/geolocation": "^5.37.3",
-    "@awesome-cordova-plugins/network": "^5.37.3",
+    "@awesome-cordova-plugins/network": "^5.41.0",
     "@awesome-cordova-plugins/open-native-settings": "^5.39.1",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage-angular": "^3.0.6",

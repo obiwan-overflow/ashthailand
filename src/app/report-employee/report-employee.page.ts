@@ -44,7 +44,10 @@ export class ReportEmployeePage implements OnInit {
     var Difference_In_Days  = await Difference_In_Time / (1000*3600*24);
     
     this.numDay   = await Difference_In_Days;
-    if(this.numDay <= 0){
+    if(this.numDay == 0){
+      this.numDay = 1;
+    }
+    if(this.numDay < 1){
       this.presentAlert();
     }else{
       this.formData = true;

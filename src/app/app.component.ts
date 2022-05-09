@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { window } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +14,16 @@ import { NavController } from '@ionic/angular';
 export class AppComponent {
   userId:any;
   fullname:any;
-  constructor(private storage: Storage,public route:Router,public navCtrl: NavController) {
-   
+  constructor(
+    private storage: Storage,
+    public route:Router,
+    public navCtrl: NavController,
+    private network: Network,
+    public alertController: AlertController
+  ) {
+    document.addEventListener("offline",()=>{
+      this.alertNetwork();
+    });
   }
   async ngOnInit() {
     // If using a custom driver:
@@ -31,5 +42,22 @@ export class AppComponent {
     await this.storage.remove('userData');
     await this.route.navigate(['home-new']);
     await location.reload();
+  }
+  async alertNetwork(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Network !',
+      message: 'การเชื่อมต่อ Internet ของคุณมีปัญหา',
+      buttons: [
+        {
+          text: 'ตกลง',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
