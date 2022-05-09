@@ -90,7 +90,7 @@ export class FormResponsePage implements OnInit {
         {
           text: 'สัมภาษณ์ต่อ',
           handler: () => {
-            this.dataStorage[this.id].status   = "success";
+            this.dataStorage[this.id].status    = "success";
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('formthree/form-step'+page+'/'+this.id);
           }
@@ -123,7 +123,8 @@ export class FormResponsePage implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            this.dataStorage[this.id].status   = "success";
+            this.dataStorage[this.id].status    = "success";
+            this.dataStorage[this.id].date      = Date();
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }

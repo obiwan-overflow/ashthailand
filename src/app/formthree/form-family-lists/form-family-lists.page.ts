@@ -185,70 +185,11 @@ export class FormFamilyListsPage implements OnInit {
     }
     await this.storage.set('formfamily',this.dataOutfamily);
     let data = await this.storage.get('formfamily');
-    if(data[sum].QUITE_CHECK == undefined){
-      if(data[sum].SECOND == undefined){
-        if(data[sum].TYPE_CIG == undefined){
-          if(data[sum].RESPONSE == undefined){
-            if(data[sum].OTHER == undefined){
-              if(data[sum].E_CIG == undefined){
-                if(data[sum].NO2 == undefined){
-                  if(data[sum].ROLL == undefined){
-                    if(data[sum].NO1 == undefined){
-                      if(data[sum].CIG == undefined){
-                        if(data[sum].TIME_M == undefined){
-                          if(data[sum].TIME_Y == undefined){
-                            if(data[sum].EXSMOKE_M == undefined){
-                              if(data[sum].EXSMOKE_Y == undefined){
-                                if(data[sum].EVERSMOKE == undefined){
-                                  if(data[sum].SMOKE == undefined){
-                                    this.router.navigateByUrl('/formthree/form4/'+sum);
-                                  }else{
-                                    this.router.navigateByUrl('/formthree/form-step1/'+sum);
-                                  }
-                                }else{
-                                  this.router.navigateByUrl('/formthree/form-step2/'+sum);
-                                }
-                              }else{
-                                this.router.navigateByUrl('/formthree/form-step3/'+sum);
-                              }
-                            }else{
-                              this.router.navigateByUrl('/formthree/form-step3b/'+sum);
-                            }
-                          }else{
-                            this.router.navigateByUrl('/formthree/form-step4/'+sum);
-                          }
-                        }else{
-                          this.router.navigateByUrl('/formthree/form-step4b/'+sum);
-                        }
-                      }else{
-                        this.router.navigateByUrl('/formthree/form-step5/'+sum);
-                      }
-                    }else{
-                      this.router.navigateByUrl('/formthree/form-step5-count/'+sum);
-                    }
-                  }else{
-                    this.router.navigateByUrl('/formthree/form-step6/'+sum);
-                  }
-                }else{
-                  this.router.navigateByUrl('/formthree/form-step6-count/'+sum);
-                }
-              }else{
-                this.router.navigateByUrl('/formthree/form-step7/'+sum);
-              }
-            }else{
-              this.router.navigateByUrl('/formthree/form-step8/'+sum);
-            }
-          }else{
-            this.router.navigateByUrl('/formthree/form-response/'+sum);
-          }
-        }else{
-          this.router.navigateByUrl('/formthree/form-step10/'+sum);
-        }
-      }else{
-        this.router.navigateByUrl('/formthree/form-step11/'+sum);
-      }
+    
+    if(data[sum].RESPONSE == undefined){
+            
     }else{
-      this.router.navigateByUrl('/formthree/form-step12/'+sum);
+      this.router.navigateByUrl('/formthree/form-response/'+sum);
     }
   }
   async btnApprove(){

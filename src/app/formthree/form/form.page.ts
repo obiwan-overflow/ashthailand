@@ -51,7 +51,10 @@ export class FormPage implements OnInit {
     });
     await this.loading.present();
     this.dataStorage  = await this.storage.get('formfamily');
-    this.dataProvin   = await this.storage.get('provincesDetail');
+    // this.dataProvin   = await this.storage.get('provincesDetail');
+    await this.storage.get('formfamily').then((data)=>{
+      this.dataProvin = data;
+    });
     this.fid          = await this.dataStorage == null ? 1 : this.dataStorage.length+1;
 
     var option = {

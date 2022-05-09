@@ -52,7 +52,10 @@ export class FormPage implements OnInit {
       message: 'กรุณารอสักครู่...',
     });
     await this.loading.present();
-    this.dataProvince   = await this.storage.get('provincesDetail');
+    // this.dataProvince   = await this.storage.get('provincesDetail');
+    await this.storage.get('provincesDetail').then((data)=>{
+      this.dataProvince = data;
+    });
     this.numberId       = await this.route.snapshot.paramMap.get('id');
     
     var option = {

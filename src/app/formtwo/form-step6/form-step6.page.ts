@@ -125,6 +125,7 @@ export class FormStep6Page implements OnInit {
       "S4A":this.dataStorage[this.numberId].S4A,
       "S5A":this.dataStorage[this.numberId].S5A,
       "S6A":value,
+      "date":Date()
     };
     await this.dataShopSuccess.push(data);
     await this.storage.set('formShopSuccess',this.dataShopSuccess);
@@ -155,6 +156,7 @@ export class FormStep6Page implements OnInit {
       "S4A":this.dataStorage[this.numberId].S4A,
       "S5A":this.dataStorage[this.numberId].S5A,
       "S6A":value,
+      "date":Date()
     };
     await this.dataShop.push(data);
     await this.storage.set('formShopFailed',this.dataShop);

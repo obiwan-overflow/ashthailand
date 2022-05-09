@@ -72,8 +72,6 @@ export class FormStep4Page implements OnInit {
           text: 'บันทึก',
           handler: () => {
             this.setDataSuccess(value);
-            // this.dataStorage[this.numberId].status = "success";
-            // this.storage.set('formpublic',this.dataStorage);
             const formData = new FormData();
             formData.append('cat_id',"1");
             formData.append('user_id',this.userData.id);
@@ -129,6 +127,7 @@ export class FormStep4Page implements OnInit {
       "P2A":this.dataStorage[this.numberId].P2A,
       "P3A":this.dataStorage[this.numberId].P3A,
       "P4A":value,
+      "date":Date()
     };
     await this.dataPublicSuccess.push(data);
     await this.storage.set('formPublicSuccess',this.dataPublicSuccess);
@@ -155,6 +154,7 @@ export class FormStep4Page implements OnInit {
       "P2A":this.dataStorage[this.numberId].P2A,
       "P3A":this.dataStorage[this.numberId].P3A,
       "P4A":value,
+      "date":Date()
     };
     await this.dataPublicNoInternet.push(data);
     await this.storage.set('formPublicFailed',this.dataPublicNoInternet);

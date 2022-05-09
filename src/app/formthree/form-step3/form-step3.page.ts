@@ -87,7 +87,8 @@ export class FormStep3Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            this.dataStorage[this.id].status   = "success";
+            this.dataStorage[this.id].status  = "success";
+            this.dataStorage[this.id].date    = Date();
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }
