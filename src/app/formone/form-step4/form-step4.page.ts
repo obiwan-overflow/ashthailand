@@ -93,12 +93,11 @@ export class FormStep4Page implements OnInit {
             formData.append('P5A',"");
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                this.deleteDataOld();
               }
             },(err)=>{
               this.errorServer(value);
             });
-            this.deleteDataOld();
           }
         }
       ]
@@ -158,6 +157,7 @@ export class FormStep4Page implements OnInit {
     };
     await this.dataPublicNoInternet.push(data);
     await this.storage.set('formPublicFailed',this.dataPublicNoInternet);
+    await this.deleteDataOld();
   }
   async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   

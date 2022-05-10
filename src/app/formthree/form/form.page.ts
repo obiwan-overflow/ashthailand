@@ -51,13 +51,11 @@ export class FormPage implements OnInit {
     });
     await this.loading.present();
     this.dataStorage  = await this.storage.get('formfamily');
-    // this.dataProvin   = await this.storage.get('provincesDetail');
-    await this.storage.get('formfamily').then((data)=>{
-      this.dataProvin = data;
-    });
+    this.dataProvin   = await this.storage.get('provincesDetail');
     this.fid          = await this.dataStorage == null ? 1 : this.dataStorage.length+1;
 
     var option = {
+      timeout: 5000, 
       enableHighAccuracy: true
     }
     await this.geolocation.getCurrentPosition(option).then((resp) => {
