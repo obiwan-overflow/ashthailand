@@ -62,6 +62,7 @@ export class Form4Page implements OnInit {
     this.dataStorage[this.id].AGE                 = form.value.AGE;
     this.dataStorage[this.id].organization_name   = userData.organization_name;
     this.dataStorage[this.id].PERSON_NO           = this.dataStorage[this.id].PERSON_NO == undefined ? 1 : this.dataStorage[this.id].PERSON_NO;
+    this.dataStorage[this.id].dateStart           = Date();
     await this.storage.set('formfamily',this.dataStorage);
 
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
@@ -90,7 +91,8 @@ export class Form4Page implements OnInit {
           text: 'บันทึก',
           handler: () => {
             console.log('Confirm Okay');
-            this.dataStorage[this.id].status   = "success";
+            this.dataStorage[this.id].status        = "success";
+            this.dataStorage[this.id].dateSuccess   = Date();
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }

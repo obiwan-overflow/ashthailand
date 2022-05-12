@@ -76,22 +76,10 @@ export class FormPage implements OnInit {
       "TMP":this.dataProvince.id_tombons,
       "LAT":this.latitude,
       "LONG":this.longitude,
+      "dateStart":Date()
     };
     await this.storage.set('formpublic_step1',dataAnswer);
     await this.router.navigateByUrl('/formone/form2/'+this.numberId);
-    // if(this.latitude == undefined || this.longitude == undefined){
-    //   this.waitLocation();
-    // }else{
-    //   let dataAnswer = {
-    //     "CWT":this.dataProvince.id_provinces,
-    //     "ID1":this.dataProvince.id_amphures,
-    //     "TMP":this.dataProvince.id_tombons,
-    //     "LAT":this.latitude,
-    //     "LONG":this.longitude,
-    //   };
-    //   await this.storage.set('formpublic_step1',dataAnswer);
-    //   await this.router.navigateByUrl('/formone/form2/'+this.numberId);
-    // }
   }
   async waitLocation() {
     const alert = await this.alertController.create({

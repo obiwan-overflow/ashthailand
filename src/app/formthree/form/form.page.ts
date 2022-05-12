@@ -76,7 +76,8 @@ export class FormPage implements OnInit {
         "ID1":this.dataProvin.id_tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
-        "fid":this.fid
+        "fid":this.fid,
+        "dateStart":Date()
       }];
       this.storage.set('formfamily',dataAnswer);
       this.router.navigateByUrl('/formthree/form2');
@@ -87,7 +88,8 @@ export class FormPage implements OnInit {
         "ID1":this.dataProvin.id_tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
-        "fid":this.fid
+        "fid":this.fid,
+        "dateStart":Date()
       };
       await this.dataStorage.push(dataAnswer);
       await this.storage.set('formfamily',this.dataStorage);

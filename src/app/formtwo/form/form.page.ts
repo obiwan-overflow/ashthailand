@@ -76,6 +76,7 @@ export class FormPage implements OnInit {
       "TMP":this.dataProvince.id_tombons,
       "LAT":this.latitude,
       "LONG":this.longitude,
+      "dateStart":Date()
     }
     await this.storage.set('formshop_step1',dataAnswer);
     await this.router.navigateByUrl('/formtwo/form2/'+this.numberId);
