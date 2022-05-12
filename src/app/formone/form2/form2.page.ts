@@ -62,6 +62,7 @@ export class Form2Page implements OnInit {
           "TMP":this.dataStorage_step1.TMP,
           "LAT":this.dataStorage_step1.LAT,
           "LONG":this.dataStorage_step1.LONG,
+          "dateStart":this.dataStorage_step1.dateStart,
           "MOO":form.value.MOO,
           "VIL":form.value.VIL,
         };

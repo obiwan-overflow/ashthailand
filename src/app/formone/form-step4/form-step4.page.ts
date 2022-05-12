@@ -126,6 +126,7 @@ export class FormStep4Page implements OnInit {
       "P2A":this.dataStorage[this.numberId].P2A,
       "P3A":this.dataStorage[this.numberId].P3A,
       "P4A":value,
+      "dateStart":this.dataStorage[this.numberId].dateStart,
       "dateSuccess":Date()
     };
     await this.dataPublicSuccess.push(data);
@@ -153,6 +154,7 @@ export class FormStep4Page implements OnInit {
       "P2A":this.dataStorage[this.numberId].P2A,
       "P3A":this.dataStorage[this.numberId].P3A,
       "P4A":value,
+      "dateStart":this.dataStorage[this.numberId].dateStart,
       "dateSuccess":Date()
     };
     await this.dataPublicNoInternet.push(data);

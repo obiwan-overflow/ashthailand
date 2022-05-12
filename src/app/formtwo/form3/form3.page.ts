@@ -57,6 +57,7 @@ export class Form3Page implements OnInit {
           "TMP":this.dataStorage_step1.TMP,
           "LAT":this.dataStorage_step1.LAT,
           "LONG":this.dataStorage_step1.LONG,
+          "dateStart":this.dataStorage_step1.dateStart,
           "MOO":this.dataStorage_step1.MOO,
           "VIL":this.dataStorage_step1.VIL,
           "A1":form.value.A1,
