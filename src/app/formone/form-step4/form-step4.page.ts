@@ -71,6 +71,9 @@ export class FormStep4Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
+            let dateStartData = new Date(this.dataStorage[this.numberId].dateStart).toLocaleString();
+            let dateSuccessData = new Date().toLocaleString();
+
             this.setDataSuccess(value);
             const formData = new FormData();
             formData.append('cat_id',"1");
@@ -86,6 +89,8 @@ export class FormStep4Page implements OnInit {
             formData.append('ADDRESS',this.dataStorage[this.numberId].ADDRESS);
             formData.append('LAT',this.dataStorage[this.numberId].LAT);
             formData.append('LONG',this.dataStorage[this.numberId].LONG);
+            // formData.append('date_start',dateStartData);
+            // formData.append('date_success',dateSuccessData);
             formData.append('P1A',this.dataStorage[this.numberId].P1A);
             formData.append('P2A',this.dataStorage[this.numberId].P2A);
             formData.append('P3A',this.dataStorage[this.numberId].P3A);
