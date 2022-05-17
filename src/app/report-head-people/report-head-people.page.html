@@ -41,178 +41,91 @@
     <ion-row *ngIf="formData == true">
       <ion-col size="12">
         <ion-text class="ion-text-center">
-          <p>ผลการสังเกตสถานที่สาธารณะ (แห่ง)</p>
+          <p class="my-0">{{titleHead}} ({{titleCount}})</p>
         </ion-text>
       </ion-col>
       <ion-col size="12">
         <ion-row>
-          <ion-col size="4">
+          <ion-col size="3">
           </ion-col>
           <ion-col size="8">
             <ion-text class="ion-text-center">
-              <p>จำนวน (แห่ง)</p>
+              <p class="my-0">จำนวน (แห่ง)</p>
             </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="4">
+          <ion-col size="3">
           </ion-col>
           <ion-col>
             <ion-text class="ion-text-center">
-              <p>ทั้งหมด</p>
-            </ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text class="ion-text-center">
-              <p>เก็บวันนี้</p>
+              <p class="my-0">ทั้งหมด</p>
             </ion-text>
           </ion-col>
           <ion-col>
             <ion-text class="ion-text-center">
-              <p>สะสม</p>
+              <p class="my-0">เก็บวันนี้</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-text class="ion-text-center">
+              <p class="my-0">สะสม</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-text class="ion-text-center">
+              <p class="my-0">รวม(คน)</p>
             </ion-text>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col size="4">
+        <ion-row *ngFor="let data of dataDetail">
+          <ion-col size="3">
             <ion-text>
-              <p>นาย ก</p>
+              <p>{{data.fullname}}</p>
             </ion-text>
           </ion-col>
           <ion-col>
             <div class="card-num">
-              <p>100</p>
+              <p>{{data.total}}</p>
             </div>
           </ion-col>
           <ion-col>
             <div class="card-num">
-              <p>8</p>
+              <p>{{data.sum_today}}</p>
             </div>
           </ion-col>
           <ion-col>
             <div class="card-num">
-              <p>90</p>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="4">
-            <ion-text>
-              <p>นาย ข</p>
-            </ion-text>
-          </ion-col>
-          <ion-col>
-            <div class="card-num">
-              <p>100</p>
+              <p>{{data.sum}}</p>
             </div>
           </ion-col>
           <ion-col>
             <div class="card-num">
-              <p>8</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="card-num">
-              <p>90</p>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="4">
-            <ion-text>
-              <p>นาย ค</p>
-            </ion-text>
-          </ion-col>
-          <ion-col>
-            <div class="card-num">
-              <p>100</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="card-num">
-              <p>8</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="card-num">
-              <p>90</p>
+              <p>{{data.sum_people}}</p>
             </div>
           </ion-col>
         </ion-row>
       </ion-col>
-      <!-- <ion-col size="12">
-        <div class="card-report">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="4">
-              <ion-text>
-                <p>นาย ก</p>
-              </ion-text>
-            </ion-col>
-            <ion-col size="4">
-              <ion-text class="ion-text-center">
-                <p>จำนวนทั้งหมด</p>
-                <p>88</p>
-              </ion-text>
-            </ion-col>
-            <ion-col size="4">
-              <ion-text class="ion-text-center">
-                <p>จำนวนเก็บวันนี้</p>
-                <p>20</p>
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </div>
-      </ion-col>
       <ion-col size="12">
-        <div class="card-report">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="4">
-              <ion-text>
-                <p>นาง ใจดี นามสกุล</p>
-              </ion-text>
-            </ion-col>
-            <ion-col size="4">
-              <ion-text class="ion-text-center">
-                <p>จำนวนทั้งหมด</p>
-                <p>88</p>
-              </ion-text>
-            </ion-col>
-            <ion-col size="4">
-              <ion-text class="ion-text-center">
-                <p>จำนวนเก็บวันนี้</p>
-                <p>20</p>
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </div>
-      </ion-col>
-      <ion-col size="12">
-        <div class="card-report">
-          <ion-row class="ion-align-items-center">
-            <ion-col size="4">
-              <ion-text>
-                <p>นาย สมชาย นามสกุล</p>
-              </ion-text>
-            </ion-col>
-            <ion-col size="4">
-              <ion-text class="ion-text-center">
-                <p>จำนวนทั้งหมด</p>
-                <p>88</p>
-              </ion-text>
-            </ion-col>
-            <ion-col size="4">
-              <ion-text class="ion-text-center">
-                <p>จำนวนเก็บวันนี้</p>
-                <p>20</p>
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </div>
-      </ion-col> -->
-      <ion-col size="12">
-        <ion-text>
-          <p>สรุป จำนวนทั้งหมด 240/250 แห่ง</p>
-        </ion-text>
+        <ion-row>
+          <ion-col size="3">
+            <ion-text>
+              <p>รวมทั้งหมด</p>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            
+          </ion-col>
+          <ion-col>
+            
+          </ion-col>
+          <ion-col>
+            
+          </ion-col>
+          <ion-col>
+            
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>

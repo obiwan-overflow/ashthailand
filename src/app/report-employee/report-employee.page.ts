@@ -3,7 +3,7 @@ import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { format, parseISO } from 'date-fns';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-report-employee',
@@ -22,7 +22,8 @@ export class ReportEmployeePage implements OnInit {
     public api:RestApiService,
     public storage:Storage,
     private formBuilder: FormBuilder,
-    public alertController:AlertController
+    public alertController:AlertController,
+    public loadingController:LoadingController
   ) {
     this.todo = this.formBuilder.group({
       dateStart: ['', Validators.required],
@@ -38,6 +39,13 @@ export class ReportEmployeePage implements OnInit {
     });
   }
   async logForm(){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่ ...',
+      backdropDismiss:true
+    });
+    loading.present();
+
     var dateStart           = await new Date(this.todo.value.dateStart);
     var dateEnd             = await new Date(this.todo.value.dateEnd);
     var Difference_In_Time  = await dateEnd.getTime() - dateStart.getTime();
@@ -48,6 +56,7 @@ export class ReportEmployeePage implements OnInit {
       this.numDay = 1;
     }
     if(this.numDay < 1){
+      loading.dismiss();
       this.presentAlert();
     }else{
       this.formData = true;
@@ -61,6 +70,7 @@ export class ReportEmployeePage implements OnInit {
       await this.api.getdata('report/reportMember&user_id='+userId+'&cat_id=3'+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
         this.dataFamily = res;
       });
+      await loading.dismiss();
     }
   }
   async presentAlert() {

@@ -31,13 +31,13 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngIf="fullname && permission === '1' || permission === '3'">
+      <ion-col size="6" *ngIf="permission === '1' || permission === '3'">
         <div class="menu" routerLink="/tabs/form">
           <ion-icon name="document-text-outline"></ion-icon>
           <p>แบบเก็บข้อมูล</p>
         </div>
       </ion-col>
-      <ion-col size="6" *ngIf="fullname && permission === '1' || permission === '3'">
+      <ion-col size="6" *ngIf="permission === '1' || permission === '3'">
         <div class="menu" routerLink="/tabs/report">
           <ion-icon name="pie-chart-outline"></ion-icon>
           <p>รายงานความก้าวหน้า</p>

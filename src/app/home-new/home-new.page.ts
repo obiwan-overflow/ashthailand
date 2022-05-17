@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
 
 @Component({
@@ -16,16 +16,19 @@ export class HomeNewPage implements OnInit {
   image:any;
   profile:any;
   permission:any;
-  constructor(private storage: Storage,public router:Router,public loadingController:LoadingController,public api:RestApiService) {
+  constructor(
+    private storage: Storage,
+    public router:Router,
+    public loadingController:LoadingController,
+    public api:RestApiService
+  ) {
     this.api.getdata('home/noti').subscribe((res)=>{
       this.titleNoti = res.title;
     });
   }
 
   ngOnInit() {
-  }
-  async ionViewDidEnter(){
-    await this.storage.get('userData').then((data)=>{
+    this.storage.get('userData').then((data)=>{
         if(data !== null){
           this.fullname   = data.name+" "+data.lastname;
           this.image      = data.image == " " ? 'assets/images/user-theme.png' : data.image;
@@ -33,6 +36,16 @@ export class HomeNewPage implements OnInit {
           this.permission = data.permission;
         }
     });
+  }
+  async ionViewWillEnter(){
+    // await this.storage.get('userData').then((data)=>{
+    //     if(data !== null){
+    //       this.fullname   = data.name+" "+data.lastname;
+    //       this.image      = data.image == " " ? 'assets/images/user-theme.png' : data.image;
+    //       this.profile    = data.imgProfile;
+    //       this.permission = data.permission;
+    //     }
+    // });
   }
   async formanswer(){
     if(this.fullname == undefined){
