@@ -141,18 +141,22 @@ export class FormFamilyListsPage implements OnInit {
     await alert.present();
   }
   async deleteMemberFamily(del){  
-    let loadingDelete = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'กรุณารอสักครู่...',
-    });
-    await loadingDelete.present();
+    // let loadingDelete = await this.loadingController.create({
+    //   cssClass: 'my-custom-class',
+    //   message: 'กรุณารอสักครู่...',
+    // });
+    // await loadingDelete.present();
     await this.datafamily.splice(del,1);
     for (let val of this.datafamily){
       this.dataOutfamily.push(val);
     }
     await this.storage.set('formfamily',this.dataOutfamily);
-    await location.assign('formthree/form-family-lists/'+this.MOO+'/'+this.VIL+'/'+this.A1+'/success')
-    await loadingDelete.dismiss();
+    // await loadingDelete.dismiss();
+    let IdMOO = this.MOO.replace("/","*kk*");
+    let IdVIL = this.VIL.replace("/","*kk*");
+    let IdA1  = this.A1.replace("/","*kk*");
+    await this.router.navigateByUrl('waiting/'+IdMOO+'/'+IdVIL+'/'+IdA1);
+    // await location.assign('formthree/form-family-lists/'+this.MOO+'/'+this.VIL+'/'+this.A1+'/success');
   }
   async continue(index,name){
     const alert = await this.alertController.create({
