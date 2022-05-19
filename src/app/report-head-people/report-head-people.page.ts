@@ -23,6 +23,7 @@ export class ReportHeadPeoplePage implements OnInit {
   sumTotal:any;
   sumToday:any;
   sumSum:any;
+  sumPeople:any;
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -77,12 +78,22 @@ export class ReportHeadPeoplePage implements OnInit {
       let userId = await this.storage.get('userId');
       await this.api.getdata('report/reportHeadMember&user_id='+userId+'&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
         this.dataDetail = res;
-        console.log(res);
-        var zero = 0;
+
+        let sumTotal    = 0;
+        let sumToday    = 0;
+        let sumSum      = 0;
+        let sumPeople   = 0;
         for (let index = 0; index < res.length; index++) {
-          const element = res[index];
-          this.sumTotal = zero + parseInt(element['total']);
+          let element = res[index];
+          sumTotal    += parseInt(element['total']);
+          sumToday    += parseInt(element['sum_today']);
+          sumSum      += parseInt(element['sum']);
+          sumPeople   += parseInt(element['sum']);
         }
+        this.sumTotal   = sumTotal;
+        this.sumToday   = sumToday;
+        this.sumSum     = sumSum;
+        this.sumPeople  = sumPeople;
       });
       await loading.dismiss();
     }

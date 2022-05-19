@@ -72,7 +72,7 @@
               <p class="my-0">สะสม</p>
             </ion-text>
           </ion-col>
-          <ion-col>
+          <ion-col *ngIf="id == 3">
             <ion-text class="ion-text-center">
               <p class="my-0">รวม(คน)</p>
             </ion-text>
@@ -99,7 +99,7 @@
               <p>{{data.sum}}</p>
             </div>
           </ion-col>
-          <ion-col>
+          <ion-col *ngIf="id == 3">
             <div class="card-num">
               <p>{{data.sum_people}}</p>
             </div>
@@ -114,16 +114,24 @@
             </ion-text>
           </ion-col>
           <ion-col>
-            {{sumTotal}}
+            <ion-text class="ion-text-center">
+              <p>{{sumTotal}}</p>
+            </ion-text>
           </ion-col>
           <ion-col>
-            
+            <ion-text class="ion-text-center">
+              <p>{{sumToday}}</p>
+            </ion-text>
           </ion-col>
           <ion-col>
-            
+            <ion-text class="ion-text-center">
+              <p>{{sumSum}}</p>
+            </ion-text>
           </ion-col>
-          <ion-col>
-            
+          <ion-col *ngIf="id == 3">
+            <ion-text class="ion-text-center">
+              <p>{{sumPeople}}</p>
+            </ion-text>
           </ion-col>
         </ion-row>
       </ion-col>
