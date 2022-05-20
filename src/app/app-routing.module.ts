@@ -361,7 +361,11 @@ const routes: Routes = [
   {
     path: 'waiting/:MOO/:VIL/:A1',
     loadChildren: () => import('./waiting/waiting.module').then( m => m.WaitingPageModule)
+  },  {
+    path: 'report-chart',
+    loadChildren: () => import('./report-chart/report-chart.module').then( m => m.ReportChartPageModule)
   },
+
 
 
 ];

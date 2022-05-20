@@ -88,7 +88,7 @@ export class ReportHeadPeoplePage implements OnInit {
           sumTotal    += parseInt(element['total']);
           sumToday    += parseInt(element['sum_today']);
           sumSum      += parseInt(element['sum']);
-          sumPeople   += parseInt(element['sum']);
+          sumPeople   += parseInt(element['sum_people']);
         }
         this.sumTotal   = sumTotal;
         this.sumToday   = sumToday;

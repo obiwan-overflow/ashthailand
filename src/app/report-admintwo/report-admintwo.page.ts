@@ -3,6 +3,7 @@ import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-report-admintwo',
@@ -22,7 +23,9 @@ export class ReportAdmintwoPage implements OnInit {
     public api:RestApiService,
     public storage:Storage,
     private formBuilder: FormBuilder,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    public alertController:AlertController,
+    public loadingController:LoadingController
   ) {
     this.todo = this.formBuilder.group({
       dateStart: ['', Validators.required],
@@ -30,6 +33,7 @@ export class ReportAdmintwoPage implements OnInit {
       location: ['', Validators.required],
       locationSub: ['', Validators.required]
     });
+    this.formData = true;
   }
 
   ngOnInit() {
@@ -48,19 +52,43 @@ export class ReportAdmintwoPage implements OnInit {
     }
     this.display = "hide";
   }
+
+
   async logForm(){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'กรุณารอสักครู่ ...',
+      backdropDismiss:true
+    });
     var dateStart           = await new Date(this.todo.value.dateStart);
     var dateEnd             = await new Date(this.todo.value.dateEnd);
     var Difference_In_Time  = await dateEnd.getTime() - dateStart.getTime();
     var Difference_In_Days  = await Difference_In_Time / (1000*3600*24);
     this.numDay   = await Difference_In_Days;
-    this.formData = true;
-
-    await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
-      this.dataDetail = res;
-    });
+    if(this.numDay == 0){
+      this.numDay = 1;
+    }
+    if(this.numDay < 1){
+      loading.dismiss();
+      this.presentAlert();
+    }else{
+      this.formData = true;
+      await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+        this.dataDetail = res;
+      });
+      await loading.dismiss();
+    }
   }
-  async selectlocation(){
+  async selectlocation(event){
     this.display = "show";
+    console.log(event.detail.value);
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      message: 'กดเลือกวันไม่ถูกต้อง !!',
+      buttons: ['ตกลง']
+    });
+    await alert.present();
   }
 }

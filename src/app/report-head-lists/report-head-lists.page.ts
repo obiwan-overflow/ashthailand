@@ -14,6 +14,10 @@ export class ReportHeadListsPage implements OnInit {
   user:any = {};
   formData:boolean;
   numDay:any;
+
+  dataPublic:any = [];
+  dataShop:any = [];
+  dataFamily:any = [];
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -45,6 +49,7 @@ export class ReportHeadListsPage implements OnInit {
     var Difference_In_Time  = dateEnd.getTime() - dateStart.getTime();
     var Difference_In_Days  = Difference_In_Time / (1000*3600*24);
     this.numDay = Difference_In_Days;
+
     if(this.numDay == 0){
       this.numDay = 1;
     }
@@ -54,9 +59,15 @@ export class ReportHeadListsPage implements OnInit {
     }else{
       this.formData = true;
       let userId = await this.storage.get('userId');
-      // await this.api.getdata('report/reportHeadMember&user_id='+userId).subscribe((res)=>{
-        
-      // });
+      await this.api.getdata('report/reportHeadAll&user_id='+userId+'&cat_id=1&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+        this.dataPublic = res;
+      });
+      await this.api.getdata('report/reportHeadAll&user_id='+userId+'&cat_id=2&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+        this.dataShop = res;
+      });
+      await this.api.getdata('report/reportHeadAll&user_id='+userId+'&cat_id=3&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+        this.dataFamily = res;
+      });
       await loading.dismiss();
     }
   }

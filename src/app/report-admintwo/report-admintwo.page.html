@@ -38,11 +38,11 @@
       <ion-col size="12">
         <ion-item>
           <ion-label>เลือกพื้นที่</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="location" (ionChange)="selectlocation()">
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="location" (ionChange)="selectlocation($event)">
             <ion-select-option value="1">รวมทุกพื้นที่</ion-select-option>
             <ion-select-option value="2">เทศบาลนคร/เมือง</ion-select-option>
             <ion-select-option value="3">เทศบาลตำบล</ion-select-option>
-            <ion-select-option value="4">องค์การบริหารส่วนตำบล</ion-select-option>
+            <ion-select-option value="4">อบต</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item class="{{display}}">
@@ -96,7 +96,7 @@
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <div class="chart public">
+              <div class="chart public" routerLink="report-chart">
                 <ion-icon name="trending-up-sharp"></ion-icon>
               </div>
             </ion-col>
@@ -136,7 +136,7 @@
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <div class="chart shop">
+              <div class="chart shop" routerLink="report-chart">
                 <ion-icon name="trending-up-sharp"></ion-icon>
               </div>
             </ion-col>
@@ -182,7 +182,7 @@
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <div class="chart family">
+              <div class="chart family" routerLink="report-chart">
                 <ion-icon name="trending-up-sharp"></ion-icon>
               </div>
             </ion-col>

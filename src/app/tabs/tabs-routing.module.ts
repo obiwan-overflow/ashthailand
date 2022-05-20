@@ -180,6 +180,10 @@ const routes: Routes = [
         loadChildren: () => import('../report-admintwo/report-admintwo.module').then(m => m.ReportAdmintwoPageModule)
       },
       {
+        path: 'report/report-admin/report-admintwo/:id/report-chart',
+        loadChildren: () => import('../report-chart/report-chart.module').then(m => m.ReportChartPageModule)
+      },
+      {
         path: 'form/formone-draft',
         loadChildren: () => import('../formone/form-draft/form-draft.module').then( m => m.FormDraftPageModule)
       },

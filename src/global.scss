@@ -43,6 +43,15 @@ ion-list {
 ion-label {
     font-family: sarabun !important;
 }
+.alert-wrapper {
+    font-family: sarabun !important;
+}
+// .alert-radio-label.sc-ion-alert-md {
+//     text-overflow: unset !important;
+// }
+// .alert-tappable.sc-ion-alert-md {
+//     overflow: unset !important;
+// }
 .ion-color-theme {
     --ion-color-base: var(--ion-color-theme);
     --ion-color-base-rgb: var(--ion-color-theme-rgb);
