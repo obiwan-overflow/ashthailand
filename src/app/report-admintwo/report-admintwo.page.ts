@@ -16,8 +16,11 @@ export class ReportAdmintwoPage implements OnInit {
   formData:boolean;
   id:any;
   numDay:any;
-  display:any;
+  displayCity:any;
+  displayTombons:any;
+  displayObt:any;
   dataDetail:any = [];
+  listsObt:any = [];
   titleHead:any;
   constructor(
     public api:RestApiService,
@@ -31,9 +34,11 @@ export class ReportAdmintwoPage implements OnInit {
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
       location: ['', Validators.required],
-      locationSub: ['', Validators.required]
+      locationCity: ['',],
+      locationTombons: ['',],
+      locationObt: ['',],
     });
-    this.formData = true;
+    this.formData = false;
   }
 
   ngOnInit() {
@@ -50,7 +55,13 @@ export class ReportAdmintwoPage implements OnInit {
     }else if(this.id == '3'){
       this.titleHead = "แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่";
     }
-    this.display = "hide";
+    await this.api.getdata('report/getListObt').subscribe((res)=>{
+      this.listsObt = res;
+      console.log(res);
+    });
+    this.displayCity = "hide";
+    this.displayTombons = "hide";
+    this.displayObt = "hide";
   }
 
 
@@ -80,8 +91,14 @@ export class ReportAdmintwoPage implements OnInit {
     }
   }
   async selectlocation(event){
-    this.display = "show";
-    console.log(event.detail.value);
+    if(event.detail.value == '1'){
+    }else if(event.detail.value == '2'){
+      this.displayCity = "show";
+    }else if(event.detail.value == '3'){
+      this.displayTombons = "show";
+    }else if(event.detail.value == '4'){
+      this.displayObt = "show";
+    }
   }
   async presentAlert() {
     const alert = await this.alertController.create({

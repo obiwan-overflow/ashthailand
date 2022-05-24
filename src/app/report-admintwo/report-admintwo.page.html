@@ -45,11 +45,22 @@
             <ion-select-option value="4">อบต</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item class="{{display}}">
+        <ion-item class="{{displayCity}}">
           <ion-label>เทศบาลนคร/เมือง</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationSub">
-            <ion-select-option value="1">เทศบาลนคร 1</ion-select-option>
-            <ion-select-option value="2">เทศบาลนคร 2</ion-select-option>
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationCity">
+            <ion-select-option value="1">เทศบาลนคร/เมือง</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="{{displayTombons}}">
+          <ion-label>เทศบาลตำบล</ion-label>
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationTombons">
+            <ion-select-option value="1">เทศบาลตำบล</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="{{displayObt}}">
+          <ion-label>อบต</ion-label>
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationObt">
+            <ion-select-option *ngFor="let data of listsObt" value="{{data.organization_name}}">{{data.organization_name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
