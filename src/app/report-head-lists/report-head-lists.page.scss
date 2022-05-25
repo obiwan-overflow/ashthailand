@@ -98,9 +98,10 @@
     text-align: center;
     background-color: #fff;
     padding: 25px 0;
+    height: 100% !important;
     p {
-        font-size: 22px;
+        // font-size: 22px;
         margin-top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 }

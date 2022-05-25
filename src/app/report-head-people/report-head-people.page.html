@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>{{titleHead}}</ion-title>
+    <ion-title class="title-smoke">{{titleHead}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -27,8 +27,8 @@
       </ion-col>
       <ion-col size="6">
         <div class="box-numdate">
-          <p>รวมวันเก็บข้อมูล</p>
-          <p>{{numDay}} <small>วัน</small></p>
+          <p><b>รวมวันเก็บข้อมูล</b></p>
+          <p class="mb-0"><b class="text-number-report">{{numDay}}</b> วัน</p>
         </div>
       </ion-col>
       <ion-col size="12">
@@ -41,7 +41,7 @@
     <ion-row *ngIf="formData == true">
       <ion-col size="12">
         <ion-text class="ion-text-center">
-          <p class="my-0">{{titleHead}} ({{titleCount}})</p>
+          <p class="my-0">{{titleHead}}</p>
         </ion-text>
       </ion-col>
       <ion-col size="12">
@@ -50,7 +50,7 @@
           </ion-col>
           <ion-col size="8">
             <ion-text class="ion-text-center">
-              <p class="my-0">จำนวน (แห่ง)</p>
+              <p class="my-0">จำนวน ({{titleCount}})</p>
             </ion-text>
           </ion-col>
         </ion-row>

@@ -16,9 +16,7 @@ export class ReportAdmintwoPage implements OnInit {
   formData:boolean;
   id:any;
   numDay:any;
-  displayCity:any;
-  displayTombons:any;
-  displayObt:any;
+  display:any;
   dataDetail:any = [];
   listsObt:any = [];
   titleHead:any;
@@ -57,11 +55,8 @@ export class ReportAdmintwoPage implements OnInit {
     }
     await this.api.getdata('report/getListObt').subscribe((res)=>{
       this.listsObt = res;
-      console.log(res);
     });
-    this.displayCity = "hide";
-    this.displayTombons = "hide";
-    this.displayObt = "hide";
+    this.display = '0';
   }
 
 
@@ -76,14 +71,13 @@ export class ReportAdmintwoPage implements OnInit {
     var Difference_In_Time  = await dateEnd.getTime() - dateStart.getTime();
     var Difference_In_Days  = await Difference_In_Time / (1000*3600*24);
     this.numDay   = await Difference_In_Days;
-    if(this.numDay == 0){
-      this.numDay = 1;
-    }
+    this.numDay   = this.numDay+1;
     if(this.numDay < 1){
       loading.dismiss();
       this.presentAlert();
     }else{
       this.formData = true;
+      console.log(this.todo.value);
       await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
         this.dataDetail = res;
       });
@@ -93,11 +87,11 @@ export class ReportAdmintwoPage implements OnInit {
   async selectlocation(event){
     if(event.detail.value == '1'){
     }else if(event.detail.value == '2'){
-      this.displayCity = "show";
+      this.display = '2';
     }else if(event.detail.value == '3'){
-      this.displayTombons = "show";
+      this.display = '3';
     }else if(event.detail.value == '4'){
-      this.displayObt = "show";
+      this.display = '4';
     }
   }
   async presentAlert() {

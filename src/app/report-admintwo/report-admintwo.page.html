@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="theme">
-    <ion-title>{{titleHead}}</ion-title>
+    <ion-title class="title-smoke">{{titleHead}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -31,8 +31,8 @@
       </ion-col>
       <ion-col size="6">
         <div class="box-numdate">
-          <p>รวมวันเก็บข้อมูล</p>
-          <p>{{numDay}} <small>วัน</small></p>
+          <p><b>รวมวันเก็บข้อมูล</b></p>
+          <p class="mb-0"><b class="text-number-report">{{numDay}}</b> วัน</p>
         </div>
       </ion-col>
       <ion-col size="12">
@@ -42,24 +42,24 @@
             <ion-select-option value="1">รวมทุกพื้นที่</ion-select-option>
             <ion-select-option value="2">เทศบาลนคร/เมือง</ion-select-option>
             <ion-select-option value="3">เทศบาลตำบล</ion-select-option>
-            <ion-select-option value="4">อบต</ion-select-option>
+            <ion-select-option value="4">อบต.</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item class="{{displayCity}}">
+        <ion-item [hidden]="display !== '2'">
           <ion-label>เทศบาลนคร/เมือง</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationCity">
+          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="locationCity">
             <ion-select-option value="1">เทศบาลนคร/เมือง</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item class="{{displayTombons}}">
+        <ion-item [hidden]="display !== '3'">
           <ion-label>เทศบาลตำบล</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationTombons">
+          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="locationTombons">
             <ion-select-option value="1">เทศบาลตำบล</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item class="{{displayObt}}">
-          <ion-label>อบต</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="locationObt">
+        <ion-item [hidden]="display !== '4'">
+          <ion-label>อบต.</ion-label>
+          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="locationObt">
             <ion-select-option *ngFor="let data of listsObt" value="{{data.organization_name}}">{{data.organization_name}}</ion-select-option>
           </ion-select>
         </ion-item>
