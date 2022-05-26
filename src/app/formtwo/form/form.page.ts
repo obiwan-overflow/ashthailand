@@ -70,13 +70,16 @@ export class FormPage implements OnInit {
     await this.loading.dismiss();
   }
   async formData(form){
+    let date = new Date();
+    var pad = function(num) { return ('00'+num).slice(-2) };
+    let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
     let dataAnswer = {
       "CWT":this.dataProvince.id_provinces,
       "ID1":this.dataProvince.id_amphures,
       "TMP":this.dataProvince.id_tombons,
       "LAT":this.latitude,
       "LONG":this.longitude,
-      "dateStart":Date()
+      "dateStart":dateDay
     }
     await this.storage.set('formshop_step1',dataAnswer);
     await this.router.navigateByUrl('/formtwo/form2/'+this.numberId);

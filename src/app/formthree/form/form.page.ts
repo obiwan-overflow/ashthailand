@@ -69,6 +69,9 @@ export class FormPage implements OnInit {
     await this.loading.dismiss();
   }
   async formData(form){
+    let date = new Date();
+    var pad = function(num) { return ('00'+num).slice(-2) };
+    let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
     if(this.dataStorage == null){
       let dataAnswer = [{
         "CWT":this.dataProvin.id_provinces,
@@ -77,7 +80,7 @@ export class FormPage implements OnInit {
         "LAT":this.latitude,
         "LONG":this.longitude,
         "fid":this.fid,
-        "dateStart":Date()
+        "dateStart":dateDay
       }];
       this.storage.set('formfamily',dataAnswer);
       this.router.navigateByUrl('/formthree/form2');
@@ -89,7 +92,7 @@ export class FormPage implements OnInit {
         "LAT":this.latitude,
         "LONG":this.longitude,
         "fid":this.fid,
-        "dateStart":Date()
+        "dateStart":dateDay
       };
       await this.dataStorage.push(dataAnswer);
       await this.storage.set('formfamily',this.dataStorage);

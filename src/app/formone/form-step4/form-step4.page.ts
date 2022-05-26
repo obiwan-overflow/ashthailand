@@ -71,10 +71,11 @@ export class FormStep4Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            let dateStartData = new Date(this.dataStorage[this.numberId].dateStart).toLocaleString();
-            let dateSuccessData = new Date().toLocaleString();
+            let date = new Date();
+            var pad = function(num) { return ('00'+num).slice(-2) };
+            let dateSuccessData = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
 
-            this.setDataSuccess(value);
+            this.setDataSuccess(value,dateSuccessData);
             const formData = new FormData();
             formData.append('cat_id',"1");
             formData.append('user_id',this.userData.id);
@@ -89,8 +90,8 @@ export class FormStep4Page implements OnInit {
             formData.append('ADDRESS',this.dataStorage[this.numberId].ADDRESS);
             formData.append('LAT',this.dataStorage[this.numberId].LAT);
             formData.append('LONG',this.dataStorage[this.numberId].LONG);
-            // formData.append('date_start',dateStartData);
-            // formData.append('date_success',dateSuccessData);
+            formData.append('date_start',this.dataStorage[this.numberId].dateStart);
+            formData.append('date_success',dateSuccessData);
             formData.append('P1A',this.dataStorage[this.numberId].P1A);
             formData.append('P2A',this.dataStorage[this.numberId].P2A);
             formData.append('P3A',this.dataStorage[this.numberId].P3A);
@@ -101,7 +102,7 @@ export class FormStep4Page implements OnInit {
                 this.deleteDataOld();
               }
             },(err)=>{
-              this.errorServer(value);
+              this.errorServer(value,dateSuccessData);
             });
           }
         }
@@ -109,7 +110,7 @@ export class FormStep4Page implements OnInit {
     });
     await alert.present();
   }
-  async setDataSuccess(value){
+  async setDataSuccess(value,dateSuccess){
     this.dataPublicSuccess = await this.storage.get('formPublicSuccess');
     if(this.dataPublicSuccess == null){
       this.dataPublicSuccess = [];
@@ -127,17 +128,17 @@ export class FormStep4Page implements OnInit {
       "ADDRESS":this.dataStorage[this.numberId].ADDRESS,
       "LAT":this.dataStorage[this.numberId].LAT,
       "LONG":this.dataStorage[this.numberId].LONG,
+      "dateStart":this.dataStorage[this.numberId].dateStart,
+      "dateSuccess":dateSuccess,
       "P1A":this.dataStorage[this.numberId].P1A,
       "P2A":this.dataStorage[this.numberId].P2A,
       "P3A":this.dataStorage[this.numberId].P3A,
       "P4A":value,
-      "dateStart":this.dataStorage[this.numberId].dateStart,
-      "dateSuccess":Date()
     };
     await this.dataPublicSuccess.push(data);
     await this.storage.set('formPublicSuccess',this.dataPublicSuccess);
   }
-  async errorServer(value){
+  async errorServer(value,dateSuccess){
     this.dataPublicNoInternet = await this.storage.get('formPublicFailed');
     if(this.dataPublicNoInternet == null){
       this.dataPublicNoInternet = [];
@@ -155,12 +156,12 @@ export class FormStep4Page implements OnInit {
       "ADDRESS":this.dataStorage[this.numberId].ADDRESS,
       "LAT":this.dataStorage[this.numberId].LAT,
       "LONG":this.dataStorage[this.numberId].LONG,
+      "dateStart":this.dataStorage[this.numberId].dateStart,
+      "dateSuccess":dateSuccess,
       "P1A":this.dataStorage[this.numberId].P1A,
       "P2A":this.dataStorage[this.numberId].P2A,
       "P3A":this.dataStorage[this.numberId].P3A,
       "P4A":value,
-      "dateStart":this.dataStorage[this.numberId].dateStart,
-      "dateSuccess":Date()
     };
     await this.dataPublicNoInternet.push(data);
     await this.storage.set('formPublicFailed',this.dataPublicNoInternet);

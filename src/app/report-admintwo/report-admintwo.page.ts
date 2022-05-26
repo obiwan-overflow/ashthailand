@@ -76,12 +76,19 @@ export class ReportAdmintwoPage implements OnInit {
       loading.dismiss();
       this.presentAlert();
     }else{
-      this.formData = true;
-      console.log(this.todo.value);
-      await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
-        this.dataDetail = res;
-      });
-      await loading.dismiss();
+      if(this.todo.value.location == '1'){
+        this.formData = true;
+        await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+          this.dataDetail = res;
+        });
+        await loading.dismiss();
+      }else if (this.todo.value.location == '2'){
+
+      }else if (this.todo.value.location == '3'){
+        
+      }else if (this.todo.value.location == '4'){
+        
+      }
     }
   }
   async selectlocation(event){

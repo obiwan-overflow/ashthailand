@@ -65,7 +65,10 @@ export class FormStep6Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            this.setDataSuccess(value);
+            let date = new Date();
+            var pad = function(num) { return ('00'+num).slice(-2) };
+            let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
+            this.setDataSuccess(value,dateDay);
 
             const formData = new FormData();
             formData.append('cat_id',"2");
@@ -81,6 +84,8 @@ export class FormStep6Page implements OnInit {
             formData.append('ADDRESS',this.dataStorage[this.numberId].ADDRESS);
             formData.append('LAT',this.dataStorage[this.numberId].LAT);
             formData.append('LONG',this.dataStorage[this.numberId].LONG);
+            formData.append('date_start',this.dataStorage[this.numberId].dateStart);
+            formData.append('date_success',dateDay);
             formData.append('S1A',this.dataStorage[this.numberId].S1A);
             formData.append('S2A',this.dataStorage[this.numberId].S2A);
             formData.append('S3A',this.dataStorage[this.numberId].S3A);
@@ -92,7 +97,7 @@ export class FormStep6Page implements OnInit {
                 this.router.navigateByUrl('tabs/form');
               }
             },(err)=>{
-              this.errorServer(value);
+              this.errorServer(value,dateDay);
             });
             this.deleteDataOld();
           }
@@ -101,7 +106,7 @@ export class FormStep6Page implements OnInit {
     });
     await alert.present();
   }
-  async setDataSuccess(value){
+  async setDataSuccess(value,dateSuccess){
     this.dataShopSuccess = await this.storage.get('formShopSuccess');
     if(this.dataShopSuccess == null){
       this.dataShopSuccess = [];
@@ -119,21 +124,21 @@ export class FormStep6Page implements OnInit {
       "ADDRESS":this.dataStorage[this.numberId].ADDRESS,
       "LAT":this.dataStorage[this.numberId].LAT,
       "LONG":this.dataStorage[this.numberId].LONG,
+      "dateStart":this.dataStorage[this.numberId].dateStart,
+      "dateSuccess":dateSuccess,
       "S1A":this.dataStorage[this.numberId].S1A,
       "S2A":this.dataStorage[this.numberId].S2A,
       "S3A":this.dataStorage[this.numberId].S3A,
       "S4A":this.dataStorage[this.numberId].S4A,
       "S5A":this.dataStorage[this.numberId].S5A,
       "S6A":value,
-      "dateStart":this.dataStorage[this.numberId].dateStart,
-      "dateSuccess":Date()
     };
     await this.dataShopSuccess.push(data);
     await this.storage.set('formShopSuccess',this.dataShopSuccess);
     // await this.dataStorage.splice(this.numberId,1);   
     // await this.storage.set('formshop',this.dataStorage);
   }
-  async errorServer(value){
+  async errorServer(value,dateSuccess){
     this.dataShop = await this.storage.get('formShopFailed');
     if(this.dataShop == null){
       this.dataShop = [];
@@ -151,14 +156,14 @@ export class FormStep6Page implements OnInit {
       "ADDRESS":this.dataStorage[this.numberId].ADDRESS,
       "LAT":this.dataStorage[this.numberId].LAT,
       "LONG":this.dataStorage[this.numberId].LONG,
+      "dateStart":this.dataStorage[this.numberId].dateStart,
+      "dateSuccess":dateSuccess,
       "S1A":this.dataStorage[this.numberId].S1A,
       "S2A":this.dataStorage[this.numberId].S2A,
       "S3A":this.dataStorage[this.numberId].S3A,
       "S4A":this.dataStorage[this.numberId].S4A,
       "S5A":this.dataStorage[this.numberId].S5A,
       "S6A":value,
-      "dateStart":this.dataStorage[this.numberId].dateStart,
-      "dateSuccess":Date()
     };
     await this.dataShop.push(data);
     await this.storage.set('formShopFailed',this.dataShop);

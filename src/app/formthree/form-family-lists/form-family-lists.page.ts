@@ -93,6 +93,9 @@ export class FormFamilyListsPage implements OnInit {
     await alert.present();
   }
   async btnStart(){
+    let date = new Date();
+    var pad = function(num) { return ('00'+num).slice(-2) };
+    let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
     if(this.status == "success"){
       let dataAnswer = {
         "CWT":this.detail.CWT,
@@ -106,6 +109,7 @@ export class FormFamilyListsPage implements OnInit {
         "MEMBER":this.detail.MEMBER,
         "PERSON_NO":this.detail.PERSON_NO + 1,
         "fid":this.detail.fid + 1,
+        "dateStart":dateDay,
       };
       await this.dataStorageAll.push(dataAnswer);
       await this.storage.set('formfamily',this.dataStorageAll);
@@ -141,22 +145,15 @@ export class FormFamilyListsPage implements OnInit {
     await alert.present();
   }
   async deleteMemberFamily(del){  
-    // let loadingDelete = await this.loadingController.create({
-    //   cssClass: 'my-custom-class',
-    //   message: 'กรุณารอสักครู่...',
-    // });
-    // await loadingDelete.present();
     await this.datafamily.splice(del,1);
     for (let val of this.datafamily){
       this.dataOutfamily.push(val);
     }
     await this.storage.set('formfamily',this.dataOutfamily);
-    // await loadingDelete.dismiss();
     let IdMOO = this.MOO.replace("/","*kk*");
     let IdVIL = this.VIL.replace("/","*kk*");
     let IdA1  = this.A1.replace("/","*kk*");
     await this.router.navigateByUrl('waiting/'+IdMOO+'/'+IdVIL+'/'+IdA1);
-    // await location.assign('formthree/form-family-lists/'+this.MOO+'/'+this.VIL+'/'+this.A1+'/success');
   }
   async continue(index,name){
     const alert = await this.alertController.create({
@@ -204,6 +201,8 @@ export class FormFamilyListsPage implements OnInit {
       const formData = new FormData();
       formData.append('cat_id',"3");
       formData.append('user_id',userData.id);
+      formData.append('date_start',val.dateStart);
+      formData.append('date_success',val.dateSuccess);
       formData.append('organization_name',val.organization_name == undefined ? "" : val.organization_name);
       formData.append('MEMBER',val.MEMBER == undefined ? "" : val.MEMBER);
       formData.append('PERSON_NO',val.PERSON_NO == undefined ? "" : val.PERSON_NO);

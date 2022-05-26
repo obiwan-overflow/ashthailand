@@ -87,8 +87,12 @@ export class FormStep3Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
+            let date = new Date();
+            var pad = function(num) { return ('00'+num).slice(-2) };
+            let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
+
             this.dataStorage[this.id].status          = "success";
-            this.dataStorage[this.id].dateSuccess     = Date();
+            this.dataStorage[this.id].dateSuccess     = dateDay;
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }
@@ -133,7 +137,12 @@ export class FormStep3Page implements OnInit {
         }, {
           text: 'ยืนยัน',
           handler: () => {
-            this.dataStorage[this.id].status   = "success";
+            let date = new Date();
+            var pad = function(num) { return ('00'+num).slice(-2) };
+            let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
+
+            this.dataStorage[this.id].status      = "success";
+            this.dataStorage[this.id].dateSuccess = dateDay;
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }
