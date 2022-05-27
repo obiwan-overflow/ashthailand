@@ -38,29 +38,18 @@
       <ion-col size="12">
         <ion-item>
           <ion-label>เลือกพื้นที่</ion-label>
-          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="location" (ionChange)="selectlocation($event)">
+          <ion-select value="1" okText="ตกลง" cancelText="ยกเลิก" formControlName="level" (ionChange)="selectlocation($event)">
             <ion-select-option value="1">รวมทุกพื้นที่</ion-select-option>
             <ion-select-option value="2">เทศบาลนคร/เมือง</ion-select-option>
             <ion-select-option value="3">เทศบาลตำบล</ion-select-option>
             <ion-select-option value="4">อบต.</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item [hidden]="display !== '2'">
-          <ion-label>เทศบาลนคร/เมือง</ion-label>
-          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="locationCity">
-            <ion-select-option value="1">เทศบาลนคร/เมือง</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item [hidden]="display !== '3'">
-          <ion-label>เทศบาลตำบล</ion-label>
-          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="locationTombons">
-            <ion-select-option value="1">เทศบาลตำบล</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item [hidden]="display !== '4'">
-          <ion-label>อบต.</ion-label>
-          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="locationObt">
-            <ion-select-option *ngFor="let data of listsObt" value="{{data.organization_name}}">{{data.organization_name}}</ion-select-option>
+        <ion-item [hidden]="!display">
+          <!-- <ion-label>{{display}}</ion-label> -->
+          <ion-select okText="ตกลง" cancelText="ยกเลิก" formControlName="location" interface="action-sheet">
+            <ion-select-option value="all">ทั้งหมด</ion-select-option>
+            <ion-select-option *ngFor="let data of listsLevel" value="{{data.organization_name}}">{{data.organization_name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>

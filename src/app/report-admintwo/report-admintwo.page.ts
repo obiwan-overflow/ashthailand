@@ -20,6 +20,7 @@ export class ReportAdmintwoPage implements OnInit {
   dataDetail:any = [];
   listsObt:any = [];
   titleHead:any;
+  listsLevel:any;
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -31,10 +32,8 @@ export class ReportAdmintwoPage implements OnInit {
     this.todo = this.formBuilder.group({
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
-      location: ['', Validators.required],
-      locationCity: ['',],
-      locationTombons: ['',],
-      locationObt: ['',],
+      level: ['', Validators.required],
+      location: ['',],
     });
     this.formData = false;
   }
@@ -56,7 +55,6 @@ export class ReportAdmintwoPage implements OnInit {
     await this.api.getdata('report/getListObt').subscribe((res)=>{
       this.listsObt = res;
     });
-    this.display = '0';
   }
 
 
@@ -66,6 +64,7 @@ export class ReportAdmintwoPage implements OnInit {
       message: 'กรุณารอสักครู่ ...',
       backdropDismiss:true
     });
+    await loading.present();
     var dateStart           = await new Date(this.todo.value.dateStart);
     var dateEnd             = await new Date(this.todo.value.dateEnd);
     var Difference_In_Time  = await dateEnd.getTime() - dateStart.getTime();
@@ -76,29 +75,63 @@ export class ReportAdmintwoPage implements OnInit {
       loading.dismiss();
       this.presentAlert();
     }else{
-      if(this.todo.value.location == '1'){
-        this.formData = true;
-        await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
-          this.dataDetail = res;
-        });
-        await loading.dismiss();
-      }else if (this.todo.value.location == '2'){
-
-      }else if (this.todo.value.location == '3'){
-        
-      }else if (this.todo.value.location == '4'){
-        
+      let select = "none";
+      if(this.todo.value.level !== '1'){
+        select = this.todo.value.location;
       }
+      await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd+'&level='+this.todo.value.level+'&location='+select).subscribe((res)=>{
+        this.dataDetail = res;
+      });
+      this.formData = await true;
+      await loading.dismiss();
+      // if(this.todo.value.location == '1'){
+      //   await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      //     this.dataDetail = res;
+      //   });
+      //   this.formData = await true;
+      //   await loading.dismiss();
+      // }else if (this.todo.value.location == '2'){
+      //   let locationCity = await this.todo.value.locationCity;
+      //   await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      //     this.dataDetail = res;
+      //   });
+      //   this.formData = await true;
+      //   await loading.dismiss();
+      // }else if (this.todo.value.location == '3'){
+      //   let locationTombons = await this.todo.value.locationTombons;
+      //   await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      //     this.dataDetail = res;
+      //   });
+      //   this.formData = await true;
+      //   await loading.dismiss();
+      // }else if (this.todo.value.location == '4'){
+      //   let locationObt = await this.todo.value.locationObt;
+      //   await this.api.getdata('report/reportAdmin&cat_id='+this.id+'&date_start='+this.todo.value.dateStart+'&date_end='+this.todo.value.dateEnd).subscribe((res)=>{
+      //     this.dataDetail = res;
+      //   });
+      //   this.formData = await true;
+      //   await loading.dismiss();
+      // }
     }
   }
   async selectlocation(event){
     if(event.detail.value == '1'){
+      this.display = "";
     }else if(event.detail.value == '2'){
-      this.display = '2';
+      this.display = "เทศบาลนคร/เมือง";
+      await this.api.getdata('report/getListsLevelObt&level=2').subscribe((res)=>{
+        this.listsLevel = res;
+      });
     }else if(event.detail.value == '3'){
-      this.display = '3';
+      this.display = "เทศบาลตำบล";
+      await this.api.getdata('report/getListsLevelObt&level=3').subscribe((res)=>{
+        this.listsLevel = res;
+      });
     }else if(event.detail.value == '4'){
-      this.display = '4';
+      this.display = "อบต.";
+      await this.api.getdata('report/getListsLevelObt&level=4').subscribe((res)=>{
+        this.listsLevel = res;
+      });
     }
   }
   async presentAlert() {
