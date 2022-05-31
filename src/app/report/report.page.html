@@ -8,68 +8,30 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-list>
-    <ion-item lines="full" routerLink="/tabs/report/report-detail">
-      <ion-avatar slot="start">
-        <ion-icon name="bar-chart-sharp" color="tertiary"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3><b>เป้าหมายของการทำแบบสอบถาม</b></h3>
-        <p><ion-icon name="time-outline"></ion-icon> วันที่ 11 ธค 2564</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item lines="full" routerLink="/tabs/report/report-detail">
-      <ion-avatar slot="start">
-        <ion-icon name="bar-chart-sharp" color="tertiary"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3><b>เป้าหมายของการทำแบบสอบถาม</b></h3>
-        <p><ion-icon name="time-outline"></ion-icon> วันที่ 11 ธค 2564</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item lines="full" routerLink="/tabs/report/report-detail">
-      <ion-avatar slot="start">
-        <ion-icon name="bar-chart-sharp" color="tertiary"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3><b>เป้าหมายของการทำแบบสอบถาม</b></h3>
-        <p><ion-icon name="time-outline"></ion-icon> วันที่ 11 ธค 2564</p>
-      </ion-label>
-    </ion-item>
-  </ion-list> -->
   <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="7" class="ion-text-center">
+      <ion-col size="5" class="ion-text-center">
         <div *ngIf="userData.imgProfile">
           <img src="assets/images/profile/{{userData.imgProfile}}.png" class="w-100">
         </div>
         <div *ngIf="!userData.imgProfile">
           <img src="assets/images/user-theme.png" class="w-100">
         </div>
-        <!-- <img src="{{userData.image}}" alt="" class="profile-img"> -->
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
         <div class="card-report" routerLink="report-employee">
-          <!-- <div class="card-report"> -->
-          <!-- <ion-icon name="folder-outline"></ion-icon> -->
           <p>พนักงานสนาม</p>
         </div>
       </ion-col>
       <ion-col size="12">
         <div class="card-report" routerLink="report-head">
-        <!-- <div class="card-report"> -->
-          <!-- <ion-icon name="folder-outline"></ion-icon> -->
           <p>ผู้ควบคุมงานสนาม</p>
         </div>
       </ion-col>
       <ion-col size="12">
         <div class="card-report" routerLink="report-admin">
-        <!-- <div class="card-report"> -->
-          <!-- <ion-icon name="folder-outline"></ion-icon> -->
           <p>ผู้ดูแลระบบ</p>
         </div>
       </ion-col>

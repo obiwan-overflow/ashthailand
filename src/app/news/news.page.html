@@ -9,20 +9,8 @@
 
 <ion-content>
   <ion-list>
-    <!-- <ion-item routerLink="/tabs/news/news-detail" lines="full">
-      <ion-avatar slot="start">
-        <img src="assets/shapes.svg">
-      </ion-avatar>
-      <ion-label>
-        <h3>รามเทพ แจ๊กพอตเพทนาการ</h3>
-        <small>17/11/2021</small>
-        <p>รามเทพ แจ๊กพอตเพทนาการ สเตริโอ ดอกเตอร์ วอลซ์เพนกวิน หลวงตาตัวตนออเดอร์โลโก้ ไฮแจ็ค...</p>
-      </ion-label>
-    </ion-item> -->
-
     <ion-item *ngFor="let lists of lists" routerLink="/tabs/news/news-detail/{{lists.id}}" lines="full">
       <ion-avatar slot="start" class="icon">
-        <!-- <img src="assets/shapes.svg"> -->
         <ion-icon name="newspaper-outline" color="warning"></ion-icon>
       </ion-avatar>
       <ion-label>
@@ -30,6 +18,5 @@
         <small><ion-icon name="time-outline"></ion-icon> {{lists.date_add}}</small>
       </ion-label>
     </ion-item>
-
   </ion-list>
 </ion-content>
