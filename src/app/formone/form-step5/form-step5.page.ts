@@ -70,7 +70,6 @@ export class FormStep5Page implements OnInit {
             var pad = function(num) { return ('00'+num).slice(-2) };
             let dateSuccessData = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
             
-            this.setDataSuccess(value,dateSuccessData);
             const formData = new FormData();
             formData.append('cat_id',"1");
             formData.append('user_id',this.userData.id);
@@ -95,12 +94,12 @@ export class FormStep5Page implements OnInit {
             formData.append('P5A',value);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                this.setDataSuccess(value,dateSuccessData);;
               }
             },(err)=>{
               this.errorServer(value,dateSuccessData);
+              this.setDataSuccess(value,dateSuccessData);
             });
-            this.deleteDataOld();
           }
         }
       ]
@@ -135,8 +134,7 @@ export class FormStep5Page implements OnInit {
     };
     await this.dataPublicSuccess.push(data);
     await this.storage.set('formPublicSuccess',this.dataPublicSuccess);
-    // await this.dataStorage.splice(this.numberId,1);   
-    // await this.storage.set('formpublic',this.dataStorage);
+    await this.deleteDataOld();
   }
   async errorServer(value,dateSuccess){
     this.dataPublicNoInternet = await this.storage.get('formPublicFailed');

@@ -194,13 +194,12 @@ export class FormFamilyListsPage implements OnInit {
     }
   }
   async btnApprove(){
-    const userData = await this.storage.get('userData');
     for (const val of this.datafamily){
       let NO1 = val.NO1 == undefined ? 0 : val.NO1;
       let NO2 = val.NO2 == undefined ? 0 : val.NO2;
       const formData = new FormData();
       formData.append('cat_id',"3");
-      formData.append('user_id',userData.id);
+      formData.append('user_id',val.userID);
       formData.append('date_start',val.dateStart);
       formData.append('date_success',val.dateSuccess);
       formData.append('organization_name',val.organization_name == undefined ? "" : val.organization_name);

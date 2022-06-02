@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/AuthService';
 export class FormStep6Page implements OnInit {
   dataStorage: any = [];
   dataShopSuccess:any = [];
-  dataShop:any = [];
+  dataShopNoInternet:any = [];
   userData:any = [];
   titleShop:any;
   numberId:any;
@@ -68,8 +68,7 @@ export class FormStep6Page implements OnInit {
             let date = new Date();
             var pad = function(num) { return ('00'+num).slice(-2) };
             let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
-            this.setDataSuccess(value,dateDay);
-
+            
             const formData = new FormData();
             formData.append('cat_id',"2");
             formData.append('user_id',this.userData.id);
@@ -94,12 +93,12 @@ export class FormStep6Page implements OnInit {
             formData.append('S6A',value);
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.router.navigateByUrl('tabs/form');
+                this.setDataSuccess(value,dateDay);
               }
             },(err)=>{
               this.errorServer(value,dateDay);
+              this.setDataSuccess(value,dateDay);
             });
-            this.deleteDataOld();
           }
         }
       ]
@@ -135,13 +134,12 @@ export class FormStep6Page implements OnInit {
     };
     await this.dataShopSuccess.push(data);
     await this.storage.set('formShopSuccess',this.dataShopSuccess);
-    // await this.dataStorage.splice(this.numberId,1);   
-    // await this.storage.set('formshop',this.dataStorage);
+    await this.deleteDataOld();
   }
   async errorServer(value,dateSuccess){
-    this.dataShop = await this.storage.get('formShopFailed');
-    if(this.dataShop == null){
-      this.dataShop = [];
+    this.dataShopNoInternet = await this.storage.get('formShopFailed');
+    if(this.dataShopNoInternet == null){
+      this.dataShopNoInternet = [];
     }
     let data = {
       "userId":this.userData.id,
@@ -165,8 +163,8 @@ export class FormStep6Page implements OnInit {
       "S5A":this.dataStorage[this.numberId].S5A,
       "S6A":value,
     };
-    await this.dataShop.push(data);
-    await this.storage.set('formShopFailed',this.dataShop);
+    await this.dataShopNoInternet.push(data);
+    await this.storage.set('formShopFailed',this.dataShopNoInternet);
   }
   async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   

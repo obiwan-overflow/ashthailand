@@ -75,7 +75,6 @@ export class FormStep4Page implements OnInit {
             var pad = function(num) { return ('00'+num).slice(-2) };
             let dateSuccessData = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
 
-            this.setDataSuccess(value,dateSuccessData);
             const formData = new FormData();
             formData.append('cat_id',"1");
             formData.append('user_id',this.userData.id);
@@ -99,10 +98,11 @@ export class FormStep4Page implements OnInit {
             formData.append('P5A',"");
             this.api.postdata('reportQuestion',formData).subscribe((res)=>{
               if(res.result == 'success'){
-                this.deleteDataOld();
+                this.setDataSuccess(value,dateSuccessData);
               }
             },(err)=>{
               this.errorServer(value,dateSuccessData);
+              this.setDataSuccess(value,dateSuccessData);
             });
           }
         }
@@ -137,6 +137,7 @@ export class FormStep4Page implements OnInit {
     };
     await this.dataPublicSuccess.push(data);
     await this.storage.set('formPublicSuccess',this.dataPublicSuccess);
+    await this.deleteDataOld();
   }
   async errorServer(value,dateSuccess){
     this.dataPublicNoInternet = await this.storage.get('formPublicFailed');
@@ -165,7 +166,6 @@ export class FormStep4Page implements OnInit {
     };
     await this.dataPublicNoInternet.push(data);
     await this.storage.set('formPublicFailed',this.dataPublicNoInternet);
-    await this.deleteDataOld();
   }
   async deleteDataOld(){
     await this.dataStorage.splice(this.numberId,1);   

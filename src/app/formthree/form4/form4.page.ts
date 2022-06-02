@@ -55,14 +55,18 @@ export class Form4Page implements OnInit {
 
   // action
   async formData(form){
-    let userData = await this.storage.get('userData');
+    const userData = await this.storage.get('userData');
+    let date = new Date();
+    let pad = function(num) { return ('00'+num).slice(-2) };
+    let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
 
+    this.dataStorage[this.id].userID              = userData.id;
     this.dataStorage[this.id].NAME                = form.value.NAME;
     this.dataStorage[this.id].SEX                 = form.value.SEX;
     this.dataStorage[this.id].AGE                 = form.value.AGE;
     this.dataStorage[this.id].organization_name   = userData.organization_name;
     this.dataStorage[this.id].PERSON_NO           = this.dataStorage[this.id].PERSON_NO == undefined ? 1 : this.dataStorage[this.id].PERSON_NO;
-    this.dataStorage[this.id].dateStart           = Date();
+    this.dataStorage[this.id].dateStart           = dateDay;
     await this.storage.set('formfamily',this.dataStorage);
 
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
@@ -90,9 +94,13 @@ export class Form4Page implements OnInit {
         }, {
           text: 'บันทึก',
           handler: () => {
-            console.log('Confirm Okay');
+            let date = new Date();
+            let pad = function(num) { return ('00'+num).slice(-2) };
+            let dateDay = date.getUTCFullYear()+"-"+pad(date.getUTCMonth() + 1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
+
+            this.dataStorage[this.id].userID        = userId;
             this.dataStorage[this.id].status        = "success";
-            this.dataStorage[this.id].dateSuccess   = Date();
+            this.dataStorage[this.id].dateSuccess   = dateDay;
             this.storage.set('formfamily',this.dataStorage);
             this.router.navigateByUrl('/formthree/form-family-lists/'+this.IdMOO+'/'+this.IdVIL+'/'+this.IdA1+'/success');
           }

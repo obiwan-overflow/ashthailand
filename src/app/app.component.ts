@@ -69,7 +69,7 @@ export class AppComponent {
 
   async updateDataPublic(){
     let dataPublic  = await this.storage.get('formPublicFailed');
-    if(dataPublic !== undefined || dataPublic !== null || dataPublic !== ""){
+    if(dataPublic.length !== 0){
       const formData = new FormData();
       formData.append('cat_id',"1");
       formData.append('user_id',dataPublic[0].userId);
@@ -101,8 +101,8 @@ export class AppComponent {
     }
   }
   async updateDataShop(){
-    let dataShop    = await this.storage.get('formShopFailed');
-    if(dataShop !== undefined || dataShop !== null || dataShop !== ""){
+    let dataShop  = await this.storage.get('formShopFailed');
+    if(dataShop.length !== 0){
       const formData = new FormData();
       formData.append('cat_id',"2");
       formData.append('user_id',dataShop[0].userId);
@@ -136,10 +136,10 @@ export class AppComponent {
   }
   async updateDataFamily(){
     let dataFamily  = await this.storage.get('formFamilyFailed');
-    if(dataFamily !== undefined || dataFamily !== null || dataFamily !== ""){
+    if(dataFamily.length !== 0){
       const formData = new FormData();
       formData.append('cat_id',"3");
-      formData.append('user_id',dataFamily[0].userId);
+      formData.append('user_id',dataFamily[0].userID);
       formData.append('organization_name',dataFamily[0].organization_name);
       formData.append('MEMBER',dataFamily[0].MEMBER);
       formData.append('PERSON_NO',dataFamily[0].PERSON_NO);
