@@ -16,6 +16,7 @@ export class FormFamilyListsPage implements OnInit {
   datafamily:any = [];
   dataOutfamily:any = [];
   detail:any = [];
+  personNo:any;
 
   id:any;
   status:any;
@@ -194,7 +195,9 @@ export class FormFamilyListsPage implements OnInit {
     }
   }
   async btnApprove(){
+    let i = 1;
     for (const val of this.datafamily){
+      this.personNo = i++;
       let NO1 = val.NO1 == undefined ? 0 : val.NO1;
       let NO2 = val.NO2 == undefined ? 0 : val.NO2;
       const formData = new FormData();
@@ -204,7 +207,8 @@ export class FormFamilyListsPage implements OnInit {
       formData.append('date_success',val.dateSuccess);
       formData.append('organization_name',val.organization_name == undefined ? "" : val.organization_name);
       formData.append('MEMBER',val.MEMBER == undefined ? "" : val.MEMBER);
-      formData.append('PERSON_NO',val.PERSON_NO == undefined ? "" : val.PERSON_NO);
+      // formData.append('PERSON_NO',val.PERSON_NO == undefined ? "" : val.PERSON_NO);
+      formData.append('PERSON_NO',this.personNo);
       formData.append('SEX',val.SEX == undefined ? "" : val.SEX);
       formData.append('AGE',val.AGE == undefined ? "" : val.AGE);
       formData.append('CWT',val.CWT == undefined ? "" : val.CWT);
