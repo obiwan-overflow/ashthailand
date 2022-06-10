@@ -19,7 +19,7 @@ export class ReportHeadPeoplePage implements OnInit {
   dataDetail:any = [];
   titleHead:any;
   titleCount:any;
-
+  dateNowChoose:any;
   sumTotal:any;
   sumToday:any;
   sumSum:any;
@@ -55,6 +55,11 @@ export class ReportHeadPeoplePage implements OnInit {
       this.titleHead = "แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่";
       this.titleCount = "ครัวเรือน";
     }
+    let dateObj = await new Date();
+    let month   = await String(dateObj.getUTCMonth() + 1).padStart(2,'0');
+    let day     = await String(dateObj.getUTCDate()).padStart(2,'0');
+    let year    = await dateObj.getUTCFullYear();
+    this.dateNowChoose = await year + "-" + month + "-" + day;
   }
   async logForm(){
     const loading = await this.loadingController.create({

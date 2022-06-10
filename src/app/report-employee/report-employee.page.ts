@@ -18,6 +18,7 @@ export class ReportEmployeePage implements OnInit {
   dataPublic:any = [];
   dataShop:any = [];
   dataFamily:any = [];
+  dateNowChoose:any;
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -37,6 +38,13 @@ export class ReportEmployeePage implements OnInit {
     await this.storage.get('userData').then((data)=>{
       this.user = data;
     });
+
+
+    let dateObj = await new Date();
+    let month   = await String(dateObj.getUTCMonth() + 1).padStart(2,'0');
+    let day     = await String(dateObj.getUTCDate()).padStart(2,'0');
+    let year    = await dateObj.getUTCFullYear();
+    this.dateNowChoose = await year + "-" + month + "-" + day;
   }
   async logForm(){
     const loading = await this.loadingController.create({

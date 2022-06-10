@@ -21,6 +21,7 @@ export class ReportAdmintwoPage implements OnInit {
   listsObt:any = [];
   titleHead:any;
   listsLevel:any;
+  dateNowChoose:any;
   constructor(
     public api:RestApiService,
     public storage:Storage,
@@ -55,6 +56,12 @@ export class ReportAdmintwoPage implements OnInit {
     await this.api.getdata('report/getListObt').subscribe((res)=>{
       this.listsObt = res;
     });
+
+    let dateObj = await new Date();
+    let month   = await String(dateObj.getUTCMonth() + 1).padStart(2,'0');
+    let day     = await String(dateObj.getUTCDate()).padStart(2,'0');
+    let year    = await dateObj.getUTCFullYear();
+    this.dateNowChoose = await year + "-" + month + "-" + day;
   }
 
 

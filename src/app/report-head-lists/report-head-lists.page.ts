@@ -14,6 +14,7 @@ export class ReportHeadListsPage implements OnInit {
   user:any = {};
   formData:boolean;
   numDay:any;
+  dateNowChoose:any;
 
   dataPublic:any = [];
   dataShop:any = [];
@@ -37,6 +38,12 @@ export class ReportHeadListsPage implements OnInit {
     await this.storage.get('userData').then((data)=>{
       this.user = data;
     });
+
+    let dateObj = await new Date();
+    let month   = await String(dateObj.getUTCMonth() + 1).padStart(2,'0');
+    let day     = await String(dateObj.getUTCDate()).padStart(2,'0');
+    let year    = await dateObj.getUTCFullYear();
+    this.dateNowChoose = await year + "-" + month + "-" + day;
   }
   async logForm(){
     const loading = await this.loadingController.create({
