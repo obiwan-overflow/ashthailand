@@ -17,6 +17,7 @@ export class FormFamilyListsPage implements OnInit {
   dataOutfamily:any = [];
   detail:any = [];
   personNo:any;
+  btnSaveData:boolean;
 
   id:any;
   status:any;
@@ -31,7 +32,9 @@ export class FormFamilyListsPage implements OnInit {
     public alertController:AlertController,
     public route:ActivatedRoute,
     public api:RestApiService,
-  ) { }
+  ) {
+    // this.btnSaveData = false;
+  }
 
   ngOnInit() {
   }
@@ -43,10 +46,13 @@ export class FormFamilyListsPage implements OnInit {
     this.dataStorageAll = await this.storage.get('formfamily');
 
     for (const val of this.dataStorageAll){
-      if(val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
+      if(await val.MOO == this.MOO && val.VIL == this.VIL && val.A1 == this.A1){
         this.detail = val;
-        if(val.PERSON_NO !== undefined){
+        if(await val.PERSON_NO !== undefined){
           this.datafamily.push(val);
+        }
+        if(await val.status == undefined){
+          this.btnSaveData = true;
         }
       }else{
         this.dataOutfamily.push(val);
@@ -56,6 +62,7 @@ export class FormFamilyListsPage implements OnInit {
   async ionViewWillLeave(){
     this.datafamily = [];
     this.dataOutfamily = [];
+    this.btnSaveData = undefined;
   }
   async updateMember() {
     const alert = await this.alertController.create({

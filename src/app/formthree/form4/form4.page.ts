@@ -72,8 +72,12 @@ export class Form4Page implements OnInit {
     if(form.value.AGE == '' || form.value.NAME == '' || form.value.SEX == ''){
       this.alert();
     }else if (form.value.AGE >= 15){
-      this.router.navigateByUrl('/formthree/form-step1/'+this.id);
+      // this.dataStorage[this.id].status = await "process";
+      // await this.storage.set('formfamily',this.dataStorage);
+      await this.router.navigateByUrl('/formthree/form-step1/'+this.id);
     }else if(form.value.AGE <= 14){
+      // this.dataStorage[this.id].status = await "success";
+      // await this.storage.set('formfamily',this.dataStorage);
       this.formConfirm(form.value.NAME,form.value.SEX,form.value.AGE);
     }
   }
