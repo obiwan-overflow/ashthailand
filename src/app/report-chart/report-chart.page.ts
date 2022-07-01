@@ -85,7 +85,7 @@ export class ReportChartPage implements OnInit {
         datasets: [
           {
             label: '1',
-            data: [2.5],
+            data: [100,50,23,14],
             backgroundColor: 'rgb(38, 194, 129)', 
             borderColor: 'rgb(38, 194, 129)',
           },
