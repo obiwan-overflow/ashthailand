@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
@@ -28,7 +28,8 @@ export class ReportAdmintwoPage implements OnInit {
     private formBuilder: FormBuilder,
     private route:ActivatedRoute,
     public alertController:AlertController,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public router:Router
   ) {
     this.todo = this.formBuilder.group({
       dateStart: ['', Validators.required],
@@ -148,5 +149,9 @@ export class ReportAdmintwoPage implements OnInit {
       buttons: ['ตกลง']
     });
     await alert.present();
+  }
+
+  async openchart(){
+    this.router.navigateByUrl('report-chart');
   }
 }

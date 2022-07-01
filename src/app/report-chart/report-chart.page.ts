@@ -13,8 +13,10 @@ export class ReportChartPage implements OnInit {
   titleHead:any;
   @ViewChild('doughnutCanvas') private doughnutCanvas: ElementRef;
   @ViewChild('barChart') barChart;
+  @ViewChild('lineChart') lineChart;
   doughnutChart: any;
   bars: any;
+  lines:any;
   constructor(
     private route:ActivatedRoute,
   ) { }
@@ -32,6 +34,7 @@ export class ReportChartPage implements OnInit {
     }
     this.doughnutChartMethod();
     this.createBarChart();
+    this.createLineChart();
   }
 
   async doughnutChartMethod() {
@@ -72,6 +75,34 @@ export class ReportChartPage implements OnInit {
           
         }
       }
+    });
+  }
+  async createLineChart(){
+    this.lines = new Chart(this.lineChart.nativeElement, {
+      type: 'line',
+      data: {
+        labels: ['S1', 'S2', 'S3',],
+        datasets: [
+          {
+            label: '1',
+            data: [2.5],
+            backgroundColor: 'rgb(38, 194, 129)', 
+            borderColor: 'rgb(38, 194, 129)',
+          },
+          {
+            label: '1',
+            data: [2.5],
+            backgroundColor: 'rgb(38, 194, 129)', 
+            borderColor: 'rgb(38, 194, 129)',
+          },
+          {
+            label: '1',
+            data: [2.5],
+            backgroundColor: 'rgb(38, 194, 129)', 
+            borderColor: 'rgb(38, 194, 129)',
+          }
+        ],
+      },
     });
   }
 }

@@ -182,7 +182,10 @@
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <div class="chart family" routerLink="report-chart">
+              <!-- <div class="chart family" routerLink="report-chart">
+                <ion-icon name="trending-up-sharp"></ion-icon>
+              </div> -->
+              <div class="chart family" (click)="openchart()">
                 <ion-icon name="trending-up-sharp"></ion-icon>
               </div>
             </ion-col>
