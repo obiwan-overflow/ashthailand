@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Chart, registerables  } from 'chart.js';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 Chart.register(...registerables);
 
 @Component({
@@ -19,6 +20,7 @@ export class ReportChartPage implements OnInit {
   lines:any;
   constructor(
     private route:ActivatedRoute,
+    private screenOrientation: ScreenOrientation
   ) { }
 
   ngOnInit() {
@@ -32,9 +34,10 @@ export class ReportChartPage implements OnInit {
     }else if(this.id == '3'){
       this.titleHead = "แบบสัมภาษณ์พฤติกรรมการสูบบุหรี่";
     }
-    this.doughnutChartMethod();
-    this.createBarChart();
-    this.createLineChart();
+    // this.doughnutChartMethod();
+    // this.createBarChart();
+    await this.createLineChart();
+    await this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
 
   async doughnutChartMethod() {
@@ -81,26 +84,14 @@ export class ReportChartPage implements OnInit {
     this.lines = new Chart(this.lineChart.nativeElement, {
       type: 'line',
       data: {
-        labels: ['S1', 'S2', 'S3',],
+        labels: ['1','2','3','4','5','6','7','8','9','10'],
         datasets: [
           {
-            label: '1',
-            data: [100,50,23,14],
+            label: 'สะสม',
+            data: [100,50,23,14,0,50,33,7,9,8],
             backgroundColor: 'rgb(38, 194, 129)', 
             borderColor: 'rgb(38, 194, 129)',
           },
-          {
-            label: '1',
-            data: [2.5],
-            backgroundColor: 'rgb(38, 194, 129)', 
-            borderColor: 'rgb(38, 194, 129)',
-          },
-          {
-            label: '1',
-            data: [2.5],
-            backgroundColor: 'rgb(38, 194, 129)', 
-            borderColor: 'rgb(38, 194, 129)',
-          }
         ],
       },
     });

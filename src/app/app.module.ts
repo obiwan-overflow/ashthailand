@@ -15,6 +15,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,7 @@ import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-setting
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera,OpenNativeSettings],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera,OpenNativeSettings,ScreenOrientation],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
