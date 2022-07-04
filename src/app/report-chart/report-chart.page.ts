@@ -37,7 +37,12 @@ export class ReportChartPage implements OnInit {
     // this.doughnutChartMethod();
     // this.createBarChart();
     await this.createLineChart();
-    await this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    // await this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    await screen.orientation.lock('landscape');
+  }
+
+  async ionViewWillLeave(){
+    await screen.orientation.unlock();
   }
 
   async doughnutChartMethod() {
