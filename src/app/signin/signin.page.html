@@ -15,6 +15,10 @@
     <ion-text color="danger">
       {{loginfail}}
     </ion-text>
+    <div class="check">
+      <ion-checkbox checked="true"></ion-checkbox>
+      <ion-label class="text-if" (click)="condition()">เงื่อนไขการให้บริการ และนโยบายความเป็นส่วนตัว</ion-label>
+    </div>
     <ion-button color="theme" expand="block" shape="round" type="submit">เข้าสู่ระบบ</ion-button>
     </form>
     <a href="forgot-password">ลืมรหัสผ่าน ?</a>

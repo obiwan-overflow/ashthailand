@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Chart, registerables  } from 'chart.js';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { RestApiService } from '../rest-api.service';
 Chart.register(...registerables);
 
 @Component({
@@ -20,7 +21,8 @@ export class ReportChartPage implements OnInit {
   lines:any;
   constructor(
     private route:ActivatedRoute,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private api:RestApiService,
   ) { }
 
   ngOnInit() {
@@ -86,6 +88,9 @@ export class ReportChartPage implements OnInit {
     });
   }
   async createLineChart(){
+    this.api.getdata('report/reportChart&cat_id=3&date_start=2022-04-04&date_end=2022-05-04&level=1').subscribe((res)=>{
+      let data = res;
+    });
     this.lines = new Chart(this.lineChart.nativeElement, {
       type: 'line',
       data: {

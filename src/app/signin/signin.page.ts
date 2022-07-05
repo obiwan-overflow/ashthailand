@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage-angular';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,8 @@ export class SigninPage implements OnInit {
     public route: Router,
     public api:RestApiService,
     private storage: Storage,
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    private iab: InAppBrowser
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,10 @@ export class SigninPage implements OnInit {
   }
   async loginfailed(){
     this.loginfail = "username หรือรหัสผ่านของท่านไม่ถูกต้อง";
+  }
+
+  async condition(){
+    await this.iab.create('https://tobaccoevaluation.com/app/','_blank','location=yes');  
   }
 
 }

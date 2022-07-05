@@ -22,6 +22,7 @@
     "@awesome-cordova-plugins/camera": "^5.39.0",
     "@awesome-cordova-plugins/core": "^5.37.3",
     "@awesome-cordova-plugins/geolocation": "^5.37.3",
+    "@awesome-cordova-plugins/in-app-browser": "^5.44.0",
     "@awesome-cordova-plugins/network": "^5.41.0",
     "@awesome-cordova-plugins/open-native-settings": "^5.39.1",
     "@awesome-cordova-plugins/screen-orientation": "^5.44.0",
@@ -57,6 +58,7 @@
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "^4.1.0",
+    "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-network-information": "^3.0.0",
@@ -98,7 +100,8 @@
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-open-native-settings": {},
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "android"
