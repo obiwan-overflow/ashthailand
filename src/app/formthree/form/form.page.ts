@@ -75,8 +75,8 @@ export class FormPage implements OnInit {
     if(this.dataStorage == null){
       let dataAnswer = [{
         "CWT":this.dataProvin.id_provinces,
-        "TMP":this.dataProvin.id_amphures,
-        "ID1":this.dataProvin.id_tombons,
+        "ID1":this.dataProvin.id_amphures,
+        "TMP":this.dataProvin.id_tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
         "fid":this.fid,
@@ -87,8 +87,8 @@ export class FormPage implements OnInit {
     }else{
       let dataAnswer = {
         "CWT":this.dataProvin.id_provinces,
-        "TMP":this.dataProvin.id_amphures,
-        "ID1":this.dataProvin.id_tombons,
+        "ID1":this.dataProvin.id_amphures,
+        "TMP":this.dataProvin.id_tombons,
         "LAT":this.latitude,
         "LONG":this.longitude,
         "fid":this.fid,

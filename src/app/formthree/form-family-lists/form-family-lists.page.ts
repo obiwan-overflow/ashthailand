@@ -231,7 +231,7 @@ export class FormFamilyListsPage implements OnInit {
       formData.append('SMOKE',val.SMOKE == undefined ? "" : val.SMOKE);
       formData.append('EVERSMOKE',val.EVERSMOKE == undefined ? "" : val.EVERSMOKE);
       formData.append('EXSMOKE_Y',val.EXSMOKE_Y == undefined ? "" : val.EXSMOKE_Y);
-      formData.append('EXSMOKE_M ',val.EXSMOKE_M  == undefined ? "" : val.EXSMOKE_M );
+      formData.append('EXSMOKE_M',val.EXSMOKE_M == undefined ? "" : val.EXSMOKE_M);
       formData.append('TIME_Y',val.TIME_Y == undefined ? "" : val.TIME_Y);
       formData.append('TIME_M',val.TIME_M == undefined ? "" : val.TIME_M);
       formData.append('CIG',val.CIG == undefined ? "" : val.CIG);
