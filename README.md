@@ -6,4 +6,4 @@ config.xml
 android bundle id tobacco.use.monitonew
 
 
-ios
+ios bundle id com.tobacco.app
