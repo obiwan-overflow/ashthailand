@@ -255,4 +255,43 @@ export class ProfilePage implements OnInit {
       this.dataTombons = res.detail;
     });
   }
+
+
+  async confirmCancelMember() {
+    const alert = await this.alertController.create({
+      header: 'ยืนยันการยกเลิกการเป็นสมาชิก!',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        },
+        {
+          text: 'ตกลง',
+          role: 'confirm',
+          handler: () => {
+            this.storage.get('userData').then((data)=>{
+              this.api.getdata('member/cancelMember&user_id='+data.id).subscribe((res)=>{
+                if(res.result == "success"){
+                  this.logout();
+                }
+              });
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async logout(){
+    await this.storage.remove('userId');
+    await this.storage.remove('fullname');
+    await this.storage.remove('userData');
+    // await this.router.navigate(['home-new']);
+    await this.router.navigateByUrl('home-new');
+    await location.reload();
+  }
 }

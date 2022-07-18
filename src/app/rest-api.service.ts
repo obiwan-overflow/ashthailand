@@ -10,8 +10,8 @@ const httpOptions = {
 		'Content-Type': 'application/json'
 	})
 };
-// const apiUrl = "https://tobaccoevaluation.com/app/api/index.php?route=";
-const apiUrl = "http://43.229.77.178/~hostphp7/smoking/api/index.php?route=";
+const apiUrl = "https://tobaccoevaluation.com/app/api/index.php?route=";
+// const apiUrl = "http://43.229.77.178/~hostphp7/smoking/api/index.php?route=";
 
 @Injectable({
   providedIn: 'root'
