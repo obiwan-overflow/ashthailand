@@ -4,7 +4,7 @@
 config.xml
 
 android bundle id tobacco.use.monitonew
-vsrsion 0.0.2
+vsrsion 0.0.3
 
 ios bundle id com.tobacco.monito
 version 0.0.1
