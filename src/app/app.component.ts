@@ -26,9 +26,6 @@ export class AppComponent {
     public platform:Platform,
     public device:Device
   ) {
-    if (this.platform.is('ios') && this.device.version >= '14.5') {
-      this.showAppTrackingTransparency();
-    }
     document.addEventListener("offline",()=>{
       // this.alertNetwork();
     });
@@ -206,27 +203,5 @@ export class AppComponent {
     await dataFamily.splice(0,1);
     await this.storage.set('formFamilyFailed',dataFamily);
     await this.updateDataFamily();
-  }
-  async showAppTrackingTransparency(){
-    // const idfaPlugin = cordova.plugins.idfa;
-    // idfaPlugin.getInfo().then((info) => {
-    //   if (!info.trackingLimited) {
-    //     return info.idfa || info.aaid;
-    //   } else if (
-    //     info.trackingPermission ===
-    //     idfaPlugin.TRACKING_PERMISSION_NOT_DETERMINED
-    //   ) {
-    //     return idfaPlugin.requestPermission().then((result) => {
-    //       if (result === idfaPlugin.TRACKING_PERMISSION_AUTHORIZED) {
-
-    //         // Start your tracking plugin here!
-
-    //         return idfaPlugin.getInfo().then((info) => {
-    //           return info.idfa || info.aaid;
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
   }
 }
