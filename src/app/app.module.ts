@@ -17,6 +17,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { Device } from '@awesome-cordova-plugins/device/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera,OpenNativeSettings,ScreenOrientation,InAppBrowser],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Geolocation,Network,Camera,OpenNativeSettings,ScreenOrientation,InAppBrowser,Device],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
